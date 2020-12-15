@@ -1,20 +1,25 @@
 <template>
-	<div class="product-info">
-		<div class="product-logo">
-			<img :src="product.img" alt="Product Logo" />
+	<div class="product">
+		<div class="product-info">
+			<div class="product-logo">
+				<img :src="product.img" alt="Product Logo" />
+			</div>
+			<div class="product-detail">
+				<h3 class="product-name">{{ product.name }}</h3>
+				<p class="product-desc">{{ product.desc }}</p>
+				<!-- <b-taglist class="product-tags">
+					<b-button size="is-small" v-for="(tag, index) in product.tags" :key="index" rounded>{{ tag }}</b-button>
+				</b-taglist> -->
+			</div>
+			<a target="_blank" rel="noopener" :href="product.url" class="product-link">
+				<b-button>
+					<i class="gg-external"></i>
+				</b-button>
+			</a>
 		</div>
-		<div class="product-detail">
-			<h3 class="product-name">{{ product.name }}</h3>
-			<p class="product-desc">{{ product.desc }}</p>
-			<b-taglist class="product-tags">
-				<b-button size="is-small" v-for="(tag, index) in product.tags" :key="index" rounded>{{ tag }}</b-button>
-			</b-taglist>
-		</div>
-		<a target="_blank" rel="noopener" :href="product.url" class="product-link">
-			<b-button>
-				<i class="gg-external"></i>
-			</b-button>
-		</a>
+		<b-taglist class="product-tags">
+			<b-button size="is-small" v-for="(tag, index) in product.tags" :key="index" rounded>{{ tag }}</b-button>
+		</b-taglist>
 	</div>
 </template>
 
@@ -28,6 +33,9 @@ export default {
     };
   },
   methods: {
+	// truncateText: function(str, max, suffix) {
+	// 	str.length < max ? str : `${str.substr(0, str.substr(0, max - suffix.length).lastIndexOf(' '))}${suffix}`;
+	// }
   },
 };
 </script>
@@ -45,80 +53,107 @@ button:active {
   /* border: 0.1px solid red; */
 }
 
-.product-info {
-  max-width: 100%;
-  padding: 0.15rem 1rem 0.75rem 1rem;
-  background-color: #fff;
-  border-bottom: 2px solid rgb(219, 219, 219);
-  display: flex;
-  margin: 0.25rem auto;
+.product {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--background-color);
+	border-bottom: 2px solid var(--wrapper-border-color);
+	padding: 0.75rem 0;
 }
 
-.product-info:last-child {
-  border: none;
+.product:last-child {
+	border: none;
+}
+
+.product-info {
+	width: 100%;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	display: flex;
+	margin-bottom: 0.25rem;
 }
 
 .product-logo {
-  min-width: 4rem;
-  position: relative;
+	min-width: 3rem;
+	position: relative;
 }
 
 .product-logo img {
-  width: 3.5rem;
-  height: 3.5rem;
-  display: block;
-  position: absolute;
-  top: calc(50% - 1.75rem);
-  left: calc(50% - 1.75rem);
-  border-radius: 0.5rem;
+	width: 2.5rem;
+	height: 2.5rem;
+	display: block;
+	position: absolute;
+	top: calc(50% - 1.25rem);
+	left: calc(50% - 1.25rem);
+	border-radius: 0.5rem;
 }
 
 .product-detail {
-  margin-left: 0.75rem;
-  padding-top: 0.25rem;
+	margin-left: 0.75rem;
+	padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+	display: flex;
+	flex-direction: column;
 }
 
 .product-detail > * {
-  margin: 0.5rem;
+	margin-bottom: 0.25rem;
 }
 
 .product-name {
-  font-size: 1.25rem;
-  color: #1a202c;
+	font-size: 1.15rem;
+	color: #1a202c;
 }
 
 .product-desc {
-  color: #5d6470;
-  line-height: 1.5;
-  font-size: 1rem;
+	color: #5d6470;
+	line-height: 1.5;
+	font-size: 0.9rem;
 }
 
+.product-info * {
+	color: var(--text-color);
+}
+
+
 .product-link {
-  min-width: 4rem;
-  margin-left: auto;
-  position: relative;
-  /* display: block; */
+	min-width: 4rem;
+	margin-left: auto;
+	position: relative;
 }
 
 .product-link button {
-  width: 4rem;
-  height: 4rem;
-  position: absolute;
-  top: calc(50% - 2rem);
-  left: calc(50% - 2rem);
-  border-radius: 2rem;
-  border: none;
+	width: 3.5rem;
+	height: 3.5rem;
+	position: absolute;
+	top: calc(50% - 1.75rem);
+	left: calc(50% - 1.75rem);
+	border-radius: 1.75rem;
+	border: none;
+	background-color: var(--background-color);
+	color: var(--text-color);
 }
 
 .product-link:hover button {
-  background-color: rgb(219, 219, 219);
+	background-color: #f1c61b;
+	color: #000;
+}
+
+.product-tags {
+	/* margin: .5rem 0; !!!!! */
+	padding: .5rem 0;
+}
+
+.product-tags button {
+	margin: 0 0.5rem 0 0;
+	background-color: var(--gray-text-color);
+	color: var(--text-color);
 }
 
 .gg-external {
 	box-sizing: border-box;
 	position: relative;
 	display: block;
-	transform: scale(var(--ggs,1));
 	width: 12px;
 	height: 12px;
 	box-shadow:
@@ -152,9 +187,5 @@ button:active {
 	border-right: 2px solid;
 	border-top: 2px solid;
 	top: -4px
-} 
-
-.tags button {
-	
 }
 </style>

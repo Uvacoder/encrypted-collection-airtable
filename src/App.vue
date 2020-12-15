@@ -1,6 +1,12 @@
 <template>
 	<div id="app">
-		<app-header></app-header>
+		<app-header v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
+		<b-field grouped class="search">
+			<b-input placeholder="Search Products..." expanded></b-input>
+			<p class="control">
+				<button class="button">Search</button>
+			</p>
+		</b-field>
 		<app-product-list></app-product-list>
 	</div>
 </template>
@@ -20,7 +26,8 @@ export default {
 			locale: "es",
 			num: 11,
 			cat: "",
-			tag: ""
+			tag: "",
+			darkThemeEnabled: false
 		}
 	},
 	methods: {
@@ -31,11 +38,81 @@ export default {
 		logIt() {
 			console.log('hello');
 		}
-	}
+	},
+	watch: {
+		darkThemeEnabled: function() {
+			// toggle dark mode
+			let rootElt = document.querySelector('html');
+
+			if (this.darkThemeEnabled && !rootElt.hasAttribute('data-theme')) {
+				rootElt.setAttribute('data-theme','dark');
+				// this.toggleColors.unchecked = "#576a7c"; // update color for toggles
+			} else if (!this.darkThemeEnabled) {
+				rootElt.removeAttribute('data-theme');
+				// this.toggleColors.unchecked = "#ced4da"; // update color for toggles
+			}
+		}
+	},
 };
 </script>
 
 <style>
+/* Import font */
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Bold.woff2') format('woff2'),
+		url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Bold.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Import bold font */
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-ExtraBold.woff2') format('woff2'),
+		url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-ExtraBold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--primary-red-color: #fa5252;
+	--primary-yellow-color: #f1c61b;
+	--overdue-red-color: #e63946;
+	--gray-text-color: #748ca3;
+	--gray-bg-color: #868e96;
+}
+
+html {
+	--text-color: #171a1d;
+	--background-color: #ffffff;
+	--gray-border-color: #ced4da;
+	--navbar-background-color: rgb(240, 240, 240);
+	--wrapper-border-color: #2c3e50;
+	--add-button-background-color: #2c3e50;
+	--opt-button-background-color: #ffffff;
+	--opt-toggle-background-color: #e9ecef;
+}
+
+html[data-theme='dark'] {
+	--text-color: #ffffff;
+	--background-color: #171a1d;
+	--gray-border-color: #3e4a57;
+	--navbar-background-color: #1f2020;
+	--wrapper-border-color: #3e4a57;
+	--add-button-background-color: #3e4a57;
+	--opt-button-background-color: #3e4a57;
+	--opt-toggle-background-color: #3e4a57;
+}
+
+html,
+body  {
+	background-color: var(--background-color) !important;
+	color: var(--text-color) !important;
+}
+
 * {
 	outline: none;
 	-webkit-touch-callout: none;
@@ -43,23 +120,108 @@ export default {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	font-family:  "JetBrains Mono", "Cascadia Mono", "Lucida Console", monospace !important;
+	font-weight: 500;
+	transition: all 0.3s, color 0s, background-color 0s;
+	-moz-transition: all 0.3s, color 0s, background-color 0s;
+	-webkit-transition: all 0.3s, color 0s, background-color 0s;
 }
+
+input, input:before, input:after {
+	-webkit-user-select: initial;
+	-khtml-user-select: initial;
+	-moz-user-select: initial;
+	-ms-user-select: initial;
+	user-select: initial;
+	color: var(--text-color);
+}
+
+input::placeholder {
+	color: var(--gray-text-color) !important;
+	opacity: 1;
+}
+
+/* *:active,*:focus {
+	border-color: none !important;
+	box-shadow: none;
+} */
 
 #app {
 	width: 100%;
+	min-width: 365px;
 	max-width: 1024px;
 	margin: 0 auto;
-	padding: 0 2rem;
+	padding: 0 2rem 2rem 2rem;
+}
+
+.search {
+	width: 65%;
+	/* padding: 0 1rem; */
+}
+
+.search input,
+.search button {
+	border: none;
+}
+
+.search input {
+	border-radius: 0.5rem;
+	background-color: var(--background-color);
+	color: var(--text-color);
+}
+
+.search button {
+	color: var(--text-color);
+	background-color: var(--primary-yellow-color);
+}
+
+.search button:hover {
+	color: var(--text-color);
+}
+
+.search > div > div > div {
+	border: 2px solid var(--wrapper-border-color);
+	border-bottom: 4px solid var(--wrapper-border-color);
+	border-radius: 0.5rem;
+}
+
+.search > div > div > p {
+	border: 2px solid var(--wrapper-border-color);
+	border-bottom: 4px solid var(--wrapper-border-color);
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+
+html[data-theme='dark'] .search button {
+	background-color: var(--background-color);
+}
+
+html[data-theme='dark'] .search > div > div > p {
+	border-color: var(--primary-yellow-color);
 }
 
 .tags button {
+	height: 1.5rem;
 	border: none;
 	margin: 0 .5rem 0.5rem 0;
 	border-radius: 5px;
-	background-color: rgb(240, 240, 240);
+	background-color: var(--add-button-background-color);
 }
 
 .tags button:hover {
 	background-color: rgb(220, 220, 220);
 }
+
+@media only screen and (max-width: 840px) {
+	.search {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 580px) {
+	#app {
+		padding: 0 .75rem 2rem .75rem;
+	}
+}
+
 </style>
