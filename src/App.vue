@@ -81,8 +81,9 @@ export default {
 	--primary-red-color: #fa5252;
 	--primary-yellow-color: #f1c61b;
 	--overdue-red-color: #e63946;
-	--gray-text-color: #748ca3;
+	--gray-text-color: #495057;
 	--gray-bg-color: #868e96;
+	--lightgray-bg-color: #ced4da;
 }
 
 html {
@@ -90,7 +91,9 @@ html {
 	--background-color: #ffffff;
 	--gray-border-color: #ced4da;
 	--navbar-background-color: rgb(240, 240, 240);
-	--wrapper-border-color: #2c3e50;
+	--wrapper-border-color: #0d1117;
+	--tags-bg-color: #e8eaec;
+	--tags-bg-hover-color: #d8dbdf;
 	--add-button-background-color: #2c3e50;
 	--opt-button-background-color: #ffffff;
 	--opt-toggle-background-color: #e9ecef;
@@ -98,10 +101,14 @@ html {
 
 html[data-theme='dark'] {
 	--text-color: #ffffff;
-	--background-color: #171a1d;
+	--background-color: #0d1117;
+	/* --background-color: #171a1d; */
+	--tags-bg-color: #272d35;
+	--tags-bg-hover-color: #2f3741;
 	--gray-border-color: #3e4a57;
 	--navbar-background-color: #1f2020;
-	--wrapper-border-color: #3e4a57;
+	/* --wrapper-border-color: #3e4a57; */
+	--wrapper-border-color: #495057;
 	--add-button-background-color: #3e4a57;
 	--opt-button-background-color: #3e4a57;
 	--opt-toggle-background-color: #3e4a57;
@@ -201,15 +208,17 @@ html[data-theme='dark'] .search > div > div > p {
 }
 
 .tags button {
+	color: var(--text-color);
 	height: 1.5rem;
 	border: none;
 	margin: 0 .5rem 0.5rem 0;
 	border-radius: 5px;
-	background-color: var(--add-button-background-color);
+	background-color: var(--tags-bg-color);
 }
 
 .tags button:hover {
-	background-color: rgb(220, 220, 220);
+	color: var(--text-color);
+	background-color: var(--tags-bg-hover-color);
 }
 
 @media only screen and (max-width: 840px) {

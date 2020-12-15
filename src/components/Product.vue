@@ -117,18 +117,18 @@ button:active {
 
 
 .product-link {
-	min-width: 4rem;
+	min-width: 3rem;
 	margin-left: auto;
 	position: relative;
 }
 
 .product-link button {
-	width: 3.5rem;
-	height: 3.5rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	position: absolute;
-	top: calc(50% - 1.75rem);
-	left: calc(50% - 1.75rem);
-	border-radius: 1.75rem;
+	top: calc(50% - 1.25rem);
+	left: calc(50% - 1.25rem);
+	border-radius: 1.25rem;
 	border: none;
 	background-color: var(--background-color);
 	color: var(--text-color);
@@ -140,18 +140,16 @@ button:active {
 }
 
 .product-tags {
-	/* margin: .5rem 0; !!!!! */
 	padding: .5rem 0;
 }
 
 .product-tags button {
 	margin: 0 0.5rem 0 0;
-	background-color: var(--gray-text-color);
-	color: var(--text-color);
 }
 
 .gg-external {
 	box-sizing: border-box;
+	color: var(--text-color);
 	position: relative;
 	display: block;
 	width: 12px;
@@ -161,7 +159,8 @@ button:active {
 	-4px -4px 0 -2px,
 	4px 4px 0 -2px;
 	margin-left: -2px;
-	margin-top: 1px
+	margin-top: 1px;
+	transform: scale(0.9);
 }
 
 .gg-external::after,
@@ -174,7 +173,7 @@ button:active {
 }
 
 .gg-external::before {
-	background: currentColor;
+	background: var(--text-color);
 	transform: rotate(-45deg);
 	width: 12px;
 	height: 2px;

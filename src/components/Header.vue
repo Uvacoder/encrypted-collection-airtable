@@ -17,9 +17,18 @@
 		<template slot="end">
             <b-navbar-item tag="div" ref="navRight" class="nav-right">
                 <div class="buttons">
-                    <b-button @click="clickMe">Submit +</b-button>
-					<b-button @click="clickMe">Report ⚠</b-button>
-                    <b-button @click="emitThemeChange">🌓</b-button>
+                    <b-button @click="clickMe">
+						Submit
+						<i class="gg-add"></i>
+					</b-button>
+					<b-button @click="clickMe">
+						Report
+						<i class="gg-flag-alt"></i>
+					</b-button>
+                    <b-button @click="emitThemeChange">
+						<i v-if="darkMode" class="gg-sun"></i>
+						<i v-else class="gg-moon"></i>
+					</b-button>
                 </div>
             </b-navbar-item>
         </template>
@@ -43,35 +52,37 @@ export default {
 			console.log('header btn');
 		},
 		emitThemeChange: function() {
+			this.darkMode = !this.darkMode;
 			this.$emit('theme-change');
 			// let grayBC = getComputedStyle(document.documentElement).getPropertyValue('--navbar-background-color');
 			// this.navMenus.style.backgroundColor = grayBC;
 		},
 		setNavMenuStyle: function() {
-			let grayBC = getComputedStyle(document.documentElement).getPropertyValue('--gray-bg-color');
+			// let grayBC = getComputedStyle(document.documentElement).getPropertyValue('--gray-bg-color');
 			
+			this.navMenus.style.background = "transparent";
+			this.navMenus.childNodes[1].childNodes[0].style.padding = ".5rem 0";
 			if (
 				window.innerWidth < 1024
 			) {
 				this.navMenus.style.boxShadow = "none";
 				this.navMenus.style.marginTop = "0.5rem";
-				this.navMenus.style.paddingLeft = "0.75rem";
+				// this.navMenus.style.paddingLeft = "0";
 				this.navMenus.style.borderRadius = "0.5rem";
 				this.hamburger.style.borderRadius = "0.5rem";
-				this.navMenus.style.backgroundColor = grayBC;
+				// this.navMenus.style.backgroundColor = grayBC;
 				// this.navMenus.style.border = "2px solid rgb(219, 219, 219)";
 			} else {
 				this.navMenus.style.border = "none";
 				this.navMenus.style.paddingLeft = "0";
 				this.navMenus.style.borderRadius = "0";
-				this.navMenus.style.backgroundColor = "";
 			}
 		}
 	},
 	mounted() {
 		this.navMenus = this.$refs.navRight.$el.parentElement.parentElement;
 		this.hamburger = this.$refs.navLeft.$el.nextSibling;
-		console.log(this.hamburger);
+		console.log(this.navMenus);
 
 		let grayBC = getComputedStyle(document.documentElement).getPropertyValue('--gray-bg-color');
 		
@@ -94,22 +105,30 @@ export default {
 </script>
 
 <style>
+@import url('https://css.gg/css?=|sun|moon|add|flag-alt');
+
+:root {
+	--ggs: 0.75;
+}
+
 * {
 	outline: none;
+}
+
+i {
+	float: right;
+	margin-left: 0.5rem;
 }
 
 #header {
 	width: 100%;
 	padding: 1rem 0;
-	/* margin: 1rem 0; */
 	margin-bottom: 1rem;
 	background-color: var(--background-color);
 }
 
 .app-info {
-	/* max-width: 32rem; */
 	padding: 0.5rem;
-	/* background-color: #fff; */
 	display: flex;
 }
 
@@ -128,7 +147,7 @@ export default {
 	top: calc(50% - 2rem);
 	left: calc(50% - 2rem);
 	border-radius: 50%;
-	box-shadow: 1px 1px 5px #bbbbbb;
+	box-shadow: 1px 1px 5px var(--lightgray-bg-color);
 }
 
 html[data-theme='dark'] .app-logo img {
@@ -161,15 +180,12 @@ html[data-theme='dark'] .app-logo img {
 	padding-right: 0;
 }
 
-/* .toggle {
-	margin-right: .5rem;
-	height: 40px;
-	padding: 0 .5rem;
-	border: 1px solid rgb(219, 219, 219);
+.buttons {
+	width: 100%;
 	display: flex;
-	justify-content: center;
 	align-items: center;
-} */
+	justify-content: flex-end !important;
+}
 
 .buttons > * {
 	border-radius: .5rem;
@@ -182,6 +198,7 @@ html[data-theme='dark'] .app-logo img {
 	border-radius: 0.5rem;
 	background-color: var(--background-color);
 	color: var(--text-color);
+	margin: 0 .5rem 0 0 !important;
 }
 
 .buttons button:hover {
@@ -190,9 +207,25 @@ html[data-theme='dark'] .app-logo img {
 	border-bottom: 4px solid var(--wrapper-border-color);
 }
 
-/* @media only screen and (max-width: 580px) {
+.buttons button:last-of-type {
+	margin: 0 !important;
+}
 
-} */
+.buttons button:last-of-type i {
+	margin-left: 0;
+}
+
+@media only screen and (max-width: 1023px) {
+	.buttons {
+		justify-content: flex-start !important;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.buttons {
+		justify-content: space-between !important;
+	}
+}
 
 @media only screen and (max-width: 580px) {
 	#header > :first-child {

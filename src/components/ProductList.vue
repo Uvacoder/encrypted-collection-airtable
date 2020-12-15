@@ -9,7 +9,7 @@
 					<h3>Tags</h3>
 					<i 
 						v-show="isSmallScreen" 
-						class="gg-chevron-down-r"
+						class="gg-chevron-down-o"
 					></i>
 				</div>
 				<b-taglist v-show="!tagsHidden">
@@ -34,7 +34,7 @@
 					<h3>Categories</h3>
 					<i
 						v-show="isSmallScreen" 
-						class="gg-chevron-down-r"
+						class="gg-chevron-down-o"
 					></i>
 				</div>
 				<b-taglist v-show="!catsHidden">
@@ -330,19 +330,20 @@ body  {
 	width: 100%;
 }
 
-.gg-chevron-down-r {
+.gg-chevron-down-o {
+	color: var(--text-color);
 	box-sizing: border-box;
 	position: relative;
-	display: inline-block;
+	display: block;
 	width: 22px;
 	height: 22px;
 	border: 2px solid;
-	border-radius: 4px;
+	border-radius: 100px
 }
 
-.gg-chevron-down-r::after {
+.gg-chevron-down-o::after {
 	content: "";
-	display: inline-block;
+	display: block;
 	box-sizing: border-box;
 	position: absolute;
 	width: 6px;
