@@ -1,44 +1,24 @@
 <template>
 	<div id="app">
 		<app-header v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
-		<b-field grouped class="search">
-			<b-input placeholder="Search Products..." expanded></b-input>
-			<p class="control">
-				<button class="button">Search</button>
-			</p>
-		</b-field>
-		<app-product-list></app-product-list>
+		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import ProductList from "./components/ProductList.vue";
+import Header from "@/components/Header.vue";
 
 export default {
 	name: "App",
 	components: {
-		appHeader: Header,
-		appProductList: ProductList,
+		appHeader: Header
 	},
 	data() {
 		return {
-			locale: "es",
-			num: 11,
-			cat: "",
-			tag: "",
 			darkThemeEnabled: false
 		}
 	},
-	methods: {
-		emitChange() {
-			this.$emit('change', this.selected);
-			console.log(this.tag);
-		},
-		logIt() {
-			console.log('hello');
-		}
-	},
+	methods: {},
 	watch: {
 		darkThemeEnabled: function() {
 			// toggle dark mode
@@ -46,13 +26,11 @@ export default {
 
 			if (this.darkThemeEnabled && !rootElt.hasAttribute('data-theme')) {
 				rootElt.setAttribute('data-theme','dark');
-				// this.toggleColors.unchecked = "#576a7c"; // update color for toggles
 			} else if (!this.darkThemeEnabled) {
 				rootElt.removeAttribute('data-theme');
-				// this.toggleColors.unchecked = "#ced4da"; // update color for toggles
 			}
 		}
-	},
+	}	
 };
 </script>
 
@@ -92,6 +70,9 @@ html {
 	--gray-border-color: #ced4da;
 	--navbar-background-color: rgb(240, 240, 240);
 	--wrapper-border-color: #0d1117;
+	--product-border-color: #ced4da;
+	--app-desc-text-color: #5d6470;
+	--product-desc-text-color: #5d6470;
 	--tags-bg-color: #e8eaec;
 	--tags-bg-hover-color: #d8dbdf;
 	--add-button-background-color: #2c3e50;
@@ -102,13 +83,14 @@ html {
 html[data-theme='dark'] {
 	--text-color: #ffffff;
 	--background-color: #0d1117;
-	/* --background-color: #171a1d; */
 	--tags-bg-color: #272d35;
 	--tags-bg-hover-color: #2f3741;
 	--gray-border-color: #3e4a57;
 	--navbar-background-color: #1f2020;
-	/* --wrapper-border-color: #3e4a57; */
 	--wrapper-border-color: #495057;
+	--app-desc-text-color: #ced4da;
+	--product-desc-text-color: #ced4da;
+	--product-border-color: #495057;
 	--add-button-background-color: #3e4a57;
 	--opt-button-background-color: #3e4a57;
 	--opt-toggle-background-color: #3e4a57;
@@ -144,67 +126,16 @@ input, input:before, input:after {
 }
 
 input::placeholder {
-	color: var(--gray-text-color) !important;
+	color: var(--app-desc-text-color) !important;
 	opacity: 1;
 }
 
-/* *:active,*:focus {
-	border-color: none !important;
-	box-shadow: none;
-} */
-
 #app {
 	width: 100%;
-	min-width: 365px;
+	min-width: 375px;
 	max-width: 1024px;
 	margin: 0 auto;
 	padding: 0 2rem 2rem 2rem;
-}
-
-.search {
-	width: 65%;
-	/* padding: 0 1rem; */
-}
-
-.search input,
-.search button {
-	border: none;
-}
-
-.search input {
-	border-radius: 0.5rem;
-	background-color: var(--background-color);
-	color: var(--text-color);
-}
-
-.search button {
-	color: var(--text-color);
-	background-color: var(--primary-yellow-color);
-}
-
-.search button:hover {
-	color: var(--text-color);
-}
-
-.search > div > div > div {
-	border: 2px solid var(--wrapper-border-color);
-	border-bottom: 4px solid var(--wrapper-border-color);
-	border-radius: 0.5rem;
-}
-
-.search > div > div > p {
-	border: 2px solid var(--wrapper-border-color);
-	border-bottom: 4px solid var(--wrapper-border-color);
-	border-radius: 0.5rem;
-	overflow: hidden;
-}
-
-html[data-theme='dark'] .search button {
-	background-color: var(--background-color);
-}
-
-html[data-theme='dark'] .search > div > div > p {
-	border-color: var(--primary-yellow-color);
 }
 
 .tags button {
@@ -219,12 +150,6 @@ html[data-theme='dark'] .search > div > div > p {
 .tags button:hover {
 	color: var(--text-color);
 	background-color: var(--tags-bg-hover-color);
-}
-
-@media only screen and (max-width: 840px) {
-	.search {
-		width: 100%;
-	}
 }
 
 @media only screen and (max-width: 580px) {

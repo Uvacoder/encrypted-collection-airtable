@@ -1,14 +1,14 @@
 <template>
 	<b-navbar id="header">
 		<template slot="brand">
-			<b-navbar-item class="app-info nav-left" ref="navLeft">
+			<b-navbar-item class="app-info nav-left" ref="navLeft" tag="router-link" :to="{ path: '/' }">
 				<div class="app-logo">
 					<img src="../assets/logo.svg" alt="EncryptedList Logo" />
 				</div>
 				<div class="app-detail">
 				<h3 class="app-name">EncryptedList</h3>
 				<p class="app-desc">
-					List of services that offer end-to-end encryption and zero-knowledge encryption.
+					List of services that offer zero-knowledge or end-to-end encryption 🔐.
 				</p>
 				</div>
 			</b-navbar-item>
@@ -17,15 +17,18 @@
 		<template slot="end">
             <b-navbar-item tag="div" ref="navRight" class="nav-right">
                 <div class="buttons">
-                    <b-button @click="clickMe">
+                    <b-button tag="router-link" to="/submit" title="Submit a Product">
 						Submit
 						<i class="gg-add"></i>
 					</b-button>
-					<b-button @click="clickMe">
+					<b-button tag="router-link" to="/report" title="Report a Product">
 						Report
 						<i class="gg-flag-alt"></i>
 					</b-button>
-                    <b-button @click="emitThemeChange">
+					<b-button title="Info">
+						<i class="gg-info"></i>
+					</b-button>
+                    <b-button @click="emitThemeChange" title="Change Theme">
 						<i v-if="darkMode" class="gg-sun"></i>
 						<i v-else class="gg-moon"></i>
 					</b-button>
@@ -38,9 +41,6 @@
 <script>
 export default {
 	name: "Header",
-	components: {
-    // appButton: Button,
-	},
 	data() {
 		return {
 			darkMode: false,
@@ -48,67 +48,52 @@ export default {
 		};
 	},
 	methods: {
-		clickMe: function() {
-			console.log('header btn');
-		},
+		// goTo: function(route) {
+		// 	this.$router.push(route);
+		// },
 		emitThemeChange: function() {
 			this.darkMode = !this.darkMode;
 			this.$emit('theme-change');
-			// let grayBC = getComputedStyle(document.documentElement).getPropertyValue('--navbar-background-color');
-			// this.navMenus.style.backgroundColor = grayBC;
 		},
 		setNavMenuStyle: function() {
-			// let grayBC = getComputedStyle(document.documentElement).getPropertyValue('--gray-bg-color');
-			
 			this.navMenus.style.background = "transparent";
 			this.navMenus.childNodes[1].childNodes[0].style.padding = ".5rem 0";
+
 			if (
 				window.innerWidth < 1024
 			) {
 				this.navMenus.style.boxShadow = "none";
 				this.navMenus.style.marginTop = "0.5rem";
-				// this.navMenus.style.paddingLeft = "0";
-				this.navMenus.style.borderRadius = "0.5rem";
 				this.hamburger.style.borderRadius = "0.5rem";
-				// this.navMenus.style.backgroundColor = grayBC;
-				// this.navMenus.style.border = "2px solid rgb(219, 219, 219)";
 			} else {
 				this.navMenus.style.border = "none";
 				this.navMenus.style.paddingLeft = "0";
-				this.navMenus.style.borderRadius = "0";
 			}
 		}
 	},
 	mounted() {
-		this.navMenus = this.$refs.navRight.$el.parentElement.parentElement;
-		this.hamburger = this.$refs.navLeft.$el.nextSibling;
-		console.log(this.navMenus);
+		// Stylize some Buefy components because they are inaccessible from CSS
+		let grayBgColor = getComputedStyle(document.documentElement).getPropertyValue('--gray-bg-color');
 
-		let grayBC = getComputedStyle(document.documentElement).getPropertyValue('--gray-bg-color');
-		
+		this.hamburger = this.$refs.navLeft.$el.nextSibling;
+		this.navMenus = this.$refs.navRight.$el.parentElement.parentElement;
 		this.hamburger.childNodes.forEach(node => {
-			node.style.backgroundColor = grayBC;
+			node.style.backgroundColor = grayBgColor;
 		})
 
 		this.setNavMenuStyle();
 		window.addEventListener('resize', () => {
-			// console.log(window.innerWidth);
-			// console.log(this.navMenus.classList.contains("is-active"));
 			this.setNavMenuStyle();
 		});
-
-		// setTimeout(() => {
-		// 	console.log(this.$refs.navRight.$el.parentElement.parentElement);
-		// }, 1000);
 	},
 };
 </script>
 
 <style>
-@import url('https://css.gg/css?=|sun|moon|add|flag-alt');
+@import url('https://css.gg/css?=|sun|moon|add|flag-alt|info');
 
 :root {
-	--ggs: 0.75;
+	--ggs: 0.8;
 }
 
 * {
@@ -125,6 +110,11 @@ i {
 	padding: 1rem 0;
 	margin-bottom: 1rem;
 	background-color: var(--background-color);
+}
+
+.navbar-brand {
+	/* width: 50%; */
+	/* background: red; */
 }
 
 .app-info {
@@ -168,12 +158,11 @@ html[data-theme='dark'] .app-logo img {
 	color: var(--text-color);
 }
 .app-desc {
-	/* color: #718096; */
-	color: var(--gray-text-color);
+	color: var(--app-desc-text-color);
 	line-height: 1.5;
 	font-size: 1rem;
 	margin: 0.25rem;
-	max-width: 320px;
+	max-width: 400px;
 }
 
 .nav-right {
@@ -192,6 +181,7 @@ html[data-theme='dark'] .app-logo img {
 	height: 2.75rem;
 }
 
+.buttons a,
 .buttons button {
 	border: 2px solid var(--wrapper-border-color);
 	border-bottom: 4px solid var(--wrapper-border-color);	
@@ -201,6 +191,7 @@ html[data-theme='dark'] .app-logo img {
 	margin: 0 .5rem 0 0 !important;
 }
 
+.buttons a:hover,
 .buttons button:hover {
 	color: var(--text-color);
 	border: 2px solid var(--wrapper-border-color);
@@ -208,14 +199,28 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .buttons button:last-of-type {
+	padding: .5rem;
 	margin: 0 !important;
 }
 
-.buttons button:last-of-type i {
+.buttons button:nth-last-of-type(2) {
+	padding: .5rem;
+}
+
+.buttons button:last-of-type i,
+.buttons button:nth-last-of-type(2) i {
 	margin-left: 0;
 }
 
 @media only screen and (max-width: 1023px) {
+	.app-info {
+		width: 75%;
+	}
+
+	.app-desc {
+		width: 100%;
+	}
+
 	.buttons {
 		justify-content: flex-start !important;
 	}

@@ -2,14 +2,11 @@
 	<div class="product">
 		<div class="product-info">
 			<div class="product-logo">
-				<img :src="product.img" alt="Product Logo" />
+				<img :src="product.img" loading="lazy" alt="Product Logo" />
 			</div>
 			<div class="product-detail">
 				<h3 class="product-name">{{ product.name }}</h3>
 				<p class="product-desc">{{ product.desc }}</p>
-				<!-- <b-taglist class="product-tags">
-					<b-button size="is-small" v-for="(tag, index) in product.tags" :key="index" rounded>{{ tag }}</b-button>
-				</b-taglist> -->
 			</div>
 			<a target="_blank" rel="noopener" :href="product.url" class="product-link">
 				<b-button>
@@ -18,39 +15,50 @@
 			</a>
 		</div>
 		<b-taglist class="product-tags">
-			<b-button size="is-small" v-for="(tag, index) in product.tags" :key="index" rounded>{{ tag }}</b-button>
+			<b-button 
+				size="is-small" 
+				v-for="(tag, index) in product.tags" 
+				:key="index" 
+				rounded
+				@click="filterWith(tag)"
+			>{{ tag }}</b-button>
 		</b-taglist>
 	</div>
 </template>
 
 <script>
+// import has from 'lodash/has';
+
 export default {
-  name: "Product",
-  props: ["product"],
-  data() {
-    return {
-      value: "",
-    };
-  },
-  methods: {
-	// truncateText: function(str, max, suffix) {
-	// 	str.length < max ? str : `${str.substr(0, str.substr(0, max - suffix.length).lastIndexOf(' '))}${suffix}`;
-	// }
-  },
+	name: "Product",
+	props: ["product"],
+	data() {
+		return {};
+	},
+	methods: {
+		filterWith: function(q) {
+			let query = Object.assign({}, this.$route.query);
+
+			if (query.t !== q) {
+				// needs to be here to avoid redundant navigation error
+				this.$router.push({ query: Object.assign({}, this.$route.query, { t : q }) });
+			}
+		},
+	},
 };
 </script>
 
 <style scoped>
+@import url('https://css.gg/css?=|external');
+
 * {
   outline: none;
-  /* border: 0.1px solid red; */
 }
 
 button:hover,
 button:focus,
 button:active {
   outline: none;
-  /* border: 0.1px solid red; */
 }
 
 .product {
@@ -58,12 +66,12 @@ button:active {
 	display: flex;
 	flex-direction: column;
 	background-color: var(--background-color);
-	border-bottom: 2px solid var(--wrapper-border-color);
+	border-bottom: 2px solid var(--product-border-color);
 	padding: 0.75rem 0;
 }
 
-.product:last-child {
-	border: none;
+.last-product {
+	border: none !important;
 }
 
 .product-info {
@@ -102,19 +110,18 @@ button:active {
 
 .product-name {
 	font-size: 1.15rem;
-	color: #1a202c;
+	color: var(--text-color);
 }
 
 .product-desc {
-	color: #5d6470;
+	color: var(--product-desc-text-color);
 	line-height: 1.5;
 	font-size: 0.9rem;
 }
 
 .product-info * {
-	color: var(--text-color);
+	/* color: var(--text-color); */
 }
-
 
 .product-link {
 	min-width: 3rem;
@@ -135,7 +142,7 @@ button:active {
 }
 
 .product-link:hover button {
-	background-color: #f1c61b;
+	background-color: var(--primary-yellow-color);
 	color: #000;
 }
 
@@ -148,43 +155,11 @@ button:active {
 }
 
 .gg-external {
-	box-sizing: border-box;
 	color: var(--text-color);
-	position: relative;
-	display: block;
-	width: 12px;
-	height: 12px;
-	box-shadow:
-	-2px 2px 0 0,
-	-4px -4px 0 -2px,
-	4px 4px 0 -2px;
-	margin-left: -2px;
-	margin-top: 1px;
 	transform: scale(0.9);
-}
-
-.gg-external::after,
-.gg-external::before {
-	content: "";
-	display: block;
-	box-sizing: border-box;
-	position: absolute;
-	right: -4px
 }
 
 .gg-external::before {
 	background: var(--text-color);
-	transform: rotate(-45deg);
-	width: 12px;
-	height: 2px;
-	top: 1px
-}
-
-.gg-external::after {
-	width: 8px;
-	height: 8px;
-	border-right: 2px solid;
-	border-top: 2px solid;
-	top: -4px
 }
 </style>

@@ -1,12 +1,22 @@
 <template>
 	<div class="container">
 		<div class="product-list">
-			<app-product v-for="(product, index) in products" :key="index" :product="product"></app-product>
+			<app-product 
+				v-for="(product, index) in products" 
+				:key="index" 
+				:product="product"
+				:class="{ 'last-product' : (index === products.length - 1)}"
+			></app-product>
+			<div v-show="(products.length === 0)" class="no-results">
+				<img src="../assets/no-results.svg" alt="No results.">
+				<h3>No results found.</h3>
+			</div>
 		</div>
 		<div class="filter-container">
 			<div class="product-filters">
-				<div class="headers" @click="tagsHidden = !tagsHidden">
+				<div class="headers" @click="toggleViewFilters(0, $event)">
 					<h3>Tags</h3>
+					<i class="gg-undo" title="Reset Tags"></i>
 					<i 
 						v-show="isSmallScreen" 
 						class="gg-chevron-down-o"
@@ -17,21 +27,25 @@
 						rounded 
 						size="is-small" 
 						v-for="(tag, index) in firstNTags" 
-						:key="index">
+						:key="index"
+						:data-tag="tag"
+						@click="filterWith(0, tag)"
+						>
 						{{ tag }}
 					</b-button>
 					<b-button 
 						rounded 
 						v-show="!isSmallScreen"
 						size="is-small" 
-						@click="toggleTags">
+						@click="toggleMoreTags">
 						...
 					</b-button>
 				</b-taglist>
 			</div>
 			<div class="product-filters">
-				<div class="headers" @click="catsHidden = !catsHidden">
+				<div class="headers" @click="toggleViewFilters(1, $event)">
 					<h3>Categories</h3>
+					<i class="gg-undo" title="Reset Categories"></i>
 					<i
 						v-show="isSmallScreen" 
 						class="gg-chevron-down-o"
@@ -40,14 +54,17 @@
 				<b-taglist v-show="!catsHidden">
 					<b-button 
 						size="is-small" 
-						v-for="(tag, index) in firstMCategories" 
-						:key="index">
-						{{ tag }}
+						v-for="(cat, index) in firstMCategories" 
+						:key="index"
+						:data-tag="cat"
+						@click="filterWith(1, cat)"	
+					>
+						{{ cat }}
 					</b-button>
 					<b-button 
 						v-show="!isSmallScreen"
 						size="is-small" 
-						@click="toggleCategories">
+						@click="toggleMoreCategories">
 						...
 					</b-button>
 				</b-taglist>
@@ -58,103 +75,74 @@
 
 
 <script>
+import has from 'lodash/has';
 import Product from "./Product";
 
 export default {
 	name: "ProductList",
-	props: [""],
+	props: ["products", "tags", "cats"],
 	components: {
-		// appButton: Button,
 		appProduct: Product,
 	},
 	data() {
 		return {
-			value: "",
 			isSmallScreen: (window.innerWidth <= 580),
 			tagsHidden: this.isSmallScreen,
 			catsHidden: this.isSmallScreen,
-			// filteredProducts: [],
-			products: [
-				{
-					name: "Buttercup",
-					desc: "A free, secure and open-source password manager.",
-					url: "https://buttercup.pw/",
-					tags: ["hello4", "hello5", "hello6"],
-					img: "https://avatars3.githubusercontent.com/u/16577796?s=200&v=4",
-				},
-				{
-					name: "Signal",
-					desc: "Fast, simple, and secure messaging.",
-					url: "https://signal.org",
-					tags: ["hello1", "hello2", "hello3"],
-					img: "https://avatars1.githubusercontent.com/u/702459?s=200&v=4",
-				},
-				{
-					name: "Briefing",
-					desc: "Secure direct group video chat",
-					url: "https://brie.fi/ng",
-					tags: ["hello7", "hello8", "hello9"],
-					img: "https://brie.fi/apple-touch-icon.png",
-				},
-			],
-			tags: [
-				"tag1",
-				"tag2",
-				"tag3",
-				"tag4",
-				"tag5",
-				"tag1",
-				"tag2",
-				"tag3",
-				"tag4",
-				"tag5",
-				"tag4",
-				"tag5",
-				"tag1",
-				"tag2",
-				"tag3",
-				"tag4",
-				"tag5",
-			],
-			cats: [
-				"cat1",
-				"cat2",
-				"cat3",
-				"cat4",
-				"cat5",
-				"cat1",
-				"cat2",
-				"cat3",
-				"cat4",
-				"cat5",
-				"cat2",
-				"cat3",
-				"cat4",
-				"cat5",
-			],
 			n: 5,
 			m: 5
 		};
 	},
 	methods: {
-		filterWithQuery: function () {
-		// let cat = $route.query.c, tag = $route.query.c;
-
+		// expand/collapse filters + reset filters on click
+		toggleViewFilters: function(type, e) {
+			if (e.target.className === "gg-undo") {
+				this.resetFilter(type);
+			} else {
+				if (type === 0) { // if tag
+					this.tagsHidden = !this.tagsHidden;
+				} else if (type === 1) { // if category
+					this.catsHidden = !this.catsHidden
+				}
+			}
 		},
-		toggleTags: function() {
+		// update queries on when filters are clicked
+		filterWith: function(type, q) { 
+			if (type === 0 && this.$route.query.t !== q) { // if tag
+				this.$router.push({ query: Object.assign({}, this.$route.query, { t : q}) });
+			} else if (type === 1 && this.$route.query.c !== q) { // if category
+				this.$router.push({ query: Object.assign({}, this.$route.query, { c : q}) });
+			}
+		},
+		// remove/reset filter by type: tag or category
+		resetFilter: function(type) {
+			let query = Object.assign({}, this.$route.query);
+
+			if (type === 0 && has(query, 't')) { // if tag
+				delete query.t;
+				this.$router.replace({ query }); // needs to be here to avoid redundant navigation error
+			} else if (type === 1 && has(query, 'c')) { // if category
+				delete query.c;
+				this.$router.replace({ query }); // needs to be here to avoid redundant navigation error
+			}			
+		},
+		// show/hide full tag list
+		toggleMoreTags: function() {
 			if (this.n === this.tags.length) {
 				this.n = (window.innerWidth <= 580) ? 3 : 5;
 			} else {
 				this.n = this.tags.length;
 			}
 		},
-		toggleCategories: function() {
+		// show/hide full category list
+		toggleMoreCategories: function() {
 			if (this.m === this.cats.length) {
 				this.m = (window.innerWidth <= 580) ? 3 : 5;
 			} else {
 				this.m = this.cats.length;
 			}
 		},
+		// set minimum number of filters displayed; rest are hidden
 		minDisplayedFilters: function() {
 			if (window.innerWidth <= 580) {
 				this.n = this.tags.length;
@@ -171,37 +159,10 @@ export default {
 		},
 		firstMCategories: function() {
 			return this.cats.slice(0, this.m);
-		},
-		// tagsHidden: function() {
-		// 	return !this.isSmallScreen;
-		// },
-		// catsHidden: function() {
-		// 	return !this.isSmallScreen;
-		// }
-		// fi()
-	// filteredProducts: function() {
-		// let tag = this.$route.query.t;
-		// if (tag.length > 0 || tag != null) {
-		//   return this.products.filter(product => product.tags.includes(tag));
-		// } else {
-		//   return [...this.products];
-		// }
-
-	// }
-	
+		}	
 	},
-	watch: {
-		// isSmallScreen: function() {
-		// 	if (this.isSmallScreen) {
-		// 		this.tagsHidden = this.isSmallScreen;
-		// 		this.catsHidden = this.isSmallScreen;
-		// 	}
-		// }
-	},
-	beforeMount() {
-		// this.tagsHidden = this.isSmallScreen;
-		// this.catsHidden = this.isSmallScreen;
-	},
+	watch: {},
+	beforeMount() {},
 	mounted() {
 		this.minDisplayedFilters();
 		this.tagsHidden = this.isSmallScreen;
@@ -219,38 +180,7 @@ export default {
 
 
 <style>
-:root {
-	--primary-red-color: #fa5252;
-	--primary-green-color: #40c057;
-	--overdue-red-color: #e63946;
-	--gray-text-color: #748ca3;
-}
-
-html {
-	--text-color: #171a1d;
-	--background-color: #ffffff;
-	--gray-border-color: #ced4da;
-	--wrapper-border-color: #171a1d;
-	--add-button-background-color: #2c3e50;
-	--opt-button-background-color: #ffffff;
-	--opt-toggle-background-color: #e9ecef;
-}
-
-html[data-theme='dark'] {
-	--text-color: #ffffff;
-	--background-color: #171a1d;
-	--gray-border-color: #3e4a57;
-	--wrapper-border-color: #3e4a57;
-	--add-button-background-color: #3e4a57;
-	--opt-button-background-color: #3e4a57;
-	--opt-toggle-background-color: #3e4a57;
-}
-
-html,
-body  {
-	background-color: var(--background-color);
-	color: var(--text-color);
-}
+@import url('https://css.gg/css?=|undo|chevron-down-o');
 
 * {
 	outline: none;
@@ -266,18 +196,8 @@ body  {
 	align-items: start;
 }
 
-
-/* .product-container > * {
-	width: 100%;
-} */
-
-/* .product-container input {
-	border: 3px solid rgb(219, 219, 219);
-} */
-
 .product-list {
 	width: 65%;
-	/* margin: 0 auto; */
 	border-radius: 0.65rem;
 	padding: 0 1.5rem;
 	display: flex;
@@ -287,15 +207,27 @@ body  {
 	border-bottom: 5px solid var(--wrapper-border-color);
 }
 
+.product-list .no-results {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 3rem;
+}
+
+.product-list .no-results img {
+	width: 25%;
+	margin-bottom: 1rem;
+}
+
 .product-filters {
 	width: 100%;
 	border-radius: 0.65rem;
 	padding: .5rem 1rem;
-	/* border: 3px solid rgb(219, 219, 219);
-	border-bottom: 5px solid rgb(219, 219, 219); */
 	border: 2.5px solid var(--wrapper-border-color);
 	border-bottom: 5px solid var(--wrapper-border-color);
-	/* border-color: ; */
 	margin-bottom: .5rem;
 }
 
@@ -322,7 +254,6 @@ body  {
 	width: 30%;
 	display: flex;
 	flex-direction: column;
-	/* justify-content: space-between; */
 	align-items: center;
 }
 
@@ -330,30 +261,19 @@ body  {
 	width: 100%;
 }
 
+.gg-undo,
 .gg-chevron-down-o {
 	color: var(--text-color);
-	box-sizing: border-box;
-	position: relative;
-	display: block;
-	width: 22px;
-	height: 22px;
-	border: 2px solid;
-	border-radius: 100px
 }
 
-.gg-chevron-down-o::after {
-	content: "";
-	display: block;
-	box-sizing: border-box;
-	position: absolute;
-	width: 6px;
-	height: 6px;
-	border-bottom: 2px solid;
-	border-right: 2px solid;
-	transform: rotate(45deg);
-	left: 6px;
-	top: 5px
-} 
+.gg-undo {
+	margin-left: auto;
+	margin-right: 0;
+	transform: scale(.9);
+}
+
+
+
 
 @media only screen and (max-width: 840px) {
 	.container {
@@ -365,11 +285,15 @@ body  {
 		width: 100%;
 	}
 
-	/* .product-list, */
 	.product-filters {
 		border-width: 2px;
 		border-bottom-width: 4px;
 	}
+}
 
+@media only screen and (max-width: 580px) {
+	.gg-undo {
+		margin-right: 0.5rem;
+	}
 }
 </style>
