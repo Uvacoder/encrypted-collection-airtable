@@ -25,9 +25,6 @@
 						Report
 						<i class="gg-flag-alt"></i>
 					</b-button>
-					<b-button title="Info">
-						<i class="gg-info"></i>
-					</b-button>
                     <b-button @click="emitThemeChange" title="Change Theme">
 						<i v-if="darkMode" class="gg-sun"></i>
 						<i v-else class="gg-moon"></i>
@@ -90,7 +87,7 @@ export default {
 </script>
 
 <style>
-@import url('https://css.gg/css?=|sun|moon|add|flag-alt|info');
+@import url('https://css.gg/css?=|sun|moon|add|flag-alt');
 
 :root {
 	--ggs: 0.8;

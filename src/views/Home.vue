@@ -9,8 +9,8 @@
 				ref="searchInput" 
 				@focus="isSearching = true" 
 				@blur="isSearching = false" 
-				@keyup="searchResults" 
-				v-bind="searchQuery"
+				@keyup="searchResults"
+				v-model="searchQuery"
 				placeholder="Search Products..."
 			/>
 			<div>
@@ -23,11 +23,11 @@
 
 
 <script>
+import { replace } from "lodash";
 import ProductList from "@/components/ProductList.vue";
 
 export default {
     name: 'Home',
-    props: [''],
     components: {
         appProductList: ProductList,
     },
@@ -39,7 +39,7 @@ export default {
 					name: "Buttercup",
 					desc: "A free, secure and open-source password manager.",
 					url: "https://buttercup.pw/",
-					tags: ["tag1", "tag9", "tag3"],
+					tags: ["tag1", "tag9", "tag3", "tag1", "tag9", "tag1", "tag9", "tag1", "tag9"],
 					categories: ["cat1", "cat2", "cat3"],
 					img: "https://avatars3.githubusercontent.com/u/16577796?s=200&v=4",
 				},
@@ -47,15 +47,15 @@ export default {
 					name: "Signal",
 					desc: "Fast, simple, and secure messaging.",
 					url: "https://signal.org",
-					tags: ["tag4", "tag5", "tag6"],
-					categories: ["cat4", "cat5", "cat6"],
+					tags: ["open-source", "cross-platform", "free"],
+					categories: ["Communication"],
 					img: "https://avatars1.githubusercontent.com/u/702459?s=200&v=4",
 				},
 				{
 					name: "Briefing",
 					desc: "Secure direct group video chat",
 					url: "https://brie.fi/ng",
-					tags: ["tag7", "tag8", "tag9"],
+					tags: ["tag7", "tag8", "tag9","tag7", "tag8","tag7", "tag8","tag7", "tag8"],
 					categories: ["cat7", "cat8", "cat1"],
 					img: "https://brie.fi/apple-touch-icon.png",
 				},
@@ -95,18 +95,94 @@ export default {
 				"cat9",
 				"cat10",
 			],
-			searchQuery: "",
 			isSearching: false,
+			searchQuery: "",
 			// processedList: []
         }
     },
     methods: {
+		getAllOccurences: function(arr, val) {
+			var indexes = [], i;
+			for(i = 0; i < arr.length; i++) {
+				if (arr[i] === val) {
+					indexes.push(i);
+				}
+			}
+			return indexes;
+		},
+		containsSubstr: function(str, substr) {
+			let index = str.indexOf(substr);
+			return [index !== -1, index]
+			// if (substr.trim()) {
+			// } else {
+			// 	return [true];
+			// }
+			// edge case: search with space - "secure and"
+		},
+		// sameTextCase: function(strOne, strTwo) {
+		// 	if (strOne.localeCompare(strTwo) === 0) {
+		// 		return 0;
+		// 	}
+		// 	// console.log([strOne, strTwo]);
+		// 	for (let i = 0; i < strOne.length; i++) {
+		// 		if (strOne[i] !== strTwo[i]) {
+		// 			if (strOne[i] === strTwo[i].toUpperCase()) {
+		// 				console.log("hello");
+		// 			} else if (strOne[i] === strTwo[i].toLowerCase()) {
+		// 				console.log("hello");
+		// 			}
+		// 		}
+		// 	}
+		// },
 		searchResults: function() {
-			return [...this.allProducts];
-			// let obj = this.allProducts.find(o => o.name === this.searchQuery)
-			// return this.allProducts.filter(product => {
-			// 	return product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-			// });
+			return this.filterResults().map(product => {
+				let newProduct = {},
+					name = product.name.toLowerCase(),
+					desc = product.desc.toLowerCase(),
+					query = this.searchQuery.toLowerCase(),
+					pattern = new RegExp("("+query+")", "gi"),
+					nameMatch = this.containsSubstr(name, query)[0], 
+					descMatch = this.containsSubstr(desc, query)[0], 
+					index = this.containsSubstr(name, query)[1];
+
+					// copy name to new var
+					// lowercase everything
+					// find query in product details
+					// if found, get substr from index
+					// regenerate capitalized query
+
+					// console.log(this.containsSubstr(name, query)[1]);
+
+				if (nameMatch || descMatch) {
+					// if (nameMatch && !descMatch) {
+					// 	// let splitName = name.indexOf(query);
+					// 	console.log(name);
+						console.log(index);
+					// 	console.log(query);
+
+					// 	newProduct = Object.assign({}, product, { 
+					// 		name: replace(product.name, pattern, `<mark class='highlight'>${query}</mark>`)
+					// 	});
+					// 	// newProduct = Object.assign({}, product);
+					// } else if (!nameMatch && descMatch) {
+					// 	newProduct = Object.assign({}, product, { 
+					// 		desc: replace(product.desc, pattern, `<mark class='highlight'>${query}</mark>`)
+					// 	});
+					// } else {
+					// 	newProduct = Object.assign({}, product, { 
+					// 		name: replace(product.name, pattern, `<mark class='highlight'>${query}</mark>`),
+					// 		desc: replace(product.desc, pattern, `<mark class='highlight'>${query}</mark>`)
+					// 	});
+					// }
+					newProduct = Object.assign({}, product, { 
+						name: replace(product.name, pattern, `<mark class='highlight'>${query}</mark>`),
+						desc: replace(product.desc, pattern, `<mark class='highlight'>${query}</mark>`)
+					});
+				} else {
+					newProduct = null;
+				}
+				return newProduct;
+			});
 		},
         filterWithTag: function(tag, list = this.allProducts) {
             return (tag.length > 0) ? 
@@ -142,17 +218,29 @@ export default {
     },
     computed: {
 		processedList: function() {
-			if (this.isSearching) {
-				console.log(this.isSearching);
-				return this.searchResults();
-			} else {
-				console.log(this.isSearching);
-				return this.filterResults();
+			if (this.searchQuery.trim().length > 0) { // if searching
+				return this.searchResults().filter(product => product !== null);
+			} else { // if just filtering
+				return [...this.filterResults()];
 			}
 		}
     },
-	watch: {},
+	watch: {
+		// searchQuery: function(value) {
+		// 	let name = this.allProducts[0].desc.toLowerCase(),
+		// 		query = value.toLowerCase(),
+		// 		index = this.containsSubstr(name, query)[1];
+
+		// 	console.log(name.substring(this.allProducts[0].name[index], index + query.length));
+		// },
+	},
 	mounted: function() {
+		this.$nextTick(function () {
+			// Code that will run only after the
+			// entire view has been rendered
+			// console.log(this.$refs.searchInput);
+		});
+
 		let vm = this;
 		window.addEventListener('keyup', (e) => {
 			if (vm.$refs.searchInput) {
@@ -229,6 +317,10 @@ i {
 	background-color: var(--background-color);
 	color: var(--text-color);
 }
+
+.highlight {
+	background-color: var(--primary-yellow-color);
+} 
 
 @media only screen and (max-width: 840px) {
 	.search {

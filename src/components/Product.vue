@@ -5,8 +5,8 @@
 				<img :src="product.img" loading="lazy" alt="Product Logo" />
 			</div>
 			<div class="product-detail">
-				<h3 class="product-name">{{ product.name }}</h3>
-				<p class="product-desc">{{ product.desc }}</p>
+				<h3 class="product-name" ref="pName" v-html="product.name"></h3>
+				<p class="product-desc" ref="pDesc" v-html="product.desc"></p>
 			</div>
 			<a target="_blank" rel="noopener" :href="product.url" class="product-link">
 				<b-button>
@@ -33,7 +33,9 @@ export default {
 	name: "Product",
 	props: ["product"],
 	data() {
-		return {};
+		return {
+			// minTags: 4
+		};
 	},
 	methods: {
 		filterWith: function(q) {
@@ -147,11 +149,11 @@ button:active {
 }
 
 .product-tags {
-	padding: .5rem 0;
+	padding: .5rem 0 0 0;
 }
 
 .product-tags button {
-	margin: 0 0.5rem 0 0;
+	margin: 0 0.5rem 0.5rem 0;
 }
 
 .gg-external {
