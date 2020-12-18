@@ -9,10 +9,10 @@
 				ref="searchInput" 
 				@focus="isSearching = true" 
 				@blur="isSearching = false" 
-				@keyup="searchResults"
 				v-model="searchQuery"
 				placeholder="Search Products..."
 			/>
+				<!-- @keyup="searchResults" -->
 			<div>
 				<p>;</p>
             </div>
@@ -23,7 +23,7 @@
 
 
 <script>
-import { replace } from "lodash";
+// import { replace } from "lodash";
 import ProductList from "@/components/ProductList.vue";
 
 export default {
@@ -97,92 +97,46 @@ export default {
 			],
 			isSearching: false,
 			searchQuery: "",
+			searchResults: []
 			// processedList: []
         }
     },
     methods: {
-		getAllOccurences: function(arr, val) {
-			var indexes = [], i;
-			for(i = 0; i < arr.length; i++) {
-				if (arr[i] === val) {
-					indexes.push(i);
-				}
+		// returns start & end indices of all occurences of a query from a string
+		stringSearch: function(str, query, caseInsensitive = true) {
+			if (str.length === 0 || query.length === 0) {
+				return [];
 			}
+			
+			let indexes = [], i = 0, findIndex = -1,
+				localStr = caseInsensitive ? str.toLowerCase() : str,
+				localQuery = caseInsensitive ? query.toLowerCase() : query;
+
+			while (str.toLowerCase().indexOf(query.toLowerCase(), i) !== -1) {
+				findIndex = localStr.toLowerCase().indexOf(localQuery, i);
+				indexes.push([findIndex, findIndex + query.length]);
+				i = findIndex + 1;
+			}
+
 			return indexes;
 		},
-		containsSubstr: function(str, substr) {
-			let index = str.indexOf(substr);
-			return [index !== -1, index]
-			// if (substr.trim()) {
-			// } else {
-			// 	return [true];
-			// }
-			// edge case: search with space - "secure and"
-		},
-		// sameTextCase: function(strOne, strTwo) {
-		// 	if (strOne.localeCompare(strTwo) === 0) {
-		// 		return 0;
-		// 	}
-		// 	// console.log([strOne, strTwo]);
-		// 	for (let i = 0; i < strOne.length; i++) {
-		// 		if (strOne[i] !== strTwo[i]) {
-		// 			if (strOne[i] === strTwo[i].toUpperCase()) {
-		// 				console.log("hello");
-		// 			} else if (strOne[i] === strTwo[i].toLowerCase()) {
-		// 				console.log("hello");
-		// 			}
-		// 		}
-		// 	}
-		// },
-		searchResults: function() {
-			return this.filterResults().map(product => {
-				let newProduct = {},
-					name = product.name.toLowerCase(),
-					desc = product.desc.toLowerCase(),
-					query = this.searchQuery.toLowerCase(),
-					pattern = new RegExp("("+query+")", "gi"),
-					nameMatch = this.containsSubstr(name, query)[0], 
-					descMatch = this.containsSubstr(desc, query)[0], 
-					index = this.containsSubstr(name, query)[1];
+		// highlights all occurences of a query in a string
+		// wraps each occurence with <mark class='highlight'></mark>
+		highlightQuery: function(str, query) {
+			let highlight = ``,
+				res = this.stringSearch(str, query);
 
-					// copy name to new var
-					// lowercase everything
-					// find query in product details
-					// if found, get substr from index
-					// regenerate capitalized query
-
-					// console.log(this.containsSubstr(name, query)[1]);
-
-				if (nameMatch || descMatch) {
-					// if (nameMatch && !descMatch) {
-					// 	// let splitName = name.indexOf(query);
-					// 	console.log(name);
-						console.log(index);
-					// 	console.log(query);
-
-					// 	newProduct = Object.assign({}, product, { 
-					// 		name: replace(product.name, pattern, `<mark class='highlight'>${query}</mark>`)
-					// 	});
-					// 	// newProduct = Object.assign({}, product);
-					// } else if (!nameMatch && descMatch) {
-					// 	newProduct = Object.assign({}, product, { 
-					// 		desc: replace(product.desc, pattern, `<mark class='highlight'>${query}</mark>`)
-					// 	});
-					// } else {
-					// 	newProduct = Object.assign({}, product, { 
-					// 		name: replace(product.name, pattern, `<mark class='highlight'>${query}</mark>`),
-					// 		desc: replace(product.desc, pattern, `<mark class='highlight'>${query}</mark>`)
-					// 	});
-					// }
-					newProduct = Object.assign({}, product, { 
-						name: replace(product.name, pattern, `<mark class='highlight'>${query}</mark>`),
-						desc: replace(product.desc, pattern, `<mark class='highlight'>${query}</mark>`)
-					});
-				} else {
-					newProduct = null;
-				}
-				return newProduct;
-			});
+			let i, j = 0;
+			for (i = 0; i < res.length; i++) {
+				highlight += str.substring(j,res[i][0]);
+				highlight += `<mark class='highlight'>`;
+				highlight += str.substring(res[i][0], res[i][1]);
+				highlight += `</mark>`;
+				j = res[i][1];
+			}
+			highlight += str.substring(j);
+			
+			return highlight;  
 		},
         filterWithTag: function(tag, list = this.allProducts) {
             return (tag.length > 0) ? 
@@ -219,34 +173,55 @@ export default {
     computed: {
 		processedList: function() {
 			if (this.searchQuery.trim().length > 0) { // if searching
-				return this.searchResults().filter(product => product !== null);
+				return this.searchResults.filter(product => product !== null);
 			} else { // if just filtering
 				return [...this.filterResults()];
 			}
 		}
     },
 	watch: {
-		// searchQuery: function(value) {
-		// 	let name = this.allProducts[0].desc.toLowerCase(),
-		// 		query = value.toLowerCase(),
-		// 		index = this.containsSubstr(name, query)[1];
+		searchQuery: function() {
+			this.searchResults = this.filterResults().map(product => {
+				let newProduct = {},
+					name = product.name,
+					desc = product.desc,
+					query = this.searchQuery,
+					nameMatch = this.stringSearch(name, query).length > 0, 
+					descMatch = this.stringSearch(desc, query).length > 0;
+					console.log(query);
+				
+				if (nameMatch || descMatch) {
+					if (nameMatch && !descMatch) {
+						newProduct = Object.assign({}, product, { 
+							name: this.highlightQuery(name, query)
+						});
+					} else if (!nameMatch && descMatch) {
+						newProduct = Object.assign({}, product, { 
+							desc: this.highlightQuery(desc, query)
+						});
+					} else {
+						newProduct = Object.assign({}, product, { 
+							name: this.highlightQuery(name, query),
+							desc: this.highlightQuery(desc, query)
+						});
+					}
+				} else {
+					newProduct = null;
+				}
 
-		// 	console.log(name.substring(this.allProducts[0].name[index], index + query.length));
-		// },
+				return newProduct;
+			});
+		}
 	},
 	mounted: function() {
-		this.$nextTick(function () {
-			// Code that will run only after the
-			// entire view has been rendered
-			// console.log(this.$refs.searchInput);
-		});
-
 		let vm = this;
 		window.addEventListener('keyup', (e) => {
 			if (vm.$refs.searchInput) {
-				if (e.keyCode === 59) { 
+				if (e.keyCode === 59) // when semicolon (';')
+				{ 
 					vm.$refs.searchInput.focus();
-				} else if (e.keyCode === 27) { 
+				} else if (e.keyCode === 27) // when 'Esc' key is pressed
+				{ 
 					vm.$refs.searchInput.blur();
 				}
 			}
@@ -319,6 +294,7 @@ i {
 }
 
 .highlight {
+	color: var(--text-color);
 	background-color: var(--primary-yellow-color);
 } 
 
