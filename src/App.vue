@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style>
-/* Import font */
+/* Import regular font */
 @font-face {
 	font-family: 'JetBrains Mono';
 	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Bold.woff2') format('woff2'),

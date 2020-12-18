@@ -7,23 +7,36 @@
 			<input 
 				type="text" 
 				ref="searchInput" 
-				@focus="isSearching = true" 
-				@blur="isSearching = false" 
 				v-model="searchQuery"
 				placeholder="Search Products..."
 			/>
-				<!-- @keyup="searchResults" -->
-			<div>
+			<div 
+				@click="searchQuery = ''"
+				v-show="searchQuery.length > 0"
+			>
+                <i class="gg-close-o"></i>
+            </div>
+			<div title="Press semicolon key ( ; ) to enter search.">
 				<p>;</p>
             </div>
 		</div>
-		<app-product-list :products="processedList" :tags="tags" :cats="cats"></app-product-list>
+		
+		<app-product-list 
+			:products="processedList" 
+			:tags="tags" 
+			:cats="cats"
+		></app-product-list>
+
+		<b-button 
+			class="show-all" 
+			@click="clearFilters" 
+			v-show="!isThatAll"
+		>Clear Filters</b-button>
     </div>
 </template>
 
 
 <script>
-// import { replace } from "lodash";
 import ProductList from "@/components/ProductList.vue";
 
 export default {
@@ -33,7 +46,6 @@ export default {
     },
     data() {
         return {
-            // allProducts: [],
             allProducts: [
 				{
 					name: "Buttercup",
@@ -95,15 +107,15 @@ export default {
 				"cat9",
 				"cat10",
 			],
-			isSearching: false,
 			searchQuery: "",
 			searchResults: []
-			// processedList: []
         }
     },
     methods: {
 		// returns start & end indices of all occurences of a query from a string
 		stringSearch: function(str, query, caseInsensitive = true) {
+			caseInsensitive = typeof caseInsensitive !== 'undefined' ? caseInsensitive : true;
+
 			if (str.length === 0 || query.length === 0) {
 				return [];
 			}
@@ -112,8 +124,8 @@ export default {
 				localStr = caseInsensitive ? str.toLowerCase() : str,
 				localQuery = caseInsensitive ? query.toLowerCase() : query;
 
-			while (str.toLowerCase().indexOf(query.toLowerCase(), i) !== -1) {
-				findIndex = localStr.toLowerCase().indexOf(localQuery, i);
+			while (localStr.indexOf(localQuery, i) !== -1) {
+				findIndex = localStr.indexOf(localQuery, i);
 				indexes.push([findIndex, findIndex + query.length]);
 				i = findIndex + 1;
 			}
@@ -138,57 +150,17 @@ export default {
 			
 			return highlight;  
 		},
-        filterWithTag: function(tag, list = this.allProducts) {
-            return (tag.length > 0) ? 
-				list
-				.filter(product => product.tags.includes(tag))
-				: [...list];
-        },
-        filterWithCategory: function(cat, list = this.allProducts) {
-            return (cat.length > 0) ? 
-				list
-				.filter(product => product.categories.includes(cat))
-				: [...list];
-        },
-        filterResults: function() {
-			let cat = this.$route.query.c, 
-                tag = this.$route.query.t;
-
-			// if either filters are undefined
-			if (tag === undefined || cat === undefined) 
-			{
-                if (tag === undefined && cat !== undefined) {
-                    return this.filterWithCategory(cat);
-                } else if (cat === undefined && tag !== undefined) {
-                    return this.filterWithTag(tag);
-                } else {
-					return [...this.allProducts];
-				}
-			} else // if both filters are defined
-			{
-				return this.filterWithCategory(cat, this.filterWithTag(tag));
-            }
-		},
-    },
-    computed: {
-		processedList: function() {
-			if (this.searchQuery.trim().length > 0) { // if searching
-				return this.searchResults.filter(product => product !== null);
-			} else { // if just filtering
-				return [...this.filterResults()];
-			}
-		}
-    },
-	watch: {
-		searchQuery: function() {
-			this.searchResults = this.filterResults().map(product => {
+		// searches through given list and adds highlighting markup (html) to queries
+		searchWithHighlight: function(list = this.filterResults) {
+			list = typeof list !== 'undefined' ? list : this.filterResults;
+			
+			return list.map(product => {
 				let newProduct = {},
 					name = product.name,
 					desc = product.desc,
-					query = this.searchQuery,
+					query = this.searchQuery.trim(),
 					nameMatch = this.stringSearch(name, query).length > 0, 
 					descMatch = this.stringSearch(desc, query).length > 0;
-					console.log(query);
 				
 				if (nameMatch || descMatch) {
 					if (nameMatch && !descMatch) {
@@ -211,13 +183,88 @@ export default {
 
 				return newProduct;
 			});
+		},
+		// filters given list with a certain tag value
+        filterWithTag: function(tag, list = this.allProducts) {
+			list = typeof list !== 'undefined' ? list : this.allProducts;
+
+            return (tag.length > 0) ? 
+				list
+				.filter(product => product.tags.indexOf(tag) !== -1)
+				: [...list];
+		},
+		// filters given list with a certain category value
+        filterWithCategory: function(cat, list = this.allProducts) {
+			list = typeof list !== 'undefined' ? list : this.allProducts;
+
+            return (cat.length > 0) ? 
+				list
+				.filter(product => product.categories.indexOf(cat) !== -1)
+				: [...list];
+		},
+		// clears all filters to show all search results
+		clearFilters: function() {
+			let query = {};
+			this.$router.replace({ query });
+		},
+    },
+    computed: {
+		// filtered results based on query parameters
+        filterResults: function() {
+			let cat = this.$route.query.c, 
+                tag = this.$route.query.t;
+
+			// if either filters are undefined
+			if (tag === undefined || cat === undefined) 
+			{
+                if (tag === undefined && cat !== undefined) {
+                    return this.filterWithCategory(cat.toLowerCase());
+                } else if (cat === undefined && tag !== undefined) {
+                    return this.filterWithTag(tag.toLowerCase());
+                } else {
+					return [...this.allProducts];
+				}
+			} else // if both filters are defined
+			{
+				return this.filterWithCategory(cat.toLowerCase(), this.filterWithTag(tag.toLowerCase()));
+            }
+		},
+		// list used to render results either filtered or searched
+		processedList: function() {
+			if (this.searchQuery.trim().length > 0) { // if searching
+				return this.searchResults.filter(product => product !== null);
+			} else { // if just filtering
+				return [...this.filterResults];
+			}
+		},
+		// Are the search results being displayed everything?
+		isThatAll: function() {
+			if (this.searchQuery.trim().length > 0 ) { // if searching
+				let filtered = this.searchWithHighlight().filter(product => product !== null),
+					allResults = this.searchWithHighlight(this.allProducts).filter(product => product !== null);
+				
+				return filtered.length === allResults.length;
+			} else {
+				return true;
+			}
+		},
+    },
+	watch: {
+		// make search again when search query changes
+		searchQuery: function() {
+			this.searchResults = this.searchWithHighlight();
+		},
+		// make search again when filter values change
+		filterResults: function() {
+			this.searchResults = this.searchWithHighlight();
 		}
 	},
 	mounted: function() {
+		// attach keyboard shortcuts for input
 		let vm = this;
 		window.addEventListener('keyup', (e) => {
 			if (vm.$refs.searchInput) {
-				if (e.keyCode === 59) // when semicolon (';')
+				if (e.keyCode === 59) // when semicolon ( ; )
 				{ 
 					vm.$refs.searchInput.focus();
 				} else if (e.keyCode === 27) // when 'Esc' key is pressed
@@ -232,7 +279,7 @@ export default {
 
 
 <style scoped>
-@import url('https://css.gg/css?=|search');
+@import url('https://css.gg/css?=|search|close-o');
 
 * {
     outline: none;
@@ -258,6 +305,7 @@ i {
 }
 
 .search > :first-child,
+.search > :nth-last-child(2),
 .search > :last-child {
     display: flex;
     justify-content: center;
@@ -267,6 +315,16 @@ i {
 .search > :first-child {
     min-width: 2.5rem;
     max-width: 2.5rem;
+}
+
+.search > :nth-last-child(2) {
+	min-width: 2.5rem;
+    max-width: 2.5rem;
+	cursor: pointer;
+}
+
+.search > :nth-last-child(2) i {
+	margin: 0;
 }
 
 .search > :last-child {
@@ -296,7 +354,24 @@ i {
 .highlight {
 	color: var(--text-color);
 	background-color: var(--primary-yellow-color);
-} 
+}
+
+.show-all {
+	border: 2px solid;
+	border-bottom: 4px solid;
+	border-radius: 0.5rem;
+	border-color:  var(--wrapper-border-color);	
+	background-color: var(--primary-yellow-color);
+	color: var(--text-color);
+	margin: 1rem auto;
+	display: block;
+	height: 3rem;
+}
+
+html[data-theme='dark'] .show-all {
+	border-color: var(--primary-yellow-color);
+	background-color: var(--background-color);
+}
 
 @media only screen and (max-width: 840px) {
 	.search {

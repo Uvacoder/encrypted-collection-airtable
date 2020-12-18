@@ -45,13 +45,12 @@ export default {
 		};
 	},
 	methods: {
-		// goTo: function(route) {
-		// 	this.$router.push(route);
-		// },
+		// emit theme change to main component
 		emitThemeChange: function() {
 			this.darkMode = !this.darkMode;
 			this.$emit('theme-change');
 		},
+		// set some CSS styles for nav menu items with JS
 		setNavMenuStyle: function() {
 			this.navMenus.style.background = "transparent";
 			this.navMenus.childNodes[1].childNodes[0].style.padding = ".5rem 0";
@@ -109,11 +108,6 @@ i {
 	background-color: var(--background-color);
 }
 
-.navbar-brand {
-	/* width: 50%; */
-	/* background: red; */
-}
-
 .app-info {
 	padding: 0.5rem;
 	display: flex;
@@ -148,7 +142,6 @@ html[data-theme='dark'] .app-logo img {
 
 .app-name {
 	font-size: 1.25rem;
-	/* color: #1a202c; */
 	font-weight: bold;
 	line-height: 1.25;
 	margin: 0.25rem;

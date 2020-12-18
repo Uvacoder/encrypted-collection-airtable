@@ -27,15 +27,11 @@
 </template>
 
 <script>
-// import has from 'lodash/has';
-
 export default {
 	name: "Product",
 	props: ["product"],
 	data() {
-		return {
-			// minTags: 4
-		};
+		return {}
 	},
 	methods: {
 		filterWith: function(q) {
@@ -119,10 +115,6 @@ button:active {
 	color: var(--product-desc-text-color);
 	line-height: 1.5;
 	font-size: 0.9rem;
-}
-
-.product-info * {
-	/* color: var(--text-color); */
 }
 
 .product-link {

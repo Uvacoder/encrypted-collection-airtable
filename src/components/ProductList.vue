@@ -106,7 +106,7 @@ export default {
 				}
 			}
 		},
-		// update queries on when filters are clicked
+		// update queries when filters are clicked
 		filterWith: function(type, q) { 
 			if (type === 0 && this.$route.query.t !== q) { // if tag
 				this.$router.push({ query: Object.assign({}, this.$route.query, { t : q}) });
@@ -161,8 +161,6 @@ export default {
 			return this.cats.slice(0, this.m);
 		}	
 	},
-	watch: {},
-	beforeMount() {},
 	mounted() {
 		this.minDisplayedFilters();
 		this.tagsHidden = this.isSmallScreen;
@@ -184,12 +182,10 @@ export default {
 
 * {
 	outline: none;
-	/* border: 0.1px solid red; */
 }
 
 .container {
 	max-width: 100%;
-	/* padding: 0 1rem; */
 	margin: 0;
 	display: flex;
 	justify-content: space-between;
@@ -271,9 +267,6 @@ export default {
 	margin-right: 0;
 	transform: scale(.9);
 }
-
-
-
 
 @media only screen and (max-width: 840px) {
 	.container {
