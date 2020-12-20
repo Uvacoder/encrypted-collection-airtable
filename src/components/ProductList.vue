@@ -17,10 +17,7 @@
 				<div class="headers" @click="toggleViewFilters(0, $event)">
 					<h3>Tags</h3>
 					<i class="gg-undo" title="Reset Tags"></i>
-					<i 
-						v-show="isSmallScreen" 
-						class="gg-chevron-down-o"
-					></i>
+					<i class="gg-chevron-down-o"></i>
 				</div>
 				<b-taglist v-show="!tagsHidden">
 					<b-button 
@@ -46,10 +43,7 @@
 				<div class="headers" @click="toggleViewFilters(1, $event)">
 					<h3>Categories</h3>
 					<i class="gg-undo" title="Reset Categories"></i>
-					<i
-						v-show="isSmallScreen" 
-						class="gg-chevron-down-o"
-					></i>
+					<i class="gg-chevron-down-o"></i>
 				</div>
 				<b-taglist v-show="!catsHidden">
 					<b-button 
@@ -189,7 +183,7 @@ export default {
 	margin: 0;
 	display: flex;
 	justify-content: space-between;
-	align-items: start;
+	align-items: flex-start;
 }
 
 .product-list {
@@ -199,8 +193,8 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border: 2.5px solid var(--wrapper-border-color);
-	border-bottom: 5px solid var(--wrapper-border-color);
+	border: 2.5px solid var(--gray-border-color);
+	border-bottom: 5px solid var(--gray-border-color);
 }
 
 .product-list .no-results {
@@ -222,8 +216,8 @@ export default {
 	width: 100%;
 	border-radius: 0.65rem;
 	padding: .5rem 1rem;
-	border: 2.5px solid var(--wrapper-border-color);
-	border-bottom: 5px solid var(--wrapper-border-color);
+	border: 2.5px solid var(--gray-border-color);
+	border-bottom: 5px solid var(--gray-border-color);
 	margin-bottom: .5rem;
 }
 
@@ -285,6 +279,10 @@ export default {
 }
 
 @media only screen and (max-width: 580px) {
+	.product-list {
+		padding: 0 1rem;
+	}
+
 	.gg-undo {
 		margin-right: 0.5rem;
 	}

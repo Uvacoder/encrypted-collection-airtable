@@ -1,24 +1,34 @@
 <template>
     <div id='home'>
         <div class="search">
-            <div>
-                <i class="gg-search"></i>
-            </div>
-			<input 
-				type="text" 
-				ref="searchInput" 
-				v-model="searchQuery"
-				placeholder="Search Products..."
-			/>
-			<div 
-				@click="searchQuery = ''"
-				v-show="searchQuery.length > 0"
+			<div class="search-bar">
+				<div @click="focusInput">
+					<i class="gg-search"></i>
+				</div>
+				<input 
+					type="text" 
+					ref="searchInput" 
+					v-model="searchQuery"
+					:placeholder="placeholderText"
+				/>
+				<div 
+					@click="searchQuery = ''"
+					v-show="searchQuery.length > 0"
+					title="Clear input"
+				>
+					<i class="gg-close-o"></i>
+				</div>
+			</div>
+			
+					<!-- v-show="!isThatAll" -->
+			<b-button
+				class="clear-filters" 
+				@click="clearFilters"
+				title="Reset all filters"
+				:disabled="isThatAll"
 			>
-                <i class="gg-close-o"></i>
-            </div>
-			<div title="Press semicolon key ( ; ) to enter search.">
-				<p>;</p>
-            </div>
+				<i class="gg-tag"></i>
+			</b-button>
 		</div>
 		
 		<app-product-list 
@@ -26,12 +36,6 @@
 			:tags="tags" 
 			:cats="cats"
 		></app-product-list>
-
-		<b-button 
-			class="show-all" 
-			@click="clearFilters" 
-			v-show="!isThatAll"
-		>Clear Filters</b-button>
     </div>
 </template>
 
@@ -108,7 +112,8 @@ export default {
 				"cat10",
 			],
 			searchQuery: "",
-			searchResults: []
+			searchResults: [],
+			placeholderText: ""
         }
     },
     methods: {
@@ -207,6 +212,10 @@ export default {
 			let query = {};
 			this.$router.replace({ query });
 		},
+		// focuses search input
+		focusInput: function() {
+			this.$refs.searchInput.focus();
+		}
     },
     computed: {
 		// filtered results based on query parameters
@@ -260,18 +269,23 @@ export default {
 		}
 	},
 	mounted: function() {
+		this.placeholderText = (window.innerWidth > 480) ? 'Press ; key to enter search...' : 'Search products...';
 		// attach keyboard shortcuts for input
 		let vm = this;
 		window.addEventListener('keyup', (e) => {
 			if (vm.$refs.searchInput) {
 				if (e.keyCode === 59) // when semicolon ( ; )
 				{ 
-					vm.$refs.searchInput.focus();
+					vm.focusInput();
 				} else if (e.keyCode === 27) // when 'Esc' key is pressed
 				{ 
 					vm.$refs.searchInput.blur();
 				}
 			}
+		});
+
+		window.addEventListener('resize', () => {
+			this.placeholderText = (window.innerWidth > 480) ? 'Press ; key to enter search...' : 'Search products...';
 		});
     }
 }
@@ -279,7 +293,7 @@ export default {
 
 
 <style scoped>
-@import url('https://css.gg/css?=|search|close-o');
+@import url('https://css.gg/css?=|search|close-o|tag');
 
 * {
     outline: none;
@@ -287,62 +301,56 @@ export default {
 
 i {
     color: var(--text-color);
+	margin-left: 0;
 }
 
 .search {
 	width: 65%;
-    border: 2px solid var(--wrapper-border-color);
-	border-bottom: 4px solid var(--wrapper-border-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: .5rem;
+}
+
+.search-bar {
+	width: calc(100% - 3.5rem);
+	height: 3rem;
+    border: 2px solid var(--gray-border-color);
+	border-bottom: 4px solid var(--gray-border-color);
 	border-radius: 0.65rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-	margin-bottom: .5rem;
 }
 
-.search > * {
+.search-bar > * {
     height: 2.5rem;
 }
 
-.search > :first-child,
-.search > :nth-last-child(2),
-.search > :last-child {
+.search-bar > :first-child,
+.search-bar > :last-child {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.search > :first-child {
+.search-bar > :first-child {
     min-width: 2.5rem;
     max-width: 2.5rem;
+	cursor: pointer;
 }
 
-.search > :nth-last-child(2) {
+.search-bar > :last-child {
 	min-width: 2.5rem;
     max-width: 2.5rem;
 	cursor: pointer;
 }
 
-.search > :nth-last-child(2) i {
+.search-bar > :last-child i {
 	margin: 0;
 }
 
-.search > :last-child {
-    min-width: 1.5rem;
-    max-width: 1.5rem;
-    height: 1.5rem;
-    margin: .5rem .5rem auto .5rem;
-    border: 1px solid var(--wrapper-border-color);
-    border-radius: .35rem;
-}
-
-.search > :last-child p {
-    line-height: 1.5rem;
-	font-size: .85rem;
-	font-weight: bold;
-}
-
-.search input {
+.search-bar input {
 	border: none;
     width: 100%;
     padding: .5rem .25rem;
@@ -351,26 +359,26 @@ i {
 	color: var(--text-color);
 }
 
-.highlight {
-	color: var(--text-color);
-	background-color: var(--primary-yellow-color);
-}
-
-.show-all {
+.clear-filters {
 	border: 2px solid;
 	border-bottom: 4px solid;
-	border-radius: 0.5rem;
-	border-color:  var(--wrapper-border-color);	
-	background-color: var(--primary-yellow-color);
+	border-radius: 0.65rem;
 	color: var(--text-color);
-	margin: 1rem auto;
-	display: block;
+	background-color: var(--filter-reset-bg-color);
+	border-color:  var(--filter-reset-border-color);	
+	width: 3rem;
 	height: 3rem;
 }
 
-html[data-theme='dark'] .show-all {
-	border-color: var(--primary-yellow-color);
-	background-color: var(--background-color);
+.clear-filters i {
+	transform: scale(.9) rotate(180deg);
+	margin-left: .25rem;
+}
+
+/* Override Annoying Buefy Defaults */
+.clear-filters:focus, .clear-filters.is-focused,
+.clear-filters:active, .clear-filters.is-active {
+	border-color: var(--filter-reset-border-color) !important;
 }
 
 @media only screen and (max-width: 840px) {

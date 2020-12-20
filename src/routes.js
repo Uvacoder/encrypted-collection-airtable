@@ -5,7 +5,7 @@ import NotFound from "./views/NotFound.vue";
 // import ProductList from "./components/ProductList.vue";
 
 export const routes = [
-	{ path: "/", alias: "/home", component: Home },
+	{ path: "/", alias: "/all", component: Home },
 	{ path: "*", name: "404", component: NotFound },
 	{ path: "/submit", component: Submit },
 	{ path: "/report", component: Report },

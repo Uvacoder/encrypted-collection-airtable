@@ -1,5 +1,5 @@
 <template>
-	<b-navbar id="header">
+	<b-navbar id="header" :close-on-click="false">
 		<template slot="brand">
 			<b-navbar-item class="app-info nav-left" ref="navLeft" tag="router-link" :to="{ path: '/' }">
 				<div class="app-logo">
@@ -17,14 +17,41 @@
 		<template slot="end">
             <b-navbar-item tag="div" ref="navRight" class="nav-right">
                 <div class="buttons">
-                    <b-button tag="router-link" to="/submit" title="Submit a Product">
-						Submit
-						<i class="gg-add"></i>
+                    <b-button tag="router-link" to="/about" title="About this project">
+						About
+						<i class="gg-info"></i>
 					</b-button>
-					<b-button tag="router-link" to="/report" title="Report a Product">
-						Report
-						<i class="gg-flag-alt"></i>
-					</b-button>
+					<b-dropdown aria-role="list" title="List of pages">
+						<button class="button" slot="trigger">
+							<span>Pages</span>
+							<i class="gg-file-document"></i>
+						</button>
+
+						<b-dropdown-item has-link aria-role="listitem" title="Report a bug or flag a product">
+							<router-link to="/report">
+								<span class="page-icons"><i class="gg-danger"></i></span>
+								Report
+							</router-link>
+						</b-dropdown-item>
+						<b-dropdown-item has-link aria-role="listitem" title="Submit a Product">
+							<router-link to="/submit">
+								<span class="page-icons"><i class="gg-add"></i></span>
+								Submit
+							</router-link>
+						</b-dropdown-item>
+						<b-dropdown-item has-link aria-role="listitem" title="Show excluded products">
+							<router-link to="/excluded">
+								<span class="page-icons"><i class="gg-unavailable"></i></span>
+								Excluded
+							</router-link>
+						</b-dropdown-item>
+						<b-dropdown-item has-link aria-role="listitem" title="Products on the watchlist">
+							<router-link to="/watchlist">
+								<span class="page-icons"><i class="gg-eye"></i></span>
+								Watchlist
+							</router-link>
+						</b-dropdown-item>
+					</b-dropdown>
                     <b-button @click="emitThemeChange" title="Change Theme">
 						<i v-if="darkMode" class="gg-sun"></i>
 						<i v-else class="gg-moon"></i>
@@ -86,7 +113,7 @@ export default {
 </script>
 
 <style>
-@import url('https://css.gg/css?=|sun|moon|add|flag-alt');
+@import url('https://css.gg/css?=|sun|moon|add|danger|info|unavailable|eye|file-document');
 
 :root {
 	--ggs: 0.8;
@@ -168,37 +195,67 @@ html[data-theme='dark'] .app-logo img {
 
 .buttons > * {
 	border-radius: .5rem;
-	height: 2.75rem;
+	height: 2.5rem;
 }
 
-.buttons a,
-.buttons button {
-	border: 2px solid var(--wrapper-border-color);
-	border-bottom: 4px solid var(--wrapper-border-color);	
+.buttons > a,
+.buttons > div button,
+.buttons > button {
+	/* padding: 0 1rem 0 1rem; */
+	border: 2px solid var(--gray-border-color);
+	border-bottom: 4px solid var(--gray-border-color);	
 	border-radius: 0.5rem;
 	background-color: var(--background-color);
 	color: var(--text-color);
 	margin: 0 .5rem 0 0 !important;
 }
 
-.buttons a:hover,
-.buttons button:hover {
+.buttons > a:hover,
+.buttons > div:hover button,
+.buttons > button:hover {
 	color: var(--text-color);
-	border: 2px solid var(--wrapper-border-color);
-	border-bottom: 4px solid var(--wrapper-border-color);
+	border: 2px solid var(--gray-border-color);
+	border-bottom: 4px solid var(--gray-border-color);
 }
 
-.buttons button:last-of-type {
-	padding: .5rem;
+.buttons > div {
+	border-radius: 0.5rem;
+	text-align: left;
+}
+
+.buttons > div .page-icons{
+	float: left;
+	width: 1.75rem;
+	margin-right: 0.5rem;
+}
+
+.buttons > div i {
+	float: left;
+	margin: 0;
+}
+
+.buttons > div button i {
+	margin-left: .5rem;
+	margin-right: 0;
+}
+
+.buttons > button:last-of-type {
+	padding: .75rem;
 	margin: 0 !important;
 }
 
-.buttons button:nth-last-of-type(2) {
-	padding: .5rem;
+.buttons > a:first-of-type span {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.buttons button:last-of-type i,
-.buttons button:nth-last-of-type(2) i {
+.router-link-active,
+.router-link-exact-active {
+	color: var(--text-color);
+}
+
+.buttons > button:last-of-type i {
 	margin-left: 0;
 }
 

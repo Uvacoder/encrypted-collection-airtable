@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import localForage from "localforage";
 import Header from "@/components/Header.vue";
 
 export default {
@@ -18,7 +19,39 @@ export default {
 			darkThemeEnabled: false
 		}
 	},
-	methods: {},
+	methods: {
+		// Initialize local storage for theme
+		initDB: function() {
+			let vm = this;
+
+			localForage
+				.getItem("theme")
+				.then(function(value) {
+					// first timer or site data cleared
+					// offline store for theme doesn't exist yet
+					if (value === null) {
+						localForage
+							.setItem("theme", vm.darkThemeEnabled)
+							.catch((err) => {
+								throw err;
+							});
+					} else {
+						vm.darkThemeEnabled = value;
+					}
+				})
+				.catch(function(err) {
+					throw err;
+				});
+		},
+		// Update local storage for theme
+		updateDB: function() {
+			localForage
+				.setItem("theme", this.darkThemeEnabled)
+				.catch((err) => {
+					throw err;
+				});
+		}
+	},
 	watch: {
 		darkThemeEnabled: function() {
 			// toggle dark mode
@@ -29,8 +62,13 @@ export default {
 			} else if (!this.darkThemeEnabled) {
 				rootElt.removeAttribute('data-theme');
 			}
+
+			this.updateDB();
 		}
-	}	
+	},
+	mounted() {
+		this.initDB();
+	},
 };
 </script>
 
@@ -56,44 +94,45 @@ export default {
 }
 
 :root {
-	--primary-red-color: #fa5252;
-	--primary-yellow-color: #f1c61b;
-	--overdue-red-color: #e63946;
-	--gray-text-color: #495057;
 	--gray-bg-color: #868e96;
 	--lightgray-bg-color: #ced4da;
+	--primary-yellow-color: #f1c61b;
+	--highlight-text-color: #171a1d;
+	/* --gray-border-color: #ced4da; */
+
 }
 
 html {
 	--text-color: #171a1d;
 	--background-color: #ffffff;
-	--gray-border-color: #ced4da;
-	--navbar-background-color: rgb(240, 240, 240);
-	--wrapper-border-color: #0d1117;
-	--product-border-color: #ced4da;
-	--app-desc-text-color: #5d6470;
-	--product-desc-text-color: #5d6470;
+	--gray-border-color: #0d1117;
 	--tags-bg-color: #e8eaec;
 	--tags-bg-hover-color: #d8dbdf;
-	--add-button-background-color: #2c3e50;
-	--opt-button-background-color: #ffffff;
-	--opt-toggle-background-color: #e9ecef;
+	--app-desc-text-color: #5d6470;
+	--placeholder-text-color: #adb5bd;
+	--product-border-color: #ced4da;
+	--product-desc-text-color: #5d6470;
+	--filter-reset-bg-color: #f1c61b;
+	--filter-reset-border-color: #0d1117;
+	/* --add-button-background-color: #2c3e50; */
+	/* --navbar-background-color: rgb(240, 240, 240); */
 }
 
 html[data-theme='dark'] {
 	--text-color: #ffffff;
 	--background-color: #0d1117;
+	--gray-border-color: #495057;
 	--tags-bg-color: #272d35;
 	--tags-bg-hover-color: #2f3741;
-	--gray-border-color: #3e4a57;
-	--navbar-background-color: #1f2020;
-	--wrapper-border-color: #495057;
 	--app-desc-text-color: #ced4da;
-	--product-desc-text-color: #ced4da;
+	--placeholder-text-color: #495057;
 	--product-border-color: #495057;
-	--add-button-background-color: #3e4a57;
-	--opt-button-background-color: #3e4a57;
-	--opt-toggle-background-color: #3e4a57;
+	--product-desc-text-color: #ced4da;
+	--filter-reset-bg-color: #0d1117;
+	--filter-reset-border-color: #f1c61b;
+	/* --add-button-background-color: #3e4a57;
+	/* --gray-border-color: #3e4a57; */
+	/* --navbar-background-color: #1f2020; */
 }
 
 html,
@@ -126,8 +165,19 @@ input, input:before, input:after {
 }
 
 input::placeholder {
-	color: var(--app-desc-text-color) !important;
+	color: var(--placeholder-text-color) !important;
 	opacity: 1;
+}
+
+/* Override Annoying Buefy Defaults */
+.button:focus, .button.is-focused,
+.button:active, .button.is-active {
+	color: var(--text-color) !important;
+	border-color: var(--gray-border-color) !important;
+}
+
+.button:focus:not(:active), .button.is-focused:not(:active) {
+	box-shadow: none !important;
 }
 
 #app {
@@ -150,6 +200,11 @@ input::placeholder {
 .tags button:hover {
 	color: var(--text-color);
 	background-color: var(--tags-bg-hover-color);
+}
+
+mark.highlight {
+	color: var(--highlight-text-color);
+	background-color: var(--primary-yellow-color);
 }
 
 @media only screen and (max-width: 580px) {
