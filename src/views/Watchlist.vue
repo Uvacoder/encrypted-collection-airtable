@@ -3,7 +3,7 @@
         <p>
             There are some services that don't currently have such encryption but plan to itegrate it into their products. 
             These services either have encryption as a current beta feature or as a likely future feature on their roadmap.
-            They can be accessed here.
+            They can be accessed on this page.
             This list is also accessible anywhere else from the "Pages" dropdown in the navigation menu under "Watchlist". 
         </p> 
         <div class="product-list">

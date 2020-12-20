@@ -2,7 +2,7 @@
     <div id='excluded'>
         <p>
             Due to inactive development, discontinuation or lack of activity in general, some services are excluded from the main list.
-            You can browse this list of excluded products here, but be careful trusting them.
+            You can browse this list of excluded products on this page, but be careful trusting them.
             This list is also accessible anywhere else from the "Pages" dropdown in the navigation menu under "Excluded". 
         </p> 
         <div class="product-list">
