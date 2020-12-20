@@ -267,6 +267,11 @@ export default {
 			this.searchResults = this.searchWithHighlight();
 		}
 	},
+	beforeRouteEnter(to, from, next) {
+		console.log(to);
+		console.log(from);
+		next()
+	},
 	mounted: function() {
 		this.placeholderText = (window.innerWidth > 480) ? 'Press ; key to enter search...' : 'Search products...';
 		// attach keyboard shortcuts for input

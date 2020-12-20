@@ -1,0 +1,99 @@
+<template>
+    <div id='unfound'>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 9C7.44772 9 7 9.44772 7 10C7 10.5523 7.44772 11 8 11H9C9.55228 11 10 10.5523 10 10C10 9.44772 9.55228 9 9 9H8Z" fill="currentColor" />
+            <path d="M15 9C14.4477 9 14 9.44772 14 10C14 10.5523 14.4477 11 15 11H16C16.5523 11 17 10.5523 17 10C17 9.44772 16.5523 9 16 9H15Z" fill="currentColor" />
+            <path d="M9 15C8.44772 15 8 15.4477 8 16C8 16.5523 8.44772 17 9 17H15C15.5523 17 16 16.5523 16 16C16 15.4477 15.5523 15 15 15H9Z" fill="currentColor" />
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" fill="currentColor" />
+        </svg>
+        <h2>
+            The page you are trying to visit doesn't exist.
+        </h2>
+        <b-button tag="router-link" to="/" title="About this project">
+            Go Back Home
+            <i class="gg-corner-right-up"></i>
+        </b-button>
+    </div>
+</template>
+
+
+<script>
+export default {
+    name: 'unfound',
+    data() {
+        return {}
+    },beforeRouteEnter(to, from, next) {
+        console.log(to);
+        console.log(from);
+        next();
+    }
+}
+</script>
+
+
+<style scoped>
+@import url('https://css.gg/css?=|corner-right-up');
+
+* {
+    outline: none;
+}
+
+#unfound {
+    padding: 2rem .5rem;
+}
+
+#unfound > svg {
+    width: 125px;
+    height: 125px;
+    color: var(--text-color);
+    margin: 0 auto;
+}
+
+#unfound h2 {
+    width: 65%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem auto;
+}
+
+#unfound > a {
+    width: 12rem;
+	/* min-height: 3rem; */
+    height: auto;
+	padding: .75rem;
+	border: 2px solid var(--gray-border-color);
+	border-bottom: 4px solid var(--gray-border-color);	
+	border-radius: 0.5rem;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	margin: 0 auto;
+    display: block;
+}
+
+#unfound > a:hover {
+	color: var(--text-color);
+	border: 2px solid var(--gray-border-color);
+	border-bottom: 4px solid var(--gray-border-color);
+}
+
+#unfound span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#unfound > a i {
+    margin-left: 0.5rem;
+}
+
+@media only screen and (max-width: 480px) {
+	#unfound {
+        padding: 1rem .25rem;
+	}
+
+    #unfound h2 {
+        width: 95%;
+	}
+}
+</style>

@@ -66,6 +66,11 @@ export default {
 			this.updateDB();
 		}
 	},
+	beforeRouteUpdate (to, from, next) {
+		console.log(to);
+		console.log(from);
+		next()
+	},
 	mounted() {
 		this.initDB();
 	},
@@ -115,7 +120,7 @@ html {
 }
 
 html[data-theme='dark'] {
-	--text-color: #ffffff;
+	--text-color: #f1f3f5;
 	--background-color: #0d1117;
 	--gray-border-color: #495057;
 	--tags-bg-color: #272d35;

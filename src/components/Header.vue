@@ -6,6 +6,7 @@
 					<img src="../assets/logo.svg" alt="EncryptedList Logo" />
 				</div>
 				<div class="app-detail">
+				<h3 class="app-name">ExcludedList</h3>
 				<h3 class="app-name">EncryptedList</h3>
 				<p class="app-desc">
 					List of services that offer zero-knowledge or end-to-end encryption 🔐.
@@ -71,7 +72,8 @@ export default {
 	data() {
 		return {
 			darkMode: false,
-			navMenus: {}
+			navMenus: {},
+			route: this.$route
 		};
 	},
 	methods: {
@@ -197,7 +199,6 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .buttons > * {
-	border-radius: .5rem;
 	height: 2.5rem;
 }
 
