@@ -20,14 +20,13 @@
 				</div>
 			</div>
 			
-					<!-- v-show="!isThatAll" -->
 			<b-button
 				class="clear-filters" 
 				@click="clearFilters"
-				title="Reset all filters"
+				title="Reset Filters &amp; Search Everything"
 				:disabled="isThatAll"
 			>
-				<i class="gg-tag"></i>
+				<i class="gg-asterisk"></i>
 			</b-button>
 		</div>
 		
@@ -293,7 +292,7 @@ export default {
 
 
 <style scoped>
-@import url('https://css.gg/css?=|search|close-o|tag');
+@import url('https://css.gg/css?=|search|close-o|asterisk');
 
 * {
     outline: none;
@@ -371,8 +370,7 @@ i {
 }
 
 .clear-filters i {
-	transform: scale(.9) rotate(180deg);
-	margin-left: .25rem;
+	transform: scale(1);
 }
 
 /* Override Annoying Buefy Defaults */

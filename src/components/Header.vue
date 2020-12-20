@@ -24,7 +24,7 @@
 					<b-dropdown aria-role="list" title="List of pages">
 						<button class="button" slot="trigger">
 							<span>Pages</span>
-							<i class="gg-file-document"></i>
+							<i class="gg-chevron-down"></i>
 						</button>
 
 						<b-dropdown-item has-link aria-role="listitem" title="Report a bug or flag a product">
@@ -52,6 +52,9 @@
 							</router-link>
 						</b-dropdown-item>
 					</b-dropdown>
+					<b-button title="Feedback">
+						<i class="gg-smile-mouth-open"></i>
+					</b-button>
                     <b-button @click="emitThemeChange" title="Change Theme">
 						<i v-if="darkMode" class="gg-sun"></i>
 						<i v-else class="gg-moon"></i>
@@ -113,7 +116,7 @@ export default {
 </script>
 
 <style>
-@import url('https://css.gg/css?=|sun|moon|add|danger|info|unavailable|eye|file-document');
+@import url('https://css.gg/css?=|sun|moon|add|danger|info|unavailable|eye|chevron-down|smile-mouth-open');
 
 :root {
 	--ggs: 0.8;
@@ -201,7 +204,7 @@ html[data-theme='dark'] .app-logo img {
 .buttons > a,
 .buttons > div button,
 .buttons > button {
-	/* padding: 0 1rem 0 1rem; */
+	padding: 0 .7rem;
 	border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);	
 	border-radius: 0.5rem;
@@ -235,12 +238,19 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .buttons > div button i {
-	margin-left: .5rem;
+	margin-left: .25rem;
 	margin-right: 0;
 }
 
+.buttons > :nth-last-child(2) i {
+	transform: scale(1);
+	margin-left: 0;
+	background-color: var(--filter-reset-bg-color);
+	color:  var(--filter-reset-border-color);
+}
+
 .buttons > button:last-of-type {
-	padding: .75rem;
+	padding: 0 .5rem;
 	margin: 0 !important;
 }
 

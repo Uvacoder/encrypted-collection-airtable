@@ -41,7 +41,7 @@
 			</div>
 			<div class="product-filters">
 				<div class="headers" @click="toggleViewFilters(1, $event)">
-					<h3>Categories</h3>
+					<h3>Category</h3>
 					<i class="gg-undo" title="Reset Categories"></i>
 					<i class="gg-chevron-down-o"></i>
 				</div>
@@ -80,6 +80,10 @@ export default {
 	},
 	data() {
 		return {
+			currCat: true,
+			currTag: true,
+			currCatValue: true,
+			currTagValue: true,
 			isSmallScreen: (window.innerWidth <= 580),
 			tagsHidden: this.isSmallScreen,
 			catsHidden: this.isSmallScreen,
@@ -230,6 +234,12 @@ export default {
 	padding: .25rem 0;
 	cursor: pointer;
 	color: var(--text-color);
+}
+
+.product-filters .headers .current {
+	margin: 0;
+	margin-right: auto;
+	margin-left: .5rem;
 }
 
 .product-filters > :not(:first-child) {

@@ -98,8 +98,6 @@ export default {
 	--lightgray-bg-color: #ced4da;
 	--primary-yellow-color: #f1c61b;
 	--highlight-text-color: #171a1d;
-	/* --gray-border-color: #ced4da; */
-
 }
 
 html {
@@ -114,8 +112,6 @@ html {
 	--product-desc-text-color: #5d6470;
 	--filter-reset-bg-color: #f1c61b;
 	--filter-reset-border-color: #0d1117;
-	/* --add-button-background-color: #2c3e50; */
-	/* --navbar-background-color: rgb(240, 240, 240); */
 }
 
 html[data-theme='dark'] {
@@ -130,9 +126,6 @@ html[data-theme='dark'] {
 	--product-desc-text-color: #ced4da;
 	--filter-reset-bg-color: #0d1117;
 	--filter-reset-border-color: #f1c61b;
-	/* --add-button-background-color: #3e4a57;
-	/* --gray-border-color: #3e4a57; */
-	/* --navbar-background-color: #1f2020; */
 }
 
 html,
