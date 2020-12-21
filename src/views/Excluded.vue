@@ -2,7 +2,7 @@
     <div id='excluded'>
         <p>
             Due to inactive development, discontinuation or lack of activity in general, some services are excluded from the main list.
-            You can browse this list of excluded products on this page, but be careful trusting them.
+            You can browse this list of excluded products on this page, but <mark class="highlight">be careful</mark> trusting them.
             This list is also accessible anywhere else from the "Pages" dropdown in the navigation menu under "Excluded". 
         </p> 
         <div class="product-list">
@@ -10,6 +10,7 @@
 				v-for="(product, index) in allProducts" 
 				:key="index" 
 				:product="product"
+				:filterDisabled="true"
 				:class="{ 'last-product' : (index === allProducts.length - 1)}"
 			></app-product>
 		</div>      
@@ -60,11 +61,6 @@ export default {
         populateList: function() {
             // fetch and populate
         }
-    },
-    beforeRouteEnter(to, from, next) {
-        console.log(to);
-        console.log(from);
-        next();
     }
 }
 </script>
@@ -83,6 +79,10 @@ export default {
     width: 80%;
     text-align: center;
     margin: 0 auto;
+}
+
+.highlight {
+    padding: 0 .25rem;
 }
 
 .product-list {

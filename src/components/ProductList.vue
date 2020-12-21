@@ -5,6 +5,7 @@
 				v-for="(product, index) in products" 
 				:key="index" 
 				:product="product"
+				:filterDisabled="false"
 				:class="{ 'last-product' : (index === products.length - 1)}"
 			></app-product>
 			<div v-show="(products.length === 0)" class="no-results">

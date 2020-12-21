@@ -6,15 +6,7 @@
             These services either have encryption as a beta feature or have it on their roadmap.
             They can be accessed here.
             They are also accessible from the "Pages" dropdown in the navigation menu under "report". 
-        </p> 
-        <div class="product-list">
-			<app-product 
-				v-for="(product, index) in allProducts" 
-				:key="index" 
-				:product="product"
-				:class="{ 'last-product' : (index === allProducts.length - 1)}"
-			></app-product>
-		</div>      
+        </p>     
     </div>
 </template>
 
@@ -30,11 +22,6 @@ export default {
         populateList: function() {
             // fetch and populate
         }
-    },
-    beforeRouteEnter(to, from, next) {
-        console.log(to);
-        console.log(from);
-        next();
     }
 }
 </script>

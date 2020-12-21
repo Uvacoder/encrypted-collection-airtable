@@ -6,8 +6,7 @@
 					<img src="../assets/logo.svg" alt="EncryptedList Logo" />
 				</div>
 				<div class="app-detail">
-				<h3 class="app-name">ExcludedList</h3>
-				<h3 class="app-name">EncryptedList</h3>
+				<h3 class="app-name">{{ headerTitle }}</h3>
 				<p class="app-desc">
 					List of services that offer zero-knowledge or end-to-end encryption 🔐.
 				</p>
@@ -98,6 +97,11 @@ export default {
 				this.navMenus.style.paddingLeft = "0";
 			}
 		}
+	},
+	computed: {
+		headerTitle: function() {
+			return this.$store.state.headerTitle;
+		},
 	},
 	mounted() {
 		// Stylize some Buefy components because they are inaccessible from CSS

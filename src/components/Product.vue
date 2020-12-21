@@ -29,18 +29,22 @@
 <script>
 export default {
 	name: "Product",
-	props: ["product"],
+	props: ["product", "filterDisabled"],
 	data() {
 		return {}
 	},
 	methods: {
 		filterWith: function(q) {
-			let query = Object.assign({}, this.$route.query);
+			// filtering is disabled on some pages that use this component
+			if (!this.filterDisabled) {
+				let query = Object.assign({}, this.$route.query);
 
-			if (query.t !== q) {
-				// needs to be here to avoid redundant navigation error
-				this.$router.push({ query: Object.assign({}, this.$route.query, { t : q }) });
+				if (query.t !== q) {
+					// needs to be here to avoid redundant navigation error
+					this.$router.push({ query: Object.assign({}, this.$route.query, { t : q }) });
+				}
 			}
+
 		},
 	},
 };

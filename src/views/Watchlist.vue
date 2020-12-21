@@ -11,6 +11,7 @@
 				v-for="(product, index) in allProducts" 
 				:key="index" 
 				:product="product"
+				:filterDisabled="true"
 				:class="{ 'last-product' : (index === allProducts.length - 1)}"
 			></app-product>
 		</div>      
@@ -61,11 +62,6 @@ export default {
         populateList: function() {
             // fetch and populate
         }
-    },
-    beforeRouteEnter(to, from, next) {
-        console.log(to);
-        console.log(from);
-        next();
     }
 }
 </script>

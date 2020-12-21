@@ -2,21 +2,16 @@ import Vue from "vue";
 import Buefy from "buefy";
 import App from "./App.vue";
 import "buefy/dist/buefy.css";
-import { routes } from "./routes";
-import VueRouter from "vue-router";
+import router from "@/router";
+import { store } from "@/store";
 
 Vue.use(Buefy);
-Vue.use(VueRouter);
-
-const router = new VueRouter({
-	routes: routes,
-	mode: "history", // or none for default "hash"
-});
 
 Vue.config.productionTip = false;
 
 const vm = new Vue({
 	el: "#app",
+	store,
 	router,
 	render: (h) => h(App),
 });

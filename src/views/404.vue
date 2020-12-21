@@ -22,10 +22,6 @@ export default {
     name: 'unfound',
     data() {
         return {}
-    },beforeRouteEnter(to, from, next) {
-        console.log(to);
-        console.log(from);
-        next();
     }
 }
 </script>

@@ -40,6 +40,7 @@
 
 
 <script>
+import axios from 'axios';
 import ProductList from "@/components/ProductList.vue";
 
 export default {
@@ -116,6 +117,24 @@ export default {
         }
     },
     methods: {
+		async fetchData() {
+			await axios({
+				method: "get",
+				url: "/api/getProducts",
+				headers: {
+					"Content-type": "application/json",
+				},
+			})
+			.then((res) => {
+				console.log(res);
+				return res.data;
+			})
+			.then((data) => {
+				console.log(data);
+				this.allProducts = [...data];
+			})
+			.catch((err) => console.log(err));
+		},
 		// returns start & end indices of all occurences of a query from a string
 		stringSearch: function(str, query, caseInsensitive = true) {
 			caseInsensitive = typeof caseInsensitive !== 'undefined' ? caseInsensitive : true;
@@ -267,10 +286,9 @@ export default {
 			this.searchResults = this.searchWithHighlight();
 		}
 	},
-	beforeRouteEnter(to, from, next) {
-		console.log(to);
-		console.log(from);
-		next()
+	beforeMount() {
+		// fetch data
+		this.fetchData();
 	},
 	mounted: function() {
 		this.placeholderText = (window.innerWidth > 480) ? 'Press ; key to enter search...' : 'Search products...';
@@ -313,7 +331,7 @@ i {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: .5rem;
+	margin-bottom: 1rem;
 }
 
 .search-bar {

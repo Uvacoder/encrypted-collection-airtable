@@ -22,11 +22,6 @@ export default {
         populateList: function() {
             // fetch and populate
         }
-    },
-    beforeRouteEnter(to, from, next) {
-        console.log(to);
-        console.log(from);
-        next();
     }
 }
 </script>
