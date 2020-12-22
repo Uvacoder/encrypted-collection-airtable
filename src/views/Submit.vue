@@ -1,11 +1,9 @@
 <template>
     <div id='submit'>
-        <h3>Submission Page</h3>
         <p>
-            There are also some services that don't currently have such encryption but plan to itegrate it into their products. 
-            These services either have encryption as a beta feature or have it on their roadmap.
-            They can be accessed here.
-            They are also accessible from the "Pages" dropdown in the navigation menu under "submit". 
+            If you discovered any products that aren't in the list, you can <mark class="highlight">submit</mark> one through this page.
+            Use this page for new submissions and <router-link to="/report">this one <i class="gg-link"></i></router-link> to report already existing products.
+            I'll review the submission and add the product ASAP.
         </p>     
     </div>
 </template>
@@ -28,8 +26,17 @@ export default {
 
 
 <style scoped>
+@import url('https://css.gg/css?=|link');
+
 * {
     outline: none;
+}
+
+i {
+    float: none;
+    display: inline-block;
+    margin: 0 .25rem 0 .75rem;
+    transform: scale(.85) rotate(-45deg);
 }
 
 #submit {
@@ -37,20 +44,30 @@ export default {
 }
 
 #submit p {
+    font-size: 1.1rem;
     width: 80%;
     text-align: center;
     margin: 0 auto;
 }
 
-.product-list {
-	width: 85%;
-    margin: 2rem auto;
+#submit a {
+    text-decoration: none;
+    border-radius: .1rem;
+    padding: 0 .25rem;
+    color: var(--highlight-text-color);
+    background-color: var(--primary-yellow-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.highlight {
+    border-radius: .1rem;
+    padding: 0 .25rem;
 }
 
 @media only screen and (max-width: 768px) {
-    .product-list {
-        width: 100%;
-    }
+    /* code */
 }
 
 @media only screen and (max-width: 480px) {
@@ -60,7 +77,7 @@ export default {
 
     #submit p {
         width: 95%;
-        text-align: justify;
+        text-align: left;
 	}
 }
 </style>

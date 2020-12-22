@@ -16,7 +16,7 @@
 					v-show="searchQuery.length > 0"
 					title="Clear input"
 				>
-					<i class="gg-close-o"></i>
+					<i class="gg-backspace"></i>
 				</div>
 			</div>
 			
@@ -315,7 +315,7 @@ export default {
 
 
 <style scoped>
-@import url('https://css.gg/css?=|search|close-o|asterisk');
+@import url('https://css.gg/css?=|search|backspace|asterisk');
 
 * {
     outline: none;
@@ -370,6 +370,8 @@ i {
 
 .search-bar > :last-child i {
 	margin: 0;
+	margin-left: .1rem;
+	transform: scale(1);
 }
 
 .search-bar input {

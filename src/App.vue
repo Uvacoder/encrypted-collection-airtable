@@ -97,13 +97,13 @@ export default {
 	--gray-bg-color: #868e96;
 	--lightgray-bg-color: #ced4da;
 	--primary-yellow-color: #f1c61b;
-	--highlight-text-color: #171a1d;
+	--highlight-text-color: #1c2024;
 }
 
 html {
-	--text-color: #171a1d;
+	--text-color: #1c2024;
 	--background-color: #ffffff;
-	--gray-border-color: #0d1117;
+	--gray-border-color: #1c2024;
 	--tags-bg-color: #e8eaec;
 	--tags-bg-hover-color: #d8dbdf;
 	--app-desc-text-color: #5d6470;
@@ -111,12 +111,12 @@ html {
 	--product-border-color: #ced4da;
 	--product-desc-text-color: #5d6470;
 	--filter-reset-bg-color: #f1c61b;
-	--filter-reset-border-color: #0d1117;
+	--filter-reset-border-color: #1c2024;
 }
 
 html[data-theme='dark'] {
 	--text-color: #f1f3f5;
-	--background-color: #0d1117;
+	--background-color: #1c2024;
 	--gray-border-color: #495057;
 	--tags-bg-color: #272d35;
 	--tags-bg-hover-color: #2f3741;
@@ -124,7 +124,7 @@ html[data-theme='dark'] {
 	--placeholder-text-color: #495057;
 	--product-border-color: #495057;
 	--product-desc-text-color: #ced4da;
-	--filter-reset-bg-color: #0d1117;
+	--filter-reset-bg-color: #1c2024;
 	--filter-reset-border-color: #f1c61b;
 }
 

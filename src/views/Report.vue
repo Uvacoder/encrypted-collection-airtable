@@ -1,11 +1,8 @@
 <template>
     <div id='report'>
-        <h3>Report Page</h3>
         <p>
-            There are also some services that don't currently have such encryption but plan to itegrate it into their products. 
-            These services either have encryption as a beta feature or have it on their roadmap.
-            They can be accessed here.
-            They are also accessible from the "Pages" dropdown in the navigation menu under "report". 
+            If you need to <mark class="highlight">report</mark> something (like a bug, broken links, a service that doesn't belong here, or just about anything), you can do so on this page.
+            If the product is already in the <router-link to="/excluded">excluded list<i class="gg-link"></i></router-link> or <router-link to="/watchlist">watchlist <i class="gg-link"></i></router-link>, and you think should be added to the main list, please list out your reason.
         </p>     
     </div>
 </template>
@@ -28,6 +25,8 @@ export default {
 
 
 <style scoped>
+@import url('https://css.gg/css?=|link');
+
 * {
     outline: none;
 }
@@ -37,20 +36,37 @@ export default {
 }
 
 #report p {
+    font-size: 1.1rem;
     width: 80%;
     text-align: center;
     margin: 0 auto;
 }
 
-.product-list {
-	width: 85%;
-    margin: 2rem auto;
+#report a {
+    text-decoration: none;
+    border-radius: .1rem;
+    padding: 0 .25rem;
+    color: var(--highlight-text-color);
+    background-color: var(--primary-yellow-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+i {
+    float: none;
+    display: inline-block;
+    margin: 0 .25rem 0 .75rem;
+    transform: scale(.85) rotate(-45deg);
+}
+
+.highlight {
+    border-radius: .1rem;
+    padding: 0 .25rem;
 }
 
 @media only screen and (max-width: 768px) {
-    .product-list {
-        width: 100%;
-    }
+    /* css */
 }
 
 @media only screen and (max-width: 480px) {
@@ -60,7 +76,7 @@ export default {
 
     #report p {
         width: 95%;
-        text-align: justify;
+        text-align: left;
 	}
 }
 </style>
