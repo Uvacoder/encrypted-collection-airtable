@@ -42,11 +42,11 @@ export default {
         async fetchData() {
 			await this.$http("getWatchlist")
 			.then((res) => {
-				console.log(res);
+				// console.log(res);
 				return res.data;
 			})
 			.then((data) => {
-				console.log(data);
+				// console.log(data);
 				this.allProducts = [...data];
 			})
 			.catch((err) => console.log(err));

@@ -44,7 +44,7 @@ export default {
                 return res.data;
 			})
 			.then((data) => {
-				console.log(data);
+				// console.log(data);
 				this.allProducts = [...data];
 			})
 			.catch((err) => console.log(err));

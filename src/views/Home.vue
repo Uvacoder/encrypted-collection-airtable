@@ -33,13 +33,14 @@
 		<app-product-list 
 			:products="processedList" 
 			:tags="tags" 
-			:cats="cats"
+			:categories="categories"
 		></app-product-list>
     </div>
 </template>
 
 
 <script>
+import { tags, categories } from "@/scripts/filters";
 import ProductList from "@/components/ProductList.vue";
 
 export default {
@@ -50,41 +51,8 @@ export default {
     data() {
         return {
             allProducts: [],
-			tags: [
-				"tag1",
-				"tag2",
-				"tag3",
-				"tag4",
-				"tag5",
-				"tag1",
-				"tag2",
-				"tag3",
-				"tag4",
-				"tag5",
-				"tag4",
-				"tag6",
-				"tag1",
-				"tag7",
-				"tag8",
-				"tag9",
-				"tag10",
-			],
-			cats: [
-				"cat1",
-				"cat2",
-				"cat3",
-				"cat4",
-				"cat5",
-				"cat1",
-				"cat2",
-				"cat7",
-				"cat4",
-				"cat6",
-				"cat8",
-				"cat3",
-				"cat9",
-				"cat10",
-			],
+			tags: [],
+			categories: [],
 			searchQuery: "",
 			searchResults: [],
 			placeholderText: ""
@@ -94,11 +62,11 @@ export default {
 		async fetchData() {
 			await this.$http("getMain")
 			.then((res) => {
-				console.log(res);
+				// console.log(res);
 				return res.data;
 			})
 			.then((data) => {
-				console.log(data);
+				// console.log(data);
 				this.allProducts = [...data];
 			})
 			.catch((err) => console.log(err));
@@ -213,7 +181,7 @@ export default {
 			if (tag === undefined || cat === undefined) 
 			{
                 if (tag === undefined && cat !== undefined) {
-                    return this.filterWithCategory(cat.toLowerCase());
+                    return this.filterWithCategory(cat);
                 } else if (cat === undefined && tag !== undefined) {
                     return this.filterWithTag(tag.toLowerCase());
                 } else {
@@ -221,7 +189,7 @@ export default {
 				}
 			} else // if both filters are defined
 			{
-				return this.filterWithCategory(cat.toLowerCase(), this.filterWithTag(tag.toLowerCase()));
+				return this.filterWithCategory(cat, this.filterWithTag(tag.toLowerCase()));
             }
 		},
 		// list used to render results either filtered or searched
@@ -257,6 +225,9 @@ export default {
 	beforeMount() {
 		// fetch data
 		this.fetchData();
+
+		this.tags = tags;
+		this.categories = categories;
 	},
 	mounted: function() {
 		this.placeholderText = (window.innerWidth > 480) ? 'Press ; key to enter search...' : 'Search products...';

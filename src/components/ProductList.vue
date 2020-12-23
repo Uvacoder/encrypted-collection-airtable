@@ -75,7 +75,7 @@ import Product from "./Product";
 
 export default {
 	name: "ProductList",
-	props: ["products", "tags", "cats"],
+	props: ["products", "tags", "categories"],
 	components: {
 		appProduct: Product,
 	},
@@ -135,17 +135,17 @@ export default {
 		},
 		// show/hide full category list
 		toggleMoreCategories: function() {
-			if (this.m === this.cats.length) {
+			if (this.m === this.categories.length) {
 				this.m = (window.innerWidth <= 580) ? 3 : 5;
 			} else {
-				this.m = this.cats.length;
+				this.m = this.categories.length;
 			}
 		},
 		// set minimum number of filters displayed; rest are hidden
 		minDisplayedFilters: function() {
 			if (window.innerWidth <= 580) {
 				this.n = this.tags.length;
-				this.m = this.cats.length;
+				this.m = this.categories.length;
 			} else {
 				this.n = 5;
 				this.m = 5;
@@ -157,7 +157,7 @@ export default {
 			return this.tags.slice(0, this.n);
 		},
 		firstMCategories: function() {
-			return this.cats.slice(0, this.m);
+			return this.categories.slice(0, this.m);
 		}	
 	},
 	mounted() {

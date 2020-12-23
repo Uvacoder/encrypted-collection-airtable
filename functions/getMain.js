@@ -11,7 +11,7 @@ exports.handler = async (event, callback) => {
 			// event.headers.referer === "http://localhost:8888/excluded"
 			// event.headers.referer === "https://encryptedlist.netlify.app/"
 		) {
-			// console.log(event.headers.host, event.headers.referer);
+			console.log(event.headers.host, event.headers.referer);
 			return await getData("Main");
 		} else {
 			return formatReturn(404, {
