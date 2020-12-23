@@ -11,7 +11,7 @@ Vue.use(Buefy);
 Vue.prototype.$http = axios.create({
 	method: "get",
 	// baseURL: "http://localhost:8888/api/",
-	baseURL: "http://encryptedlist.netlify.app/api/",
+	baseURL: "https://encryptedlist.netlify.app/api/",
 	headers: {
 		"Content-type": "application/json",
 	},
