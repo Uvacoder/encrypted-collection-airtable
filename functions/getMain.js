@@ -1,31 +1,25 @@
 "use strict";
 const getData = require("./helpers/getData");
-// const formatIt = require("./helpers/formatIt");
+const formatReturn = require("./helpers/formatReturn");
 
 exports.handler = async (event, callback) => {
 	try {
 		if (
-			event.httpMethod === "GET" &&
-			event.headers.host === "encryptedlist.netlify.app" &&
-			event.headers.referer === "https://encryptedlist.netlify.app/"
+			event.httpMethod === "GET" //&&
+			// event.headers.host === "encryptedlist.netlify.app" &&
+			// event.headers.host === "localhost:8888" &&
+			// event.headers.referer === "http://localhost:8888/excluded"
+			// event.headers.referer === "https://encryptedlist.netlify.app/"
 		) {
-			let data = await getData();
-			return {
-				statusCode: 200,
-				body: JSON.stringify(data),
-			};
+			// console.log(event.headers.host, event.headers.referer);
+			return await getData("Main");
 		} else {
-			return {
-				statusCode: 404,
-				body: JSON.stringify({ msg: "error" }),
-			};
-			// return formatIt(404, { msg: "error" });
+			return formatReturn(404, {
+				error: "Error Making Request (Unauthorized)",
+			});
 		}
 	} catch (err) {
 		console.error("Somethings gone wrong ", err);
-		return callback(null, {
-			statusCode: 500,
-			body: JSON.stringify({ error: err }),
-		});
+		return callback(null, formatReturn(500, { error: err }));
 	}
 };

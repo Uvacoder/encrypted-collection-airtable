@@ -9,7 +9,7 @@
         <h2>
             The page you are trying to visit doesn't exist.
         </h2>
-        <b-button tag="router-link" to="/" title="About this project">
+        <b-button tag="router-link" to="/" title="Go Back Home">
             Go Back Home
             <i class="gg-corner-right-up"></i>
         </b-button>
@@ -55,7 +55,6 @@ export default {
 
 #unfound > a {
     width: 12rem;
-	/* min-height: 3rem; */
     height: auto;
 	padding: .75rem;
 	border: 2px solid var(--gray-border-color);
@@ -71,12 +70,6 @@ export default {
 	color: var(--text-color);
 	border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);
-}
-
-#unfound span {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 #unfound > a i {

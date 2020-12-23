@@ -4,8 +4,17 @@ import App from "./App.vue";
 import "buefy/dist/buefy.css";
 import router from "@/router";
 import { store } from "@/store";
+import axios from "axios";
 
 Vue.use(Buefy);
+
+Vue.prototype.$http = axios.create({
+	method: "get",
+	baseURL: "http://localhost:8888/api/",
+	headers: {
+		"Content-type": "application/json",
+	},
+});
 
 Vue.config.productionTip = false;
 

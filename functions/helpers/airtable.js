@@ -7,6 +7,6 @@ Airtable.configure({
 });
 
 const base = Airtable.base(process.env.AIRTABLE_APP_ID);
-const table = base(process.env.AIRTABLE_TABLE_NAME);
+// const table = base(process.env.AIRTABLE_TABLE_NAME);
 
-module.exports = { table };
+module.exports = { base };

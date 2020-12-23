@@ -1,25 +1,38 @@
 "use strict";
-const { table } = require("./airtable");
-// const formatIt = require("./formatIt");
+const { base } = require("./airtable");
+const formatReturn = require("./formatReturn");
 
-module.exports = async () => {
+module.exports = async (tableName) => {
 	try {
+		const table = base(tableName);
+
+		let products = [];
+
 		const recs = await table
 			.select({
-				view: "Main View",
+				view: "all",
 			})
-			.firstPage();
+			.eachPage((records, fetchNextPage) => {
+				records.forEach((record) => {
+					products.push({
+						name: record.fields.name,
+						desc: record.fields.description,
+						url: record.fields.url,
+						tags: record.fields.tags,
+						categories: record.fields.categories,
+						img: record.fields.icon[0].url,
+					});
+				});
+				fetchNextPage();
+			});
 
-		const formattedRecs = recs.map((rec) => ({
-			rec: rec.fields,
-		}));
+		if (typeof recs !== "undefined") {
+			console.log(recs);
+		}
 
-		return formattedRecs;
-		// return formatIt(200, formattedRecs);
+		return formatReturn(200, products);
 	} catch (err) {
-		// console.log("failed at airtable");
 		console.error(err);
-		return { statusCode: 500, msg: "error at getData" };
-		// return formatIt(500, err);
+		return formatReturn(500, { error: err });
 	}
 };

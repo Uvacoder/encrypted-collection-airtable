@@ -7,8 +7,10 @@
             Items tagged as "open-source" are more reliable. However, not all items tagged as "open-source" are fully open source. 
             Do your research before trusting a service 🤓 and enjoy!😉.
         </p>
-        <br>
-              
+        <b-button tag="router-link" to="/" title="Go Home">
+            Go Home
+            <i class="gg-corner-right-up"></i>
+        </b-button>              
     </div>
 </template>
 
@@ -24,13 +26,13 @@ export default {
 
 
 <style scoped>
-@import url('https://css.gg/css?=|external');
+@import url('https://css.gg/css?=|external|corner-right-up');
 
 * {
     outline: none;
 }
 
-i {
+#about p i {
     float: none;
     display: inline-block;
     margin: 0 .25rem 0 .75rem;
@@ -55,6 +57,29 @@ i {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
+}
+
+#about > a[title] {
+    width: 9rem;
+	height: auto;
+	padding: .75rem;
+	border: 2px solid var(--gray-border-color);
+	border-bottom: 4px solid var(--gray-border-color);	
+	border-radius: 0.5rem;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	margin: 1rem 0;
+    display: block;
+}
+
+#about > a[title]:hover {
+	color: var(--text-color);
+	border: 2px solid var(--gray-border-color);
+	border-bottom: 4px solid var(--gray-border-color);
+}
+
+#about > a i {
+    margin-left: 0.5rem;
 }
 
 @media only screen and (max-width: 480px) {

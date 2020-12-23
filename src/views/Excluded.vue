@@ -30,40 +30,29 @@ export default {
     },
     data() {
         return {
-            allProducts: [
-				{
-					name: "Buttercup",
-					desc: "A free, secure and open-source password manager.",
-					url: "https://buttercup.pw/",
-					tags: ["tag1", "tag9", "tag3", "tag1", "tag9", "tag1", "tag9", "tag1", "tag9"],
-					categories: ["cat1", "cat2", "cat3"],
-					img: "https://avatars3.githubusercontent.com/u/16577796?s=200&v=4",
-				},
-				{
-					name: "Signal",
-					desc: "Fast, simple, and secure messaging.",
-					url: "https://signal.org",
-					tags: ["open-source", "cross-platform", "free"],
-					categories: ["Communication"],
-					img: "https://avatars1.githubusercontent.com/u/702459?s=200&v=4",
-				},
-				{
-					name: "Briefing",
-					desc: "Secure direct group video chat",
-					url: "https://brie.fi/ng",
-					tags: ["tag7", "tag8", "tag9","tag7", "tag8","tag7", "tag8","tag7", "tag8"],
-					categories: ["cat7", "cat8", "cat1"],
-					img: "https://brie.fi/apple-touch-icon.png",
-				},
-			],
+            allProducts: [],
         }
     },
     methods: {
         // fetches and populates list from db
         populateList: function() {
             // fetch and populate
-        }
-    }
+        },
+        async fetchData() {
+			await this.$http("getExcluded")
+			.then((res) => {
+                return res.data;
+			})
+			.then((data) => {
+				console.log(data);
+				this.allProducts = [...data];
+			})
+			.catch((err) => console.log(err));
+		},
+    },
+    mounted() {
+        this.fetchData();
+    },
 }
 </script>
 
