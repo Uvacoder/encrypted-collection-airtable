@@ -315,6 +315,7 @@ i {
 
 .search-bar input {
 	border: none;
+	font-size: 1rem;
     width: 100%;
     padding: .5rem .25rem;
 	border-radius: 0.5rem;
