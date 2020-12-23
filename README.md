@@ -1,5 +1,7 @@
 # EncryptedList 🔐
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a6f28855-91fe-4883-aa1d-10795ba87b5c/deploy-status)](https://app.netlify.com/sites/encryptedlist/deploys)
+
 List of products & services that offer zero-knowledge or end-to-end encryption.
 
 ## Development
