@@ -29,14 +29,14 @@
 <script>
 export default {
 	name: "Product",
-	props: ["product", "filterDisabled"],
+	props: ["product", "filterable"],
 	data() {
 		return {}
 	},
 	methods: {
 		filterWith: function(q) {
 			// filtering is disabled on some pages that use this component
-			if (!this.filterDisabled) {
+			if (this.filterable) {
 				let query = Object.assign({}, this.$route.query);
 
 				if (query.t !== q) {

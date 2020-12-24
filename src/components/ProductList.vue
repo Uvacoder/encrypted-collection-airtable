@@ -5,7 +5,7 @@
 				v-for="(product, index) in products" 
 				:key="index" 
 				:product="product"
-				:filterDisabled="false"
+				:filterable="true"
 				:class="{ 'last-product' : (index === products.length - 1)}"
 			></app-product>
 			<div v-show="(products.length === 0)" class="no-results">
@@ -17,7 +17,10 @@
 			<div class="product-filters">
 				<div class="headers" @click="toggleViewFilters(0, $event)">
 					<h3>Tags</h3>
-					<i class="gg-undo" title="Reset Tags"></i>
+					<button class="current no-toggle" v-show="currTagExists">
+						<span class="no-toggle">{{ currTagValue }}</span>
+						<i class="gg-close no-toggle" title="Reset Tags"></i>
+					</button>
 					<i class="gg-chevron-down-o"></i>
 				</div>
 				<b-taglist v-show="!tagsHidden">
@@ -26,7 +29,6 @@
 						size="is-small" 
 						v-for="(tag, index) in firstNTags" 
 						:key="index"
-						:data-tag="tag"
 						@click="filterWith(0, tag)"
 						>
 						{{ tag }}
@@ -43,7 +45,10 @@
 			<div class="product-filters">
 				<div class="headers" @click="toggleViewFilters(1, $event)">
 					<h3>Category</h3>
-					<i class="gg-undo" title="Reset Categories"></i>
+					<button class="current no-toggle" v-show="currCategoryExists">
+						<span class="no-toggle">{{ currCategoryValue }}</span>
+						<i class="gg-close no-toggle" title="Reset Tags"></i>
+					</button>
 					<i class="gg-chevron-down-o"></i>
 				</div>
 				<b-taglist v-show="!catsHidden">
@@ -51,7 +56,6 @@
 						size="is-small" 
 						v-for="(cat, index) in firstMCategories" 
 						:key="index"
-						:data-tag="cat"
 						@click="filterWith(1, cat)"	
 					>
 						{{ cat }}
@@ -70,7 +74,7 @@
 
 
 <script>
-import has from 'lodash/has';
+// import has from 'lodash/has';
 import Product from "./Product";
 
 export default {
@@ -81,10 +85,8 @@ export default {
 	},
 	data() {
 		return {
-			currCat: true,
-			currTag: true,
-			currCatValue: true,
-			currTagValue: true,
+			// currCat: true,
+			// currTag: true,
 			isSmallScreen: (window.innerWidth <= 580),
 			tagsHidden: this.isSmallScreen,
 			catsHidden: this.isSmallScreen,
@@ -95,13 +97,15 @@ export default {
 	methods: {
 		// expand/collapse filters + reset filters on click
 		toggleViewFilters: function(type, e) {
-			if (e.target.className === "gg-undo") {
-				this.resetFilter(type);
-			} else {
+			if (!e.target.classList.contains("no-toggle")) {
 				if (type === 0) { // if tag
 					this.tagsHidden = !this.tagsHidden;
 				} else if (type === 1) { // if category
 					this.catsHidden = !this.catsHidden
+				}
+			} else {
+				if (e.target.classList.contains("gg-close")) {
+					this.resetFilter(type);
 				}
 			}
 		},
@@ -117,10 +121,10 @@ export default {
 		resetFilter: function(type) {
 			let query = Object.assign({}, this.$route.query);
 
-			if (type === 0 && has(query, 't')) { // if tag
+			if (type === 0 && this.$has(query, 't')) { // if tag
 				delete query.t;
 				this.$router.replace({ query }); // needs to be here to avoid redundant navigation error
-			} else if (type === 1 && has(query, 'c')) { // if category
+			} else if (type === 1 && this.$has(query, 'c')) { // if category
 				delete query.c;
 				this.$router.replace({ query }); // needs to be here to avoid redundant navigation error
 			}			
@@ -158,7 +162,27 @@ export default {
 		},
 		firstMCategories: function() {
 			return this.categories.slice(0, this.m);
-		}	
+		},
+		currTagValue: function() {	
+			return this.$route.query.t;
+		},
+		currCategoryValue: function() {
+			return this.$route.query.c;
+		}, 
+		currTagExists: function() {
+			return (typeof this.currTagValue !== "undefined");
+		}, 
+		currCategoryExists: function() {	
+			return (typeof this.currCategoryValue !== "undefined");
+		}
+	},
+	watch: {
+		currTagValue: function(value) {	
+			console.log(value);
+		},
+		currCategoryValue: function(value) {
+			console.log(value);
+		},
 	},
 	mounted() {
 		this.minDisplayedFilters();
@@ -177,7 +201,8 @@ export default {
 
 
 <style>
-@import url('https://css.gg/css?=|undo|chevron-down-o');
+/* // <style scoped> */
+@import url('https://css.gg/css?=|close|chevron-down-o');
 
 * {
 	outline: none;
@@ -228,6 +253,7 @@ export default {
 
 .product-filters .headers {
 	width: 100%;
+	height: 2rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -237,14 +263,39 @@ export default {
 	color: var(--text-color);
 }
 
+.product-filters .headers i {
+	transform: scale(1);
+}
+
 .product-filters .headers .current {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	margin: 0;
-	margin-right: auto;
-	margin-left: .5rem;
+	/* border-radius: 1rem; */
+	border: none;
+	margin-left: auto;
+	margin-right: .5rem;
+	font-size: .75rem;
+	padding: 0 .2rem 0 .5rem;
+	color: var(--text-color);
+	background-color: var(--tags-bg-color);
+}
+
+.product-filters .headers .current i {
+	margin-left: .25rem;
+	margin-right: 0;
+	cursor: pointer;
+	transform: scale(.75);
 }
 
 .product-filters > :not(:first-child) {
 	margin: 0.5rem 0;
+}
+
+.product-filters:first-of-type button {
+	border-radius: 1rem;
 }
 
 .product-filters:last-of-type button {
@@ -262,15 +313,15 @@ export default {
 	width: 100%;
 }
 
-.gg-undo,
+.gg-close-o,
 .gg-chevron-down-o {
 	color: var(--text-color);
 }
 
-.gg-undo {
+.gg-close-o {
 	margin-left: auto;
 	margin-right: 0;
-	transform: scale(.9);
+	transform: scale(.65);
 }
 
 @media only screen and (max-width: 840px) {
@@ -294,8 +345,8 @@ export default {
 		padding: 0 1rem;
 	}
 
-	.gg-undo {
-		margin-right: 0.5rem;
+	.gg-close-o {
+		/* margin-right: 0.5rem; */
 	}
 }
 </style>

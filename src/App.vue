@@ -1,18 +1,21 @@
 <template>
 	<div id="app">
 		<app-header v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
-		<router-view></router-view>
+		<app-menu-list></app-menu-list>
+		<!-- <router-view></router-view> -->
 	</div>
 </template>
 
 <script>
 import localForage from "localforage";
 import Header from "@/components/Header.vue";
+import MenuList from "@/components/MenuList.vue";
 
 export default {
 	name: "App",
 	components: {
-		appHeader: Header
+		appHeader: Header,
+		appMenuList: MenuList
 	},
 	data() {
 		return {
@@ -130,6 +133,8 @@ html[data-theme='dark'] {
 
 html,
 body  {
+	margin: 0;
+	padding: 0;
 	background-color: var(--background-color) !important;
 	color: var(--text-color) !important;
 }
@@ -146,6 +151,7 @@ body  {
 	transition: all 0.3s, color 0s, background-color 0s;
 	-moz-transition: all 0.3s, color 0s, background-color 0s;
 	-webkit-transition: all 0.3s, color 0s, background-color 0s;
+	/* border: .1px solid red; */
 }
 
 input, input:before, input:after {
@@ -179,6 +185,7 @@ input::placeholder {
 	max-width: 1024px;
 	margin: 0 auto;
 	padding: 0 2rem 2rem 2rem;
+	box-sizing: border-box;
 }
 
 .tags button {

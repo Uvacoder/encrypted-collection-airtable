@@ -1,168 +1,122 @@
 <template>
-	<b-navbar id="header" :close-on-click="false">
-		<template slot="brand">
-			<b-navbar-item class="app-info nav-left" ref="navLeft" tag="router-link" :to="{ path: '/' }">
-				<div class="app-logo">
-					<img src="../assets/logo.svg" alt="EncryptedList Logo" />
-				</div>
-				<div class="app-detail">
+	<nav id="header">
+	<!-- :close-on-click="false" -->
+		<router-link class="app-info nav-left" ref="navLeft" :to="{ path: '/' }">
+			<div class="app-logo">
+				<img src="../assets/logo.svg" alt="EncryptedList Logo" />
+			</div>
+			<div class="app-detail">
 				<h3 class="app-name">{{ headerTitle }}</h3>
 				<p class="app-desc">
 					List of services that offer zero-knowledge or end-to-end encryption 🔐.
 				</p>
-				</div>
-			</b-navbar-item>
-		</template>
+			</div>
+		</router-link>
 		
-		<template slot="end">
-            <b-navbar-item tag="div" ref="navRight" class="nav-right">
-                <div class="buttons">
-                    <b-button tag="router-link" to="/about" title="About this project">
-						About
-						<i class="gg-info"></i>
-					</b-button>
-					<b-dropdown aria-role="list" title="List of pages">
-						<button class="button" slot="trigger">
-							<span>Pages</span>
-							<i class="gg-chevron-down"></i>
-						</button>
+		<div class="buttons">
+			
 
-						<b-dropdown-item has-link aria-role="listitem" title="Report a bug or flag a product">
-							<router-link to="/report">
-								<span class="page-icons"><i class="gg-danger"></i></span>
-								Report
-							</router-link>
-						</b-dropdown-item>
-						<b-dropdown-item has-link aria-role="listitem" title="Submit a Product">
-							<router-link to="/submit">
-								<span class="page-icons"><i class="gg-add"></i></span>
-								Submit
-							</router-link>
-						</b-dropdown-item>
-						<b-dropdown-item has-link aria-role="listitem" title="Show excluded products">
-							<router-link to="/excluded">
-								<span class="page-icons"><i class="gg-unavailable"></i></span>
-								Excluded
-							</router-link>
-						</b-dropdown-item>
-						<b-dropdown-item has-link aria-role="listitem" title="Products on the watchlist">
-							<router-link to="/watchlist">
-								<span class="page-icons"><i class="gg-eye"></i></span>
-								Watchlist
-							</router-link>
-						</b-dropdown-item>
-					</b-dropdown>
-					<b-button title="Feedback">
-						<i class="gg-smile-mouth-open"></i>
-					</b-button>
-                    <b-button @click="emitThemeChange" title="Change Theme">
-						<i v-if="darkMode" class="gg-sun"></i>
-						<i v-else class="gg-moon"></i>
-					</b-button>
-                </div>
-            </b-navbar-item>
-        </template>
-	</b-navbar>
+			<app-button 
+				:iconButton="true" 
+				@clicked="emitThemeChange" 
+				:label="'Change Color Theme'"
+			>
+				<i v-if="darkMode" class="gg-sun"></i>
+				<i v-else class="gg-moon"></i>
+			</app-button>
+
+			<app-button
+				:iconButton="true" 
+				:label="'Give Feedback'"
+			>
+				<i class="gg-smile-mouth-open"></i>
+			</app-button>
+
+			<app-button
+				:label="'Show List of Pages'"
+			>
+				Pages
+				<i class="gg-push-left"></i>
+			</app-button>
+		</div>
+		
+	</nav>
 </template>
 
 <script>
+import Button from "@/components/Button.vue";
+
 export default {
 	name: "Header",
+	components: {
+		appButton: Button,
+	},
 	data() {
 		return {
-			darkMode: false,
-			navMenus: {},
-			route: this.$route
+			darkMode: false
 		};
 	},
 	methods: {
+		showMenu: function() {
+            this.$refs.MenuList.style.setProperty("margin-right", "0px");
+        },
 		// emit theme change to main component
 		emitThemeChange: function() {
 			this.darkMode = !this.darkMode;
 			this.$emit('theme-change');
 		},
-		// set some CSS styles for nav menu items with JS
-		setNavMenuStyle: function() {
-			this.navMenus.style.background = "transparent";
-			this.navMenus.childNodes[1].childNodes[0].style.padding = ".5rem 0";
-
-			if (
-				window.innerWidth < 1024
-			) {
-				this.navMenus.style.boxShadow = "none";
-				this.navMenus.style.marginTop = "0.5rem";
-				this.hamburger.style.borderRadius = "0.5rem";
-			} else {
-				this.navMenus.style.border = "none";
-				this.navMenus.style.paddingLeft = "0";
-			}
-		}
 	},
 	computed: {
 		headerTitle: function() {
 			return this.$store.state.headerTitle;
 		},
-	},
-	mounted() {
-		// Stylize some Buefy components because they are inaccessible from CSS
-		let grayBgColor = getComputedStyle(document.documentElement).getPropertyValue('--gray-bg-color');
-
-		this.hamburger = this.$refs.navLeft.$el.nextSibling;
-		this.navMenus = this.$refs.navRight.$el.parentElement.parentElement;
-		this.hamburger.childNodes.forEach(node => {
-			node.style.backgroundColor = grayBgColor;
-		})
-
-		this.setNavMenuStyle();
-		window.addEventListener('resize', () => {
-			this.setNavMenuStyle();
-		});
-	},
+	}
 };
 </script>
 
-<style>
-@import url('https://css.gg/css?=|sun|moon|add|danger|info|unavailable|eye|chevron-down|smile-mouth-open');
-
-:root {
-	--ggs: 0.8;
-}
+<style scoped>
+@import url('https://css.gg/css?=|sun|moon|add|danger|info|unavailable|eye|chevron-down|push-left|smile-mouth-open');
 
 * {
 	outline: none;
-}
-
-i {
-	float: right;
-	margin-left: 0.5rem;
+	/* border: .1px solid red; */
 }
 
 #header {
 	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding: 1rem 0;
 	margin-bottom: 1rem;
 	background-color: var(--background-color);
 }
 
 .app-info {
+	min-width: 45%;
 	padding: 0.5rem;
+	text-decoration: none;
 	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .app-logo {
-	min-width: 4rem;
-	min-height: 4rem;
+	min-width: 3rem;
+	max-width: 3rem;
+	min-height: 3rem;
+	max-height: 3rem;
 	position: relative;
 }
 
 .app-logo img {
-	min-width: 100%;
-	min-height: 100%;
+	width: 100%;
+	height: 100%;
 	background-color: #fff;
 	display: block;
 	position: absolute;
-	top: calc(50% - 2rem);
-	left: calc(50% - 2rem);
+	top: calc(50% - 1.5rem);
+	left: calc(50% - 1.5rem);
 	border-radius: 50%;
 	box-shadow: 1px 1px 5px var(--lightgray-bg-color);
 }
@@ -172,8 +126,12 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .app-detail {
-	margin-left: 1rem;
+	margin-left: .75rem;
 	padding-top: 0.25rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
 }
 
 .app-name {
@@ -191,20 +149,43 @@ html[data-theme='dark'] .app-logo img {
 	max-width: 400px;
 }
 
-.nav-right {
-	padding-right: 0;
-}
-
 .buttons {
-	width: 100%;
+	/* width: 45%; */
 	display: flex;
 	align-items: center;
-	justify-content: flex-end !important;
+	justify-content: flex-end;
 }
 
 .buttons > * {
-	height: 2.5rem;
+	margin-right: 0.5rem;
 }
+
+.buttons > :last-child {
+	margin: 0;
+}
+
+.buttons > :nth-last-child(2) i {
+	transform: scale(1);
+	margin-left: 0;
+	background-color: var(--filter-reset-bg-color);
+	color:  var(--filter-reset-border-color);
+}
+
+/* @media only screen and (max-width: 1023px) {
+	.app-info {
+		width: 75%;
+	}
+
+	.app-desc {
+		width: 100%;
+	}
+
+	.buttons {
+		justify-content: flex-start !important;
+	}
+} */
+
+/* 
 
 .buttons > a,
 .buttons > div button,
@@ -247,12 +228,7 @@ html[data-theme='dark'] .app-logo img {
 	margin-right: 0;
 }
 
-.buttons > :nth-last-child(2) i {
-	transform: scale(1);
-	margin-left: 0;
-	background-color: var(--filter-reset-bg-color);
-	color:  var(--filter-reset-border-color);
-}
+
 
 .buttons > button:last-of-type {
 	padding: 0 .5rem;
@@ -272,9 +248,9 @@ html[data-theme='dark'] .app-logo img {
 
 .buttons > button:last-of-type i {
 	margin-left: 0;
-}
+} */
 
-@media only screen and (max-width: 1023px) {
+/* @media only screen and (max-width: 1023px) {
 	.app-info {
 		width: 75%;
 	}
@@ -300,8 +276,8 @@ html[data-theme='dark'] .app-logo img {
 	}
 
 	.app-logo {
-		min-width: 2.5rem;
-		min-height: 2.5rem;
+		width: 2.5rem;
+		height: 2.5rem;
 	}
 
 	.app-logo img {
@@ -316,5 +292,5 @@ html[data-theme='dark'] .app-logo img {
 	.app-desc {
 		display: none;
 	}
-}
+} */
 </style>

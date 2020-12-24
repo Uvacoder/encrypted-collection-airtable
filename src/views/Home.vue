@@ -59,18 +59,18 @@ export default {
         }
     },
     methods: {
-		async fetchData() {
-			await this.$http("getMain")
-			.then((res) => {
-				// console.log(res);
-				return res.data;
-			})
-			.then((data) => {
-				// console.log(data);
-				this.allProducts = [...data];
-			})
-			.catch((err) => console.log(err));
-		},
+		// async fetchData() {
+		// 	await this.$http("getMain")
+		// 	.then((res) => {
+		// 		// console.log(res);
+		// 		return res.data;
+		// 	})
+		// 	.then((data) => {
+		// 		// console.log(data);
+		// 		this.allProducts = [...data];
+		// 	})
+		// 	.catch((err) => console.log(err));
+		// },
 		// returns start & end indices of all occurences of a query from a string
 		stringSearch: function(str, query, caseInsensitive = true) {
 			caseInsensitive = typeof caseInsensitive !== 'undefined' ? caseInsensitive : true;
@@ -224,7 +224,7 @@ export default {
 	},
 	beforeMount() {
 		// fetch data
-		this.fetchData();
+		// this.fetchData();
 
 		this.tags = tags;
 		this.categories = categories;

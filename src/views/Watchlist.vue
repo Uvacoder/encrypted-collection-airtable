@@ -13,7 +13,7 @@
 				v-for="(product, index) in allProducts" 
 				:key="index" 
 				:product="product"
-				:filterDisabled="true"
+				:filterable="false"
 				:class="{ 'last-product' : (index === allProducts.length - 1)}"
 			></app-product>
 		</div>      
@@ -39,21 +39,21 @@ export default {
         populateList: function() {
             // fetch and populate
         },
-        async fetchData() {
-			await this.$http("getWatchlist")
-			.then((res) => {
-				// console.log(res);
-				return res.data;
-			})
-			.then((data) => {
-				// console.log(data);
-				this.allProducts = [...data];
-			})
-			.catch((err) => console.log(err));
-		},
+        // async fetchData() {
+		// 	await this.$http("getWatchlist")
+		// 	.then((res) => {
+		// 		// console.log(res);
+		// 		return res.data;
+		// 	})
+		// 	.then((data) => {
+		// 		// console.log(data);
+		// 		this.allProducts = [...data];
+		// 	})
+		// 	.catch((err) => console.log(err));
+		// },
     },
     mounted() {
-        this.fetchData();
+        // this.fetchData();
     }
 }
 </script>
