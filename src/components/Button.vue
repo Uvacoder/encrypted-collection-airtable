@@ -1,11 +1,12 @@
 <template>
     <button
         ref="btn"
-        id="button"
+        id="Button"
         :title="label"
         :aria-label="label"
         @click="$emit('clicked')"
-        :class="['button', { 'icon-button' : iconButton }]"
+        :disabled="disabled"
+        :class="['button', { 'disabled' : disabled }, { 'icon-button' : iconButton }]"
     >
         <slot></slot>
     </button>
@@ -15,7 +16,17 @@
 <script>
 export default {
     name: "Button",
-    props: ["label", "iconButton"]
+    props: {
+		label: String,
+		disabled: {
+			type: Boolean,
+			default: false
+        },
+        iconButton: {
+			type: Boolean,
+			default: false
+		},
+	},
 }
 </script>
 
@@ -28,6 +39,7 @@ export default {
 i {
     --ggs: 0.9;
     margin: 0;
+	color: var(--text-color);
 }
 
 .button {
@@ -38,7 +50,6 @@ i {
 	padding: 0 .75rem;
     display: flex;
     align-items: center;
-    box-sizing: border-box;
     justify-content: space-between;
 	border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);	
@@ -58,6 +69,12 @@ i {
 }
 
 .icon-button {
+	min-width: 2.5rem;
 	padding: 0 .5rem;
+    justify-content: center;
+}
+
+.disabled {
+    cursor: not-allowed;
 }
 </style>

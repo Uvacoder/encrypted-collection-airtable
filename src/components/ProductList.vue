@@ -1,72 +1,81 @@
 <template>
-	<div class="container">
+	<div id="ProductList">
 		<div class="product-list">
 			<app-product 
 				v-for="(product, index) in products" 
 				:key="index" 
 				:product="product"
 				:filterable="true"
-				:class="{ 'last-product' : (index === products.length - 1)}"
 			></app-product>
+
+			<!-- loading div here possibly -->
+
 			<div v-show="(products.length === 0)" class="no-results">
 				<img src="../assets/no-results.svg" alt="No results.">
 				<h3>No results found.</h3>
 			</div>
 		</div>
-		<div class="filter-container">
+		<div class="filter-list">
 			<div class="product-filters">
-				<div class="headers" @click="toggleViewFilters(0, $event)">
-					<h3>Tags</h3>
-					<button class="current no-toggle" v-show="currTagExists">
-						<span class="no-toggle">{{ currTagValue }}</span>
-						<i class="gg-close no-toggle" title="Reset Tags"></i>
-					</button>
-					<i class="gg-chevron-down-o"></i>
+				<div class="headers">
+					<h4>Tags</h4>
+					<app-button-tag
+						class="current"
+						:closable="true"
+						:value="currTagValue"
+						v-show="currTagExists"
+						:closingTaskTitle="'Reset Tag'"
+						@close-tag="resetFilter(0)"
+					></app-button-tag>
+					<i 
+						class="gg-chevron-down-o"
+						@click="tagsHidden = !tagsHidden"
+					></i>
 				</div>
-				<b-taglist v-show="!tagsHidden">
-					<b-button 
-						rounded 
-						size="is-small" 
-						v-for="(tag, index) in firstNTags" 
+				<div class="tag-list" v-show="!tagsHidden">
+					<app-button-tag
+						v-for="(tag, index) in firstNTags"
 						:key="index"
-						@click="filterWith(0, tag)"
-						>
-						{{ tag }}
-					</b-button>
-					<b-button 
-						rounded 
-						v-show="!isSmallScreen"
-						size="is-small" 
-						@click="toggleMoreTags">
-						...
-					</b-button>
-				</b-taglist>
+						:value="tag"
+						@clicked="filterWith(0, tag)"
+					></app-button-tag>
+					
+					<app-button-tag
+						:value="'...'"
+						@clicked="toggleMoreTags"
+					></app-button-tag>
+				</div>
 			</div>
 			<div class="product-filters">
-				<div class="headers" @click="toggleViewFilters(1, $event)">
-					<h3>Category</h3>
-					<button class="current no-toggle" v-show="currCategoryExists">
-						<span class="no-toggle">{{ currCategoryValue }}</span>
-						<i class="gg-close no-toggle" title="Reset Tags"></i>
-					</button>
-					<i class="gg-chevron-down-o"></i>
+				<div class="headers">
+					<h4>Category</h4>
+					<app-button-tag
+						class="current"
+						:closable="true"
+						:value="currCategoryValue"
+						v-show="currCategoryExists"
+						:closingTaskTitle="'Reset Category'"
+						@close-tag="resetFilter(1)"
+					></app-button-tag>
+					<i 
+						class="gg-chevron-down-o"
+						@click="catsHidden = !catsHidden"
+					></i>
 				</div>
-				<b-taglist v-show="!catsHidden">
-					<b-button 
-						size="is-small" 
-						v-for="(cat, index) in firstMCategories" 
+
+				<div class="tag-list" v-show="!catsHidden">
+					<app-button-tag
+						v-for="(cat, index) in firstMCategories"
 						:key="index"
-						@click="filterWith(1, cat)"	
-					>
-						{{ cat }}
-					</b-button>
-					<b-button 
-						v-show="!isSmallScreen"
-						size="is-small" 
-						@click="toggleMoreCategories">
-						...
-					</b-button>
-				</b-taglist>
+						:value="cat"
+						@clicked="filterWith(1, cat)"
+					></app-button-tag>
+					
+					<app-button-tag
+						:value="'...'"
+						@clicked="toggleMoreCategories"
+					></app-button-tag>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -74,19 +83,20 @@
 
 
 <script>
-// import has from 'lodash/has';
-import Product from "./Product";
+// import Button from "./Button.vue";
+import Product from "./Product.vue";
+import ButtonTag from "./ButtonTag.vue";
 
 export default {
 	name: "ProductList",
 	props: ["products", "tags", "categories"],
 	components: {
+		// appButton: Button,
 		appProduct: Product,
+		appButtonTag: ButtonTag,
 	},
 	data() {
 		return {
-			// currCat: true,
-			// currTag: true,
 			isSmallScreen: (window.innerWidth <= 580),
 			tagsHidden: this.isSmallScreen,
 			catsHidden: this.isSmallScreen,
@@ -95,20 +105,6 @@ export default {
 		};
 	},
 	methods: {
-		// expand/collapse filters + reset filters on click
-		toggleViewFilters: function(type, e) {
-			if (!e.target.classList.contains("no-toggle")) {
-				if (type === 0) { // if tag
-					this.tagsHidden = !this.tagsHidden;
-				} else if (type === 1) { // if category
-					this.catsHidden = !this.catsHidden
-				}
-			} else {
-				if (e.target.classList.contains("gg-close")) {
-					this.resetFilter(type);
-				}
-			}
-		},
 		// update queries when filters are clicked
 		filterWith: function(type, q) { 
 			if (type === 0 && this.$route.query.t !== q) { // if tag
@@ -176,14 +172,6 @@ export default {
 			return (typeof this.currCategoryValue !== "undefined");
 		}
 	},
-	watch: {
-		currTagValue: function(value) {	
-			console.log(value);
-		},
-		currCategoryValue: function(value) {
-			console.log(value);
-		},
-	},
 	mounted() {
 		this.minDisplayedFilters();
 		this.tagsHidden = this.isSmallScreen;
@@ -200,16 +188,15 @@ export default {
 </script>
 
 
-<style>
-/* // <style scoped> */
-@import url('https://css.gg/css?=|close|chevron-down-o');
+<style scoped>
+@import url('https://css.gg/css?=|chevron-down-o');
 
 * {
 	outline: none;
 }
 
-.container {
-	max-width: 100%;
+#ProductList {
+	width: 100%;
 	margin: 0;
 	display: flex;
 	justify-content: space-between;
@@ -217,7 +204,7 @@ export default {
 }
 
 .product-list {
-	width: 65%;
+	width: 62.5%;
 	border-radius: 0.65rem;
 	padding: 0 1.5rem;
 	display: flex;
@@ -227,25 +214,38 @@ export default {
 	border-bottom: 5px solid var(--gray-border-color);
 }
 
-.product-list .no-results {
+.product-list > .no-results {
 	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	padding: 3rem;
 }
 
-.product-list .no-results img {
+.product-list > .no-results img {
 	width: 25%;
-	margin-bottom: 1rem;
+	height: auto;
+	display: block;
+	margin: 0 auto 1rem auto;
+}
+
+.product-list > .no-results h3 {
+	margin: 1rem auto;
+	text-align: center;
+}
+
+.product-list > :nth-last-child(2) {
+	border: none !important;
+}
+
+.filter-list {
+	width: 35%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .product-filters {
 	width: 100%;
 	border-radius: 0.65rem;
-	padding: .5rem 1rem;
+	padding: .35rem .75rem;
 	border: 2.5px solid var(--gray-border-color);
 	border-bottom: 5px solid var(--gray-border-color);
 	margin-bottom: .5rem;
@@ -257,14 +257,8 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-weight: bold;
 	padding: .25rem 0;
-	cursor: pointer;
 	color: var(--text-color);
-}
-
-.product-filters .headers i {
-	transform: scale(1);
 }
 
 .product-filters .headers .current {
@@ -273,64 +267,42 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 	margin: 0;
-	/* border-radius: 1rem; */
 	border: none;
 	margin-left: auto;
-	margin-right: .5rem;
-	font-size: .75rem;
 	padding: 0 .2rem 0 .5rem;
 	color: var(--text-color);
-	background-color: var(--tags-bg-color);
+	background-color: var(--current-tags-bg-color);
 }
 
-.product-filters .headers .current i {
-	margin-left: .25rem;
-	margin-right: 0;
+.product-filters .headers .current:hover {
+	background-color: var(--current-tags-bg-hover-color);
+}
+
+.product-filters .headers > i {
+	display: none;
+	margin-left: .5rem;
 	cursor: pointer;
-	transform: scale(.75);
 }
 
-.product-filters > :not(:first-child) {
-	margin: 0.5rem 0;
+.product-filters .tag-list {
+	margin-top: 0.75rem;
 }
 
-.product-filters:first-of-type button {
-	border-radius: 1rem;
+.product-filters .tag-list > button {
+	margin: 0 .25rem .5rem 0;
 }
 
 .product-filters:last-of-type button {
 	border-radius: .35rem;
 }
 
-.filter-container {
-	width: 30%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.filter-container > * {
-	width: 100%;
-}
-
-.gg-close-o,
-.gg-chevron-down-o {
-	color: var(--text-color);
-}
-
-.gg-close-o {
-	margin-left: auto;
-	margin-right: 0;
-	transform: scale(.65);
-}
-
 @media only screen and (max-width: 840px) {
-	.container {
+	#ProductList {
 		flex-direction: column-reverse;
 	}
 
 	.product-list,
-	.filter-container {
+	.filter-list {
 		width: 100%;
 	}
 
@@ -345,8 +317,12 @@ export default {
 		padding: 0 1rem;
 	}
 
-	.gg-close-o {
-		/* margin-right: 0.5rem; */
+	.product-filters .headers i {
+		display: inline-block;
+	}
+
+	.product-filters .tag-list :last-child {
+		display: none;
 	}
 }
 </style>

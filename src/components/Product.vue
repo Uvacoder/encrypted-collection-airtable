@@ -1,5 +1,5 @@
 <template>
-	<div class="product">
+	<div id="Product">
 		<div class="product-info">
 			<div class="product-logo">
 				<img :src="product.img" loading="lazy" alt="Product Logo" />
@@ -8,28 +8,34 @@
 				<h3 class="product-name" ref="pName" v-html="product.name"></h3>
 				<p class="product-desc" ref="pDesc" v-html="product.desc"></p>
 			</div>
-			<a title="Go To Link" target="_blank" rel="noopener" :href="product.url" class="product-link">
-				<b-button aria-label="Go To Link">
+			<div class="product-link">
+				<a title="Go To Product Website" aria-label="Go To Product Website" target="_blank" rel="noopener" :href="product.url">
 					<i class="gg-external"></i>
-				</b-button>
-			</a>
+				</a>
+			</div>
 		</div>
-		<b-taglist class="product-tags">
-			<b-button 
-				size="is-small" 
+		<div class="product-tags">
+			<app-button-tag
 				v-for="(tag, index) in product.tags" 
 				:key="index" 
-				rounded
-				@click="filterWith(tag)"
-			>{{ tag }}</b-button>
-		</b-taglist>
+				:value="tag"
+				@clicked="filterWith(tag)"
+			>{{ tag }}</app-button-tag>
+		</div>
 	</div>
 </template>
 
 <script>
+// import Button from "@/components/Button.vue";
+import ButtonTag from "@/components/ButtonTag.vue";
+
 export default {
 	name: "Product",
 	props: ["product", "filterable"],
+    components: {
+        // appButton: Button,
+        appButtonTag: ButtonTag,
+    },
 	data() {
 		return {}
 	},
@@ -54,26 +60,28 @@ export default {
 @import url('https://css.gg/css?=|external');
 
 * {
-  outline: none;
+	outline: none;
 }
 
-button:hover,
-button:focus,
-button:active {
-  outline: none;
+*:not(i) {
+	/* border: .1px solid red; */
 }
 
-.product {
+i {
+	color: var(--text-color);
+}
+
+i::before {
+	background: var(--text-color);
+}
+
+#Product {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	background-color: var(--background-color);
 	border-bottom: 2px solid var(--product-border-color);
 	padding: 0.75rem 0;
-}
-
-.last-product {
-	border: none !important;
 }
 
 .product-info {
@@ -104,14 +112,16 @@ button:active {
 	padding: 0.25rem 0.25rem 0.25rem 0.5rem;
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-evenly;
 }
 
 .product-detail > * {
-	margin-bottom: 0.25rem;
+	margin: 0 0 0.5rem 0;
 }
 
 .product-name {
-	font-size: 1.15rem;
+	font-size: 1.1rem;
 	color: var(--text-color);
 }
 
@@ -122,12 +132,14 @@ button:active {
 }
 
 .product-link {
+	display: block;
 	min-width: 3rem;
 	margin-left: auto;
 	position: relative;
 }
 
-.product-link button {
+.product-link > a {
+	display: block;
 	width: 2.5rem;
 	height: 2.5rem;
 	position: absolute;
@@ -137,27 +149,21 @@ button:active {
 	border: none;
 	background-color: var(--background-color);
 	color: var(--text-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.product-link:hover button {
+.product-link > a:hover {
 	background-color: var(--primary-yellow-color);
 	color: #000;
 }
 
 .product-tags {
-	padding: .5rem 0 0 0;
+	padding: .25rem 0 0 0;
 }
 
 .product-tags button {
 	margin: 0 0.5rem 0.5rem 0;
-}
-
-.gg-external {
-	color: var(--text-color);
-	transform: scale(0.9);
-}
-
-.gg-external::before {
-	background: var(--text-color);
 }
 </style>

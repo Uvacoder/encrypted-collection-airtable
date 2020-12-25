@@ -1,21 +1,18 @@
 <template>
 	<div id="app">
 		<app-header v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
-		<app-menu-list></app-menu-list>
-		<!-- <router-view></router-view> -->
+		<router-view></router-view>
 	</div>
 </template>
 
 <script>
 import localForage from "localforage";
 import Header from "@/components/Header.vue";
-import MenuList from "@/components/MenuList.vue";
 
 export default {
 	name: "App",
 	components: {
-		appHeader: Header,
-		appMenuList: MenuList
+		appHeader: Header
 	},
 	data() {
 		return {
@@ -109,6 +106,8 @@ html {
 	--gray-border-color: #1c2024;
 	--tags-bg-color: #e8eaec;
 	--tags-bg-hover-color: #d8dbdf;
+	--current-tags-bg-color: #ced4da;
+	--current-tags-bg-hover-color: #b5bbc0;
 	--app-desc-text-color: #5d6470;
 	--placeholder-text-color: #adb5bd;
 	--product-border-color: #ced4da;
@@ -123,6 +122,8 @@ html[data-theme='dark'] {
 	--gray-border-color: #495057;
 	--tags-bg-color: #272d35;
 	--tags-bg-hover-color: #2f3741;
+	--current-tags-bg-color: #495057;
+	--current-tags-bg-hover-color: #575f68;
 	--app-desc-text-color: #ced4da;
 	--placeholder-text-color: #495057;
 	--product-border-color: #495057;
@@ -148,10 +149,10 @@ body  {
 	user-select: none;
 	font-family:  "JetBrains Mono", "Cascadia Mono", "Lucida Console", monospace !important;
 	font-weight: 500;
-	transition: all 0.3s, color 0s, background-color 0s;
-	-moz-transition: all 0.3s, color 0s, background-color 0s;
-	-webkit-transition: all 0.3s, color 0s, background-color 0s;
-	/* border: .1px solid red; */
+	transition: all 0.2s, color 0s, background-color 0s;
+	-moz-transition: all 0.2s, color 0s, background-color 0s;
+	-webkit-transition: all 0.2s, color 0s, background-color 0s;
+	box-sizing: border-box;
 }
 
 input, input:before, input:after {
@@ -168,17 +169,6 @@ input::placeholder {
 	opacity: 1;
 }
 
-/* Override Annoying Buefy Defaults */
-.button:focus, .button.is-focused,
-.button:active, .button.is-active {
-	color: var(--text-color) !important;
-	border-color: var(--gray-border-color) !important;
-}
-
-.button:focus:not(:active), .button.is-focused:not(:active) {
-	box-shadow: none !important;
-}
-
 #app {
 	width: 100%;
 	min-width: 365px;
@@ -188,7 +178,7 @@ input::placeholder {
 	box-sizing: border-box;
 }
 
-.tags button {
+/* .tags button {
 	color: var(--text-color);
 	height: 1.5rem;
 	border: none;
@@ -200,7 +190,7 @@ input::placeholder {
 .tags button:hover {
 	color: var(--text-color);
 	background-color: var(--tags-bg-hover-color);
-}
+} */
 
 mark.highlight {
 	color: var(--highlight-text-color);

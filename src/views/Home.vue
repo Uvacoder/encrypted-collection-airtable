@@ -20,14 +20,15 @@
 				</div>
 			</div>
 			
-			<b-button
+			<app-button
 				class="clear-filters" 
-				@click="clearFilters"
-				title="Reset Filters &amp; Search Everything"
+				:iconButton="true"
+				@clicked="clearFilters"
+				:label="'Reset Filters & Search Everything'"
 				:disabled="isThatAll"
 			>
 				<i class="gg-asterisk"></i>
-			</b-button>
+			</app-button>
 		</div>
 		
 		<app-product-list 
@@ -40,17 +41,36 @@
 
 
 <script>
+import Button from "@/components/Button.vue";
 import { tags, categories } from "@/scripts/filters";
 import ProductList from "@/components/ProductList.vue";
 
 export default {
     name: 'Home',
     components: {
-        appProductList: ProductList,
+        appButton: Button,
+        appProductList: ProductList
     },
     data() {
         return {
-            allProducts: [],
+            allProducts: [
+				{
+					categories: [ "All", "Health", "Communication" ],
+					desc: "Free and secure video chats for therapists.",
+					img: "https://dl.airtable.com/.attachments/092f92d1abe5756195ce1cce6798b517/105592a5/jour.png",
+					name: "Jour for Therapists",
+					tags: [ "all", "beta", "free"],
+					url: "https://therapy.jour.com/"
+				},
+				{
+					categories: [ "All", "Health", "Communication" ],
+					desc: "Free and secure video chats for therapists.",
+					img: "https://dl.airtable.com/.attachments/092f92d1abe5756195ce1cce6798b517/105592a5/jour.png",
+					name: "Jour for Therapists",
+					tags: [ "all", "beta", "free"],
+					url: "https://therapy.jour.com/"
+				}
+			],
 			tags: [],
 			categories: [],
 			searchQuery: "",
@@ -59,18 +79,18 @@ export default {
         }
     },
     methods: {
-		// async fetchData() {
-		// 	await this.$http("getMain")
-		// 	.then((res) => {
-		// 		// console.log(res);
-		// 		return res.data;
-		// 	})
-		// 	.then((data) => {
-		// 		// console.log(data);
-		// 		this.allProducts = [...data];
-		// 	})
-		// 	.catch((err) => console.log(err));
-		// },
+		async fetchData() {
+			await this.$http("getMain")
+			.then((res) => {
+				// console.log(res);
+				return res.data;
+			})
+			.then((data) => {
+				console.log(data);
+				this.allProducts = [...data];
+			})
+			.catch((err) => console.log(err));
+		},
 		// returns start & end indices of all occurences of a query from a string
 		stringSearch: function(str, query, caseInsensitive = true) {
 			caseInsensitive = typeof caseInsensitive !== 'undefined' ? caseInsensitive : true;
@@ -260,13 +280,8 @@ export default {
     outline: none;
 }
 
-i {
-    color: var(--text-color);
-	margin-left: 0;
-}
-
 .search {
-	width: 65%;
+	width: 62.5%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -323,25 +338,13 @@ i {
 	color: var(--text-color);
 }
 
-.clear-filters {
-	border: 2px solid;
-	border-bottom: 4px solid;
+.search .clear-filters {
+	width: 3rem;
+	height: 3rem;
 	border-radius: 0.65rem;
 	color: var(--text-color);
 	background-color: var(--filter-reset-bg-color);
 	border-color:  var(--filter-reset-border-color);	
-	width: 3rem;
-	height: 3rem;
-}
-
-.clear-filters i {
-	transform: scale(1);
-}
-
-/* Override Annoying Buefy Defaults */
-.clear-filters:focus, .clear-filters.is-focused,
-.clear-filters:active, .clear-filters.is-active {
-	border-color: var(--filter-reset-border-color) !important;
 }
 
 @media only screen and (max-width: 840px) {
