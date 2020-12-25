@@ -1,5 +1,5 @@
 <template>
-    <div id='unfound'>
+    <div id='Unfound'>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 9C7.44772 9 7 9.44772 7 10C7 10.5523 7.44772 11 8 11H9C9.55228 11 10 10.5523 10 10C10 9.44772 9.55228 9 9 9H8Z" fill="currentColor" />
             <path d="M15 9C14.4477 9 14 9.44772 14 10C14 10.5523 14.4477 11 15 11H16C16.5523 11 17 10.5523 17 10C17 9.44772 16.5523 9 16 9H15Z" fill="currentColor" />
@@ -9,20 +9,32 @@
         <h2>
             The page you are trying to visit doesn't exist.
         </h2>
-        <b-button tag="router-link" to="/" title="Go Back Home">
+
+        <app-button
+            :label="'Go Back Home'"
+            @clicked="navigateTo('/')" 
+        >
             Go Back Home
             <i class="gg-corner-right-up"></i>
-        </b-button>
+        </app-button>
     </div>
 </template>
 
 
 <script>
+import Button from "@/components/Button.vue";
+
 export default {
-    name: 'unfound',
-    data() {
-        return {}
-    }
+    name: 'Unfound',
+    components: {
+        appButton: Button,
+    },
+    methods: {
+        // // used by buttons to act as a router-link 
+		navigateTo: function(whereTo) {
+			this.$router.push({ path: whereTo });
+		}
+    },
 }
 </script>
 
@@ -34,18 +46,19 @@ export default {
     outline: none;
 }
 
-#unfound {
+#Unfound {
     padding: 2rem .5rem;
 }
 
-#unfound > svg {
+#Unfound > svg {
     width: 125px;
     height: 125px;
     color: var(--text-color);
     margin: 0 auto;
+    display: block;
 }
 
-#unfound h2 {
+#Unfound h2 {
     width: 65%;
     text-align: center;
     font-size: 1.5rem;
@@ -53,35 +66,18 @@ export default {
     margin: 1rem auto;
 }
 
-#unfound > a {
-    width: 12rem;
-    height: auto;
-	padding: .75rem;
-	border: 2px solid var(--gray-border-color);
-	border-bottom: 4px solid var(--gray-border-color);	
+#Unfound > button {
+	padding: 1rem;
 	border-radius: 0.5rem;
-	background-color: var(--background-color);
-	color: var(--text-color);
 	margin: 0 auto;
-    display: block;
-}
-
-#unfound > a:hover {
-	color: var(--text-color);
-	border: 2px solid var(--gray-border-color);
-	border-bottom: 4px solid var(--gray-border-color);
-}
-
-#unfound > a i {
-    margin-left: 0.5rem;
 }
 
 @media only screen and (max-width: 480px) {
-	#unfound {
+	#Unfound {
         padding: 1rem .25rem;
 	}
 
-    #unfound h2 {
+    #Unfound h2 {
         width: 95%;
 	}
 }

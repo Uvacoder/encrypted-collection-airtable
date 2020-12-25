@@ -7,20 +7,31 @@
             Items tagged as "open-source" are more reliable. However, not all items tagged as "open-source" are fully open source. 
             Do your research before trusting a service 🤓 and enjoy!😉.
         </p>
-        <b-button tag="router-link" to="/" title="Go Home">
+        <app-button
+            :label="'Go Home'"
+            @clicked="navigateTo('/')" 
+        >
             Go Home
             <i class="gg-corner-right-up"></i>
-        </b-button>              
+        </app-button>            
     </div>
 </template>
 
 
 <script>
+import Button from "@/components/Button.vue";
+
 export default {
     name: 'About',
-    data() {
-        return {}
-    }
+    components: {
+        appButton: Button,
+    },
+    methods: {
+        // // used by buttons to act as a router-link 
+		navigateTo: function(whereTo) {
+			this.$router.push({ path: whereTo });
+		}
+    },
 }
 </script>
 
@@ -40,12 +51,13 @@ export default {
 }
 
 #about {
-    padding: 1rem .5rem;
+    padding: .5rem;
     font-size: 1.1rem;
 }
 
 #about p {
     width: 80%;
+    line-height: 1.6;
 }
 
 #about a {

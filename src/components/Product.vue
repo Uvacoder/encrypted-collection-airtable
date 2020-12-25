@@ -26,18 +26,13 @@
 </template>
 
 <script>
-// import Button from "@/components/Button.vue";
-import ButtonTag from "@/components/ButtonTag.vue";
+import ButtonTag from "./ButtonTag.vue";
 
 export default {
 	name: "Product",
 	props: ["product", "filterable"],
     components: {
-        // appButton: Button,
         appButtonTag: ButtonTag,
-    },
-	data() {
-		return {}
 	},
 	methods: {
 		filterWith: function(q) {
@@ -61,10 +56,6 @@ export default {
 
 * {
 	outline: none;
-}
-
-*:not(i) {
-	/* border: .1px solid red; */
 }
 
 i {
