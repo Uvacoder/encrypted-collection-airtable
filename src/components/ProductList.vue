@@ -5,13 +5,12 @@
 				v-for="(product, index) in products" 
 				:key="index" 
 				:product="product"
-				:filterable="true"
 			></app-product>
 
 			<!-- loading div here possibly -->
 
 			<div v-show="(products.length === 0)" class="no-results">
-				<img src="../assets/no-results.svg" alt="No results.">
+				<app-list-icon></app-list-icon>
 				<h3>No results found.</h3>
 			</div>
 		</div>
@@ -83,16 +82,16 @@
 
 
 <script>
-// import Button from "./Button.vue";
 import Product from "./Product.vue";
+import ListIcon from "./ListIcon.vue";
 import ButtonTag from "./ButtonTag.vue";
 
 export default {
 	name: "ProductList",
 	props: ["products", "tags", "categories"],
 	components: {
-		// appButton: Button,
 		appProduct: Product,
+		appListIcon: ListIcon,
 		appButtonTag: ButtonTag,
 	},
 	data() {
@@ -189,8 +188,6 @@ export default {
 
 
 <style scoped>
-@import url('https://css.gg/css?=|chevron-down-o');
-
 * {
 	outline: none;
 }
@@ -220,10 +217,10 @@ export default {
 }
 
 .product-list > .no-results img {
-	width: 25%;
+	/* width: 25%;
 	height: auto;
 	display: block;
-	margin: 0 auto 1rem auto;
+	margin: 0 auto 1rem auto; */
 }
 
 .product-list > .no-results h3 {

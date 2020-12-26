@@ -7,38 +7,30 @@
             Items tagged as "open-source" are more reliable. However, not all items tagged as "open-source" are fully open source. 
             Do your research before trusting a service 🤓 and enjoy!😉.
         </p>
-        <app-button
+        <app-button-link
+            :path="'/'"
             :label="'Go Home'"
-            @clicked="navigateTo('/')" 
         >
             Go Home
             <i class="gg-corner-right-up"></i>
-        </app-button>            
+        </app-button-link>            
     </div>
 </template>
 
 
 <script>
-import Button from "@/components/Button.vue";
+import ButtonLink from "@/components/ButtonLink.vue";
 
 export default {
     name: 'About',
     components: {
-        appButton: Button,
-    },
-    methods: {
-        // // used by buttons to act as a router-link 
-		navigateTo: function(whereTo) {
-			this.$router.push({ path: whereTo });
-		}
-    },
+        appButtonLink: ButtonLink,
+    }
 }
 </script>
 
 
 <style scoped>
-@import url('https://css.gg/css?=|external|corner-right-up');
-
 * {
     outline: none;
 }
@@ -60,9 +52,9 @@ export default {
     line-height: 1.6;
 }
 
-#about a {
+#about p > a {
     text-decoration: none;
-    border-radius: .1rem;
+    border-radius: .2rem;
     padding: 0 .25rem;
     color: var(--highlight-text-color);
     background-color: var(--primary-yellow-color);
@@ -71,27 +63,8 @@ export default {
     justify-content: space-between;
 }
 
-#about > a[title] {
-    width: 9rem;
-	height: auto;
-	padding: .75rem;
-	border: 2px solid var(--gray-border-color);
-	border-bottom: 4px solid var(--gray-border-color);	
-	border-radius: 0.5rem;
-	background-color: var(--background-color);
-	color: var(--text-color);
-	margin: 1rem 0;
-    display: block;
-}
-
-#about > a[title]:hover {
-	color: var(--text-color);
-	border: 2px solid var(--gray-border-color);
-	border-bottom: 4px solid var(--gray-border-color);
-}
-
-#about > a i {
-    margin-left: 0.5rem;
+#about > a {
+    width: 8rem;
 }
 
 @media only screen and (max-width: 480px) {

@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<app-header v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
+		<app-header :darkTheme="darkThemeEnabled" v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
 		<router-view></router-view>
 	</div>
 </template>
@@ -73,7 +73,10 @@ export default {
 </script>
 
 <style>
-/* Import regular font */
+/* Import all the CSS icons needed from https://css.gg/ */
+@import url('https://css.gg/css?=|search|backspace|asterisk|link|external|corner-right-up|chevron-down-o|menu|sun|moon|add|danger|info|unavailable|eye|push-left|push-right|smile-mouth-open|close');
+
+/* Import regular monospace font */
 @font-face {
 	font-family: 'JetBrains Mono';
 	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Bold.woff2') format('woff2'),
@@ -83,7 +86,7 @@ export default {
 	font-display: swap;
 }
 
-/* Import bold font */
+/* Import bold monospace font */
 @font-face {
 	font-family: 'JetBrains Mono';
 	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-ExtraBold.woff2') format('woff2'),
@@ -98,6 +101,7 @@ export default {
 	--lightgray-bg-color: #ced4da;
 	--primary-yellow-color: #f1c61b;
 	--highlight-text-color: #1c2024;
+	--disabled-text-color: #798086;
 }
 
 html {
@@ -114,6 +118,7 @@ html {
 	--product-desc-text-color: #5d6470;
 	--filter-reset-bg-color: #f1c61b;
 	--filter-reset-border-color: #1c2024;
+	--disabled-filter-reset-border-color: #798086;
 }
 
 html[data-theme='dark'] {
@@ -130,6 +135,7 @@ html[data-theme='dark'] {
 	--product-desc-text-color: #ced4da;
 	--filter-reset-bg-color: #1c2024;
 	--filter-reset-border-color: #f1c61b;
+	--disabled-filter-reset-border-color: #564d29;
 }
 
 html,

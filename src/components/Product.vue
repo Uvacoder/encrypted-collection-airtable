@@ -30,7 +30,15 @@ import ButtonTag from "./ButtonTag.vue";
 
 export default {
 	name: "Product",
-	props: ["product", "filterable"],
+	props: {
+		product: {
+			type: Object,
+		},
+		filterable: {
+			type: Boolean,
+			default: true
+		}
+	},
     components: {
         appButtonTag: ButtonTag,
 	},
@@ -52,8 +60,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://css.gg/css?=|external');
-
 * {
 	outline: none;
 }

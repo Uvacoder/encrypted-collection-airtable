@@ -25,8 +25,6 @@ export default {
 
 
 <style scoped>
-@import url('https://css.gg/css?=|link');
-
 * {
     outline: none;
 }

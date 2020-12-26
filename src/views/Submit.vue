@@ -2,7 +2,7 @@
     <div id='submit'>
         <p>
             If you discovered any products that aren't in the list, you can <mark class="highlight">submit</mark> one through this page.
-            Use this page for new submissions and <router-link to="/report">this one <i class="gg-link"></i></router-link> to report already existing products.
+            Use this page for new submissions and <router-link to="/report">the report page <i class="gg-link"></i></router-link> to report already existing products.
             I'll review the submission and add the product ASAP.
         </p>     
     </div>
@@ -11,23 +11,12 @@
 
 <script>
 export default {
-    name: 'Submit',
-    data() {
-        return {}
-    },
-    methods: {
-        // fetches and populates list from db
-        populateList: function() {
-            // fetch and populate
-        }
-    }
+    name: 'Submit'
 }
 </script>
 
 
 <style scoped>
-@import url('https://css.gg/css?=|link');
-
 * {
     outline: none;
 }

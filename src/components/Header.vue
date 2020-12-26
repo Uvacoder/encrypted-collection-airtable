@@ -50,6 +50,8 @@
 				<i class="gg-menu"></i>
 			</app-button>
 		</div>
+
+		<div class="overlay" ref="Overlay" @click="hideMenu"></div>
 		
 		<div class='menu-list' ref="MenuList">
 			<div class="header">
@@ -72,6 +74,7 @@
 						:iconButton="true" 
 						:label="'Give Feedback'"
 					>
+						<!-- hidemenu on click -->
 						<i class="gg-smile-mouth-open"></i>
 					</app-button>
 
@@ -85,61 +88,69 @@
 				</div>
 			</div>
 			
-			<app-button
+			<app-button-link
+				:path="'/about'"
 				:label="'Go to About Page'"
-				@clicked="navigateTo('about')" 
+				@clicked="hideMenu" 
 			>
 				About Page
 				<i class="gg-info"></i>
-			</app-button>
+			</app-button-link>
 			
-			<app-button
+			<app-button-link
+				:path="'/watchlist'"
 				:label="'Go to Watchlist Page'"
-				@clicked="navigateTo('watchlist')" 
+				@clicked="hideMenu" 
 			>
 				Watchlist
 				<i class="gg-eye"></i>
-			</app-button>
+			</app-button-link>
 
-			<app-button
+			<app-button-link
+				:path="'/report'"
 				:label="'Go to Report Page'"
-				@clicked="navigateTo('report')" 
+				@clicked="hideMenu" 
 			>
 				Report Page
 				<i class="gg-danger"></i>
-			</app-button>
+			</app-button-link>
 
-			<app-button
+			<app-button-link
+				:path="'/excluded'"
+				@clicked="hideMenu" 
 				:label="'Go to Excluded Products Page'"
-				@clicked="navigateTo('excluded')" 
 			>
 				Excluded List
 				<i class="gg-unavailable"></i>
-			</app-button>
+			</app-button-link>
 
-			<app-button
+			<app-button-link
+				:path="'/submit'"
+				@clicked="hideMenu" 
 				:label="'Go to Submission Page'"
-				@clicked="navigateTo('submit')" 
 			>
 				Submission Page
 				<i class="gg-add"></i>
-			</app-button>        
+			</app-button-link>        
 		</div>
 	</nav>
 </template>
 
 <script>
 import Button from "./Button.vue";
+import ButtonLink from "./ButtonLink.vue";
 
 export default {
 	name: "Header",
+	props: ["darkTheme"],
 	components: {
-		appButton: Button,
+		appButton: Button,		
+		appButtonLink: ButtonLink,
 	},
 	data() {
 		return {
-			darkMode: false
-		};
+			darkMode: this.darkTheme
+		}
 	},
 	methods: {
 		// emit theme change to main component
@@ -147,31 +158,31 @@ export default {
 			this.darkMode = !this.darkMode;
 			this.$emit('theme-change');
 		},
-		// used by buttons to act as a router-link 
-		navigateTo: function(whereTo) {
-			this.$router.push({ path: whereTo });
-			this.hideMenu();
-		},
 		// hide side menu
         hideMenu: function() {
-            this.$refs.MenuList.style.setProperty("transform", "translateX(100%)");
+			this.$refs.MenuList.style.setProperty("transform", "translateX(100%)");
+			this.$refs.Overlay.style.setProperty("visibility", "hidden");
 		},
 		// show side menu
 		showMenu: function() {
-            this.$refs.MenuList.style.setProperty("transform", "translateX(0)");
+			this.$refs.MenuList.style.setProperty("transform", "translateX(0)");
+			this.$refs.Overlay.style.setProperty("visibility", "visible");
         },
 	},
 	computed: {
 		headerTitle: function() {
 			return this.$store.state.headerTitle;
 		},
+	},
+	watch: {
+		darkTheme: function(value) {
+			this.darkMode = value;
+		},
 	}
 };
 </script>
 
 <style scoped>
-@import url('https://css.gg/css?=|menu|sun|moon|add|danger|info|unavailable|eye|push-left|push-right|smile-mouth-open');
-
 * {
 	outline: none;
 }
@@ -269,10 +280,21 @@ html[data-theme='dark'] .app-logo img {
 	display: none;
 }
 
+.overlay {
+	width: 100%;
+	height: 100vh;
+	z-index: 2;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, .5);
+	visibility: hidden;
+}
+
 .menu-list {
     width: 45%;
     height: 100vh;
-	z-index: 1;
+	z-index: 2;
     position: fixed;
     top: 0;
     right: 0;
@@ -322,11 +344,6 @@ html[data-theme='dark'] .app-logo img {
 
 .menu-list .header .menu-list-buttons > :last-child  {
 	margin: 0;
-}
-
-.router-link-active,
-.router-link-exact-active {
-	color: var(--text-color);
 }
 
 @media only screen and (max-width: 840px) {

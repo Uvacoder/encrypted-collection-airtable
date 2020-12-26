@@ -5,10 +5,6 @@ import { store } from "@/scripts/store";
 import axios from "axios";
 import has from "lodash/has";
 
-// import Buefy from "buefy";
-// import "buefy/dist/buefy.css";
-// Vue.use(Buefy);
-
 Vue.prototype.$has = has;
 Vue.prototype.$http = axios.create({
 	method: "get",

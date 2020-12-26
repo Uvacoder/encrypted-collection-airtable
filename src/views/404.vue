@@ -10,38 +10,30 @@
             The page you are trying to visit doesn't exist.
         </h2>
 
-        <app-button
+        <app-button-link
+            :path="'/'"
             :label="'Go Back Home'"
-            @clicked="navigateTo('/')" 
         >
             Go Back Home
             <i class="gg-corner-right-up"></i>
-        </app-button>
+        </app-button-link>
     </div>
 </template>
 
 
 <script>
-import Button from "@/components/Button.vue";
+import ButtonLink from "@/components/ButtonLink.vue";
 
 export default {
     name: 'Unfound',
     components: {
-        appButton: Button,
-    },
-    methods: {
-        // // used by buttons to act as a router-link 
-		navigateTo: function(whereTo) {
-			this.$router.push({ path: whereTo });
-		}
-    },
+        appButtonLink: ButtonLink,
+    }
 }
 </script>
 
 
 <style scoped>
-@import url('https://css.gg/css?=|corner-right-up');
-
 * {
     outline: none;
 }
@@ -66,10 +58,9 @@ export default {
     margin: 1rem auto;
 }
 
-#Unfound > button {
-	padding: 1rem;
-	border-radius: 0.5rem;
-	margin: 0 auto;
+#Unfound > a {
+    width: 11rem;
+	margin: 2rem auto;
 }
 
 @media only screen and (max-width: 480px) {

@@ -1,12 +1,11 @@
 <template>
     <button
-        ref="btn"
         id="Button"
         :title="label"
         :aria-label="label"
-        @click="$emit('clicked')"
         :disabled="disabled"
-        :class="['button', { 'disabled' : disabled }, { 'icon-button' : iconButton }]"
+        @click="$emit('clicked')"
+        :class="['button', { 'icon-button' : iconButton }]"
     >
         <slot></slot>
     </button>
@@ -72,9 +71,5 @@ i {
 	min-width: 2.5rem;
 	padding: 0 .5rem;
     justify-content: center;
-}
-
-.disabled {
-    cursor: not-allowed;
 }
 </style>

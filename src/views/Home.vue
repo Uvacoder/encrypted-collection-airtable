@@ -67,7 +67,7 @@ export default {
 					desc: "Free and secure video chats for therapists.",
 					img: "https://dl.airtable.com/.attachments/092f92d1abe5756195ce1cce6798b517/105592a5/jour.png",
 					name: "Jour for Therapists",
-					tags: [ "all", "beta", "free"],
+					tags: [ "all", "open-source", "opt-in"],
 					url: "https://therapy.jour.com/"
 				}
 			],
@@ -183,8 +183,10 @@ export default {
 		},
 		// clears all filters to show all search results
 		clearFilters: function() {
-			let query = {};
-			this.$router.replace({ query });
+			if (this.$has(this.$route.query, 't') || this.$has(this.$route.query, 'c')) {
+				let query = {};
+				this.$router.replace({ query });
+			}
 		},
 		// focuses search input
 		focusInput: function() {
@@ -274,8 +276,6 @@ export default {
 
 
 <style scoped>
-@import url('https://css.gg/css?=|search|backspace|asterisk');
-
 * {
     outline: none;
 }
@@ -342,9 +342,20 @@ export default {
 	width: 3rem;
 	height: 3rem;
 	border-radius: 0.65rem;
-	color: var(--text-color);
 	background-color: var(--filter-reset-bg-color);
 	border-color:  var(--filter-reset-border-color);	
+}
+
+.search .clear-filters:disabled,
+.search .clear-filters[disabled] {
+    cursor: not-allowed;
+	background-color: var(--background-color);
+	border-color:  var(--disabled-filter-reset-border-color);	
+}
+
+.search .clear-filters:disabled i,
+.search .clear-filters[disabled] i {
+	color: var(--disabled-text-color);
 }
 
 @media only screen and (max-width: 840px) {

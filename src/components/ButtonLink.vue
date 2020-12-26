@@ -1,32 +1,21 @@
 <template>
-    <button
-        ref="btn"
-        id="Button"
+    <router-link
+        :to="path"
         :title="label"
+        id="ButtonLink"
+        class="button-link"
         :aria-label="label"
-        @click="$emit('clicked')"
-        :disabled="disabled"
-        :class="['button', { 'disabled' : disabled }, { 'icon-button' : iconButton }]"
+        @click.native="$emit('clicked')"
     >
         <slot></slot>
-    </button>
+    </router-link>
 </template>
 
 
 <script>
 export default {
-    name: "Button",
-    props: {
-		label: String,
-		disabled: {
-			type: Boolean,
-			default: false
-        },
-        iconButton: {
-			type: Boolean,
-			default: false
-		},
-	},
+    name: "ButtonLink",
+    props: ["path", "label"]
 }
 </script>
 
@@ -39,15 +28,17 @@ export default {
 i {
     --ggs: 0.9;
     margin: 0;
+	margin-left: .65rem;
 	color: var(--text-color);
 }
 
-.button {
+.button-link {
 	margin: 0;
 	height: 2.5rem;
     font-size: 1rem;
     cursor: pointer;
 	padding: 0 .75rem;
+    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -58,23 +49,14 @@ i {
 	color: var(--text-color);
 }
 
-.button:hover {
+.button-link:hover {
 	color: var(--text-color);
 	border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);
 }
 
-.button:not(.icon-button) i {
-	margin-left: .65rem;
-}
-
-.icon-button {
-	min-width: 2.5rem;
-	padding: 0 .5rem;
-    justify-content: center;
-}
-
-.disabled {
-    cursor: not-allowed;
+.router-link-active,
+.router-link-exact-active {
+	color: var(--text-color);
 }
 </style>
