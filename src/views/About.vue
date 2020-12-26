@@ -7,13 +7,21 @@
             Items tagged as "open-source" are more reliable. However, not all items tagged as "open-source" are fully open source. 
             Do your research before trusting a service 🤓 and enjoy!😉.
         </p>
-        <app-button-link
-            :path="'/'"
-            :label="'Go Home'"
-        >
-            Go Home
-            <i class="gg-corner-right-up"></i>
-        </app-button-link>            
+
+        <div class="links">
+            <app-button-link
+                :path="'/'"
+                :label="'Go Home'"
+            >
+                Go Home
+                <i class="gg-corner-right-up"></i>
+            </app-button-link>   
+
+            <a title="Go To GitHub Repo" aria-label="Go To GitHub Repo" target="_blank" rel="noopener" href="https://github.com/oneminch/encrypted-list">
+                GitHub
+                <i class="gg-external"></i>
+            </a>  
+        </div>  
     </div>
 </template>
 
@@ -63,8 +71,44 @@ export default {
     justify-content: space-between;
 }
 
-#about > a {
+#about .links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#about .links > a {
+}
+
+#about .links > :first-child {
     width: 8rem;
+    margin-right: 1rem;
+}
+
+#about .links > :last-child {
+    width: 7rem;
+    margin: 0;
+	height: 2.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+	padding: 0 .75rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	border: 2px solid;
+	border-bottom: 4px solid;	
+	border-radius: 0.5rem;
+	color: var(--text-color);
+    background-color: var(--filter-reset-bg-color);
+	border-color:  var(--filter-reset-border-color);
+}
+
+#about .links > :last-child i {
+    --ggs: 0.9;
+    margin: 0;
+	margin-left: .65rem;
+	color: var(--text-color);
 }
 
 @media only screen and (max-width: 480px) {

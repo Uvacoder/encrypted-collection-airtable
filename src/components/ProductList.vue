@@ -216,13 +216,6 @@ export default {
 	padding: 3rem;
 }
 
-.product-list > .no-results img {
-	/* width: 25%;
-	height: auto;
-	display: block;
-	margin: 0 auto 1rem auto; */
-}
-
 .product-list > .no-results h3 {
 	margin: 1rem auto;
 	text-align: center;
