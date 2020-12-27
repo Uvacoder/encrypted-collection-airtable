@@ -67,7 +67,7 @@ export default {
         // fetches and populates list from db
         fetchData() {
 			this.isFetchingData = true;
-			this.$http("getWatchlist")
+			this.$http("/api/getWatchlist")
 			.then((res) => {
 				return res.data;
 			})

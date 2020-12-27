@@ -66,7 +66,7 @@ export default {
         // fetches and populates list from db
         fetchData() {
 			this.isFetchingData = true;
-			this.$http("getExcluded")
+			this.$http("/api/getExcluded")
 			.then((res) => {
 				return res.data;
 			})

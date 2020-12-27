@@ -69,7 +69,7 @@ export default {
     methods: {
 		fetchData() {
 			this.isFetchingData = true;
-			this.$http("getMain")
+			this.$http("/api/getMain")
 			.then((res) => {
 				return res.data;
 			})
