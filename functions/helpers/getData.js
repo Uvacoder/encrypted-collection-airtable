@@ -32,7 +32,6 @@ module.exports = async (tableName) => {
 
 		return formatReturn(200, products);
 	} catch (err) {
-		console.error(err);
 		return formatReturn(500, { error: err });
 	}
 };

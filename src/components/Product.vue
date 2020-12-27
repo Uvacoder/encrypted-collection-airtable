@@ -1,5 +1,5 @@
 <template>
-	<div id="Product">
+	<div class="product">
 		<div class="product-info">
 			<div class="product-logo">
 				<img :src="product.img" loading="lazy" alt="Product Logo" />
@@ -72,7 +72,7 @@ i::before {
 	background: var(--text-color);
 }
 
-#Product {
+.product {
 	width: 100%;
 	display: flex;
 	flex-direction: column;

@@ -1,6 +1,5 @@
 <template>
 	<button
-		id="ButtonTag"
 		@click="emitEvent"
 		:aria-label="value"
 		:closable="closable"

@@ -1,9 +1,11 @@
 <template>
 	<nav id="header">
-	<!-- :close-on-click="false" -->
 		<router-link class="app-info nav-left" ref="navLeft" :to="{ path: '/' }">
 			<div class="app-logo">
-				<img src="../assets/logo.svg" alt="EncryptedList Logo" />
+				<picture>
+					<source srcset="../assets/logo.webp" type="image/webp">
+					<img src="../assets/logo.svg" alt="EncryptedList Logo"/>
+				</picture>
 			</div>
 			<div class="app-detail">
 				<h3 class="app-name">{{ headerTitle }}</h3>
@@ -74,7 +76,6 @@
 						:iconButton="true" 
 						:label="'Give Feedback'"
 					>
-						<!-- hidemenu on click -->
 						<i class="gg-smile-mouth-open"></i>
 					</app-button>
 
@@ -247,6 +248,7 @@ html[data-theme='dark'] .app-logo img {
 	margin: 0.25rem;
 	color: var(--text-color);
 }
+
 .app-desc {
 	color: var(--app-desc-text-color);
 	line-height: 1.5;
@@ -344,6 +346,10 @@ html[data-theme='dark'] .app-logo img {
 
 .menu-list .header .menu-list-buttons > :last-child  {
 	margin: 0;
+}
+
+.menu-list i {
+	color: var(--text-color);
 }
 
 @media only screen and (max-width: 840px) {

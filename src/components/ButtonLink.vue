@@ -2,7 +2,6 @@
     <router-link
         :to="path"
         :title="label"
-        id="ButtonLink"
         class="button-link"
         :aria-label="label"
         @click.native="$emit('clicked')"

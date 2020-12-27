@@ -1,6 +1,5 @@
 <template>
     <button
-        id="Button"
         :title="label"
         :aria-label="label"
         :disabled="disabled"

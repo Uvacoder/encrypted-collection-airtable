@@ -1,5 +1,5 @@
 <template>
-	<div id="ProductList">
+	<div class="ProductList">
 		<div class="product-list">
 			<app-product 
 				v-for="(product, index) in products" 
@@ -7,9 +7,24 @@
 				:product="product"
 			></app-product>
 
-			<!-- loading div here possibly -->
+			<div v-show="isFetchingData" class="no-results">
+				<app-loading-icon></app-loading-icon>
+				<h3>Loading...</h3>
+			</div>
 
-			<div v-show="(products.length === 0)" class="no-results">
+			<div v-show="errorFetching" class="no-results">
+				<app-error-icon></app-error-icon>
+				<h3>
+					There was an issue getting the data.
+					<br>
+					Please try again soon.
+				</h3>
+			</div>
+			
+			<div 
+				class="no-results"
+				v-show="(products.length === 0) && !isFetchingData && !errorFetching" 
+			>
 				<app-list-icon></app-list-icon>
 				<h3>No results found.</h3>
 			</div>
@@ -84,15 +99,19 @@
 <script>
 import Product from "./Product.vue";
 import ListIcon from "./ListIcon.vue";
+import ErrorIcon from "./ErrorIcon.vue";
 import ButtonTag from "./ButtonTag.vue";
+import LoadingIcon from "./LoadingIcon.vue";
 
 export default {
 	name: "ProductList",
-	props: ["products", "tags", "categories"],
+	props: ["products", "tags", "categories", "isFetchingData", "errorFetching"],
 	components: {
 		appProduct: Product,
-		appListIcon: ListIcon,
+		appListIcon: ListIcon,		
+		appErrorIcon: ErrorIcon,
 		appButtonTag: ButtonTag,
+		appLoadingIcon: LoadingIcon,
 	},
 	data() {
 		return {
@@ -192,7 +211,7 @@ export default {
 	outline: none;
 }
 
-#ProductList {
+.ProductList {
 	width: 100%;
 	margin: 0;
 	display: flex;
@@ -287,7 +306,7 @@ export default {
 }
 
 @media only screen and (max-width: 840px) {
-	#ProductList {
+	.ProductList {
 		flex-direction: column-reverse;
 	}
 

@@ -16,8 +16,25 @@
 				:filterable="false"
 			></app-product>
 
-            <div v-show="(watchlistProducts.length === 0)" class="no-products">
-                <app-list-icon></app-list-icon>
+            <div v-show="isFetchingData" class="no-products">
+				<app-loading-icon></app-loading-icon>
+				<h4>Loading...</h4>
+			</div>
+
+			<div v-show="errorFetching" class="no-products">
+				<app-error-icon></app-error-icon>
+				<h4>
+					There was an issue getting the data.
+					<br>
+					Please try again soon.
+				</h4>
+			</div>
+			
+			<div 
+				class="no-products"
+				v-show="(watchlistProducts.length === 0) && !isFetchingData && !errorFetching" 
+			>
+				<app-list-icon></app-list-icon>
 				<h4>This list is currently empty.</h4>
 			</div>
 		</div>      
@@ -28,55 +45,45 @@
 <script>
 import Product from "@/components/Product";
 import ListIcon from "@/components/ListIcon.vue";
+import ErrorIcon from "@/components/ErrorIcon.vue";
+import LoadingIcon from "@/components/LoadingIcon.vue";
 
 export default {
     name: 'Watchlist',
     components: {
         appProduct: Product,
         appListIcon: ListIcon,
+        appErrorIcon: ErrorIcon,
+		appLoadingIcon: LoadingIcon,
     },
     data() {
         return {
-            watchlistProducts: [
-                {
-					categories: [ "All", "Health", "Communication" ],
-					desc: "Free and secure video chats for therapists.",
-					img: "https://dl.airtable.com/.attachments/092f92d1abe5756195ce1cce6798b517/105592a5/jour.png",
-					name: "Jour for Therapists",
-					tags: [ "all", "beta", "free"],
-					url: "https://therapy.jour.com/"
-				},
-				{
-					categories: [ "All", "Health", "Communication" ],
-					desc: "Free and secure video chats for therapists.",
-					img: "https://dl.airtable.com/.attachments/092f92d1abe5756195ce1cce6798b517/105592a5/jour.png",
-					name: "Jour for Therapists",
-					tags: [ "all", "beta", "free"],
-					url: "https://therapy.jour.com/"
-				}
-            ],
+            watchlistProducts: [],
+            isFetchingData: false,
+			errorFetching: false
         }
     },
     methods: {
         // fetches and populates list from db
-        populateList: function() {
-            // fetch and populate
-        },
-        // async fetchData() {
-		// 	await this.$http("getWatchlist")
-		// 	.then((res) => {
-		// 		// console.log(res);
-		// 		return res.data;
-		// 	})
-		// 	.then((data) => {
-		// 		// console.log(data);
-		// 		this.watchlistProducts = [...data];
-		// 	})
-		// 	.catch((err) => console.log(err));
-		// },
+        fetchData() {
+			this.isFetchingData = true;
+			this.$http("getWatchlist")
+			.then((res) => {
+				return res.data;
+			})
+			.then((data) => {
+				this.watchlistProducts = data.slice();
+				this.isFetchingData = false;
+			})
+			.catch((err) => {
+				this.errorFetching = true;
+				this.isFetchingData = false;
+				throw err;
+			});
+		},
     },
-    mounted() {
-        // this.fetchData();
+    created() {
+        this.fetchData();
     }
 }
 </script>

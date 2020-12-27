@@ -7,7 +7,8 @@
 				</div>
 				<input 
 					type="text" 
-					ref="searchInput" 
+					ref="searchInput"
+					aria-label="Search Input"
 					v-model="searchQuery"
 					:placeholder="placeholderText"
 				/>
@@ -35,6 +36,8 @@
 			:products="processedList" 
 			:tags="tags" 
 			:categories="categories"
+			:isFetchingData="isFetchingData"
+			:errorFetching="errorFetching"
 		></app-product-list>
     </div>
 </template>
@@ -53,43 +56,32 @@ export default {
     },
     data() {
         return {
-            allProducts: [
-				{
-					categories: [ "All", "Health", "Communication" ],
-					desc: "Free and secure video chats for therapists.",
-					img: "https://dl.airtable.com/.attachments/092f92d1abe5756195ce1cce6798b517/105592a5/jour.png",
-					name: "Jour for Therapists",
-					tags: [ "all", "beta", "free"],
-					url: "https://therapy.jour.com/"
-				},
-				{
-					categories: [ "All", "Health", "Communication" ],
-					desc: "Free and secure video chats for therapists.",
-					img: "https://dl.airtable.com/.attachments/092f92d1abe5756195ce1cce6798b517/105592a5/jour.png",
-					name: "Jour for Therapists",
-					tags: [ "all", "open-source", "opt-in"],
-					url: "https://therapy.jour.com/"
-				}
-			],
+            allProducts: [],
 			tags: [],
 			categories: [],
 			searchQuery: "",
 			searchResults: [],
-			placeholderText: ""
+			placeholderText: "",
+			isFetchingData: false,
+			errorFetching: false
         }
     },
     methods: {
-		async fetchData() {
-			await this.$http("getMain")
+		fetchData() {
+			this.isFetchingData = true;
+			this.$http("getMain")
 			.then((res) => {
-				// console.log(res);
 				return res.data;
 			})
 			.then((data) => {
-				console.log(data);
-				this.allProducts = [...data];
+				this.allProducts = data.slice();
+				this.isFetchingData = false;
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				this.errorFetching = true;
+				this.isFetchingData = false;
+				throw err;
+			});
 		},
 		// returns start & end indices of all occurences of a query from a string
 		stringSearch: function(str, query, caseInsensitive = true) {
@@ -244,9 +236,9 @@ export default {
 			this.searchResults = this.searchWithHighlight();
 		}
 	},
-	beforeMount() {
+	created() {
 		// fetch data
-		// this.fetchData();
+		this.fetchData();
 
 		this.tags = tags;
 		this.categories = categories;
