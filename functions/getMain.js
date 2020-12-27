@@ -4,14 +4,18 @@ const formatReturn = require("./helpers/formatReturn");
 
 exports.handler = async (event, callback) => {
 	try {
+		const altHost = `${process.env.ALT_BASE_URL}`;
+		const mainHost = `${process.env.MAIN_BASE_URL}`;
+		const altReferer = `https://${process.env.ALT_BASE_URL}/`;
+		const mainReferer = `https://${process.env.MAIN_BASE_URL}/`;
+
 		if (
-			event.httpMethod === "GET" //&&
-			// event.headers.host === "encryptedlist.netlify.app" &&
-			// event.headers.host === "localhost:8888" &&
-			// event.headers.referer === "http://localhost:8888/excluded"
-			// event.headers.referer === "https://encryptedlist.netlify.app/"
+			event.httpMethod === "GET" &&
+			(event.headers.host === altHost ||
+				event.headers.host === mainHost) &&
+			(event.headers.referer === altReferer ||
+				event.headers.referer === mainReferer)
 		) {
-			console.log(event.headers.host, event.headers.referer);
 			return await getData("Main");
 		} else {
 			return formatReturn(404, {
