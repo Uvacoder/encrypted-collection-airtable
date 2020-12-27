@@ -8,8 +8,8 @@ import has from "lodash/has";
 Vue.prototype.$has = has;
 Vue.prototype.$http = axios.create({
 	method: "get",
-	baseURL: "http://localhost:8888/api/",
-	// baseURL: "https://encryptedlist.netlify.app/api/",
+	// baseURL: "http://localhost:8888/api/",
+	baseURL: "https://encryptedlist.netlify.app/api/",
 	headers: {
 		"Content-type": "application/json",
 	},
