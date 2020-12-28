@@ -240,7 +240,7 @@ export default {
 	text-align: center;
 }
 
-.product-list > :nth-last-child(2) {
+.product-list > :nth-last-child(4) {
 	border: none !important;
 }
 

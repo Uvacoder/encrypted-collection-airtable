@@ -9,9 +9,6 @@ exports.handler = async (event, callback) => {
 		const altReferer = `https://${process.env.ALT_BASE_URL}/watchlist`;
 		const mainReferer = `https://${process.env.MAIN_BASE_URL}/watchlist`;
 
-		console.log(event.headers.host, event.headers.referer);
-		console.log(process.env.ALT_BASE_URL);
-
 		if (
 			event.httpMethod === "GET" &&
 			(event.headers.host === altHost ||

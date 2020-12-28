@@ -74,7 +74,7 @@ export default {
 
 <style>
 /* Import all the CSS icons needed from https://css.gg/ */
-@import url('https://css.gg/css?=|search|backspace|asterisk|link|external|corner-right-up|chevron-down-o|menu|sun|moon|add|danger|info|unavailable|eye|push-left|push-right|smile-mouth-open|close');
+@import url('https://css.gg/css?=|arrow-up|search|backspace|asterisk|link|external|corner-right-up|chevron-down-o|menu|sun|moon|add|danger|info|unavailable|eye|push-left|push-right|smile-mouth-open|close');
 
 /* Import regular monospace font */
 @font-face {
@@ -175,6 +175,26 @@ input::placeholder {
 	opacity: 1;
 }
 
+input::-webkit-input-placeholder {
+    color: var(--placeholder-text-color) !important;
+	opacity: 1;
+}
+
+input:-moz-placeholder {
+    color: var(--placeholder-text-color) !important;
+	opacity: 1;
+}
+
+input::-moz-placeholder {
+    color: var(--placeholder-text-color) !important;
+	opacity: 1;
+}
+
+input:-ms-input-placeholder {
+    color: var(--placeholder-text-color) !important;
+	opacity: 1 !important;
+}
+
 #app {
 	width: 100%;
 	min-width: 365px;
@@ -183,20 +203,6 @@ input::placeholder {
 	padding: 0 2rem 2rem 2rem;
 	box-sizing: border-box;
 }
-
-/* .tags button {
-	color: var(--text-color);
-	height: 1.5rem;
-	border: none;
-	margin: 0 .5rem 0.5rem 0;
-	border-radius: 5px;
-	background-color: var(--tags-bg-color);
-}
-
-.tags button:hover {
-	color: var(--text-color);
-	background-color: var(--tags-bg-hover-color);
-} */
 
 mark.highlight {
 	color: var(--highlight-text-color);

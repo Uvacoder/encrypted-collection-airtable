@@ -1,5 +1,10 @@
 <template>
     <div id='watchlist'>
+        <app-button class="scroll-to-top">
+            Top
+            <i class="gg-arrow-up"></i>
+        </app-button>
+
         <p>
             There are some services that don't currently have such encryption but plan to itegrate it into their products. 
             These services either have encryption as a current beta feature or as a likely future feature on their roadmap.
@@ -43,7 +48,8 @@
 
 
 <script>
-import Product from "@/components/Product";
+import Button from "@/components/Button.vue";
+import Product from "@/components/Product.vue";
 import ListIcon from "@/components/ListIcon.vue";
 import ErrorIcon from "@/components/ErrorIcon.vue";
 import LoadingIcon from "@/components/LoadingIcon.vue";
@@ -51,6 +57,7 @@ import LoadingIcon from "@/components/LoadingIcon.vue";
 export default {
     name: 'Watchlist',
     components: {
+        appButton: Button,
         appProduct: Product,
         appListIcon: ListIcon,
         appErrorIcon: ErrorIcon,
@@ -60,7 +67,7 @@ export default {
         return {
             watchlistProducts: [],
             isFetchingData: false,
-			errorFetching: false
+			errorFetching: false,
         }
     },
     methods: {
@@ -80,7 +87,15 @@ export default {
 				this.isFetchingData = false;
 				throw err;
 			});
-		},
+        },
+        // scroll to top
+        scroll: function() {
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: "smooth"
+            });
+        },
     },
     created() {
         this.fetchData();
@@ -94,8 +109,7 @@ export default {
     outline: none;
 }
 
-i {
-    float: none;
+.gg-link {
     display: inline-block;
     margin: 0 .25rem 0 .75rem;
     transform: scale(.85) rotate(-45deg);
@@ -103,6 +117,18 @@ i {
 
 #watchlist {
     padding: .5rem;
+}
+
+#watchlist .scroll-to-top {
+    width: 7rem;
+    height: 3rem;
+    padding: 0 1.5rem;
+    border-radius: 1.5rem;
+    position: fixed;
+    z-index: 0;
+    bottom: 1.5rem;
+    left: calc(50% - 3.25rem);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .25);
 }
 
 #watchlist p {
@@ -135,7 +161,7 @@ i {
 	border-bottom: 5px solid var(--gray-border-color);
 }
 
-.product-list > :nth-last-child(2) {
+.product-list > :nth-last-child(4) {
 	border: none !important;
 }
 

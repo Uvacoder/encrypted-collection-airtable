@@ -21,8 +21,7 @@ export default {
     outline: none;
 }
 
-i {
-    float: none;
+.gg-link {
     display: inline-block;
     margin: 0 .25rem 0 .75rem;
     transform: scale(.85) rotate(-45deg);
