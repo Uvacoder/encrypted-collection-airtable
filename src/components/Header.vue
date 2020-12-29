@@ -3,8 +3,8 @@
 		<router-link class="app-info nav-left" ref="navLeft" :to="{ path: '/' }">
 			<div class="app-logo">
 				<picture>
-					<source srcset="../assets/logo.webp" type="image/webp">
-					<img src="../assets/logo.svg" alt="EncryptedList Logo"/>
+					<source srcset="https://res.cloudinary.com/minch/image/upload/w_60/v1609226799/EncryptedList/logo_ymk6dg.webp" type="image/webp">
+					<img src="https://res.cloudinary.com/minch/image/upload/w_60/v1609227018/EncryptedList/logo_ykncom.png" alt="EncryptedList Logo"/>
 				</picture>
 			</div>
 			<div class="app-detail">
