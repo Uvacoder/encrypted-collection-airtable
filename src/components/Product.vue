@@ -2,7 +2,10 @@
 	<div class="product">
 		<div class="product-info">
 			<div class="product-logo">
-				<img :src="product.img" loading="lazy" alt="Product Logo" />
+				<picture>
+					<source :srcset="product.webp_img" type="image/webp">
+					<img :src="product.png_img" loading="lazy" alt="Product Logo"/>
+				</picture>
 			</div>
 			<div class="product-detail">
 				<h3 class="product-name" ref="pName" v-html="product.name"></h3>
