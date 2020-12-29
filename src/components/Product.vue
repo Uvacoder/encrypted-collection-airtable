@@ -99,7 +99,7 @@ i::before {
 
 .product-logo img {
 	width: 2.5rem;
-	height: 2.5rem;
+	height: auto;
 	display: block;
 	position: absolute;
 	top: calc(50% - 1.25rem);

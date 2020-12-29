@@ -20,7 +20,6 @@ module.exports = async (tableName) => {
 						url: record.fields.url,
 						tags: record.fields.tags,
 						categories: record.fields.categories,
-						img: record.fields.icon[0].url,
 						png_img: record.fields.png_icon_url,
 						webp_img: record.fields.webp_icon_url,
 					});
