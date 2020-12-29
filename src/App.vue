@@ -74,7 +74,7 @@ export default {
 
 <style>
 /* Import all the CSS icons needed from https://css.gg/ */
-@import url('https://css.gg/css?=|arrow-up|search|backspace|asterisk|link|external|corner-right-up|chevron-down-o|menu|sun|moon|add|danger|info|unavailable|eye|push-left|push-right|smile-mouth-open|close');
+/* @import url('https://css.gg/css?=|arrow-up|search|backspace|asterisk|link|external|corner-right-up|chevron-down-o|menu|sun|moon|add|danger|info|unavailable|eye|push-left|push-right|smile-mouth-open|close'); */
 
 /* Import regular monospace font */
 @font-face {
