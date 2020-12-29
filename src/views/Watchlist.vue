@@ -11,7 +11,7 @@
             They can be accessed on this page.
             This list is also accessible anywhere else from the "Pages" dropdown in the navigation menu under "Watchlist". 
             <br>
-            If you find any products here that either no longer plan to offer encryption or should be in the main list, please <router-link to="/excluded">report them here <i class="gg-link"></i></router-link>.
+            If you find any products here that either no longer plan to offer encryption or should be in the main list, please <router-link to="/report">report them here <i class="gg-link"></i></router-link>.
         </p>
         <div class="product-list">
 			<app-product 

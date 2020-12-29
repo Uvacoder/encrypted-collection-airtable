@@ -104,7 +104,7 @@ i::before {
 	position: absolute;
 	top: calc(50% - 1.25rem);
 	left: calc(50% - 1.25rem);
-	border-radius: 0.5rem;
+	border-radius: 0.25rem;
 }
 
 .product-detail {
