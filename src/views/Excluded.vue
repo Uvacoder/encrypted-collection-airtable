@@ -42,6 +42,7 @@
 
 
 <script>
+import { isDefined } from '@/scripts/helpers';
 import Product from "@/components/Product";
 import ListIcon from "@/components/ListIcon.vue";
 import ErrorIcon from "@/components/ErrorIcon.vue";
@@ -66,7 +67,7 @@ export default {
         // fetches and populates list from db
         fetchData(limit) {
 			this.isFetchingData = true;
-            let reqURL = (typeof limit !== "undefined") ? `/api/getExcluded?limit=${limit}` : `/api/getExcluded`;
+            let reqURL = isDefined(limit) ? `/api/getExcluded?limit=${limit}` : `/api/getExcluded`;
             
 			this.$http(reqURL)
 			.then((res) => {

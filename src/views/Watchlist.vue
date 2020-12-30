@@ -48,6 +48,7 @@
 
 
 <script>
+import { isDefined } from '@/scripts/helpers';
 import Button from "@/components/Button.vue";
 import Product from "@/components/Product.vue";
 import ListIcon from "@/components/ListIcon.vue";
@@ -74,7 +75,7 @@ export default {
         // fetches and populates list from db
         fetchData(limit) {
             this.isFetchingData = true;
-            let reqURL = (typeof limit !== "undefined") ? `/api/getWatchlist?limit=${limit}` : `/api/getWatchlist`;
+            let reqURL = isDefined(limit) ? `/api/getWatchlist?limit=${limit}` : `/api/getWatchlist`;
             
 			this.$http(reqURL)
 			.then((res) => {

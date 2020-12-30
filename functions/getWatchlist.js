@@ -6,17 +6,18 @@ exports.handler = async (event, callback) => {
 	try {
 		const altHost = `${process.env.ALT_BASE_URL}`;
 		const mainHost = `${process.env.MAIN_BASE_URL}`;
-		// const altReferer = `https://${process.env.ALT_BASE_URL}/watchlist`;
-		// const mainReferer = `https://${process.env.MAIN_BASE_URL}/watchlist`;
-		const altReferer = `http://${process.env.ALT_BASE_URL}/watchlist`;
-		const mainReferer = `http://${process.env.MAIN_BASE_URL}/watchlist`;
+		const altReferer = `https://${process.env.ALT_BASE_URL}/watchlist`;
+		const mainReferer = `https://${process.env.MAIN_BASE_URL}/watchlist`;
+
+		// const altReferer = `http://${process.env.ALT_BASE_URL}/watchlist`;
+		// const mainReferer = `http://${process.env.MAIN_BASE_URL}/watchlist`;
 
 		if (
 			event.httpMethod === "GET" &&
 			(event.headers.host === altHost ||
 				event.headers.host === mainHost) &&
-			(event.headers.referer === altReferer ||
-				event.headers.referer === mainReferer)
+			(event.headers.referer.indexOf(altReferer) >= 0 ||
+				event.headers.referer.indexOf(mainReferer) >= 0)
 		) {
 			if (Object.keys(event.queryStringParameters).length > 0) {
 				const initialLimit = event.queryStringParameters.limit;

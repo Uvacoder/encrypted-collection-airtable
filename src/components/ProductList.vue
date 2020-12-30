@@ -113,6 +113,7 @@ import ListIcon from "./ListIcon.vue";
 import ErrorIcon from "./ErrorIcon.vue";
 import ButtonTag from "./ButtonTag.vue";
 import LoadingIcon from "./LoadingIcon.vue";
+import { isDefined, capitalizeWords } from '@/scripts/helpers';
 
 export default {
 	name: "ProductList",
@@ -138,9 +139,9 @@ export default {
 		// update queries when filters are clicked
 		filterWith: function(type, q) { 
 			if (type === 0 && this.$route.query.t !== q) { // if tag
-				this.$router.push({ query: Object.assign({}, this.$route.query, { t : q}) });
+				this.$router.push({ query: Object.assign({}, this.$route.query, { t : q }) });
 			} else if (type === 1 && this.$route.query.c !== q) { // if category
-				this.$router.push({ query: Object.assign({}, this.$route.query, { c : q}) });
+				this.$router.push({ query: Object.assign({}, this.$route.query, { c : q.toLowerCase() }) });
 			}
 		},
 		// remove/reset filter by type: tag or category
@@ -189,17 +190,29 @@ export default {
 		firstMCategories: function() {
 			return this.categories.slice(0, this.m);
 		},
-		currTagValue: function() {	
-			return this.$route.query.t;
+		currTagValue: function() {
+			let queryTag = this.$route.query.t;
+
+			if (isDefined(queryTag)) {
+				return queryTag.toLowerCase();
+			} else {
+				return queryTag; // undefined
+			}
 		},
 		currCategoryValue: function() {
-			return this.$route.query.c;
-		}, 
+			let queryCat = this.$route.query.c;
+
+			if (isDefined(queryCat)) {
+				return capitalizeWords(queryCat.toLowerCase());
+			} else {
+				return queryCat; // undefined
+			}
+		},
 		currTagExists: function() {
-			return (typeof this.currTagValue !== "undefined");
+			return isDefined(this.currTagValue);
 		}, 
 		currCategoryExists: function() {	
-			return (typeof this.currCategoryValue !== "undefined");
+			return isDefined(this.currCategoryValue);
 		}
 	},
 	mounted() {

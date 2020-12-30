@@ -48,6 +48,7 @@
 <script>
 import Button from "@/components/Button.vue";
 import { tags, categories } from "@/scripts/filters";
+import { isDefined, stringSearch, highlightQuery } from '@/scripts/helpers';
 import ProductList from "@/components/ProductList.vue";
 
 export default {
@@ -74,7 +75,7 @@ export default {
 		// fetch and populate data from database
 		fetchSome(limit) {
 			this.isFetchingData = true;
-            let reqURL = this.isDefined(limit) ? `/api/getMain?limit=${limit}` : `/api/getMain`;
+            let reqURL = isDefined(limit) ? `/api/getMain?limit=${limit}` : `/api/getMain`;
             
 			this.$http(reqURL)
 			.then((res) => {
@@ -98,48 +99,6 @@ export default {
 				this.allFetched = true;
 			}		
 		},
-		// check if item is undefined
-		isDefined: function(item) {
-			return (typeof item !== "undefined");
-		},
-		// returns start & end indices of all occurences of a query from a string
-		stringSearch: function(str, query, caseInsensitive = true) {
-			caseInsensitive = this.isDefined(caseInsensitive) ? caseInsensitive : true;
-
-			if (str.length === 0 || query.length === 0) {
-				return [];
-			}
-			
-			let indexes = [], i = 0, findIndex = -1,
-				localStr = caseInsensitive ? str.toLowerCase() : str,
-				localQuery = caseInsensitive ? query.toLowerCase() : query;
-
-			while (localStr.indexOf(localQuery, i) !== -1) {
-				findIndex = localStr.indexOf(localQuery, i);
-				indexes.push([findIndex, findIndex + query.length]);
-				i = findIndex + 1;
-			}
-
-			return indexes;
-		},
-		// highlights all occurences of a query in a string
-		// wraps each occurence with <mark class='highlight'></mark>
-		highlightQuery: function(str, query) {
-			let highlight = ``,
-				res = this.stringSearch(str, query);
-
-			let i, j = 0;
-			for (i = 0; i < res.length; i++) {
-				highlight += str.substring(j,res[i][0]);
-				highlight += `<mark class='highlight'>`;
-				highlight += str.substring(res[i][0], res[i][1]);
-				highlight += `</mark>`;
-				j = res[i][1];
-			}
-			highlight += str.substring(j);
-			
-			return highlight;  
-		},
 		// searches through given list and adds highlighting markup (html) to queries
 		searchWithHighlight: function(list = this.filterResults) {
 			// fetch all products before searching
@@ -147,29 +106,29 @@ export default {
 				this.fetchAll();
 			}
 
-			list = this.isDefined(list) ? list : this.filterResults;
+			list = isDefined(list) ? list : this.filterResults;
 			
 			return list.map(product => {
 				let newProduct = {},
 					name = product.name,
 					desc = product.desc,
 					query = this.searchQuery.trim(),
-					nameMatch = this.stringSearch(name, query).length > 0, 
-					descMatch = this.stringSearch(desc, query).length > 0;
+					nameMatch = stringSearch(name, query).length > 0, 
+					descMatch = stringSearch(desc, query).length > 0;
 				
 				if (nameMatch || descMatch) {
 					if (nameMatch && !descMatch) {
 						newProduct = Object.assign({}, product, { 
-							name: this.highlightQuery(name, query)
+							name: highlightQuery(name, query)
 						});
 					} else if (!nameMatch && descMatch) {
 						newProduct = Object.assign({}, product, { 
-							desc: this.highlightQuery(desc, query)
+							desc: highlightQuery(desc, query)
 						});
 					} else {
 						newProduct = Object.assign({}, product, { 
-							name: this.highlightQuery(name, query),
-							desc: this.highlightQuery(desc, query)
+							name: highlightQuery(name, query),
+							desc: highlightQuery(desc, query)
 						});
 					}
 				} else {
@@ -184,7 +143,7 @@ export default {
 			// fetch all products before filtering
 			this.fetchAll();
 
-			list = this.isDefined(list) ? list : this.allProducts;
+			list = isDefined(list) ? list : this.allProducts;
 
             return (tag.length > 0) ? 
 				list
@@ -196,7 +155,7 @@ export default {
 			// fetch all products before filtering
 			this.fetchAll();
 
-			list = this.isDefined(list) ? list : this.allProducts;
+			list = isDefined(list) ? list : this.allProducts;
 
             return (cat.length > 0) ? 
 				list
@@ -222,18 +181,18 @@ export default {
 				tag = this.$route.query.t;	
 
 			// if either filters is undefined
-			if (!this.isDefined(tag) || !this.isDefined(cat)) 
+			if (!isDefined(tag) || !isDefined(cat)) 
 			{
-				if (!this.isDefined(tag) && this.isDefined(cat)) {
-					return this.filterWithCategory(cat);
-                } else if (!this.isDefined(cat) && this.isDefined(tag)) {
+				if (!isDefined(tag) && isDefined(cat)) {
+					return this.filterWithCategory(cat.toLowerCase());
+                } else if (!isDefined(cat) && isDefined(tag)) {
 					return this.filterWithTag(tag.toLowerCase());
                 } else {
 					return [...this.allProducts];
 				}
 			} else // if both filters are defined
 			{
-				return this.filterWithCategory(cat, this.filterWithTag(tag.toLowerCase()));
+				return this.filterWithCategory(cat.toLowerCase(), this.filterWithTag(tag.toLowerCase()));
             }
 		},
 		// list used to render results either filtered or searched
@@ -268,7 +227,7 @@ export default {
 	},
 	created() {
 		// fetch and populate data
-		if (this.isDefined(this.$route.query.c) || this.isDefined(this.$route.query.t)) {
+		if (isDefined(this.$route.query.c) || isDefined(this.$route.query.t)) {
 			this.fetchAll(); // fetch all
 		} else {
 			this.fetchSome(this.limit); // fetch first few
