@@ -6,8 +6,10 @@ exports.handler = async (event, callback) => {
 	try {
 		const altHost = `${process.env.ALT_BASE_URL}`;
 		const mainHost = `${process.env.MAIN_BASE_URL}`;
-		const altReferer = `https://${process.env.ALT_BASE_URL}/watchlist`;
-		const mainReferer = `https://${process.env.MAIN_BASE_URL}/watchlist`;
+		// const altReferer = `https://${process.env.ALT_BASE_URL}/watchlist`;
+		// const mainReferer = `https://${process.env.MAIN_BASE_URL}/watchlist`;
+		const altReferer = `http://${process.env.ALT_BASE_URL}/watchlist`;
+		const mainReferer = `http://${process.env.MAIN_BASE_URL}/watchlist`;
 
 		if (
 			event.httpMethod === "GET" &&
@@ -16,7 +18,12 @@ exports.handler = async (event, callback) => {
 			(event.headers.referer === altReferer ||
 				event.headers.referer === mainReferer)
 		) {
-			return await getData("Watchlist");
+			if (Object.keys(event.queryStringParameters).length > 0) {
+				const initialLimit = event.queryStringParameters.limit;
+				return await getData("Watchlist", initialLimit);
+			} else {
+				return await getData("Watchlist");
+			}
 		} else {
 			return formatReturn(404, {
 				error: "Error Making Request (Unauthorized)",

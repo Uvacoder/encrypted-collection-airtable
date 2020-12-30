@@ -64,9 +64,11 @@ export default {
     },
     methods: {
         // fetches and populates list from db
-        fetchData() {
+        fetchData(limit) {
 			this.isFetchingData = true;
-			this.$http("/api/getExcluded")
+            let reqURL = (typeof limit !== "undefined") ? `/api/getExcluded?limit=${limit}` : `/api/getExcluded`;
+            
+			this.$http(reqURL)
 			.then((res) => {
 				return res.data;
 			})

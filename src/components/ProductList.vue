@@ -28,6 +28,16 @@
 				<app-list-icon></app-list-icon>
 				<h3>No results found.</h3>
 			</div>
+
+			<app-button 
+				class="show-more" 
+				:label="'Show All Products'"
+				@clicked="$emit('fetch-all')"
+				v-show="visible && !isFetchingData && !errorFetching"
+			>	
+				Show all
+				<i class="gg-chevron-down-o"></i>
+			</app-button>
 		</div>
 		<div class="filter-list">
 			<div class="product-filters">
@@ -97,6 +107,7 @@
 
 
 <script>
+import Button from "./Button.vue";
 import Product from "./Product.vue";
 import ListIcon from "./ListIcon.vue";
 import ErrorIcon from "./ErrorIcon.vue";
@@ -105,8 +116,9 @@ import LoadingIcon from "./LoadingIcon.vue";
 
 export default {
 	name: "ProductList",
-	props: ["products", "tags", "categories", "isFetchingData", "errorFetching"],
+	props: ["tags", "visible", "products", "categories", "isFetchingData", "errorFetching"],
 	components: {
+		appButton: Button,
 		appProduct: Product,
 		appListIcon: ListIcon,		
 		appErrorIcon: ErrorIcon,
@@ -115,11 +127,11 @@ export default {
 	},
 	data() {
 		return {
+			n: 5,
+			m: 5,
 			isSmallScreen: (window.innerWidth <= 580),
 			tagsHidden: this.isSmallScreen,
-			catsHidden: this.isSmallScreen,
-			n: 5,
-			m: 5
+			catsHidden: this.isSmallScreen
 		};
 	},
 	methods: {
@@ -240,8 +252,20 @@ export default {
 	text-align: center;
 }
 
-.product-list > :nth-last-child(4) {
+.product-list > :nth-last-child(5) {
 	border: none !important;
+}
+
+.product-list .show-more {
+	width: 100%;
+	border: none;
+	margin: .75rem 0;
+	justify-content: center;
+	background-color: var(--tags-bg-color);
+}
+
+.product-list .show-more:hover {
+	background-color: var(--tags-bg-hover-color);
 }
 
 .filter-list {

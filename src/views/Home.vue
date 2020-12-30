@@ -33,11 +33,13 @@
 		</div>
 		
 		<app-product-list 
-			:products="processedList" 
-			:tags="tags" 
+			:tags="tags"
+			:visible="allProducts.length === limit"
 			:categories="categories"
+			:products="processedList" 
 			:isFetchingData="isFetchingData"
 			:errorFetching="errorFetching"
+			v-on:fetch-all="fetchAll"
 		></app-product-list>
     </div>
 </template>
@@ -56,24 +58,31 @@ export default {
     },
     data() {
         return {
-            allProducts: [],
 			tags: [],
+			limit: 10,
 			categories: [],
+            allProducts: [],
 			searchQuery: "",
 			searchResults: [],
 			placeholderText: "",
 			isFetchingData: false,
-			errorFetching: false
+			errorFetching: false,
+			allFetched: false
         }
     },
     methods: {
-		fetchData() {
+		// fetch and populate data from database
+		fetchSome(limit) {
 			this.isFetchingData = true;
-			this.$http("/api/getMain")
+            let reqURL = this.isDefined(limit) ? `/api/getMain?limit=${limit}` : `/api/getMain`;
+            
+			this.$http(reqURL)
 			.then((res) => {
 				return res.data;
 			})
 			.then((data) => {
+				this.allProducts = [];
+				this.allProducts.length = 0;
 				this.allProducts = data.slice();
 				this.isFetchingData = false;
 			})
@@ -83,9 +92,19 @@ export default {
 				throw err;
 			});
 		},
+		fetchAll() {
+			if (this.allProducts.length <= this.limit && !this.allFetched) {
+				this.fetchSome();
+				this.allFetched = true;
+			}		
+		},
+		// check if item is undefined
+		isDefined: function(item) {
+			return (typeof item !== "undefined");
+		},
 		// returns start & end indices of all occurences of a query from a string
 		stringSearch: function(str, query, caseInsensitive = true) {
-			caseInsensitive = typeof caseInsensitive !== 'undefined' ? caseInsensitive : true;
+			caseInsensitive = this.isDefined(caseInsensitive) ? caseInsensitive : true;
 
 			if (str.length === 0 || query.length === 0) {
 				return [];
@@ -123,7 +142,12 @@ export default {
 		},
 		// searches through given list and adds highlighting markup (html) to queries
 		searchWithHighlight: function(list = this.filterResults) {
-			list = typeof list !== 'undefined' ? list : this.filterResults;
+			// fetch all products before searching
+			if (this.searchQuery.trim().length > 0) {
+				this.fetchAll();
+			}
+
+			list = this.isDefined(list) ? list : this.filterResults;
 			
 			return list.map(product => {
 				let newProduct = {},
@@ -156,8 +180,11 @@ export default {
 			});
 		},
 		// filters given list with a certain tag value
-        filterWithTag: function(tag, list = this.allProducts) {
-			list = typeof list !== 'undefined' ? list : this.allProducts;
+        filterWithTag: function(tag, list) {
+			// fetch all products before filtering
+			this.fetchAll();
+
+			list = this.isDefined(list) ? list : this.allProducts;
 
             return (tag.length > 0) ? 
 				list
@@ -165,8 +192,11 @@ export default {
 				: [...list];
 		},
 		// filters given list with a certain category value
-        filterWithCategory: function(cat, list = this.allProducts) {
-			list = typeof list !== 'undefined' ? list : this.allProducts;
+        filterWithCategory: function(cat, list) {
+			// fetch all products before filtering
+			this.fetchAll();
+
+			list = this.isDefined(list) ? list : this.allProducts;
 
             return (cat.length > 0) ? 
 				list
@@ -189,15 +219,15 @@ export default {
 		// filtered results based on query parameters
         filterResults: function() {
 			let cat = this.$route.query.c, 
-                tag = this.$route.query.t;
+				tag = this.$route.query.t;	
 
-			// if either filters are undefined
-			if (tag === undefined || cat === undefined) 
+			// if either filters is undefined
+			if (!this.isDefined(tag) || !this.isDefined(cat)) 
 			{
-                if (tag === undefined && cat !== undefined) {
-                    return this.filterWithCategory(cat);
-                } else if (cat === undefined && tag !== undefined) {
-                    return this.filterWithTag(tag.toLowerCase());
+				if (!this.isDefined(tag) && this.isDefined(cat)) {
+					return this.filterWithCategory(cat);
+                } else if (!this.isDefined(cat) && this.isDefined(tag)) {
+					return this.filterWithTag(tag.toLowerCase());
                 } else {
 					return [...this.allProducts];
 				}
@@ -237,16 +267,23 @@ export default {
 		}
 	},
 	created() {
-		// fetch data
-		this.fetchData();
+		// fetch and populate data
+		if (this.isDefined(this.$route.query.c) || this.isDefined(this.$route.query.t)) {
+			this.fetchAll(); // fetch all
+		} else {
+			this.fetchSome(this.limit); // fetch first few
+		}
 
 		this.tags = tags;
 		this.categories = categories;
 	},
 	mounted: function() {
-		this.placeholderText = (window.innerWidth > 480) ? 'Press ; key to enter search...' : 'Search products...';
-		// attach keyboard shortcuts for input
 		let vm = this;
+		
+		// set input placeholder based on device width
+		this.placeholderText = (window.innerWidth > 480) ? 'Press ; key to enter search...' : 'Search products...';
+
+		// attach keyboard shortcuts for input
 		window.addEventListener('keyup', (e) => {
 			if (vm.$refs.searchInput) {
 				if (e.keyCode === 59) // when semicolon ( ; )

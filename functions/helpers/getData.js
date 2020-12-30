@@ -2,15 +2,17 @@
 const { base } = require("./airtable");
 const formatReturn = require("./formatReturn");
 
-module.exports = async (tableName) => {
+module.exports = async (tableName, numRecs) => {
 	try {
 		const table = base(tableName);
+		const initialLimit = typeof numRecs !== "undefined" ? numRecs : 50;
 
 		let products = [];
 
 		const recs = await table
 			.select({
 				view: "all",
+				maxRecords: parseInt(initialLimit),
 			})
 			.eachPage((records, fetchNextPage) => {
 				records.forEach((record) => {

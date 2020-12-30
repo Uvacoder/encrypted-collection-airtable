@@ -72,9 +72,11 @@ export default {
     },
     methods: {
         // fetches and populates list from db
-        fetchData() {
-			this.isFetchingData = true;
-			this.$http("/api/getWatchlist")
+        fetchData(limit) {
+            this.isFetchingData = true;
+            let reqURL = (typeof limit !== "undefined") ? `/api/getWatchlist?limit=${limit}` : `/api/getWatchlist`;
+            
+			this.$http(reqURL)
 			.then((res) => {
 				return res.data;
 			})
