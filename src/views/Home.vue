@@ -368,16 +368,15 @@ export default {
 }
 
 #home .scroll-to-top {
-    width: 7rem;
-    height: 3rem;
+    width: 5rem;
 	margin: 0 auto;
 	position: fixed;
     z-index: 0;
     bottom: 1.5rem;
-    left: calc(50% - 3.5rem);
-    padding: 0 1.5rem;
-    border-radius: 1.5rem;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, .25);
+    left: calc(50% - 2.5rem);
+	background-color: var(--filter-reset-bg-color);
+	border-color:  var(--filter-reset-border-color);	
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, .15);
 }
 
 @media only screen and (max-width: 840px) {
