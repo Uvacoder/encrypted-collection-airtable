@@ -1,12 +1,23 @@
 <template>
 	<div id="app">
-		<app-header :darkTheme="darkThemeEnabled" v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
-		<router-view></router-view>
+		<div v-show="isIE()" class="ie-overlay" >
+			<p>
+				It seems like you are using Internet Explorer (IE). <br><br>
+				This website isn't supported on IE. <br><br>
+				If this is inaccurate, you probably have a setting or an extension that alters the browser behavior. <br><br>
+				Otherwise, please upgrade to a different browser.
+			</p>
+		</div>
+
+		<app-header v-show="!isIE()" :darkTheme="darkThemeEnabled" v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
+
+		<router-view v-show="!isIE()"></router-view>
 	</div>
 </template>
 
 <script>
 import localForage from "localforage";
+import { isIE } from '@/scripts/helpers';
 import Header from "@/components/Header.vue";
 
 export default {
@@ -20,6 +31,8 @@ export default {
 		}
 	},
 	methods: {
+		// detect if browser is IE
+		isIE,
 		// Initialize local storage for theme
 		initDB: function() {
 			let vm = this;
@@ -209,9 +222,30 @@ mark.highlight {
 	background-color: var(--primary-yellow-color);
 }
 
+.ie-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: #fff;
+	color: #000;
+	padding: 2rem;
+}
+
+.ie-overlay p {
+	position: relative;
+	top: 25%;
+	margin: 0 auto;
+}
+
 @media only screen and (max-width: 580px) {
 	#app {
 		padding: 0 .75rem 2rem .75rem;
+	}
+
+	.ie-overlay p {
+		width: 100%;
 	}
 }
 

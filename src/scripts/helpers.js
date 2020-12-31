@@ -12,6 +12,12 @@ const scroll = () => {
 	});
 };
 
+// identify whether the current browser is Internet Explorer
+const isIE = () => {
+	const ua = navigator.userAgent;
+	return ua.indexOf("MSIE") > -1 || ua.indexOf("Trident") > -1;
+};
+
 // Capitalizes the first letter of every word in a string
 const capitalizeWords = (str) => {
 	return str.replace(/\b[a-z]/g, (char) => char.toUpperCase());
@@ -60,4 +66,11 @@ const highlightQuery = (str, query) => {
 	return highlight;
 };
 
-export { scroll, isDefined, capitalizeWords, stringSearch, highlightQuery };
+export {
+	isIE,
+	scroll,
+	isDefined,
+	capitalizeWords,
+	stringSearch,
+	highlightQuery,
+};
