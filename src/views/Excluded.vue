@@ -6,8 +6,9 @@
             This list is also accessible anywhere else from the "Pages" dropdown in the navigation menu under "Excluded".
             <br>
             If you find any products here that should be in the main list, please <router-link to="/report">report them here <i class="gg-link"></i></router-link>.
-        </p> 
-        <div class="product-list">
+        </p>
+
+        <div class="product-list" ref="list">
 			<app-product 
 				v-for="(product, index) in excludedProducts" 
 				:key="index" 
@@ -36,14 +37,25 @@
 				<app-list-icon></app-list-icon>
 				<h4>This list is currently empty.</h4>
 			</div>
-		</div>      
+		</div> 
+
+        <app-button
+			@clicked="scroll"
+            v-show="scrollOffset"
+            class="scroll-to-top"
+			:label="'Scroll to the top'"
+        >
+            Top
+            <i class="gg-arrow-up"></i>
+        </app-button>     
     </div>
 </template>
 
 
 <script>
-import { isDefined } from '@/scripts/helpers';
-import Product from "@/components/Product";
+import { scroll, isDefined } from '@/scripts/helpers';
+import Button from "@/components/Button.vue";
+import Product from "@/components/Product.vue";
 import ListIcon from "@/components/ListIcon.vue";
 import ErrorIcon from "@/components/ErrorIcon.vue";
 import LoadingIcon from "@/components/LoadingIcon.vue";
@@ -51,6 +63,7 @@ import LoadingIcon from "@/components/LoadingIcon.vue";
 export default {
     name: 'Excluded',
     components: {
+        appButton: Button,
         appProduct: Product,
         appListIcon: ListIcon,
         appErrorIcon: ErrorIcon,
@@ -58,12 +71,15 @@ export default {
     },
     data() {
         return {
+            scrollOffset: false,
             excludedProducts: [],
+			errorFetching: false,
             isFetchingData: false,
-			errorFetching: false
         }
     },
     methods: {
+        // scroll to top of page
+		scroll,
         // fetches and populates list from db
         fetchData(limit) {
 			this.isFetchingData = true;
@@ -82,11 +98,19 @@ export default {
 				this.isFetchingData = false;
 				throw err;
 			});
-		},
+        },
+        // detect list reaching top of viewport
+		setScrollOffset: function() {
+            this.scrollOffset = (this.$refs.list.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+        }
     },
     created() {
         this.fetchData();
-    }
+    },
+    mounted() {
+		this.setScrollOffset();
+        window.addEventListener("scroll", () => { this.setScrollOffset() });
+    },
 }
 </script>
 
@@ -148,6 +172,19 @@ export default {
 .product-list .no-products {
     padding: 1rem;
     text-align: center;
+}
+
+#excluded .scroll-to-top {
+    width: 7rem;
+    height: 3rem;
+	margin: 0 auto;
+	position: fixed;
+    z-index: 0;
+    bottom: 1.5rem;
+    left: calc(50% - 3.5rem);
+    padding: 0 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .25);
 }
 
 @media only screen and (max-width: 768px) {

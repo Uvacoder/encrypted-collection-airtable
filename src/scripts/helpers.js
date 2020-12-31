@@ -3,6 +3,15 @@ const isDefined = (item) => {
 	return typeof item !== "undefined";
 };
 
+// scroll to top
+const scroll = () => {
+	window.scroll({
+		top: 0,
+		left: 0,
+		behavior: "smooth",
+	});
+};
+
 // Capitalizes the first letter of every word in a string
 const capitalizeWords = (str) => {
 	return str.replace(/\b[a-z]/g, (char) => char.toUpperCase());
@@ -51,4 +60,4 @@ const highlightQuery = (str, query) => {
 	return highlight;
 };
 
-export { isDefined, capitalizeWords, stringSearch, highlightQuery };
+export { scroll, isDefined, capitalizeWords, stringSearch, highlightQuery };

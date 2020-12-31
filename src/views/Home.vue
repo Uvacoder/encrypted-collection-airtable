@@ -22,17 +22,18 @@
 			</div>
 			
 			<app-button
-				class="clear-filters" 
 				:iconButton="true"
+				class="clear-filters" 
 				@clicked="clearFilters"
-				:label="'Reset Filters & Search Everything'"
 				:disabled="isThatAll"
+				:label="'Reset Filters & Search Everything'"
 			>
 				<i class="gg-asterisk"></i>
 			</app-button>
 		</div>
 		
 		<app-product-list 
+			ref="list"
 			:tags="tags"
 			:visible="allProducts.length === limit"
 			:categories="categories"
@@ -41,6 +42,16 @@
 			:errorFetching="errorFetching"
 			v-on:fetch-all="fetchAll"
 		></app-product-list>
+
+		<app-button
+			@clicked="scroll"
+			v-show="scrollOffset" 
+			class="scroll-to-top"
+			:label="'Scroll to the top'"
+		>
+			Top
+			<i class="gg-arrow-up"></i>
+		</app-button>
     </div>
 </template>
 
@@ -48,7 +59,7 @@
 <script>
 import Button from "@/components/Button.vue";
 import { tags, categories } from "@/scripts/filters";
-import { isDefined, stringSearch, highlightQuery } from '@/scripts/helpers';
+import { scroll, isDefined, stringSearch, highlightQuery } from '@/scripts/helpers';
 import ProductList from "@/components/ProductList.vue";
 
 export default {
@@ -68,10 +79,13 @@ export default {
 			placeholderText: "",
 			isFetchingData: false,
 			errorFetching: false,
-			allFetched: false
+			allFetched: false,
+			scrollOffset: false
         }
     },
     methods: {
+		// scroll to top of page
+		scroll,
 		// fetch and populate data from database
 		fetchSome(limit) {
 			this.isFetchingData = true;
@@ -172,7 +186,11 @@ export default {
 		// focuses search input
 		focusInput: function() {
 			this.$refs.searchInput.focus();
-		}
+		},
+		// detect list reaching top of viewport
+		setScrollOffset: function() {
+            this.scrollOffset = (this.$refs.list.$el.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+        }
     },
     computed: {
 		// filtered results based on query parameters
@@ -238,6 +256,9 @@ export default {
 	},
 	mounted: function() {
 		let vm = this;
+
+		this.setScrollOffset();
+        window.addEventListener("scroll", () => { this.setScrollOffset() });
 		
 		// set input placeholder based on device width
 		this.placeholderText = (window.innerWidth > 480) ? 'Press ; key to enter search...' : 'Search products...';
@@ -344,6 +365,19 @@ export default {
 .search .clear-filters:disabled i,
 .search .clear-filters[disabled] i {
 	color: var(--disabled-text-color);
+}
+
+#home .scroll-to-top {
+    width: 7rem;
+    height: 3rem;
+	margin: 0 auto;
+	position: fixed;
+    z-index: 0;
+    bottom: 1.5rem;
+    left: calc(50% - 3.5rem);
+    padding: 0 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .25);
 }
 
 @media only screen and (max-width: 840px) {

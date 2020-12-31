@@ -1,10 +1,5 @@
 <template>
     <div id='watchlist'>
-        <app-button class="scroll-to-top">
-            Top
-            <i class="gg-arrow-up"></i>
-        </app-button>
-
         <p>
             There are some services that don't currently have such encryption but plan to itegrate it into their products. 
             These services either have encryption as a current beta feature or as a likely future feature on their roadmap.
@@ -13,7 +8,8 @@
             <br>
             If you find any products here that either no longer plan to offer encryption or should be in the main list, please <router-link to="/report">report them here <i class="gg-link"></i></router-link>.
         </p>
-        <div class="product-list">
+
+        <div class="product-list" ref="list">
 			<app-product 
 				v-for="(product, index) in watchlistProducts" 
 				:key="index" 
@@ -42,13 +38,23 @@
 				<app-list-icon></app-list-icon>
 				<h4>This list is currently empty.</h4>
 			</div>
-		</div>      
+		</div> 
+
+        <app-button
+			@clicked="scroll"
+            v-show="scrollOffset"
+            class="scroll-to-top"
+			:label="'Scroll to the top'"
+        >
+            Top
+            <i class="gg-arrow-up"></i>
+        </app-button>    
     </div>
 </template>
 
 
 <script>
-import { isDefined } from '@/scripts/helpers';
+import { scroll, isDefined } from '@/scripts/helpers';
 import Button from "@/components/Button.vue";
 import Product from "@/components/Product.vue";
 import ListIcon from "@/components/ListIcon.vue";
@@ -66,12 +72,15 @@ export default {
     },
     data() {
         return {
-            watchlistProducts: [],
+            scrollOffset: false,
+            errorFetching: false,
             isFetchingData: false,
-			errorFetching: false,
+            watchlistProducts: [],
         }
     },
     methods: {
+        // scroll to top of page
+		scroll,
         // fetches and populates list from db
         fetchData(limit) {
             this.isFetchingData = true;
@@ -91,18 +100,18 @@ export default {
 				throw err;
 			});
         },
-        // scroll to top
-        scroll: function() {
-            window.scroll({
-                top: 0,
-                left: 0,
-                behavior: "smooth"
-            });
-        },
+        // detect list reaching top of viewport
+		setScrollOffset: function() {
+            this.scrollOffset = (this.$refs.list.$el.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+        }
     },
     created() {
         this.fetchData();
-    }
+    },
+    mounted() {
+		this.setScrollOffset();
+        window.addEventListener("scroll", () => { this.setScrollOffset() });
+    },
 }
 </script>
 
@@ -125,12 +134,13 @@ export default {
 #watchlist .scroll-to-top {
     width: 7rem;
     height: 3rem;
-    padding: 0 1.5rem;
-    border-radius: 1.5rem;
-    position: fixed;
+	margin: 0 auto;
+	position: fixed;
     z-index: 0;
     bottom: 1.5rem;
-    left: calc(50% - 3.25rem);
+    left: calc(50% - 3.5rem);
+    padding: 0 1.5rem;
+    border-radius: 1.5rem;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, .25);
 }
 

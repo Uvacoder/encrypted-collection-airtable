@@ -349,7 +349,7 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .menu-list i {
-	color: var(--text-color);
+	color: var(--text-color) !important;
 }
 
 @media only screen and (max-width: 840px) {
