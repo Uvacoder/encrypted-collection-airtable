@@ -3,7 +3,6 @@
         <p>
             Due to inactive development, discontinuation or lack of activity in general, some services are excluded from the main list.
             You can browse this list of excluded products on this page, but <mark class="highlight">do your research</mark> before trusting any.
-            This list is also accessible anywhere else from the "Pages" dropdown in the navigation menu under "Excluded".
             <br>
             If you find any products here that should be in the main list, please <router-link to="/report">report them here <i class="gg-link"></i></router-link>.
         </p>
