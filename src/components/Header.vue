@@ -205,7 +205,7 @@ export default {
 	text-decoration: none;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 }
 
 .app-logo {
@@ -334,6 +334,7 @@ html[data-theme='dark'] .app-logo img {
     display: flex;
 	align-items: center;
 	justify-content: space-between;
+	color: var(--text-color);
 }
 
 .menu-list .header .menu-list-buttons > * {

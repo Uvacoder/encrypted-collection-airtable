@@ -4,7 +4,32 @@
             If you discovered any products that aren't in the list, you can <mark class="highlight">submit</mark> one through this page.
             Use this page for new submissions and <router-link to="/report">the report page <i class="gg-link"></i></router-link> to report already existing products.
             I'll review the submission and add the product ASAP.
-        </p>     
+        </p>
+        <form netlify>
+            <label for="name">Name:</label>    
+            <input type="text" name="name">
+			
+			<label for="desc">Description:</label>
+			<textarea name="desc" cols="30" rows="10"></textarea>
+			
+			<label for="url">URL:</label>    
+            <input type="url" name="url">
+			
+			<label for="name">Tags:</label>    
+			<select name="tags">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+
+			<label for="name">Categories:</label>    
+			<select name="categories">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+
+        </form>   
     </div>
 </template>
 
