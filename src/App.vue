@@ -211,7 +211,7 @@ input:-ms-input-placeholder {
 #app {
 	width: 100%;
 	min-width: 365px;
-	max-width: 1024px;
+	max-width: 1440px;
 	margin: 0 auto;
 	padding: 0 2rem 2rem 2rem;
 	box-sizing: border-box;
