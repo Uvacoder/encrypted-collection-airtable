@@ -350,8 +350,13 @@ html[data-theme='dark'] .app-logo img {
 }
 
 
-#header .menu-list i {
-	color: var(--text-color);
+/* I do not know why but has to be this way */
+#header .menu-list :nth-child(3) i {
+	color: #1c2024;
+}
+
+html[data-theme='dark'] #header .menu-list :nth-child(3) i {
+	color: #f1f3f5;
 }
 
 @media only screen and (max-width: 840px) {
