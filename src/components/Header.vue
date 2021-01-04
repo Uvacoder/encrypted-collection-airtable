@@ -349,8 +349,9 @@ html[data-theme='dark'] .app-logo img {
 	margin: 0;
 }
 
-.menu-list i {
-	color: var(--text-color) !important;
+
+#header .menu-list i {
+	color: var(--text-color);
 }
 
 @media only screen and (max-width: 840px) {
