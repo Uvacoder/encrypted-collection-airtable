@@ -8,7 +8,10 @@
 				</picture>
 			</div>
 			<div class="app-detail">
-				<h3 class="app-name">{{ headerTitle }}</h3>
+				<h3 class="app-name">
+					{{ headerTitle }}
+					<span title="Work In Progress">(WIP)</span>
+				</h3>
 				<p class="app-desc">
 					List of services that offer zero-knowledge or end-to-end encryption 🔐.
 				</p>
@@ -249,6 +252,10 @@ html[data-theme='dark'] .app-logo img {
 	color: var(--text-color);
 }
 
+.app-name > span{
+	color: var(--placeholder-text-color);
+}
+
 .app-desc {
 	color: var(--app-desc-text-color);
 	line-height: 1.5;
@@ -347,16 +354,6 @@ html[data-theme='dark'] .app-logo img {
 
 .menu-list .header .menu-list-buttons > :last-child  {
 	margin: 0;
-}
-
-
-/* I do not know why but has to be this way */
-#header .menu-list :nth-child(3) i {
-	color: #1c2024;
-}
-
-html[data-theme='dark'] #header .menu-list :nth-child(3) i {
-	color: #f1f3f5;
 }
 
 @media only screen and (max-width: 840px) {

@@ -20,16 +20,6 @@
 					<i class="gg-backspace"></i>
 				</div>
 			</div>
-			
-			<app-button
-				:iconButton="true"
-				class="clear-filters" 
-				@clicked="clearFilters"
-				:disabled="isThatAll"
-				:label="'Reset Filters & Search Everything'"
-			>
-				<i class="gg-asterisk"></i>
-			</app-button>
 		</div>
 		
 		<app-product-list 
@@ -40,6 +30,7 @@
 			:products="processedList" 
 			:isFetchingData="isFetchingData"
 			:errorFetching="errorFetching"
+			:allResultsShown="isThatAll"
 			v-on:fetch-all="fetchAll"
 		></app-product-list>
 
@@ -176,13 +167,6 @@ export default {
 				.filter(product => product.categories.indexOf(cat) !== -1)
 				: [...list];
 		},
-		// clears all filters to show all search results
-		clearFilters: function() {
-			if (this.$has(this.$route.query, 't') || this.$has(this.$route.query, 'c')) {
-				let query = {};
-				this.$router.replace({ query });
-			}
-		},
 		// focuses search input
 		focusInput: function() {
 			this.$refs.searchInput.focus();
@@ -298,7 +282,7 @@ export default {
 }
 
 .search-bar {
-	width: calc(100% - 3.5rem);
+	width: 100%;
 	height: 3rem;
     border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);
@@ -345,26 +329,6 @@ export default {
 	border-radius: 0.5rem;
 	background-color: var(--background-color);
 	color: var(--text-color);
-}
-
-.search .clear-filters {
-	width: 3rem;
-	height: 3rem;
-	border-radius: 0.65rem;
-	background-color: var(--filter-reset-bg-color);
-	border-color:  var(--filter-reset-border-color);	
-}
-
-.search .clear-filters:disabled,
-.search .clear-filters[disabled] {
-    cursor: not-allowed;
-	background-color: var(--background-color);
-	border-color:  var(--disabled-filter-reset-border-color);	
-}
-
-.search .clear-filters:disabled i,
-.search .clear-filters[disabled] i {
-	color: var(--disabled-text-color);
 }
 
 #home .scroll-to-top {

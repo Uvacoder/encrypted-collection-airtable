@@ -1,10 +1,20 @@
 <template>
 	<div class="ProductList">
 		<div class="product-list">
+			<app-button
+				class="clear-filters"
+				@clicked="clearFilters"
+				v-show="!allResultsShown"
+				:label="'Reset Filters & Show All Results'"
+			>
+				Reset Filters &amp; Show All Results
+			</app-button>
+
 			<app-product 
 				v-for="(product, index) in products" 
 				:key="index" 
 				:product="product"
+				:class="{'last-product': (index === products.length - 1)}"
 			></app-product>
 
 			<div v-show="isFetchingData" class="no-results">
@@ -117,7 +127,7 @@ import { isDefined, capitalizeWords } from '@/scripts/helpers';
 
 export default {
 	name: "ProductList",
-	props: ["tags", "visible", "products", "categories", "isFetchingData", "errorFetching"],
+	props: ["tags", "visible", "products", "categories", "isFetchingData", "errorFetching", "allResultsShown"],
 	components: {
 		appButton: Button,
 		appProduct: Product,
@@ -181,7 +191,14 @@ export default {
 				this.n = 5;
 				this.m = 5;
 			}
-		}
+		},
+		// clears all filters to show all search results
+		clearFilters: function() {
+			if (this.$has(this.$route.query, 't') || this.$has(this.$route.query, 'c')) {
+				let query = {};
+				this.$router.replace({ query });
+			}
+		},
 	},
 	computed: {
 		firstNTags: function() {
@@ -242,6 +259,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	padding-bottom: 2.5rem;
 }
 
 .product-list {
@@ -255,6 +273,33 @@ export default {
 	border-bottom: 5px solid var(--gray-border-color);
 }
 
+
+.product-list > .clear-filters {
+	width: 100%;
+	min-height: 2.5rem;
+	height: auto;
+	justify-content: center;
+	border-radius: 0.5rem;
+	margin: .75rem 0;
+	padding: .5rem;
+	background-color: var(--filter-reset-bg-color);
+	border: 2px solid var(--gray-border-color);
+	border-bottom: 4px solid var(--gray-border-color);	
+	border-color:  var(--filter-reset-border-color);	
+}
+
+.product-list > .clear-filters:disabled,
+.product-list > .clear-filters[disabled] {
+    cursor: not-allowed;
+	background-color: var(--background-color);
+	border-color:  var(--disabled-filter-reset-border-color);	
+}
+
+.product-list > .clear-filters:disabled i,
+.product-list > .clear-filters[disabled] i {
+	color: var(--disabled-text-color);
+}
+
 .product-list > .no-results {
 	width: 100%;
 	padding: 3rem;
@@ -265,7 +310,7 @@ export default {
 	text-align: center;
 }
 
-.product-list > :nth-last-child(5) {
+.last-product {
 	border: none !important;
 }
 
