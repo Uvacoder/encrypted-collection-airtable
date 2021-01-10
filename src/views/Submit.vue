@@ -21,9 +21,7 @@
 			<label for="desc">
                 <abbr title="Required" aria-label="Required">*</abbr>    
                 Description: 
-                <textarea id="desc" name="desc" required>
-                    hello
-                </textarea>
+                <textarea id="desc" name="desc" required>hello</textarea>
             </label>
 			
 			<label for="url">
@@ -173,6 +171,7 @@ export default {
 
 #submit > form input[type="checkbox"] {
     margin-right: .5rem;
+    /* cu */
     /* border-radius: 1rem; */
     /* border: 5px solid var(--gray-border-color); */
 }
@@ -185,6 +184,11 @@ export default {
 
 #submit > form fieldset legend span {
     color: var(--placeholder-text-color);
+}
+
+#submit > form fieldset label,
+#submit > form fieldset input {
+    cursor: pointer;
 }
 
 * {
