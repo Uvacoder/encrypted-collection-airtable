@@ -25,8 +25,8 @@
 				@clicked="emitThemeChange" 
 				:label="'Change Color Theme'"
 			>
-				<i v-if="darkMode" class="gg-sun"></i>
-				<i v-else class="gg-moon"></i>
+				<app-sun-icon v-if="darkMode"></app-sun-icon>
+				<app-moon-icon v-else></app-moon-icon>
 			</app-button>
 
 			<app-button
@@ -34,7 +34,7 @@
 				:iconButton="true" 
 				:label="'Give Feedback'"
 			>
-				<i class="gg-smile-mouth-open"></i>
+				<app-smile-icon></app-smile-icon>
 			</app-button>
 
 			<app-button
@@ -42,8 +42,8 @@
 				@clicked="showMenu"
 				:label="'Show List of Pages'"
 			>
-				Pages
-				<i class="gg-push-left"></i>
+				Menu
+				<app-menu-alt-icon></app-menu-alt-icon>
 			</app-button>
 			
 			<app-button
@@ -52,7 +52,7 @@
 				@clicked="showMenu"
 				:label="'Toggle Menu'"
 			>
-				<i class="gg-menu"></i>
+				<app-menu-icon></app-menu-icon>
 			</app-button>
 		</div>
 
@@ -70,8 +70,8 @@
 						@clicked="emitThemeChange" 
 						:label="'Change Color Theme'"
 					>
-						<i v-if="darkMode" class="gg-sun"></i>
-						<i v-else class="gg-moon"></i>
+						<app-sun-icon v-if="darkMode"></app-sun-icon>
+						<app-moon-icon v-else></app-moon-icon>
 					</app-button>
 
 					<app-button
@@ -79,15 +79,16 @@
 						:iconButton="true" 
 						:label="'Give Feedback'"
 					>
-						<i class="gg-smile-mouth-open"></i>
+						<app-smile-icon></app-smile-icon>
 					</app-button>
 
 					<app-button
+						class="hide-pages"
 						:iconButton="true" 
 						:label="'Hide List of Pages'"
 						@clicked="hideMenu"
 					>
-						<i class="gg-push-right"></i>
+						<app-menu-alt-icon></app-menu-alt-icon>
 					</app-button>
 				</div>
 			</div>
@@ -98,7 +99,7 @@
 				@clicked="hideMenu" 
 			>
 				About Page
-				<i class="gg-info"></i>
+				<app-info-icon></app-info-icon>
 			</app-button-link>
 			
 			<app-button-link
@@ -107,7 +108,7 @@
 				@clicked="hideMenu" 
 			>
 				Watchlist
-				<i class="gg-eye"></i>
+				<app-eye-icon></app-eye-icon>
 			</app-button-link>
 
 			<app-button-link
@@ -116,7 +117,7 @@
 				@clicked="hideMenu" 
 			>
 				Report Page
-				<i class="gg-danger"></i>
+				<app-danger-icon></app-danger-icon>
 			</app-button-link>
 
 			<app-button-link
@@ -125,7 +126,7 @@
 				:label="'Go to Excluded Products Page'"
 			>
 				Excluded List
-				<i class="gg-unavailable"></i>
+				<app-unavailable-icon></app-unavailable-icon>
 			</app-button-link>
 
 			<app-button-link
@@ -134,7 +135,7 @@
 				:label="'Go to Submission Page'"
 			>
 				Submission Page
-				<i class="gg-add"></i>
+				<app-add-icon></app-add-icon>
 			</app-button-link>        
 		</div>
 	</nav>
@@ -143,13 +144,33 @@
 <script>
 import Button from "./Button.vue";
 import ButtonLink from "./ButtonLink.vue";
+import AddIcon from "./icons/AddIcon.vue";
+import EyeIcon from "./icons/EyeIcon.vue";
+import SunIcon from "./icons/SunIcon.vue";
+import MoonIcon from "./icons/MoonIcon.vue";
+import MenuIcon from "./icons/MenuIcon.vue";
+import InfoIcon from "./icons/InfoIcon.vue";
+import SmileIcon from "./icons/SmileIcon.vue";
+import DangerIcon from "./icons/DangerIcon.vue";
+import MenuAltIcon from "./icons/MenuAltIcon.vue";
+import UnavailableIcon from "./icons/UnavailableIcon.vue";
 
 export default {
 	name: "Header",
 	props: ["darkTheme"],
 	components: {
 		appButton: Button,		
+		appAddIcon: AddIcon,		
+		appEyeIcon: EyeIcon,
+		appSunIcon: SunIcon,
+		appMoonIcon: MoonIcon,
+		appMenuIcon: MenuIcon,
+		appInfoIcon: InfoIcon,
+		appSmileIcon: SmileIcon,
+		appDangerIcon: DangerIcon,
 		appButtonLink: ButtonLink,
+		appMenuAltIcon: MenuAltIcon,
+		appUnavailableIcon: UnavailableIcon,
 	},
 	data() {
 		return {
@@ -279,13 +300,15 @@ html[data-theme='dark'] .app-logo img {
 	margin: 0;
 }
 
-.nav-buttons > .give-feedback i,
-.menu-list .header .menu-list-buttons > .give-feedback i {
+.nav-buttons > .give-feedback,
+.menu-list .header .menu-list-buttons > .give-feedback {
 	background-color: var(--filter-reset-bg-color);
-	color:  var(--filter-reset-border-color);
+	border-color:  var(--filter-reset-border-color);
 }
 
 .nav-buttons > .toggle-menu {
+	width: 2.5rem;
+	border: none;
 	display: none;
 }
 
@@ -356,6 +379,15 @@ html[data-theme='dark'] .app-logo img {
 	margin: 0;
 }
 
+.menu-list > a svg {
+	width: 1.25rem;
+	height: 1.25rem;
+}
+
+.nav-buttons > .show-pages svg {
+	margin-left: .5rem;
+}
+
 @media only screen and (max-width: 840px) {
 	.nav-buttons > .show-pages,
 	.nav-buttons > .change-theme,	
@@ -364,7 +396,7 @@ html[data-theme='dark'] .app-logo img {
 	}
 
 	.nav-buttons > .toggle-menu {
-		display: block;
+		display: flex;
 	}
 
 	.menu-list .header .mobile-header-title {
@@ -376,7 +408,7 @@ html[data-theme='dark'] .app-logo img {
 	}
 
 	.menu-list .header .menu-list-buttons > *:not(:last-child)  {
-		display: block;
+		display: flex;
 	}
 }
 

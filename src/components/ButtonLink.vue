@@ -24,13 +24,6 @@ export default {
     outline: none;
 }
 
-i {
-    --ggs: 0.9;
-    margin: 0;
-	margin-left: .65rem;
-	color: var(--text-color);
-}
-
 .button-link {
 	margin: 0;
 	height: 2.5rem;

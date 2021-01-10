@@ -5,7 +5,7 @@
             These services either have encryption as a current beta feature or as a likely future feature on their roadmap.
             They can be accessed on this page.
             <br>
-            If you find any products here that either no longer plan to offer encryption or should be in the main list, please <router-link to="/report">report them here <i class="gg-link"></i></router-link>.
+            If you find any products here that either no longer plan to offer encryption or should be in the main list, please <router-link to="/report">report them here <app-link-icon></app-link-icon></router-link>.
         </p>
 
         <div class="product-list" ref="list">
@@ -46,7 +46,7 @@
 			:label="'Scroll to the top'"
         >
             Top
-            <i class="gg-arrow-up"></i>
+            <app-arrow-up-icon></app-arrow-up-icon>
         </app-button>    
     </div>
 </template>
@@ -56,9 +56,11 @@
 import { scroll, isDefined } from '@/scripts/helpers';
 import Button from "@/components/Button.vue";
 import Product from "@/components/Product.vue";
-import ListIcon from "@/components/ListIcon.vue";
-import ErrorIcon from "@/components/ErrorIcon.vue";
-import LoadingIcon from "@/components/LoadingIcon.vue";
+import ListIcon from "@/components/icons/ListIcon.vue";
+import LinkIcon from "@/components/icons/LinkIcon.vue";
+import ErrorIcon from "@/components/icons/ErrorIcon.vue";
+import LoadingIcon from "@/components/icons/LoadingIcon.vue";
+import ArrowUpIcon from "@/components/icons/ArrowUpIcon.vue";
 
 export default {
     name: 'Watchlist',
@@ -66,8 +68,10 @@ export default {
         appButton: Button,
         appProduct: Product,
         appListIcon: ListIcon,
+        appLinkIcon: LinkIcon,
         appErrorIcon: ErrorIcon,
-		appLoadingIcon: LoadingIcon,
+        appLoadingIcon: LoadingIcon,
+        appArrowUpIcon: ArrowUpIcon,
     },
     data() {
         return {
@@ -120,23 +124,17 @@ export default {
     outline: none;
 }
 
-.gg-link {
-    display: inline-block;
-    margin: 0 .25rem 0 .75rem;
-    transform: scale(.85) rotate(-45deg);
-}
-
 #watchlist {
     padding: .5rem;
 }
 
 #watchlist .scroll-to-top {
-    width: 5rem;
+    width: 5.5rem;
 	margin: 0 auto;
 	position: fixed;
     z-index: 0;
     bottom: 1.5rem;
-    left: calc(50% - 2.5rem);
+    left: calc(50% - 2.75rem);
 	background-color: var(--filter-reset-bg-color);
 	border-color:  var(--filter-reset-border-color);	
     box-shadow: 0px 5px 15px rgba(0, 0, 0, .15);

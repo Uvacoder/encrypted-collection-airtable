@@ -46,7 +46,7 @@
 				v-show="visible && !isFetchingData && !errorFetching"
 			>	
 				Show all
-				<i class="gg-chevron-down-o"></i>
+				<app-chevron-down-icon></app-chevron-down-icon>
 			</app-button>
 		</div>
 		<div class="filter-list">
@@ -61,10 +61,7 @@
 						:closingTaskTitle="'Reset Tag'"
 						@close-tag="resetFilter(0)"
 					></app-button-tag>
-					<i 
-						class="gg-chevron-down-o"
-						@click="tagsHidden = !tagsHidden"
-					></i>
+					<app-chevron-down-icon @clicked="tagsHidden = !tagsHidden"></app-chevron-down-icon>
 				</div>
 				<div class="tag-list" v-show="!tagsHidden">
 					<app-button-tag
@@ -91,10 +88,7 @@
 						:closingTaskTitle="'Reset Category'"
 						@close-tag="resetFilter(1)"
 					></app-button-tag>
-					<i 
-						class="gg-chevron-down-o"
-						@click="catsHidden = !catsHidden"
-					></i>
+					<app-chevron-down-icon @clicked="catsHidden = !catsHidden"></app-chevron-down-icon>
 				</div>
 
 				<div class="tag-list" v-show="!catsHidden">
@@ -119,10 +113,11 @@
 <script>
 import Button from "./Button.vue";
 import Product from "./Product.vue";
-import ListIcon from "./ListIcon.vue";
-import ErrorIcon from "./ErrorIcon.vue";
+import ListIcon from "./icons/ListIcon.vue";
+import ErrorIcon from "./icons/ErrorIcon.vue";
 import ButtonTag from "./ButtonTag.vue";
-import LoadingIcon from "./LoadingIcon.vue";
+import LoadingIcon from "./icons/LoadingIcon.vue";
+import ChevronDownIcon from "./icons/ChevronDownIcon.vue";
 import { isDefined, capitalizeWords } from '@/scripts/helpers';
 
 export default {
@@ -134,7 +129,8 @@ export default {
 		appListIcon: ListIcon,		
 		appErrorIcon: ErrorIcon,
 		appButtonTag: ButtonTag,
-		appLoadingIcon: LoadingIcon,
+		appLoadingIcon: LoadingIcon,		
+		appChevronDownIcon: ChevronDownIcon,
 	},
 	data() {
 		return {
@@ -288,18 +284,6 @@ export default {
 	border-color:  var(--filter-reset-border-color);	
 }
 
-.product-list > .clear-filters:disabled,
-.product-list > .clear-filters[disabled] {
-    cursor: not-allowed;
-	background-color: var(--background-color);
-	border-color:  var(--disabled-filter-reset-border-color);	
-}
-
-.product-list > .clear-filters:disabled i,
-.product-list > .clear-filters[disabled] i {
-	color: var(--disabled-text-color);
-}
-
 .product-list > .no-results {
 	width: 100%;
 	padding: 3rem;
@@ -369,7 +353,7 @@ export default {
 	background-color: var(--current-tags-bg-hover-color);
 }
 
-.product-filters .headers > i {
+.product-filters .headers > svg {
 	display: none;
 	margin-left: .5rem;
 	cursor: pointer;
@@ -408,7 +392,7 @@ export default {
 		padding: 0 1rem;
 	}
 
-	.product-filters .headers i {
+	.product-filters .headers > svg {
 		display: inline-block;
 	}
 

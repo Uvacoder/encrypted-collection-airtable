@@ -3,7 +3,7 @@
         <div class="search">
 			<div class="search-bar">
 				<div @click="focusInput">
-					<i class="gg-search"></i>
+					<app-search-icon></app-search-icon>
 				</div>
 				<input 
 					type="text" 
@@ -15,9 +15,9 @@
 				<div 
 					@click="searchQuery = ''"
 					v-show="searchQuery.length > 0"
-					title="Clear input"
+					title="Clear Input"
 				>
-					<i class="gg-backspace"></i>
+					<app-clear-icon></app-clear-icon>
 				</div>
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 			:label="'Scroll to the top'"
 		>
 			Top
-			<i class="gg-arrow-up"></i>
+			<app-arrow-up-icon></app-arrow-up-icon>
 		</app-button>
     </div>
 </template>
@@ -49,15 +49,22 @@
 
 <script>
 import Button from "@/components/Button.vue";
+import ProductList from "@/components/ProductList.vue";
+import ClearIcon from "@/components/icons/ClearIcon.vue";
+import SearchIcon from "@/components/icons/SearchIcon.vue";
+import ArrowUpIcon from "@/components/icons/ArrowUpIcon.vue";
+
 import { tags, categories } from "@/scripts/filters";
 import { scroll, isDefined, stringSearch, highlightQuery } from '@/scripts/helpers';
-import ProductList from "@/components/ProductList.vue";
 
 export default {
     name: 'Home',
     components: {
         appButton: Button,
-        appProductList: ProductList
+		appClearIcon: ClearIcon,
+		appSearchIcon: SearchIcon,		
+		appProductList: ProductList,
+		appArrowUpIcon: ArrowUpIcon,		
     },
     data() {
         return {
@@ -315,12 +322,6 @@ export default {
 	cursor: pointer;
 }
 
-.search-bar > :last-child i {
-	margin: 0;
-	margin-left: .1rem;
-	transform: scale(1);
-}
-
 .search-bar input {
 	border: none;
 	font-size: 1rem;
@@ -332,12 +333,12 @@ export default {
 }
 
 #home .scroll-to-top {
-    width: 5rem;
+    width: 5.5rem;
 	margin: 0 auto;
 	position: fixed;
     z-index: 0;
     bottom: 1.5rem;
-    left: calc(50% - 2.5rem);
+    left: calc(50% - 2.75rem);
 	background-color: var(--filter-reset-bg-color);
 	border-color:  var(--filter-reset-border-color);	
     box-shadow: 0px 5px 15px rgba(0, 0, 0, .15);

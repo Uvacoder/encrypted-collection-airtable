@@ -13,7 +13,7 @@
 			</div>
 			<div class="product-link">
 				<a title="Go To Product Website" aria-label="Go To Product Website" target="_blank" rel="noopener" :href="product.url">
-					<i class="gg-external"></i>
+					<app-external-icon></app-external-icon>
 				</a>
 			</div>
 		</div>
@@ -30,6 +30,7 @@
 
 <script>
 import ButtonTag from "./ButtonTag.vue";
+import ExternalIcon from "./icons/ExternalIcon.vue";
 
 export default {
 	name: "Product",
@@ -44,6 +45,7 @@ export default {
 	},
     components: {
         appButtonTag: ButtonTag,
+        appExternalIcon: ExternalIcon,
 	},
 	methods: {
 		filterWith: function(q) {
@@ -65,14 +67,6 @@ export default {
 <style scoped>
 * {
 	outline: none;
-}
-
-i {
-	color: var(--text-color);
-}
-
-i::before {
-	background: var(--text-color);
 }
 
 .product {
@@ -156,7 +150,10 @@ i::before {
 
 .product-link > a:hover {
 	background-color: var(--primary-yellow-color);
-	color: #000;
+}
+
+.product-link > a:hover > svg {
+	color: var(--highlight-text-color);
 }
 
 .product-tags {

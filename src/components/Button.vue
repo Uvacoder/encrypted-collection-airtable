@@ -34,12 +34,6 @@ export default {
     outline: none;
 }
 
-i {
-    --ggs: 0.9;
-    margin: 0;
-	color: var(--text-color);
-}
-
 .button {
 	margin: 0;
 	height: 2.5rem;
@@ -62,13 +56,10 @@ i {
 	border-bottom: 4px solid var(--gray-border-color);
 }
 
-.button:not(.icon-button) i {
-	margin-left: .65rem;
-}
-
 .icon-button {
 	min-width: 2.5rem;
-	padding: 0 .5rem;
+	max-width: 2.5rem;
+	padding: 0;
     justify-content: center;
 }
 </style>

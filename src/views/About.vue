@@ -1,7 +1,7 @@
 <template>
     <div id='about'>
         <p>
-            EncryptedList is a list of products and services that offer <a href="https://protonmail.com/blog/what-is-end-to-end-encryption/" target="_blank" rel="noopener">end-to-end encryption <i class="gg-external"></i></a> 👈 or some form of <a href="https://tresorit.com/blog/zero-knowledge-encryption/" target="_blank" rel="noopener">zero-knowledge architecture <i class="gg-external"></i></a> 🔐.
+            EncryptedList is a list of products and services that offer <a href="https://protonmail.com/blog/what-is-end-to-end-encryption/" target="_blank" rel="noopener">end-to-end encryption <app-external-icon></app-external-icon></a> 👈 or some form of <a href="https://tresorit.com/blog/zero-knowledge-encryption/" target="_blank" rel="noopener">zero-knowledge architecture <app-external-icon></app-external-icon></a> 🔐.
             This can include services that either have such architecture on some of their features or that implement it fully. 
             It is based on claims made by their respective owners or companies.
             Items tagged as "open-source" are more reliable. However, not all items tagged as "open-source" are fully open source. 
@@ -14,12 +14,12 @@
                 :label="'Go Home'"
             >
                 Go Home
-                <i class="gg-corner-right-up"></i>
+                <app-home-icon></app-home-icon>
             </app-button-link>   
 
             <a title="Go To GitHub Repo" aria-label="Go To GitHub Repo" target="_blank" rel="noopener" href="https://github.com/oneminch/encrypted-list">
                 GitHub
-                <i class="gg-external"></i>
+                <app-external-icon></app-external-icon>
             </a>  
         </div>  
     </div>
@@ -28,11 +28,15 @@
 
 <script>
 import ButtonLink from "@/components/ButtonLink.vue";
+import HomeIcon from "@/components/icons/HomeIcon.vue";
+import ExternalIcon from "@/components/icons/ExternalIcon.vue";
 
 export default {
     name: 'About',
     components: {
+        appHomeIcon: HomeIcon,
         appButtonLink: ButtonLink,
+        appExternalIcon: ExternalIcon,
     }
 }
 </script>
@@ -43,11 +47,10 @@ export default {
     outline: none;
 }
 
-#about p i {
-    float: none;
+#about p svg {
     display: inline-block;
-    margin: 0 .25rem 0 .75rem;
-    transform: scale(.75);
+    margin: 0 .25rem;
+    color: var(--highlight-text-color);
 }
 
 #about {
@@ -86,7 +89,7 @@ export default {
 }
 
 #about .links > :last-child {
-    width: 7rem;
+    width: 7.5rem;
     margin: 0;
 	height: 2.5rem;
     font-size: 1rem;
@@ -104,11 +107,8 @@ export default {
 	border-color:  var(--filter-reset-border-color);
 }
 
-#about .links > :last-child i {
-    --ggs: 0.9;
-    margin: 0;
-	margin-left: .65rem;
-	color: var(--text-color);
+#about .links > :last-child svg {
+    color: var(--text-color);
 }
 
 @media only screen and (max-width: 480px) {

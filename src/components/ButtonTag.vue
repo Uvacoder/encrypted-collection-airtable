@@ -6,12 +6,14 @@
 		:class="['button-tag', { 'closable' : closable }]"
 	>
 		{{ value }}
-		<i v-show="closable" class="gg-close" :title="closingTaskTitle" @click="$emit('close-tag')"></i>
+		<app-close-icon @clicked="$emit('close-tag')" v-show="closable" :title="closingTaskTitle"></app-close-icon>
 	</button>
 </template>
 
 
 <script>
+import CloseIcon from "./icons/CloseIcon.vue";
+
 export default {
     name: "ButtonTag",
 	props: {
@@ -24,6 +26,9 @@ export default {
 			type: Boolean,
 			default: false
 		},
+	},
+	components: {
+		appCloseIcon: CloseIcon
 	},
     methods: {
         emitEvent: function() {
@@ -39,12 +44,6 @@ export default {
 <style scoped>
 * {
     outline: none;
-}
-
-i {
-    --ggs: 0.75;
-    margin: 0;
-	color: var(--text-color);
 }
 
 .button-tag {
@@ -71,7 +70,7 @@ i {
     justify-content: space-between;
 }
 
-.button-tag.closable i {
-	margin-left: .15rem;
+.button-tag.closable svg {
+	margin: 0 .15rem 0 .35rem;
 }
 </style>

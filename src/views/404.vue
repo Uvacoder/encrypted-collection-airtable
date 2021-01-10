@@ -1,6 +1,6 @@
 <template>
     <div id='Unfound'>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 9C7.44772 9 7 9.44772 7 10C7 10.5523 7.44772 11 8 11H9C9.55228 11 10 10.5523 10 10C10 9.44772 9.55228 9 9 9H8Z" fill="currentColor" />
             <path d="M15 9C14.4477 9 14 9.44772 14 10C14 10.5523 14.4477 11 15 11H16C16.5523 11 17 10.5523 17 10C17 9.44772 16.5523 9 16 9H15Z" fill="currentColor" />
             <path d="M9 15C8.44772 15 8 15.4477 8 16C8 16.5523 8.44772 17 9 17H15C15.5523 17 16 16.5523 16 16C16 15.4477 15.5523 15 15 15H9Z" fill="currentColor" />
@@ -15,7 +15,7 @@
             :label="'Go Back Home'"
         >
             Go Back Home
-            <i class="gg-corner-right-up"></i>
+            <app-home-icon></app-home-icon>
         </app-button-link>
     </div>
 </template>
@@ -23,10 +23,12 @@
 
 <script>
 import ButtonLink from "@/components/ButtonLink.vue";
+import HomeIcon from "@/components/icons/HomeIcon.vue";
 
 export default {
     name: 'Unfound',
     components: {
+        appHomeIcon: HomeIcon,
         appButtonLink: ButtonLink,
     }
 }

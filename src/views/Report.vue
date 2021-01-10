@@ -2,17 +2,22 @@
     <div id='report'>
         <p>
             If you need to <mark class="highlight">report</mark> something (like a bug, broken links, a service that doesn't belong here, or just about anything), you can do so on this page.
-            If the product is already in the <router-link to="/excluded">excluded list<i class="gg-link"></i></router-link> or <router-link to="/watchlist">watchlist <i class="gg-link"></i></router-link>, and you think should be added to the main list, please list out your reason.
+            If the product is already in the <router-link to="/excluded">excluded list <app-link-icon></app-link-icon></router-link> or <router-link to="/watchlist">watchlist <app-link-icon></app-link-icon></router-link>, and you think should be added to the main list, please list out your reason.
         </p>     
     </div>
 </template>
 
 
 <script>
+import LinkIcon from "@/components/icons/LinkIcon.vue";
+
 export default {
     name: 'Report',
     data() {
         return {}
+    },
+    components: {
+        appLinkIcon: LinkIcon,
     },
     methods: {
         // fetches and populates list from db
@@ -49,12 +54,6 @@ export default {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.gg-link {
-    display: inline-block;
-    margin: 0 .25rem 0 .75rem;
-    transform: scale(.85) rotate(-45deg);
 }
 
 .highlight {

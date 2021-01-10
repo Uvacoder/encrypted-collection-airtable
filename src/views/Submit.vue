@@ -2,7 +2,7 @@
     <div id='submit'>
         <p>
             If you discovered any products that aren't in the list, you can <mark class="highlight">submit</mark> one through this page.
-            Use this page for new submissions and <router-link to="/report">the report page <i class="gg-link"></i></router-link> to report already existing products.
+            Use this page for new submissions and <router-link to="/report">the report page <app-link-icon></app-link-icon></router-link> to report already existing products.
             I'll review the submission and add the product ASAP.
         </p>
         <form netlify>
@@ -35,8 +35,13 @@
 
 
 <script>
+import LinkIcon from "@/components/icons/LinkIcon.vue";
+
 export default {
-    name: 'Submit'
+    name: 'Submit',
+    components: {
+        appLinkIcon: LinkIcon,
+    }
 }
 </script>
 
@@ -44,12 +49,6 @@ export default {
 <style scoped>
 * {
     outline: none;
-}
-
-.gg-link {
-    display: inline-block;
-    margin: 0 .25rem 0 .75rem;
-    transform: scale(.85) rotate(-45deg);
 }
 
 #submit {
