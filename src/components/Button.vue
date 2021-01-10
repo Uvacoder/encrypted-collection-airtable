@@ -1,8 +1,8 @@
 <template>
     <button
         :title="label"
+		:type="ofType"
         :aria-label="label"
-        :disabled="disabled"
         @click="$emit('clicked')"
         :class="['button', { 'icon-button' : iconButton }]"
     >
@@ -16,10 +16,7 @@ export default {
     name: "Button",
     props: {
 		label: String,
-		disabled: {
-			type: Boolean,
-			default: false
-        },
+		ofType: String,
         iconButton: {
 			type: Boolean,
 			default: false

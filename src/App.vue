@@ -111,7 +111,7 @@ export default {
 	--lightgray-bg-color: #ced4da;
 	--primary-yellow-color: #f1c61b;
 	--highlight-text-color: #1c2024;
-	--disabled-text-color: #798086;
+	/* --disabled-text-color: #798086; */
 }
 
 html {
@@ -128,7 +128,7 @@ html {
 	--product-desc-text-color: #5d6470;
 	--filter-reset-bg-color: #f1c61b;
 	--filter-reset-border-color: #1c2024;
-	--disabled-filter-reset-border-color: #798086;
+	/* --disabled-filter-reset-border-color: #798086; */
 }
 
 html[data-theme='dark'] {
@@ -145,7 +145,7 @@ html[data-theme='dark'] {
 	--product-desc-text-color: #ced4da;
 	--filter-reset-bg-color: #1c2024;
 	--filter-reset-border-color: #f1c61b;
-	--disabled-filter-reset-border-color: #564d29;
+	/* --disabled-filter-reset-border-color: #564d29; */
 }
 
 html,
