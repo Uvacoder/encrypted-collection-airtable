@@ -88,7 +88,14 @@ export default {
 			this.isFetchingData = true;
             let reqURL = isDefined(limit) ? `/api/getExcluded?limit=${limit}` : `/api/getExcluded`;
             
-			this.$http(reqURL)
+            const axiosConfig = {
+                headers: { "Content-type": "application/json" },
+            }
+
+            this.$http.get(
+                reqURL,
+                axiosConfig
+            )
 			.then((res) => {
 				return res.data;
 			})

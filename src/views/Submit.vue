@@ -5,6 +5,7 @@
             data-netlify="true"
             name="new-product"
             data-netlify-honeypot="bot-field"
+            @submit.prevent="handleSubmission"
         >
             <!-- name="New Product Submission"  -->
 
@@ -85,6 +86,7 @@
 
 <script>
 import Button from "@/components/Button.vue";
+// import Home from './Home.vue'
 import LinkIcon from "@/components/icons/LinkIcon.vue";
 import SendIcon from "@/components/icons/SendIcon.vue";
 import { tags, categories } from "@/scripts/filters";
@@ -101,6 +103,32 @@ export default {
             tags: [],
             categories: []
         }
+    },
+    methods: {
+        encode (data) {
+            return Object.keys(data)
+                .map(
+                key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+                )
+                .join("&");
+        },
+        handleSubmission: function() {
+            const axiosConfig = {
+                header: { "Content-Type": "application/x-www-form-urlencoded" }
+            }
+
+            this.$http.post(
+                "/submit",
+                // "/",
+                axiosConfig
+            )
+			.then(() => {
+                this.$router.push("About")
+			})
+			.catch(() => {
+                this.$router.push("404")
+			})
+        },
     },
     created() {
 		this.tags = tags;

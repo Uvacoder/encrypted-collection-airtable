@@ -89,7 +89,14 @@ export default {
             this.isFetchingData = true;
             let reqURL = isDefined(limit) ? `/api/getWatchlist?limit=${limit}` : `/api/getWatchlist`;
             
-			this.$http(reqURL)
+			const axiosConfig = {
+                headers: { "Content-type": "application/json" }
+            }
+
+            this.$http.get(
+                reqURL,
+                axiosConfig
+            )
 			.then((res) => {
 				return res.data;
 			})
