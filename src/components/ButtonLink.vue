@@ -26,7 +26,7 @@ export default {
 
 .button-link {
 	margin: 0;
-	height: 2.5rem;
+	height: 3rem;
     font-size: 1rem;
     cursor: pointer;
 	padding: 0 .75rem;

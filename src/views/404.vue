@@ -45,8 +45,8 @@ export default {
 }
 
 #Unfound > svg {
-    width: 125px;
-    height: 125px;
+    width: 8rem;
+    height: 8rem;
     color: var(--text-color);
     margin: 0 auto;
     display: block;
