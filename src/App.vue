@@ -109,9 +109,10 @@ export default {
 :root {
 	--gray-bg-color: #868e96;
 	--lightgray-bg-color: #ced4da;
-	--primary-yellow-color: #f1c61b;
 	--highlight-text-color: #1c2024;
-	/* --disabled-text-color: #798086; */
+	--primary-red-color: #fa5252;
+	--primary-green-color: #51cf66;
+	--primary-yellow-color: #f1c61b;
 }
 
 html {
@@ -123,12 +124,11 @@ html {
 	--current-tags-bg-color: #ced4da;
 	--current-tags-bg-hover-color: #b5bbc0;
 	--app-desc-text-color: #5d6470;
-	--placeholder-text-color: #adb5bd;
+	--placeholder-text-color: #9da3a8;
 	--product-border-color: #ced4da;
 	--product-desc-text-color: #5d6470;
 	--filter-reset-bg-color: #f1c61b;
 	--filter-reset-border-color: #1c2024;
-	/* --disabled-filter-reset-border-color: #798086; */
 }
 
 html[data-theme='dark'] {
@@ -140,12 +140,11 @@ html[data-theme='dark'] {
 	--current-tags-bg-color: #495057;
 	--current-tags-bg-hover-color: #575f68;
 	--app-desc-text-color: #ced4da;
-	--placeholder-text-color: #495057;
+	--placeholder-text-color: #7b828a;
 	--product-border-color: #495057;
 	--product-desc-text-color: #ced4da;
 	--filter-reset-bg-color: #1c2024;
 	--filter-reset-border-color: #f1c61b;
-	/* --disabled-filter-reset-border-color: #564d29; */
 }
 
 html,
@@ -171,7 +170,8 @@ body  {
 	box-sizing: border-box;
 }
 
-input, input:before, input:after {
+input, input:before, input:after,
+textarea, textarea:before, textarea:after {
 	-webkit-user-select: initial;
 	-khtml-user-select: initial;
 	-moz-user-select: initial;

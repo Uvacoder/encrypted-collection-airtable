@@ -7,8 +7,6 @@
             data-netlify-honeypot="bot-field"
             @submit.prevent="handleSubmission"
         >
-            <!-- name="New Product Submission"  -->
-
             <h2>Enter Product Details</h2>
 
             <input type="hidden" name="form-name" value="new-product" />
@@ -133,7 +131,7 @@ import SendIcon from "@/components/icons/SendIcon.vue";
 import { tags, categories } from "@/scripts/filters";
 
 export default {
-    name: 'Submit',
+    name: 'SubmitForm',
     components: {
         appButton: Button,
         appLinkIcon: LinkIcon,
@@ -144,7 +142,7 @@ export default {
             form: {
                 name: '',
                 desc: '',
-                url: '',
+                url: 'https://',
                 tags: [],
                 categories: []
             },
@@ -153,7 +151,7 @@ export default {
         }
     },
     methods: {
-        encode (data) {
+        encode: function(data) {
             return Object.keys(data)
                 .map(
                 key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
@@ -174,11 +172,10 @@ export default {
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push("success");
+                this.$router.push({ name: "Success" });
 			})
 			.catch(() => {
-                console.log("error");
-                this.$router.push("failure");
+                this.$router.push({ name: "Failure" });
 			});
         },
     },
@@ -216,12 +213,8 @@ export default {
 }
 
 #submit > form > label abbr {
-    color: #fa5252;
+    color: var(--primary-red-color);
 }
-
-/* #submit > form > label span {
-    color: var(--placeholder-text-color);
-} */
 
 #submit > form textarea,
 #submit > form input[type="url"],
@@ -289,8 +282,6 @@ export default {
     width: 40%;
     text-align: left;
     margin: 0;
-    /* margin: 0 auto; */
-    /* padding: 2.5rem 0; */
 }
 
 #submit a {
