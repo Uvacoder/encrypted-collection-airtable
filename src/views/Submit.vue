@@ -144,7 +144,7 @@ export default {
             this.$http.post(
                 "/submit",
                 this.encode({
-                    "form-name": "ask-question",
+                    "form-name": "new-product",
                     ...this.form
                 }),
                 axiosConfig
