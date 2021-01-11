@@ -51,7 +51,7 @@
                 >
             </label>    
 			
-			<fieldset>      
+			<fieldset name="Tags">      
                 <legend>
                     Tags <span>(Optional)</span>:
                 </legend>  
@@ -80,7 +80,7 @@
                 </p>
             </fieldset>
 
-            <fieldset>      
+            <fieldset name="Categories">      
                 <legend>
                     Categories <span>(Optional)</span>:
                 </legend>
@@ -174,11 +174,11 @@ export default {
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push("About");
+                this.$router.push("FormSuccess");
 			})
 			.catch(() => {
                 console.log("error");
-                this.$router.push("404");
+                this.$router.push("FormFailure");
 			});
         },
     },

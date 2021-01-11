@@ -9,13 +9,31 @@ import Submit from "@/views/Submit.vue";
 import Report from "@/views/Report.vue";
 import Excluded from "@/views/Excluded.vue";
 import Watchlist from "@/views/Watchlist.vue";
+import FormSuccess from "@/views/FormSuccess.vue";
+import FormFailure from "@/views/FormFailure.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
 	{ path: "/", name: "Home", alias: "/all", component: Home },
 	{ path: "/about", name: "About", component: About },
-	{ path: "/submit", name: "Submit", component: Submit },
+	{
+		path: "/submit",
+		name: "Submit",
+		component: Submit,
+		children: [
+			{
+				path: "/success",
+				name: "FormSuccess",
+				component: FormSuccess,
+			},
+			{
+				path: "/failure",
+				name: "FormFailure",
+				component: FormFailure,
+			},
+		],
+	},
 	{ path: "/report", name: "Report", component: Report },
 	{ path: "/excluded", name: "Excluded", component: Excluded },
 	{ path: "/watchlist", name: "Watchlist", component: Watchlist },
