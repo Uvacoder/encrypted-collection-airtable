@@ -16,19 +16,38 @@
             <label for="name">
                 <abbr title="Required" aria-label="Required">*</abbr>
                 Name: 
-                <input type="text" id="name" name="name" value="hello" required>
+                <input 
+                    id="name" 
+                    type="text" 
+                    name="name" 
+                    value="hello" 
+                    @input="ev => form.name = ev.target.value"
+                    required
+                >
             </label>    
 			
 			<label for="desc">
                 <abbr title="Required" aria-label="Required">*</abbr>    
                 Description: 
-                <textarea id="desc" name="desc" required>hello</textarea>
+                <textarea 
+                    id="desc" 
+                    name="desc" 
+                    required
+                    @input="ev => form.desc = ev.target.value"
+                >hello</textarea>
             </label>
 			
 			<label for="url">
                 <abbr title="Required" aria-label="Required">*</abbr> 
                 URL: 
-                <input type="url" id="url" name="url" value="https://mozilla.org" required>
+                <input 
+                    id="url" 
+                    type="url" 
+                    name="url" 
+                    value="https://mozilla.org" 
+                    @input="ev => form.url = ev.target.value"
+                    required
+                >
             </label>    
 			
 			<fieldset>      
@@ -100,6 +119,11 @@ export default {
     },
     data() {
         return {
+            form: {
+                name: '',
+                desc: '',
+                url: ''
+            },
             tags: [],
             categories: []
         }
@@ -119,14 +143,18 @@ export default {
 
             this.$http.post(
                 "/submit",
-                // "/",
+                this.encode({
+                    "form-name": "ask-question",
+                    ...this.form
+                }),
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push("About")
+                this.$router.push("About");
 			})
 			.catch(() => {
-                this.$router.push("404")
+                console.log("error");
+                this.$router.push("404");
 			})
         },
     },
