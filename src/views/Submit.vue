@@ -174,11 +174,11 @@ export default {
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push("FormSuccess");
+                this.$router.push("success");
 			})
 			.catch(() => {
                 console.log("error");
-                this.$router.push("FormFailure");
+                this.$router.push("failure");
 			});
         },
     },
@@ -266,6 +266,11 @@ export default {
 #submit > form fieldset label,
 #submit > form fieldset input {
     cursor: pointer;
+}
+
+#submit > form fieldset > p:first-of-type label,
+#submit > form fieldset > p:first-of-type input {
+    cursor: not-allowed;
 }
 
 * {
