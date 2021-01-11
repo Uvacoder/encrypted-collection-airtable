@@ -180,27 +180,33 @@ input, input:before, input:after {
 	color: var(--text-color);
 }
 
-input::placeholder {
+
+input::placeholder,
+textarea::placeholder {
 	color: var(--placeholder-text-color) !important;
 	opacity: 1;
 }
 
-input::-webkit-input-placeholder {
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
     color: var(--placeholder-text-color) !important;
 	opacity: 1;
 }
 
-input:-moz-placeholder {
+input:-moz-placeholder,
+textarea:-moz-placeholder {
     color: var(--placeholder-text-color) !important;
 	opacity: 1;
 }
 
-input::-moz-placeholder {
+input::-moz-placeholder,
+textarea::-moz-placeholder {
     color: var(--placeholder-text-color) !important;
 	opacity: 1;
 }
 
-input:-ms-input-placeholder {
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
     color: var(--placeholder-text-color) !important;
 	opacity: 1 !important;
 }

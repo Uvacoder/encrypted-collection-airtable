@@ -20,9 +20,9 @@
                     id="name" 
                     type="text" 
                     name="name" 
-                    value="hello" 
-                    @input="ev => form.name = ev.target.value"
                     required
+                    placeholder="Name of the Product"
+                    v-model="form.name"
                 >
             </label>    
 			
@@ -33,8 +33,9 @@
                     id="desc" 
                     name="desc" 
                     required
-                    @input="ev => form.desc = ev.target.value"
-                >hello</textarea>
+                    v-model="form.desc"
+                    placeholder="Briefly describe the product..."
+                ></textarea>
             </label>
 			
 			<label for="url">
@@ -44,9 +45,9 @@
                     id="url" 
                     type="url" 
                     name="url" 
-                    value="https://mozilla.org" 
-                    @input="ev => form.url = ev.target.value"
                     required
+                    placeholder="https://example.com"
+                    v-model="form.url"
                 >
             </label>    
 			
@@ -54,14 +55,26 @@
                 <legend>
                     Tags <span>(Optional)</span>:
                 </legend>  
-                <p v-for="(tag, index) in tags" :key="index">
+                <!-- All - Default Tag -->
+                <p>
+                    <input 
+                        :id="tags[0]" 
+                        :value="tags[0]" 
+                        type="checkbox" 
+                        name="categories" 
+                        disabled
+                        checked
+                    >
+                    <label :for="tags[0]">{{ tags[0] }}</label>
+                </p>
+
+                <p v-for="(tag, index) in tags.slice(1)" :key="index">
                     <input 
                         :id="tag" 
                         name="tags" 
                         :value="tag" 
-                        type="checkbox" 
-                        :checked="(index === 0)"
-                        :disabled="(index === 0)"
+                        type="checkbox"
+                        v-model="form.tags"
                     >
                     <label :for="tag">{{ tag }}</label>
                 </p>
@@ -70,21 +83,31 @@
             <fieldset>      
                 <legend>
                     Categories <span>(Optional)</span>:
-                </legend>  
-                <p v-for="(cat, index) in categories" :key="index">
+                </legend>
+                <!-- All - Default Category -->
+                <p>
+                    <input 
+                        :id="categories[0]" 
+                        :value="categories[0]" 
+                        type="checkbox" 
+                        name="categories" 
+                        disabled
+                        checked
+                    >
+                    <label :for="categories[0]">{{ categories[0] }}</label>
+                </p>
+
+                <p v-for="(cat, index) in categories.slice(1)" :key="index">
                     <input 
                         :id="cat" 
                         :value="cat" 
                         type="checkbox" 
-                        name="categories" 
-                        :checked="(index === 0)"
-                        :disabled="(index === 0)"
+                        name="categories"
+                        v-model="form.categories"
                     >
                     <label :for="cat">{{ cat }}</label>
                 </p>
             </fieldset>
-
-            <!-- honeypot here -->
 
             <div class="submit-btn">
                 <app-button :ofType="'submit'" :label="'Submit'">
@@ -105,7 +128,6 @@
 
 <script>
 import Button from "@/components/Button.vue";
-// import Home from './Home.vue'
 import LinkIcon from "@/components/icons/LinkIcon.vue";
 import SendIcon from "@/components/icons/SendIcon.vue";
 import { tags, categories } from "@/scripts/filters";
@@ -122,7 +144,9 @@ export default {
             form: {
                 name: '',
                 desc: '',
-                url: ''
+                url: '',
+                tags: [],
+                categories: []
             },
             tags: [],
             categories: []
@@ -139,7 +163,7 @@ export default {
         handleSubmission: function() {
             const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
-            }
+            };
 
             this.$http.post(
                 "/submit",
@@ -155,7 +179,7 @@ export default {
 			.catch(() => {
                 console.log("error");
                 this.$router.push("404");
-			})
+			});
         },
     },
     created() {
@@ -222,14 +246,11 @@ export default {
 
 #submit > form input[type="url"],
 #submit > form input[type="text"] {
-    height: 2.5rem;
+    height: 2.75rem;
 }
 
 #submit > form input[type="checkbox"] {
     margin-right: .5rem;
-    /* cu */
-    /* border-radius: 1rem; */
-    /* border: 5px solid var(--gray-border-color); */
 }
 
 #submit > form fieldset {
