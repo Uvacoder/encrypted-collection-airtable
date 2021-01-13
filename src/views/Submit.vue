@@ -56,12 +56,12 @@
                 <!-- All - Default Tag -->
                 <p>
                     <input 
+                        checked
+                        disabled
                         :id="tags[0]" 
                         :value="tags[0]" 
                         type="checkbox" 
                         name="categories" 
-                        disabled
-                        checked
                     >
                     <label :for="tags[0]">{{ tags[0] }}</label>
                 </p>
@@ -85,12 +85,12 @@
                 <!-- All - Default Category -->
                 <p>
                     <input 
+                        checked
+                        disabled
                         :id="categories[0]" 
                         :value="categories[0]" 
                         type="checkbox" 
                         name="categories" 
-                        disabled
-                        checked
                     >
                     <label :for="categories[0]">{{ categories[0] }}</label>
                 </p>
@@ -158,6 +158,11 @@ export default {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
             };
 
+            console.log(encode({
+                    "form-name": "submit",
+                    ...this.form
+                }));
+
             this.$http.post(
                 "/submit",
                 encode({
@@ -167,10 +172,10 @@ export default {
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push({ name: "FormSuccess", query: { from: "success" } });
+                this.$router.push({ name: "FormSuccess", query: { from: "submit" } });
 			})
 			.catch(() => {
-                this.$router.push({ name: "FormFailure", query: { from: "success" } });
+                this.$router.push({ name: "FormFailure", query: { from: "submit" } });
 			});
         },
     },

@@ -79,9 +79,9 @@
 					:label="'Yes'"
 					type="'submit'"
 					name="Feedback:"
-					value="I like this product."
-					@clicked="feedback = 'I like this product.'"
+					@clicked="feedback = 'I like this product'"
 				>
+					<!-- value="I like this product." -->
 					Yes 👍
 				</app-button>
 				
@@ -89,9 +89,9 @@
 					:label="'No'"
 					type="'submit'"
 					name="Feedback:"
-					value="I don't like this product."
-					@clicked="feedback = 'I don\'t like this product.'"
+					@clicked="feedback = 'I don\'t like this product'"
 				>
+					<!-- value="I don't like this product." -->
 					No 👎
 				</app-button>
 			</div>
@@ -257,28 +257,31 @@ export default {
 		},
 		
 		// submit feedback
-        sendFeedback: function($event) {
+        sendFeedback: function() {
             const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
 			};
 			
-			console.log($event.target);
+			console.log(encode({
+                    "form-name": "feedback",
+                    "feedback": this.feedback
+                }));
 
             this.$http.post(
                 this.$route.path,
                 encode({
                     "form-name": "feedback",
-                    ...this.feedback
+                    "feedback": this.feedback
                 }),
                 axiosConfig
             )
 			.then(() => {
 				this.toggleFeedback(0);
-                this.$router.push({ name: "FormSuccess", query: { from: "feedback" } });
+                this.$router.push({ name: "FormSuccess" });
 			})
 			.catch(() => {
 				this.toggleFeedback(0);
-                this.$router.push({ name: "FormFailure", query: { from: "feedback" } });
+                this.$router.push({ name: "FormFailure" });
 			});
         },
 	},
