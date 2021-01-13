@@ -31,12 +31,12 @@ const routes = [
 			},
 			{
 				path: "success",
-				name: "Success",
+				name: "SubmitSuccess",
 				component: FormSuccess,
 			},
 			{
 				path: "failure",
-				name: "Failure",
+				name: "SubmitFailure",
 				component: FormFailure,
 			},
 		],
@@ -53,12 +53,12 @@ const routes = [
 			},
 			{
 				path: "success",
-				name: "Success",
+				name: "ReportSuccess",
 				component: FormSuccess,
 			},
 			{
 				path: "failure",
-				name: "Failure",
+				name: "ReportFailure",
 				component: FormFailure,
 			},
 		],

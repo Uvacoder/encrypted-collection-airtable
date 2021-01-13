@@ -214,7 +214,7 @@ export default {
 		return {
 			darkMode: this.darkTheme,
 			form: {
-				
+
 			}
 		}
 	},
@@ -275,10 +275,12 @@ export default {
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push({ name: "Success" });
+				this.toggleFeedback(0);
+                this.$router.push({ name: "ReportSuccess" });
 			})
 			.catch(() => {
-                this.$router.push({ name: "Failure" });
+				this.toggleFeedback(0);
+                this.$router.push({ name: "ReportFailure" });
 			});
         },
 	},

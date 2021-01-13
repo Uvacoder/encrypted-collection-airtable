@@ -100,10 +100,10 @@ export default {
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push({ name: "Success" });
+                this.$router.push({ name: "ReportSuccess" });
 			})
 			.catch(() => {
-                this.$router.push({ name: "Failure" });
+                this.$router.push({ name: "ReportFailure" });
 			});
         },
     }
