@@ -35,7 +35,7 @@
             </label>
 			
             <div>
-                <app-button :ofType="'submit'" :label="'Send Report'">
+                <app-button type="submit" :label="'Send Report'">
                     Report
                     <app-send-icon></app-send-icon>
                 </app-button>

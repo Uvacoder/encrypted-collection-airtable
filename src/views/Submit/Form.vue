@@ -108,7 +108,7 @@
             </fieldset>
 
             <div class="submit-btn">
-                <app-button :ofType="'submit'" :label="'Submit'">
+                <app-button type="submit" :label="'Submit'">
                     Submit
                     <app-send-icon></app-send-icon>
                 </app-button>

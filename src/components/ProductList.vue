@@ -61,7 +61,10 @@
 						:closingTaskTitle="'Reset Tag'"
 						@close-tag="resetFilter(0)"
 					></app-button-tag>
-					<app-chevron-down-icon @clicked="tagsHidden = !tagsHidden"></app-chevron-down-icon>
+					<app-chevron-down-icon 
+						:expanded="!tagsHidden"
+						@clicked="tagsHidden = !tagsHidden" 
+					></app-chevron-down-icon>
 				</div>
 				<div class="tag-list" v-show="!tagsHidden">
 					<app-button-tag
@@ -88,7 +91,10 @@
 						:closingTaskTitle="'Reset Category'"
 						@close-tag="resetFilter(1)"
 					></app-button-tag>
-					<app-chevron-down-icon @clicked="catsHidden = !catsHidden"></app-chevron-down-icon>
+					<app-chevron-down-icon 
+						@clicked="catsHidden = !catsHidden" 
+						:expanded="!catsHidden"
+					></app-chevron-down-icon>
 				</div>
 
 				<div class="tag-list" v-show="!catsHidden">

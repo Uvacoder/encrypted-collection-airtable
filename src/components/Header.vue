@@ -33,13 +33,14 @@
 				class="give-feedback"
 				:iconButton="true" 
 				:label="'Give Feedback'"
+				@clicked="toggleFeedback(1)"
 			>
 				<app-smile-icon></app-smile-icon>
 			</app-button>
 
 			<app-button
 				class="show-pages"
-				@clicked="showMenu"
+				@clicked="toggleMenu(1)"
 				:label="'Show List of Pages'"
 			>
 				Menu
@@ -49,14 +50,50 @@
 			<app-button
 				class="toggle-menu"
 				:iconButton="true" 
-				@clicked="showMenu"
+				@clicked="toggleMenu(1)"
 				:label="'Toggle Menu'"
 			>
 				<app-menu-icon></app-menu-icon>
 			</app-button>
 		</div>
 
-		<div class="overlay" ref="Overlay" @click="hideMenu"></div>
+		<div class="overlay" ref="Overlay" @click="toggleMenu(0); toggleFeedback(0)"></div>
+
+		<form 
+			method="POST"
+			name="feedback"
+			data-netlify="true"
+			ref="FeedbackModal"
+			class="feedback-modal" 
+			data-netlify-honeypot="bot-field"
+			@submit.prevent="sendFeedback"
+		>
+			<input type="hidden" name="form-name" value="feedback" />
+
+			<h3>
+				Do you like this website?
+			</h3>
+				
+			<div>
+				<app-button
+					:label="'Yes'"
+					type="'submit'"
+					name="Feedback:"
+					value="I like this product."
+				>
+					Yes 👍
+				</app-button>
+				
+				<app-button
+					:label="'No'"
+					type="'submit'"
+					name="Feedback:"
+					value="I don't like this product."
+				>
+					No 👎
+				</app-button>
+			</div>
+		</form>
 		
 		<div class='menu-list' ref="MenuList">
 			<div class="header">
@@ -78,6 +115,7 @@
 						class="give-feedback"
 						:iconButton="true" 
 						:label="'Give Feedback'"
+						@clicked="toggleFeedback(1)"
 					>
 						<app-smile-icon></app-smile-icon>
 					</app-button>
@@ -86,7 +124,7 @@
 						class="hide-pages"
 						:iconButton="true"
 						:label="'Hide List of Pages'"
-						@clicked="hideMenu"
+						@clicked="toggleMenu(0)"
 					>
 						<app-menu-alt-icon></app-menu-alt-icon>
 					</app-button>
@@ -96,7 +134,7 @@
 			<app-button-link
 				:path="'/about'"
 				:label="'Go to About Page'"
-				@clicked="hideMenu" 
+				@clicked="toggleMenu(0)" 
 			>
 				About
 				<app-info-icon></app-info-icon>
@@ -104,7 +142,7 @@
 			
 			<app-button-link
 				:path="'/submit'"
-				@clicked="hideMenu" 
+				@clicked="toggleMenu(0)" 
 				:label="'Go to Submission Page'"
 			>
 				Submit
@@ -114,7 +152,7 @@
 			<app-button-link
 				:path="'/report'"
 				:label="'Go to Report Page'"
-				@clicked="hideMenu" 
+				@clicked="toggleMenu(0)" 
 			>
 				Report
 				<app-danger-icon></app-danger-icon>
@@ -123,7 +161,7 @@
 			<app-button-link
 				:path="'/watchlist'"
 				:label="'Go to Watchlist Page'"
-				@clicked="hideMenu" 
+				@clicked="toggleMenu(0)" 
 			>
 				Watchlist
 				<app-eye-icon></app-eye-icon>
@@ -131,7 +169,7 @@
 
 			<app-button-link
 				:path="'/excluded'"
-				@clicked="hideMenu" 
+				@clicked="toggleMenu(0)" 
 				:label="'Go to Excluded Products Page'"
 			>
 				Excluded List
@@ -174,7 +212,10 @@ export default {
 	},
 	data() {
 		return {
-			darkMode: this.darkTheme
+			darkMode: this.darkTheme,
+			form: {
+				
+			}
 		}
 	},
 	methods: {
@@ -183,15 +224,62 @@ export default {
 			this.darkMode = !this.darkMode;
 			this.$emit('theme-change');
 		},
-		// hide side menu
-        hideMenu: function() {
-			this.$refs.MenuList.style.setProperty("transform", "translateX(100%)");
-			this.$refs.Overlay.style.setProperty("visibility", "hidden");
+		// toggle overlay visibility
+		toggleOverlay: function(toggle) {
+			if (toggle === 0) { // hide overlay
+				this.$refs.Overlay.style.setProperty("visibility", "hidden");
+			} else if (toggle === 1) { // show overlay
+				this.$refs.Overlay.style.setProperty("visibility", "visible");
+			}
 		},
-		// show side menu
-		showMenu: function() {
-			this.$refs.MenuList.style.setProperty("transform", "translateX(0)");
-			this.$refs.Overlay.style.setProperty("visibility", "visible");
+		// toggle side menu visibility
+        toggleMenu: function(toggle) {
+			if (toggle === 0) { // hide side menu
+				this.toggleOverlay(toggle)
+				this.$refs.MenuList.style.setProperty("transform", "translateX(100%)");
+			} else if (toggle === 1) { // show side menu
+				this.toggleOverlay(toggle)
+				this.$refs.MenuList.style.setProperty("transform", "translateX(0)");
+			}
+		},
+		// toggle feedback modal visibility
+        toggleFeedback: function(toggle) {
+			if (toggle === 0) { // hide feedback modal
+				this.toggleOverlay(toggle);
+				this.$refs.FeedbackModal.style.setProperty("visibility", "hidden");
+			} else if (toggle === 1) { // show feedback modal
+				this.toggleMenu(0);
+				this.toggleOverlay(toggle);
+				this.$refs.FeedbackModal.style.setProperty("visibility", "visible");
+			}
+		},
+		encode: function(data) {
+            return Object.keys(data)
+                .map(
+                key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+                )
+                .join("&");
+		},
+		
+        sendFeedback: function() {
+            const axiosConfig = {
+                header: { "Content-Type": "application/x-www-form-urlencoded" }
+            };
+
+            this.$http.post(
+                "/",
+                this.encode({
+                    "form-name": "feedback",
+                    ...this.form
+                }),
+                axiosConfig
+            )
+			.then(() => {
+                this.$router.push({ name: "Success" });
+			})
+			.catch(() => {
+                this.$router.push({ name: "Failure" });
+			});
         },
 	},
 	computed: {
@@ -319,8 +407,43 @@ html[data-theme='dark'] .app-logo img {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, .5);
+	background-color: rgba(0, 0, 0, .75);
 	visibility: hidden;
+}
+
+.feedback-modal {
+    width: 28rem;
+    height: 13rem;
+	z-index: 2;
+    position: fixed;
+    top: calc(50% - 6.5rem);
+    left: calc(50% - 14rem);
+	visibility: hidden;
+	border-radius: .65rem;
+	text-align: center;
+	padding: 2rem 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+    background-color: var(--background-color);
+    border: 3px solid var(--gray-border-color);
+	transition: all 0.2s ease-out, color 0s, background-color 0s;
+	-moz-transition: all 0.2s ease-out, color 0s, background-color 0s;
+	-webkit-transition: all 0.2s ease-out, color 0s, background-color 0s;
+}
+
+.feedback-modal h3 {
+	margin: 0;
+}
+
+.feedback-modal button {
+	width: 6rem;
+	display: inline-block;
+}
+
+.feedback-modal button:first-of-type {
+	margin-right: 3rem;
 }
 
 .menu-list {
@@ -333,7 +456,7 @@ html[data-theme='dark'] .app-logo img {
 	padding-top: 1rem;
 	transform: translateX(100%);
     background-color: var(--background-color);
-    border-left: 2px solid var(--gray-border-color);
+    border-left: 3px solid var(--gray-border-color);
 	transition: all 0.2s ease-out, color 0s, background-color 0s;
 	-moz-transition: all 0.2s ease-out, color 0s, background-color 0s;
 	-webkit-transition: all 0.2s ease-out, color 0s, background-color 0s;
@@ -453,6 +576,12 @@ html[data-theme='dark'] .app-logo img {
 @media only screen and (max-width: 480px) {
 	.menu-list {
 		width: 95%;
+	}
+
+	.feedback-modal {
+		width: 100%;
+		border-radius: 0;
+		left: 0;
 	}
 }
 </style>

@@ -5,7 +5,6 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import About from "@/views/About.vue";
 import Unfound from "@/views/404.vue";
-// import Report from "@/views/Report.vue";
 import Excluded from "@/views/Excluded.vue";
 import Watchlist from "@/views/Watchlist.vue";
 import SubmitForm from "@/views/Submit/Form.vue";
@@ -64,7 +63,6 @@ const routes = [
 			},
 		],
 	},
-	// { path: "/report", name: "Report", component: Report },
 	{ path: "/excluded", name: "Excluded", component: Excluded },
 	{ path: "/watchlist", name: "Watchlist", component: Watchlist },
 	{ path: "*", name: "404", component: Unfound },
