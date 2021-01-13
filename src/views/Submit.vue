@@ -158,11 +158,6 @@ export default {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
             };
 
-            console.log(encode({
-                    "form-name": "submit",
-                    ...this.form
-                }));
-
             this.$http.post(
                 "/submit",
                 encode({

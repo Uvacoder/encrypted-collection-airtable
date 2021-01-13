@@ -78,20 +78,20 @@
 				<app-button
 					:label="'Yes'"
 					type="'submit'"
-					name="feedback"
-					@clicked="feedback = 'I like this product'"
+					name="comment"
+					@clicked="comment = 'I like this product'"
+					value="I like this product."
 				>
-					<!-- value="I like this product." -->
 					Yes 👍
 				</app-button>
 				
 				<app-button
 					:label="'No'"
 					type="'submit'"
-					name="feedback"
-					@clicked="feedback = 'I don\'t like this product'"
+					name="comment"
+					@clicked="comment = 'I don\'t like this product'"
+					value="I don't like this product."
 				>
-					<!-- value="I don't like this product." -->
 					No 👎
 				</app-button>
 			</div>
@@ -217,7 +217,7 @@ export default {
 	data() {
 		return {
 			darkMode: this.darkTheme,
-			feedback: ""
+			comment: ""
 		}
 	},
 	methods: {
@@ -264,14 +264,14 @@ export default {
 			
 			console.log(encode({
                     "form-name": "feedback",
-                    "feedback": this.feedback
+                    "comment": this.comment
                 }));
 
             this.$http.post(
                 this.$route.path,
                 encode({
                     "form-name": "feedback",
-                    "feedback": this.feedback
+                    "comment": this.comment
                 }),
                 axiosConfig
             )
