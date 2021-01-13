@@ -103,8 +103,8 @@ export default {
 	border-bottom: 4px solid;	
 	border-radius: 0.5rem;
 	color: var(--text-color);
-    background-color: var(--filter-reset-bg-color);
-	border-color:  var(--filter-reset-border-color);
+    background-color: var(--yellow-black-bg-color);
+	border-color:  var(--yellow-black-border-color);
 }
 
 #about .links > :last-child svg {

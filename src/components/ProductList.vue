@@ -278,10 +278,10 @@ export default {
 	border-radius: 0.5rem;
 	margin: .75rem 0;
 	padding: .5rem;
-	background-color: var(--filter-reset-bg-color);
+	background-color: var(--yellow-black-bg-color);
 	border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);	
-	border-color:  var(--filter-reset-border-color);	
+	border-color:  var(--yellow-black-border-color);	
 }
 
 .product-list > .no-results {

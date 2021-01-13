@@ -16,7 +16,10 @@ export default {
     name: "Button",
     props: {
 		label: String,
-		ofType: String,
+		ofType:  {
+			type: String,
+			default: "button"
+		},
         iconButton: {
 			type: Boolean,
 			default: false

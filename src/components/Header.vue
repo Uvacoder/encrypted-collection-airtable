@@ -84,7 +84,7 @@
 
 					<app-button
 						class="hide-pages"
-						:iconButton="true" 
+						:iconButton="true"
 						:label="'Hide List of Pages'"
 						@clicked="hideMenu"
 					>
@@ -98,10 +98,28 @@
 				:label="'Go to About Page'"
 				@clicked="hideMenu" 
 			>
-				About Page
+				About
 				<app-info-icon></app-info-icon>
 			</app-button-link>
 			
+			<app-button-link
+				:path="'/submit'"
+				@clicked="hideMenu" 
+				:label="'Go to Submission Page'"
+			>
+				Submit
+				<app-add-icon></app-add-icon>
+			</app-button-link> 
+
+			<app-button-link
+				:path="'/report'"
+				:label="'Go to Report Page'"
+				@clicked="hideMenu" 
+			>
+				Report
+				<app-danger-icon></app-danger-icon>
+			</app-button-link>
+						
 			<app-button-link
 				:path="'/watchlist'"
 				:label="'Go to Watchlist Page'"
@@ -112,31 +130,13 @@
 			</app-button-link>
 
 			<app-button-link
-				:path="'/report'"
-				:label="'Go to Report Page'"
-				@clicked="hideMenu" 
-			>
-				Report Page
-				<app-danger-icon></app-danger-icon>
-			</app-button-link>
-
-			<app-button-link
 				:path="'/excluded'"
 				@clicked="hideMenu" 
 				:label="'Go to Excluded Products Page'"
 			>
 				Excluded List
 				<app-unavailable-icon></app-unavailable-icon>
-			</app-button-link>
-
-			<app-button-link
-				:path="'/submit'"
-				@clicked="hideMenu" 
-				:label="'Go to Submission Page'"
-			>
-				Submission Page
-				<app-add-icon></app-add-icon>
-			</app-button-link>        
+			</app-button-link>      
 		</div>
 	</nav>
 </template>
@@ -302,8 +302,8 @@ html[data-theme='dark'] .app-logo img {
 
 .nav-buttons > .give-feedback,
 .menu-list .header .menu-list-buttons > .give-feedback {
-	background-color: var(--filter-reset-bg-color);
-	border-color:  var(--filter-reset-border-color);
+	background-color: var(--yellow-black-bg-color);
+	border-color:  var(--yellow-black-border-color);
 }
 
 .nav-buttons > .toggle-menu {

@@ -346,8 +346,8 @@ export default {
     z-index: 0;
     bottom: 1.5rem;
     left: calc(50% - 2.75rem);
-	background-color: var(--filter-reset-bg-color);
-	border-color:  var(--filter-reset-border-color);	
+	background-color: var(--yellow-black-bg-color);
+	border-color:  var(--yellow-black-border-color);	
     box-shadow: 0px 5px 15px rgba(0, 0, 0, .15);
 }
 

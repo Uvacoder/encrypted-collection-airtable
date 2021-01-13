@@ -127,8 +127,8 @@ html {
 	--placeholder-text-color: #9da3a8;
 	--product-border-color: #ced4da;
 	--product-desc-text-color: #5d6470;
-	--filter-reset-bg-color: #f1c61b;
-	--filter-reset-border-color: #1c2024;
+	--yellow-black-bg-color: #f1c61b;
+	--yellow-black-border-color: #1c2024;
 }
 
 html[data-theme='dark'] {
@@ -143,8 +143,8 @@ html[data-theme='dark'] {
 	--placeholder-text-color: #7b828a;
 	--product-border-color: #495057;
 	--product-desc-text-color: #ced4da;
-	--filter-reset-bg-color: #1c2024;
-	--filter-reset-border-color: #f1c61b;
+	--yellow-black-bg-color: #1c2024;
+	--yellow-black-border-color: #f1c61b;
 }
 
 html,

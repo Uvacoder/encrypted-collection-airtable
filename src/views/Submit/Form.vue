@@ -3,13 +3,13 @@
         <form 
             method="POST"
             data-netlify="true"
-            name="new-product"
+            name="submit"
             data-netlify-honeypot="bot-field"
             @submit.prevent="handleSubmission"
         >
             <h2>Enter Product Details</h2>
 
-            <input type="hidden" name="form-name" value="new-product" />
+            <input type="hidden" name="form-name" value="submit" />
 
             <label for="name">
                 <abbr title="Required" aria-label="Required">*</abbr>
@@ -166,7 +166,7 @@ export default {
             this.$http.post(
                 "/submit",
                 this.encode({
-                    "form-name": "new-product",
+                    "form-name": "submit",
                     ...this.form
                 }),
                 axiosConfig
@@ -188,6 +188,17 @@ export default {
 
 
 <style scoped>
+* {
+    outline: none;
+}
+
+#submit {
+    padding: .5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
 #submit > form {
     width: 55%;
     max-width: 640px;
@@ -266,15 +277,9 @@ export default {
     cursor: not-allowed;
 }
 
-* {
-    outline: none;
-}
-
-#submit {
-    padding: .5rem;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+#submit > form button {
+    background-color: var(--yellow-black-bg-color);
+	border-color:  var(--yellow-black-border-color);
 }
 
 #submit > p {
