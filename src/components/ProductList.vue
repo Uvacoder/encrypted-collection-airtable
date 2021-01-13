@@ -119,9 +119,9 @@
 <script>
 import Button from "./Button.vue";
 import Product from "./Product.vue";
+import ButtonTag from "./ButtonTag.vue";
 import ListIcon from "./icons/ListIcon.vue";
 import ErrorIcon from "./icons/ErrorIcon.vue";
-import ButtonTag from "./ButtonTag.vue";
 import LoadingIcon from "./icons/LoadingIcon.vue";
 import ChevronDownIcon from "./icons/ChevronDownIcon.vue";
 import { isDefined, capitalizeWords } from '@/scripts/helpers';

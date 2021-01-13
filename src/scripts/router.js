@@ -7,10 +7,8 @@ import About from "@/views/About.vue";
 import Unfound from "@/views/404.vue";
 import Excluded from "@/views/Excluded.vue";
 import Watchlist from "@/views/Watchlist.vue";
-import SubmitForm from "@/views/Submit/Form.vue";
-import SubmitView from "@/views/Submit/View.vue";
-import ReportForm from "@/views/Report/Form.vue";
-import ReportView from "@/views/Report/View.vue";
+import Submit from "@/views/Submit.vue";
+import Report from "@/views/Report.vue";
 import FormFailure from "@/views/FormStatus/FormFailure.vue";
 import FormSuccess from "@/views/FormStatus/FormSuccess.vue";
 
@@ -19,50 +17,10 @@ Vue.use(VueRouter);
 const routes = [
 	{ path: "/", name: "Home", alias: "/all", component: Home },
 	{ path: "/about", name: "About", component: About },
-	{
-		path: "/submit",
-		name: "SubmitView",
-		component: SubmitView,
-		children: [
-			{
-				path: "",
-				name: "SubmitForm",
-				component: SubmitForm,
-			},
-			{
-				path: "success",
-				name: "SubmitSuccess",
-				component: FormSuccess,
-			},
-			{
-				path: "failure",
-				name: "SubmitFailure",
-				component: FormFailure,
-			},
-		],
-	},
-	{
-		path: "/report",
-		name: "ReportView",
-		component: ReportView,
-		children: [
-			{
-				path: "",
-				name: "ReportForm",
-				component: ReportForm,
-			},
-			{
-				path: "success",
-				name: "ReportSuccess",
-				component: FormSuccess,
-			},
-			{
-				path: "failure",
-				name: "ReportFailure",
-				component: FormFailure,
-			},
-		],
-	},
+	{ path: "/submit", name: "Submit", component: Submit },
+	{ path: "/report", name: "Report", component: Report },
+	{ path: "/success", name: "FormSuccess", component: FormSuccess },
+	{ path: "/failure", name: "FormFailure", component: FormFailure },
 	{ path: "/excluded", name: "Excluded", component: Excluded },
 	{ path: "/watchlist", name: "Watchlist", component: Watchlist },
 	{ path: "*", name: "404", component: Unfound },

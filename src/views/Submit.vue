@@ -128,10 +128,12 @@
 import Button from "@/components/Button.vue";
 import LinkIcon from "@/components/icons/LinkIcon.vue";
 import SendIcon from "@/components/icons/SendIcon.vue";
+
+import { encode } from '@/scripts/helpers';
 import { tags, categories } from "@/scripts/filters";
 
 export default {
-    name: 'SubmitForm',
+    name: 'Submit',
     components: {
         appButton: Button,
         appLinkIcon: LinkIcon,
@@ -151,13 +153,6 @@ export default {
         }
     },
     methods: {
-        encode: function(data) {
-            return Object.keys(data)
-                .map(
-                key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-                )
-                .join("&");
-        },
         handleFormSubmission: function() {
             const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
@@ -165,17 +160,17 @@ export default {
 
             this.$http.post(
                 "/submit",
-                this.encode({
+                encode({
                     "form-name": "submit",
                     ...this.form
                 }),
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push({ name: "SubmitSuccess" });
+                this.$router.push({ name: "FormSuccess", query: { from: "success" } });
 			})
 			.catch(() => {
-                this.$router.push({ name: "SubmitFailure" });
+                this.$router.push({ name: "FormFailure", query: { from: "success" } });
 			});
         },
     },

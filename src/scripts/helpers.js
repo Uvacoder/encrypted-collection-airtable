@@ -12,6 +12,16 @@ const scroll = () => {
 	});
 };
 
+// encoding used for form submissions
+const encode = (data) => {
+	return Object.keys(data)
+		.map(
+			(key) =>
+				`${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+		)
+		.join("&");
+};
+
 // identify whether the current browser is Internet Explorer
 const isIE = () => {
 	const ua = navigator.userAgent;
@@ -68,6 +78,7 @@ const highlightQuery = (str, query) => {
 
 export {
 	isIE,
+	encode,
 	scroll,
 	isDefined,
 	capitalizeWords,

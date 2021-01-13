@@ -63,8 +63,10 @@ import Button from "@/components/Button.vue";
 import LinkIcon from "@/components/icons/LinkIcon.vue";
 import SendIcon from "@/components/icons/SendIcon.vue";
 
+import { encode } from '@/scripts/helpers';
+
 export default {
-    name: 'ReportForm',
+    name: 'Report',
     components: {
         appButton: Button,
         appLinkIcon: LinkIcon,
@@ -79,13 +81,6 @@ export default {
         }
     },
     methods: {
-        encode: function(data) {
-            return Object.keys(data)
-                .map(
-                key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-                )
-                .join("&");
-        },
         handleFormSubmission: function() {
             const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
@@ -93,17 +88,17 @@ export default {
 
             this.$http.post(
                 "/report",
-                this.encode({
+                encode({
                     "form-name": "report",
                     ...this.form
                 }),
                 axiosConfig
             )
 			.then(() => {
-                this.$router.push({ name: "ReportSuccess" });
+                this.$router.push({ name: "FormSuccess", query: { from: "report" } });
 			})
 			.catch(() => {
-                this.$router.push({ name: "ReportFailure" });
+                this.$router.push({ name: "FormFailure", query: { from: "report" } });
 			});
         },
     }
@@ -213,11 +208,8 @@ export default {
 }
 
 #report > p ul {
-    list-style-type: square;
-}
-
-#report > p ul {
     list-style: none;
+    text-align: left;
 }
 
 #report > p ul li::before {
@@ -258,7 +250,6 @@ export default {
 
     #report > p {
         width: 80%;
-        text-align: center;
         margin: 0 0 2rem 0;
     }
 }

@@ -195,6 +195,8 @@ import DangerIcon from "./icons/DangerIcon.vue";
 import MenuAltIcon from "./icons/MenuAltIcon.vue";
 import UnavailableIcon from "./icons/UnavailableIcon.vue";
 
+import { encode } from '@/scripts/helpers';
+
 export default {
 	name: "Header",
 	props: ["darkTheme"],
@@ -253,14 +255,8 @@ export default {
 				this.$refs.FeedbackModal.style.setProperty("visibility", "visible");
 			}
 		},
-		encode: function(data) {
-            return Object.keys(data)
-                .map(
-                key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-                )
-                .join("&");
-		},
 		
+		// submit feedback
         sendFeedback: function($event) {
             const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
@@ -270,7 +266,7 @@ export default {
 
             this.$http.post(
                 this.$route.path,
-                this.encode({
+                encode({
                     "form-name": "feedback",
                     ...this.feedback
                 }),
@@ -278,11 +274,11 @@ export default {
             )
 			.then(() => {
 				this.toggleFeedback(0);
-                this.$router.push({ name: "ReportSuccess" });
+                this.$router.push({ name: "FormSuccess", query: { from: "feedback" } });
 			})
 			.catch(() => {
 				this.toggleFeedback(0);
-                this.$router.push({ name: "ReportFailure" });
+                this.$router.push({ name: "FormFailure", query: { from: "feedback" } });
 			});
         },
 	},
