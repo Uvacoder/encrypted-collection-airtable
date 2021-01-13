@@ -80,6 +80,7 @@
 					type="'submit'"
 					name="Feedback:"
 					value="I like this product."
+					@clicked="feedback = 'I like this product.'"
 				>
 					Yes 👍
 				</app-button>
@@ -89,6 +90,7 @@
 					type="'submit'"
 					name="Feedback:"
 					value="I don't like this product."
+					@clicked="feedback = 'I don\'t like this product.'"
 				>
 					No 👎
 				</app-button>
@@ -213,9 +215,7 @@ export default {
 	data() {
 		return {
 			darkMode: this.darkTheme,
-			form: {
-
-			}
+			feedback: ""
 		}
 	},
 	methods: {
@@ -261,16 +261,18 @@ export default {
                 .join("&");
 		},
 		
-        sendFeedback: function() {
+        sendFeedback: function($event) {
             const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
-            };
+			};
+			
+			console.log($event.target);
 
             this.$http.post(
-                "/",
+                this.$route.path,
                 this.encode({
                     "form-name": "feedback",
-                    ...this.form
+                    ...this.feedback
                 }),
                 axiosConfig
             )
@@ -292,7 +294,7 @@ export default {
 	watch: {
 		darkTheme: function(value) {
 			this.darkMode = value;
-		},
+		}
 	}
 };
 </script>

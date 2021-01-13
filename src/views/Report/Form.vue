@@ -5,7 +5,7 @@
             data-netlify="true"
             name="report"
             data-netlify-honeypot="bot-field"
-            @submit.prevent="handleSubmission"
+            @submit.prevent="handleFormSubmission"
         >
             <h2>Enter Product Details</h2>
 
@@ -86,7 +86,7 @@ export default {
                 )
                 .join("&");
         },
-        handleSubmission: function() {
+        handleFormSubmission: function() {
             const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
             };
