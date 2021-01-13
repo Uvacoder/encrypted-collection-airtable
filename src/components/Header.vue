@@ -78,7 +78,7 @@
 				<app-button
 					:label="'Yes'"
 					type="'submit'"
-					name="Feedback:"
+					name="feedback"
 					@clicked="feedback = 'I like this product'"
 				>
 					<!-- value="I like this product." -->
@@ -88,7 +88,7 @@
 				<app-button
 					:label="'No'"
 					type="'submit'"
-					name="Feedback:"
+					name="feedback"
 					@clicked="feedback = 'I don\'t like this product'"
 				>
 					<!-- value="I don't like this product." -->

@@ -11,23 +11,23 @@
 
             <input type="hidden" name="form-name" value="report" />
 
-            <label for="name">
+            <label for="pname">
                 Name of the Product You Want to Report: 
                 <input 
-                    id="name" 
+                    id="pname" 
                     type="text" 
-                    name="name" 
+                    name="pname" 
                     placeholder="Product Name"
                     v-model="form.pname"
                 >
             </label>    
 			
-			<label for="desc">
+			<label for="message">
                 <abbr title="Required" aria-label="Required">*</abbr>    
                 Message: 
                 <textarea 
-                    id="desc" 
-                    name="desc" 
+                    id="message" 
+                    name="message" 
                     required
                     v-model="form.message"
                     placeholder="In detail, describe your issue with either the webiste or a product..."
