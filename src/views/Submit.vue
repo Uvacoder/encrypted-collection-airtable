@@ -54,7 +54,7 @@
                     Tags <span>(Optional)</span>:
                 </legend>  
 
-                <label hidden>Tags: </label>
+                <!-- <label hidden>Tags: </label> -->
 
                 <!-- All - Default Tag -->
                 <p>
@@ -86,7 +86,7 @@
                     Categories <span>(Optional)</span>:
                 </legend>
 
-                <label hidden>Categories: </label>
+                <!-- <label hidden>Categories: </label> -->
 
                 <!-- All - Default Category -->
                 <p>

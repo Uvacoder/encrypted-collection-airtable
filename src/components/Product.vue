@@ -12,7 +12,7 @@
 				<p class="product-desc" ref="pDesc" v-html="product.desc"></p>
 			</div>
 			<div class="product-link">
-				<a title="Go To Product Website" aria-label="Go To Product Website" target="_blank" rel="noopener" :href="`${product.url}/?EncryptedList`">
+				<a title="Go To Product Website" aria-label="Go To Product Website" target="_blank" rel="noopener" :href="`${product.url}?ref=EncryptedList`">
 					<app-external-icon></app-external-icon>
 				</a>
 			</div>

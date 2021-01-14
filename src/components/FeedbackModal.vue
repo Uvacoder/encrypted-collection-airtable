@@ -13,14 +13,16 @@
 				Do you like this website?
 			</h3>
 
-			<fieldset name="comment" @change="$emit('submitted', $event)">      
-					<label for="pos_comment">
-                        <input hidden type="radio" value="It's amazing!" name="comment" id="pos_comment">
+            <label for="Feedback" hidden>Tags: </label>
+
+			<fieldset id="Feedback" @change="$emit('submitted', $event)">      
+					<label for="comment">
+                        <input hidden type="radio" value="It's amazing!" name="comment" id="comment">
                         Amazing 👏
                     </label>
 
-					<label for="neg_comment">
-                        <input hidden type="radio" value="It's just okay!" name="comment" id="neg_comment">
+					<label for="comment">
+                        <input hidden type="radio" value="It's just okay!" name="comment" id="comment">
                         Just Ok 👍
                     </label>
 			</fieldset>
