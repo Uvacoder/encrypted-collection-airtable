@@ -41,10 +41,10 @@ export default {
         appCheckIcon: CheckIcon,
         appButtonLink: ButtonLink,
     },
-    computed: {
-        previous: function() {
-            return this.$route.query.from.toLowerCase();
-        },
+    beforeRouteEnter (to, from, next) {
+        next(vm => {
+            vm.previous = from.path.toLowerCase();
+        });
     },
 }
 </script>

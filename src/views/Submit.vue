@@ -61,7 +61,7 @@
                         :id="tags[0]" 
                         :value="tags[0]" 
                         type="checkbox" 
-                        name="categories" 
+                        :name="tags[0]" 
                     >
                     <label :for="tags[0]">{{ tags[0] }}</label>
                 </p>
@@ -69,7 +69,7 @@
                 <p v-for="(tag, index) in tags.slice(1)" :key="index">
                     <input 
                         :id="tag" 
-                        name="tags" 
+                        :name="tag" 
                         :value="tag" 
                         type="checkbox"
                         v-model="form.tags"
@@ -90,7 +90,7 @@
                         :id="categories[0]" 
                         :value="categories[0]" 
                         type="checkbox" 
-                        name="categories" 
+                        :name="categories[0]" 
                     >
                     <label :for="categories[0]">{{ categories[0] }}</label>
                 </p>
@@ -100,14 +100,14 @@
                         :id="cat" 
                         :value="cat" 
                         type="checkbox" 
-                        name="categories"
+                        :name="cat"
                         v-model="form.categories"
                     >
                     <label :for="cat">{{ cat }}</label>
                 </p>
             </fieldset>
 
-            <div class="submit-btn">
+            <div>
                 <app-button type="submit" :label="'Submit'">
                     Submit
                     <app-send-icon></app-send-icon>

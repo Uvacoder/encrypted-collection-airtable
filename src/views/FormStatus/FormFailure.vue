@@ -42,19 +42,7 @@ export default {
 		appClearIcon: ClearIcon,
         appButtonLink: ButtonLink,
     },
-    data() {
-        return {
-            previous: "previous"
-        }
-    },
-    computed: {
-        // previous: function() {
-        //     // console.log(this.$route);
-        //     return this.$route.query.from.toLowerCase();
-        // },
-    },
     beforeRouteEnter (to, from, next) {
-        // console.log(from.path.toLowerCase());
         next(vm => {
             vm.previous = from.path.toLowerCase();
         });

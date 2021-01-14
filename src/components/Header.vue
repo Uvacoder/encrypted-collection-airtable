@@ -73,10 +73,30 @@
 			<h3>
 				Do you like this website?
 			</h3>
+
+			<fieldset name="comment">      
+                <legend>
+                    Categories <span>(Optional)</span>:
+                </legend>
+
+				<p>
+					<input type="radio" value="I like it!" name="comment" id="pos_comment">
+					<label for="pos_comment">I like it!</label>
+				</p>
+
+				<p>
+					<input type="radio" value="I don't like it!" name="comment" id="neg_comment">
+					<label for="neg_comment">I don't like it!</label>
+				</p>
+			</fieldset>	
 				
 			<div>
-				<label for="pos_comment"></label>
-				<app-button
+				<app-button type="submit" :label="'Submit'">
+                    Submit
+                    <app-send-icon></app-send-icon>
+                </app-button>
+				<!-- <label for="pos_comment"></label> -->
+				<!-- <app-button
 					:label="'Yes'"
 					type="'submit'"
 					id="pos_comment"
@@ -85,10 +105,10 @@
 					value="I like this product."
 				>
 					Yes 👍
-				</app-button>
+				</app-button> -->
 				
-				<label for="neg_comment"></label>
-				<app-button
+				<!-- <label for="neg_comment"></label> -->
+				<!-- <app-button
 					:label="'No'"
 					type="'submit'"
 					id="neg_comment"
@@ -97,7 +117,7 @@
 					value="I don't like this product."
 				>
 					No 👎
-				</app-button>
+				</app-button> -->
 			</div>
 		</form>
 		
