@@ -75,20 +75,24 @@
 			</h3>
 				
 			<div>
+				<label for="pos_comment"></label>
 				<app-button
 					:label="'Yes'"
 					type="'submit'"
-					name="positive_comment"
+					id="pos_comment"
+					name="pos_comment"
 					@clicked="updateComment"
 					value="I like this product."
 				>
 					Yes 👍
 				</app-button>
 				
+				<label for="neg_comment"></label>
 				<app-button
 					:label="'No'"
 					type="'submit'"
-					name="negative_comment"
+					id="neg_comment"
+					name="neg_comment"
 					@clicked="updateComment"
 					value="I don't like this product."
 				>
