@@ -13,16 +13,19 @@
 				Do you like this website?
 			</h3>
 
-            <label for="Feedback" hidden>Tags: </label>
-
-			<fieldset id="Feedback" @change="$emit('submitted', $event)">      
-					<label for="comment">
-                        <input hidden type="radio" value="It's amazing!" name="comment" id="comment">
+			<fieldset @change="$emit('submitted', $event)">      
+                    <label for="comment">
+                        Feedback:
+                        <input type="radio" id="comment" hidden>
+                    </label>
+                
+					<label for="pos_comment">
+                        <input hidden type="radio" value="It's amazing!" name="comment" id="pos_comment">
                         Amazing 👏
                     </label>
 
-					<label for="comment">
-                        <input hidden type="radio" value="It's just okay!" name="comment" id="comment">
+					<label for="neg_comment">
+                        <input hidden type="radio" value="It's just okay!" name="comment" id="neg_comment">
                         Just Ok 👍
                     </label>
 			</fieldset>
@@ -158,7 +161,11 @@ export default {
 }
 
 #FeedbackModal .feedback-form > fieldset label:first-of-type {
-	margin-right: 3rem;
+    display: none;
+}
+
+#FeedbackModal .feedback-form > fieldset label:last-of-type {
+	margin-left: 3rem;
 }
 
 @media only screen and (max-width: 540px) {
