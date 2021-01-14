@@ -33,14 +33,14 @@
 				class="give-feedback"
 				:iconButton="true" 
 				:label="'Give Feedback'"
-				@clicked="toggleFeedback(1)"
+				@clicked="showFeedbackModal(true)"
 			>
 				<app-smile-icon></app-smile-icon>
 			</app-button>
 
 			<app-button
 				class="show-pages"
-				@clicked="toggleMenu(1)"
+				@clicked="showMenuList(true)"
 				:label="'Show List of Pages'"
 			>
 				Menu
@@ -50,78 +50,26 @@
 			<app-button
 				class="toggle-menu"
 				:iconButton="true" 
-				@clicked="toggleMenu(1)"
+				@clicked="showMenuList(true)"
 				:label="'Toggle Menu'"
 			>
 				<app-menu-icon></app-menu-icon>
 			</app-button>
 		</div>
 
-		<div class="overlay" ref="Overlay" @click="toggleMenu(0); toggleFeedback(0)"></div>
+		<div 
+			@click="showOverlay(false)"
+			:class="['overlay', { 'visible' : overlayVisible }]"
+		></div>
 
-		<form 
-			method="POST"
-			name="feedback"
-			data-netlify="true"
-			ref="FeedbackModal"
-			class="feedback-modal" 
-			data-netlify-honeypot="bot-field"
-			@submit.prevent="sendFeedback"
-		>
-			<input type="hidden" name="form-name" value="feedback" />
-
-			<h3>
-				Do you like this website?
-			</h3>
-
-			<fieldset name="comment">      
-                <legend>
-                    Categories <span>(Optional)</span>:
-                </legend>
-
-				<p>
-					<input type="radio" value="I like it!" name="comment" id="pos_comment">
-					<label for="pos_comment">I like it!</label>
-				</p>
-
-				<p>
-					<input type="radio" value="I don't like it!" name="comment" id="neg_comment">
-					<label for="neg_comment">I don't like it!</label>
-				</p>
-			</fieldset>	
-				
-			<div>
-				<app-button type="submit" :label="'Submit'">
-                    Submit
-                    <app-send-icon></app-send-icon>
-                </app-button>
-				<!-- <label for="pos_comment"></label> -->
-				<!-- <app-button
-					:label="'Yes'"
-					type="'submit'"
-					id="pos_comment"
-					name="pos_comment"
-					@clicked="updateComment"
-					value="I like this product."
-				>
-					Yes 👍
-				</app-button> -->
-				
-				<!-- <label for="neg_comment"></label> -->
-				<!-- <app-button
-					:label="'No'"
-					type="'submit'"
-					id="neg_comment"
-					name="neg_comment"
-					@clicked="updateComment"
-					value="I don't like this product."
-				>
-					No 👎
-				</app-button> -->
-			</div>
-		</form>
+		<app-feedback-modal 
+			:hidden="feedbackModal.hidden"
+			:status="feedbackModal.status"
+			@submitted="sendFeedback($event)"
+			@close-modal="showFeedbackModal(false)"
+		></app-feedback-modal>
 		
-		<div class='menu-list' ref="MenuList">
+		<div :class="['menu-list', { 'shown' : menuShown }]">
 			<div class="header">
 				<h2 class="desktop-header-title">Navigate To</h2>
 				<h2 class="mobile-header-title">Menu</h2>
@@ -141,7 +89,7 @@
 						class="give-feedback"
 						:iconButton="true" 
 						:label="'Give Feedback'"
-						@clicked="toggleFeedback(1)"
+						@clicked="showFeedbackModal(true)"
 					>
 						<app-smile-icon></app-smile-icon>
 					</app-button>
@@ -150,7 +98,7 @@
 						class="hide-pages"
 						:iconButton="true"
 						:label="'Hide List of Pages'"
-						@clicked="toggleMenu(0)"
+						@clicked="showMenuList(false)"
 					>
 						<app-menu-alt-icon></app-menu-alt-icon>
 					</app-button>
@@ -160,7 +108,7 @@
 			<app-button-link
 				:path="'/about'"
 				:label="'Go to About Page'"
-				@clicked="toggleMenu(0)" 
+				@clicked="showMenuList(false)" 
 			>
 				About
 				<app-info-icon></app-info-icon>
@@ -168,7 +116,7 @@
 			
 			<app-button-link
 				:path="'/submit'"
-				@clicked="toggleMenu(0)" 
+				@clicked="showMenuList(false)" 
 				:label="'Go to Submission Page'"
 			>
 				Submit
@@ -178,7 +126,7 @@
 			<app-button-link
 				:path="'/report'"
 				:label="'Go to Report Page'"
-				@clicked="toggleMenu(0)" 
+				@clicked="showMenuList(false)" 
 			>
 				Report
 				<app-danger-icon></app-danger-icon>
@@ -187,7 +135,7 @@
 			<app-button-link
 				:path="'/watchlist'"
 				:label="'Go to Watchlist Page'"
-				@clicked="toggleMenu(0)" 
+				@clicked="showMenuList(false)" 
 			>
 				Watchlist
 				<app-eye-icon></app-eye-icon>
@@ -195,7 +143,7 @@
 
 			<app-button-link
 				:path="'/excluded'"
-				@clicked="toggleMenu(0)" 
+				@clicked="showMenuList(false)" 
 				:label="'Go to Excluded Products Page'"
 			>
 				Excluded List
@@ -213,6 +161,7 @@ import EyeIcon from "./icons/EyeIcon.vue";
 import SunIcon from "./icons/SunIcon.vue";
 import MoonIcon from "./icons/MoonIcon.vue";
 import MenuIcon from "./icons/MenuIcon.vue";
+import FeedbackModal from "./FeedbackModal.vue";
 import InfoIcon from "./icons/InfoIcon.vue";
 import SmileIcon from "./icons/SmileIcon.vue";
 import DangerIcon from "./icons/DangerIcon.vue";
@@ -232,6 +181,7 @@ export default {
 		appMoonIcon: MoonIcon,
 		appMenuIcon: MenuIcon,
 		appInfoIcon: InfoIcon,
+		appFeedbackModal: FeedbackModal,
 		appSmileIcon: SmileIcon,
 		appDangerIcon: DangerIcon,
 		appButtonLink: ButtonLink,
@@ -241,7 +191,12 @@ export default {
 	data() {
 		return {
 			darkMode: this.darkTheme,
-			comment: ""
+			feedbackModal: {
+				status: 0,
+				hidden: true
+			},
+			menuShown: false,
+			overlayVisible: false
 		}
 	},
 	methods: {
@@ -251,76 +206,70 @@ export default {
 			this.$emit('theme-change');
 		},
 		// toggle overlay visibility
-		toggleOverlay: function(toggle) {
-			if (toggle === 0) { // hide overlay
-				this.$refs.Overlay.style.setProperty("visibility", "hidden");
-			} else if (toggle === 1) { // show overlay
-				this.$refs.Overlay.style.setProperty("visibility", "visible");
-			}
+		showOverlay: function(show) {
+			this.overlayVisible = show;
 		},
-		// toggle side menu visibility
-        toggleMenu: function(toggle) {
-			if (toggle === 0) { // hide side menu
-				this.toggleOverlay(toggle)
-				this.$refs.MenuList.style.setProperty("transform", "translateX(100%)");
-			} else if (toggle === 1) { // show side menu
-				this.toggleOverlay(toggle)
-				this.$refs.MenuList.style.setProperty("transform", "translateX(0)");
-			}
+		// toggle side menu visibility with overlay
+        showMenuList: function(show) {
+			this.menuShown = show;
+			this.showOverlay(show);
 		},
-		// toggle feedback modal visibility
-        toggleFeedback: function(toggle) {
-			if (toggle === 0) { // hide feedback modal
-				this.toggleOverlay(toggle);
-				this.$refs.FeedbackModal.style.setProperty("visibility", "hidden");
-			} else if (toggle === 1) { // show feedback modal
-				this.toggleMenu(0);
-				this.toggleOverlay(toggle);
-				this.$refs.FeedbackModal.style.setProperty("visibility", "visible");
+		// toggle feedback modal visibility with overlay
+		showFeedbackModal: function(show) {
+			if (show) { // show
+				this.showMenuList(false); // hide menu if shown
+				this.feedbackModal.hidden = !show;
 			}
-		},
-		// update comment value
-		updateComment: function(e) {
-			this.comment = e.target.value;
+			
+			this.showOverlay(show);
 		},
 		// submit feedback
-        sendFeedback: function() {
+        sendFeedback: function($event) {
+			$event.preventDefault();
+
             const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
 			};
-			
-			console.log(encode({
-                    "form-name": "feedback",
-                    "comment": this.comment
-                }));
 
+			// send the feedback
             this.$http.post(
                 this.$route.path,
                 encode({
                     "form-name": "feedback",
-                    "comment": this.comment
+                    "comment": $event.target.value
                 }),
                 axiosConfig
             )
 			.then(() => {
-				this.toggleFeedback(0);
-                this.$router.push({ name: "FormSuccess" });
+				// reset form and show success message
+				$event.target.form.reset();
+				this.feedbackModal.status = 1;
 			})
 			.catch(() => {
-				this.toggleFeedback(0);
-                this.$router.push({ name: "FormFailure" });
+				// reset form and show failure message
+				$event.target.form.reset();
+				this.feedbackModal.status = 2;
 			});
         },
 	},
 	computed: {
 		headerTitle: function() {
 			return this.$store.state.headerTitle;
-		},
+		}
 	},
 	watch: {
 		darkTheme: function(value) {
 			this.darkMode = value;
-		}
+		},
+		"feedbackModal.hidden": function() {
+			this.feedbackModal.status = 0;
+		},
+		overlayVisible: function(value) {
+			if (!value) {
+				this.menuShown = false;
+				this.feedbackModal.hidden = true;
+			}
+		},
 	}
 };
 </script>
@@ -441,39 +390,8 @@ html[data-theme='dark'] .app-logo img {
 	visibility: hidden;
 }
 
-.feedback-modal {
-    width: 28rem;
-    height: 13rem;
-	z-index: 2;
-    position: fixed;
-    top: calc(50% - 6.5rem);
-    left: calc(50% - 14rem);
-	visibility: hidden;
-	border-radius: .65rem;
-	text-align: center;
-	padding: 2rem 1rem;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
-    background-color: var(--background-color);
-    border: 3px solid var(--gray-border-color);
-	transition: all 0.2s ease-out, color 0s, background-color 0s;
-	-moz-transition: all 0.2s ease-out, color 0s, background-color 0s;
-	-webkit-transition: all 0.2s ease-out, color 0s, background-color 0s;
-}
-
-.feedback-modal h3 {
-	margin: 0;
-}
-
-.feedback-modal button {
-	width: 6rem;
-	display: inline-block;
-}
-
-.feedback-modal button:first-of-type {
-	margin-right: 3rem;
+.overlay.visible {
+	visibility: visible;
 }
 
 .menu-list {
@@ -490,6 +408,10 @@ html[data-theme='dark'] .app-logo img {
 	transition: all 0.2s ease-out, color 0s, background-color 0s;
 	-moz-transition: all 0.2s ease-out, color 0s, background-color 0s;
 	-webkit-transition: all 0.2s ease-out, color 0s, background-color 0s;
+}
+
+.menu-list.shown {
+	transform: translateX(0);
 }
 
 .menu-list > * {
@@ -606,12 +528,6 @@ html[data-theme='dark'] .app-logo img {
 @media only screen and (max-width: 480px) {
 	.menu-list {
 		width: 95%;
-	}
-
-	.feedback-modal {
-		width: 100%;
-		border-radius: 0;
-		left: 0;
 	}
 }
 </style>

@@ -12,7 +12,7 @@
             <input type="hidden" name="form-name" value="report" />
 
             <label for="pname">
-                Name of the Product You Want to Report: 
+                Name of Product You Want to Report (If applicable): 
                 <input 
                     id="pname" 
                     type="text" 

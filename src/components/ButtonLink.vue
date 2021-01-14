@@ -14,7 +14,13 @@
 <script>
 export default {
     name: "ButtonLink",
-    props: ["path", "label"]
+    props: {
+        path: {
+            type: String,
+            default: "/"
+        },
+        label: String
+    }
 }
 </script>
 

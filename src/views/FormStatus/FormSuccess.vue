@@ -41,6 +41,11 @@ export default {
         appCheckIcon: CheckIcon,
         appButtonLink: ButtonLink,
     },
+    data() {
+        return {
+            previous: "/"
+        }
+    },
     beforeRouteEnter (to, from, next) {
         next(vm => {
             vm.previous = from.path.toLowerCase();

@@ -42,6 +42,11 @@ export default {
 		appClearIcon: ClearIcon,
         appButtonLink: ButtonLink,
     },
+    data() {
+        return {
+            previous: "/"
+        }
+    },
     beforeRouteEnter (to, from, next) {
         next(vm => {
             vm.previous = from.path.toLowerCase();

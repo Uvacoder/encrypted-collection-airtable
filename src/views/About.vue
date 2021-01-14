@@ -80,9 +80,6 @@ export default {
     justify-content: flex-start;
 }
 
-#about .links > a {
-}
-
 #about .links > :first-child {
     width: 8rem;
     margin-right: 1rem;
@@ -91,7 +88,7 @@ export default {
 #about .links > :last-child {
     width: 7.5rem;
     margin: 0;
-	height: 2.5rem;
+	height: 3rem;
     font-size: 1rem;
     cursor: pointer;
 	padding: 0 .75rem;
