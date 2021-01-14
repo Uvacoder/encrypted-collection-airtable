@@ -78,8 +78,8 @@
 				<app-button
 					:label="'Yes'"
 					type="'submit'"
-					name="comment"
-					@clicked="comment = 'I like this product'"
+					name="positive_comment"
+					@clicked="updateComment"
 					value="I like this product."
 				>
 					Yes 👍
@@ -88,8 +88,8 @@
 				<app-button
 					:label="'No'"
 					type="'submit'"
-					name="comment"
-					@clicked="comment = 'I don\'t like this product'"
+					name="negative_comment"
+					@clicked="updateComment"
 					value="I don't like this product."
 				>
 					No 👎
@@ -255,7 +255,10 @@ export default {
 				this.$refs.FeedbackModal.style.setProperty("visibility", "visible");
 			}
 		},
-		
+		// update comment value
+		updateComment: function(e) {
+			this.comment = e.target.value;
+		},
 		// submit feedback
         sendFeedback: function() {
             const axiosConfig = {

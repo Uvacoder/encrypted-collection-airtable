@@ -2,7 +2,7 @@
     <button
         :title="label"
         :aria-label="label"
-        @click="$emit('clicked')"
+        @click="$emit('clicked', $event)"
         :class="['button', { 'icon-button' : iconButton }]"
     >
         <slot></slot>
