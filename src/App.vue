@@ -111,6 +111,7 @@ export default {
 	--lightgray-bg-color: #ced4da;
 	--highlight-text-color: #1c2024;
 	--primary-red-color: #fa5252;
+	--alternate-red-color: #e03131;
 	--primary-green-color: #51cf66;
 	--primary-yellow-color: #f1c61b;
 }

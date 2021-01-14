@@ -1,5 +1,6 @@
 <template>
 	<nav id="header">
+		<!-- brief website info: logo, name, description -->
 		<router-link class="app-info nav-left" ref="navLeft" :to="{ path: '/' }">
 			<div class="app-logo">
 				<picture>
@@ -18,6 +19,7 @@
 			</div>
 		</router-link>
 		
+		<!-- main nav buttons -->
 		<div class="nav-buttons">
 			<app-button
 				class="change-theme"
@@ -57,11 +59,13 @@
 			</app-button>
 		</div>
 
+		<!-- transparent overlay -->
 		<div 
 			@click="showOverlay(false)"
 			:class="['overlay', { 'visible' : overlayVisible }]"
 		></div>
 
+		<!-- feedback modal popup -->
 		<app-feedback-modal 
 			:hidden="feedbackModal.hidden"
 			:status="feedbackModal.status"
@@ -69,6 +73,7 @@
 			@close-modal="showFeedbackModal(false)"
 		></app-feedback-modal>
 		
+		<!-- hidden-by-default list of menu items -->
 		<div :class="['menu-list', { 'shown' : menuShown }]">
 			<div class="header">
 				<h2 class="desktop-header-title">Navigate To</h2>

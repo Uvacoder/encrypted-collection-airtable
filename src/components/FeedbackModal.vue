@@ -14,12 +14,7 @@
 			</h3>
 
 			<fieldset @change="$emit('submitted', $event)">      
-                    <label for="comment">
-                        Feedback:
-                        <input type="radio" id="comment" hidden>
-                    </label>
-                
-					<label for="pos_comment">
+                    <label for="pos_comment">
                         <input hidden type="radio" value="It's amazing!" name="comment" id="pos_comment">
                         Amazing 👏
                     </label>
@@ -158,10 +153,6 @@ export default {
 	display: inline-block;
     border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);	
-}
-
-#FeedbackModal .feedback-form > fieldset label:first-of-type {
-    display: none;
 }
 
 #FeedbackModal .feedback-form > fieldset label:last-of-type {

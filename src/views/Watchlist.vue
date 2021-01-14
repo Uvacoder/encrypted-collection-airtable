@@ -112,7 +112,9 @@ export default {
         },
         // detect list reaching top of viewport
 		setScrollOffset: function() {
-            this.scrollOffset = (this.$refs.list.$el.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+            if (this.$route.path.toLowerCase() === "/watchlist") {
+                this.scrollOffset = (this.$refs.list.$el.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+			}
         }
     },
     created() {

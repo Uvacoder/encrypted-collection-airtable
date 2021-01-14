@@ -19,10 +19,12 @@
 		</div>
 		<div class="product-tags">
 			<app-button-tag
-				v-for="(tag, index) in product.tags" 
+				v-for="(tag, index) in product.tags.slice(1)" 
 				:key="index" 
 				:value="tag"
 				@clicked="filterWith(tag)"
+				:class="{ 'warn' : tag === 'opt-in' }"
+				:title="(tag === 'opt-in') ? 'Beware!' : ''"
 			>{{ tag }}</app-button-tag>
 		</div>
 	</div>
@@ -162,5 +164,10 @@ export default {
 
 .product-tags button {
 	margin: 0 0.5rem 0.5rem 0;
+}
+
+.product-tags .warn {
+	color: #ffffff;
+	background-color: var(--alternate-red-color);
 }
 </style>

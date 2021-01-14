@@ -183,11 +183,19 @@ export default {
 		},
 		// focuses search input
 		focusInput: function() {
-			this.$refs.searchInput.focus();
+			let currPath = this.$route.path.toLowerCase();
+			
+            if (currPath === "/" || currPath === "/all") {
+				this.$refs.searchInput.focus();
+			}
 		},
 		// detect list reaching top of viewport
 		setScrollOffset: function() {
-            this.scrollOffset = (this.$refs.list.$el.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+			let currPath = this.$route.path.toLowerCase();
+
+            if (currPath === "/" || currPath === "/all") {
+				this.scrollOffset = (this.$refs.list.$el.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+			}
         }
     },
     computed: {

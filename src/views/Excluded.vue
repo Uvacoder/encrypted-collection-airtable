@@ -111,7 +111,9 @@ export default {
         },
         // detect list reaching top of viewport
 		setScrollOffset: function() {
-            this.scrollOffset = (this.$refs.list.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+            if (this.$route.path.toLowerCase() === "/excluded") {
+                this.scrollOffset = (this.$refs.list.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+            }
         }
     },
     created() {

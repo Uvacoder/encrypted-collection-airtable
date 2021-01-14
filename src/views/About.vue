@@ -4,7 +4,11 @@
             EncryptedList is a list of products and services that offer <a href="https://protonmail.com/blog/what-is-end-to-end-encryption/" target="_blank" rel="noopener">end-to-end encryption <app-external-icon></app-external-icon></a> 👈 or some form of <a href="https://tresorit.com/blog/zero-knowledge-encryption/" target="_blank" rel="noopener">zero-knowledge architecture <app-external-icon></app-external-icon></a> 🔐.
             This can include services that either have such architecture on some of their features or that implement it fully. 
             It is based on claims made by their respective owners or companies.
+            <br>
             Items tagged as "open-source" are more reliable. However, not all items tagged as "open-source" are fully open source. 
+            <br>
+            Items tagged as "opt-in" either don't have encryption enabled by default or have it as a feature on some <mark class="highlight">specific part</mark> of the software.
+            <br>
             Do your research before trusting a service 🤓 and enjoy!😉.
         </p>
 
@@ -106,6 +110,11 @@ export default {
 
 #about .links > :last-child svg {
     color: var(--text-color);
+}
+
+.highlight {
+    border-radius: .1rem;
+    padding: 0 .25rem;
 }
 
 @media only screen and (max-width: 480px) {

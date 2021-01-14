@@ -146,17 +146,15 @@ export default {
 }
 
 #report > form textarea,
-#report > form input[type="url"],
 #report > form input[type="text"] {
     width: 100%;
     padding: .5rem .75rem;
     background-color: var(--background-color);
     color: var(--text-color);
     display: block;
-    margin: 0.25rem 0;
+    margin: 0.5rem 0;
     font-size: 1rem;
-    border: 2px solid var(--gray-border-color);
-	border-bottom: 4px solid var(--gray-border-color);
+    border: 2.5px solid var(--gray-border-color);
 	border-radius: 0.5rem;
     resize: none;
     box-shadow: none;
@@ -166,33 +164,8 @@ export default {
     height: 7rem;
 }
 
-#report > form input[type="url"],
 #report > form input[type="text"] {
     height: 2.75rem;
-}
-
-#report > form input[type="checkbox"] {
-    margin-right: .5rem;
-}
-
-#report > form fieldset {
-    border: 2px solid var(--gray-border-color);
-	border-bottom: 4px solid var(--gray-border-color);
-	border-radius: 0.5rem;
-}
-
-#report > form fieldset legend span {
-    color: var(--placeholder-text-color);
-}
-
-#report > form fieldset label,
-#report > form fieldset input {
-    cursor: pointer;
-}
-
-#report > form fieldset > p:first-of-type label,
-#report > form fieldset > p:first-of-type input {
-    cursor: not-allowed;
 }
 
 #report > form button {

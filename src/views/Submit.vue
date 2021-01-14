@@ -54,8 +54,6 @@
                     Tags <span>(Optional)</span>:
                 </legend>  
 
-                <!-- <label hidden>Tags: </label> -->
-
                 <!-- All - Default Tag -->
                 <p>
                     <input 
@@ -85,8 +83,6 @@
                 <legend>
                     Categories <span>(Optional)</span>:
                 </legend>
-
-                <!-- <label hidden>Categories: </label> -->
 
                 <!-- All - Default Category -->
                 <p>
@@ -235,10 +231,9 @@ export default {
     background-color: var(--background-color);
     color: var(--text-color);
     display: block;
-    margin: 0.25rem 0;
+    margin: 0.5rem 0;
     font-size: 1rem;
-    border: 2px solid var(--gray-border-color);
-	border-bottom: 4px solid var(--gray-border-color);
+    border: 2.5px solid var(--gray-border-color);
 	border-radius: 0.5rem;
     resize: none;
     box-shadow: none;
@@ -258,8 +253,8 @@ export default {
 }
 
 #submit > form fieldset {
-    border: 2px solid var(--gray-border-color);
-	border-bottom: 4px solid var(--gray-border-color);
+    border: 2.5px solid var(--gray-border-color);
+	border-bottom: 5px solid var(--gray-border-color);
 	border-radius: 0.5rem;
 }
 
