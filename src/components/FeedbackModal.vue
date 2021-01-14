@@ -15,13 +15,13 @@
 
 			<fieldset name="comment" @change="$emit('submitted', $event)">      
 					<label for="pos_comment">
-                        <input hidden type="radio" value="I like it!" name="comment" id="pos_comment">
-                        Yup 👍
+                        <input hidden type="radio" value="It's amazing!" name="comment" id="pos_comment">
+                        Amazing 👏
                     </label>
 
 					<label for="neg_comment">
-                        <input hidden type="radio" value="I don't like it!" name="comment" id="neg_comment">
-                        Nope 👎
+                        <input hidden type="radio" value="It's just okay!" name="comment" id="neg_comment">
+                        Just Ok 👍
                     </label>
 			</fieldset>
 		</form>
@@ -149,6 +149,7 @@ export default {
 	text-align: left;
 	margin: 0;
     cursor: pointer;
+    text-align: center;
 	display: inline-block;
     border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);	
@@ -158,10 +159,20 @@ export default {
 	margin-right: 3rem;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 540px) {
 	#FeedbackModal {
 		width: 96%;
         left: 2%;
+	}
+}
+
+@media only screen and (max-width: 425px) {
+    #FeedbackModal .feedback-form > fieldset label {
+		width: 100%;
+	}
+
+    #FeedbackModal .feedback-form > fieldset label:first-of-type {
+        margin-bottom: .75rem;
 	}
 }
 </style>

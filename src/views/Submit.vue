@@ -53,6 +53,9 @@
                 <legend>
                     Tags <span>(Optional)</span>:
                 </legend>  
+
+                <label hidden>Tags: </label>
+
                 <!-- All - Default Tag -->
                 <p>
                     <input 
@@ -61,7 +64,7 @@
                         :id="tags[0]" 
                         :value="tags[0]" 
                         type="checkbox" 
-                        :name="tags[0]" 
+                        name="tags" 
                     >
                     <label :for="tags[0]">{{ tags[0] }}</label>
                 </p>
@@ -69,7 +72,7 @@
                 <p v-for="(tag, index) in tags.slice(1)" :key="index">
                     <input 
                         :id="tag" 
-                        :name="tag" 
+                        name="tags" 
                         :value="tag" 
                         type="checkbox"
                         v-model="form.tags"
@@ -82,6 +85,9 @@
                 <legend>
                     Categories <span>(Optional)</span>:
                 </legend>
+
+                <label hidden>Categories: </label>
+
                 <!-- All - Default Category -->
                 <p>
                     <input 
@@ -90,7 +96,7 @@
                         :id="categories[0]" 
                         :value="categories[0]" 
                         type="checkbox" 
-                        :name="categories[0]" 
+                        name="categories" 
                     >
                     <label :for="categories[0]">{{ categories[0] }}</label>
                 </p>
@@ -100,7 +106,7 @@
                         :id="cat" 
                         :value="cat" 
                         type="checkbox" 
-                        :name="cat"
+                        name="categories"
                         v-model="form.categories"
                     >
                     <label :for="cat">{{ cat }}</label>
@@ -211,7 +217,6 @@ export default {
 
 #submit > form > label {
     display: block;
-    /* margin: 1rem auto; */
 }
 
 #submit > form button svg {
@@ -275,6 +280,11 @@ export default {
 #submit > form button {
     background-color: var(--yellow-black-bg-color);
 	border-color:  var(--yellow-black-border-color);
+}
+
+#submit > form fieldset > label {
+    /* min-height: 0;
+    visibility: hidden; */
 }
 
 #submit > p {
