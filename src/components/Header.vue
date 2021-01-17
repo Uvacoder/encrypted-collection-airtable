@@ -346,7 +346,7 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .app-name > span{
-	color: var(--placeholder-text-color);
+	color: var(--wip-text-color);
 }
 
 .app-desc {

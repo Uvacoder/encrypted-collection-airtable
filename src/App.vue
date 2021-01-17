@@ -158,6 +158,7 @@ html {
 	--product-desc-text-color: #5d6470;
 	--yellow-black-bg-color: #f1c61b;
 	--yellow-black-border-color: #1c2024;
+	--wip-text-color: #475058;
 }
 
 html[data-theme='dark'] {
@@ -174,6 +175,7 @@ html[data-theme='dark'] {
 	--product-desc-text-color: #ced4da;
 	--yellow-black-bg-color: #1c2024;
 	--yellow-black-border-color: #f1c61b;
+	--wip-text-color: #748694;
 }
 
 html,
