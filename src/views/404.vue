@@ -30,6 +30,9 @@ export default {
     components: {
         appHomeIcon: HomeIcon,
         appButtonLink: ButtonLink,
+    },
+    metaInfo: {
+        title: 'Not Found'
     }
 }
 </script>

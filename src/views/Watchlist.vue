@@ -73,6 +73,9 @@ export default {
         appLoadingIcon: LoadingIcon,
         appArrowUpIcon: ArrowUpIcon,
     },
+    metaInfo: {
+        title: 'Watchlist',
+    },
     data() {
         return {
             scrollOffset: false,

@@ -141,6 +141,9 @@ export default {
         appLinkIcon: LinkIcon,
         appSendIcon: SendIcon,
     },
+    metaInfo: {
+        title: 'Submit',
+    },
     data() {
         return {
             form: {

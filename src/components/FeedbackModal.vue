@@ -174,5 +174,9 @@ export default {
     #FeedbackModal .feedback-form > fieldset label:first-of-type {
         margin-bottom: .75rem;
 	}
+
+    #FeedbackModal .feedback-form > fieldset label:last-of-type {
+        margin: 0;
+    }
 }
 </style>

@@ -41,6 +41,9 @@ export default {
         appCheckIcon: CheckIcon,
         appButtonLink: ButtonLink,
     },
+    metaInfo: {
+        title: 'Success'
+    },
     data() {
         return {
             previous: "/"

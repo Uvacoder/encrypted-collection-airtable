@@ -72,6 +72,9 @@ export default {
         appLinkIcon: LinkIcon,
         appSendIcon: SendIcon,
     },
+    metaInfo: {
+        title: 'Report',
+    },
     data() {
         return {
             form: {

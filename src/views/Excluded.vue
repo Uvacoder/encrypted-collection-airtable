@@ -72,6 +72,9 @@ export default {
         appLoadingIcon: LoadingIcon,
 		appArrowUpIcon: ArrowUpIcon,
     },
+    metaInfo: {
+        title: 'Excluded',
+    },
     data() {
         return {
             scrollOffset: false,

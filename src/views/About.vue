@@ -41,6 +41,9 @@ export default {
         appHomeIcon: HomeIcon,
         appButtonLink: ButtonLink,
         appExternalIcon: ExternalIcon,
+    },
+    metaInfo: {
+        title: 'About',
     }
 }
 </script>

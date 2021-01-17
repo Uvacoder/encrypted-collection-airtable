@@ -25,6 +25,34 @@ export default {
 	components: {
 		appHeader: Header
 	},
+	metaInfo: {
+		titleTemplate: '%s | EncryptedList',
+		
+        meta: [
+			{ charset: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1'},
+            { name: 'title', content: 'EncryptedList - A Growing List of Encrypted Products'},
+			{ name: 'description', content: 'A collective list of products & services that offer zero-knowledge or end-to-end encryption.'},
+
+			// OpenGraph data
+			{ property: 'og:type', content: 'website'},
+			{ property: 'og:site_name', content: 'EncryptedList'},
+			{ property: 'og:url', content: 'https://encryptedlist.xyz/'},
+			{ property: 'og:title', content: 'EncryptedList - A Growing List of Encrypted Products'},
+			{ property: 'og:description', content: 'A collective list of products & services that offer zero-knowledge or end-to-end encryption.'},
+			{ property: 'og:image', content: 'https://res.cloudinary.com/minch/image/upload/w_60/v1609226799/EncryptedList/logo_ymk6dg.webp'},
+
+			// Twitter card
+			{name: 'twitter:card', content: 'summary'},
+			{name: 'twitter:site', content: 'https://encryptedlist.xyz/' },
+			{name: 'twitter:title', content: 'EncryptedList - A Growing List of Encrypted Products' },
+			{name: 'twitter:description', content: 'A collective list of products & services that offer zero-knowledge or end-to-end encryption.' },
+			{name: 'twitter:image:src', content: 'https://res.cloudinary.com/minch/image/upload/w_60/v1609226799/EncryptedList/logo_ymk6dg.webp' },
+		],
+		link: [
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/'}
+		]
+    },
 	data() {
 		return {
 			darkThemeEnabled: false

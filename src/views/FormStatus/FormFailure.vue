@@ -42,6 +42,9 @@ export default {
 		appClearIcon: ClearIcon,
         appButtonLink: ButtonLink,
     },
+    metaInfo: {
+        title: 'Error'
+    },
     data() {
         return {
             previous: "/"

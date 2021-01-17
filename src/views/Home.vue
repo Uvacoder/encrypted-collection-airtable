@@ -65,6 +65,9 @@ export default {
 		appSearchIcon: SearchIcon,		
 		appProductList: ProductList,
 		appArrowUpIcon: ArrowUpIcon,		
+	},
+	metaInfo: {
+        title: 'Home',
     },
     data() {
         return {
