@@ -44,6 +44,13 @@ export default {
     },
     metaInfo: {
         title: 'About',
+        meta: [
+            { property: 'og:url', content: 'https://encryptedlist.xyz/about'},
+			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/about' },
+        ],
+        link: [
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/about'}
+		]
     }
 }
 </script>

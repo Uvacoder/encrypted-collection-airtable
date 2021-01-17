@@ -75,6 +75,13 @@ export default {
     },
     metaInfo: {
         title: 'Watchlist',
+        meta: [
+            { property: 'og:url', content: 'https://encryptedlist.xyz/watchlist'},
+			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/watchlist' },
+        ],
+        link: [
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/watchlist'}
+		]
     },
     data() {
         return {

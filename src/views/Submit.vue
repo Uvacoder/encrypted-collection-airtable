@@ -143,6 +143,13 @@ export default {
     },
     metaInfo: {
         title: 'Submit',
+        meta: [
+            { property: 'og:url', content: 'https://encryptedlist.xyz/submit'},
+			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/submit' },
+        ],
+        link: [
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/submit'}
+		]
     },
     data() {
         return {

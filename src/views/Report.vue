@@ -74,6 +74,13 @@ export default {
     },
     metaInfo: {
         title: 'Report',
+        meta: [
+            { property: 'og:url', content: 'https://encryptedlist.xyz/report'},
+			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/report' },
+        ],
+        link: [
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/report'}
+		]
     },
     data() {
         return {

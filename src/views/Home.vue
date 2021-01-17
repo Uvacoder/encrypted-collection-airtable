@@ -67,7 +67,14 @@ export default {
 		appArrowUpIcon: ArrowUpIcon,		
 	},
 	metaInfo: {
-        title: 'Home',
+		title: 'Home',
+		meta: [
+            { property: 'og:url', content: 'https://encryptedlist.xyz/'},
+			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/' },
+        ],
+        link: [
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/'}
+		]
     },
     data() {
         return {

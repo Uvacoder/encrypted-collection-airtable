@@ -74,6 +74,13 @@ export default {
     },
     metaInfo: {
         title: 'Excluded',
+        meta: [
+            { property: 'og:url', content: 'https://encryptedlist.xyz/excluded'},
+			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/excluded' },
+        ],
+        link: [
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/excluded'}
+		]
     },
     data() {
         return {
