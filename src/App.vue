@@ -40,14 +40,14 @@ export default {
 			{ property: 'og:url', content: 'https://encryptedlist.xyz/'},
 			{ property: 'og:title', content: 'EncryptedList - A Growing List of Encrypted Products'},
 			{ property: 'og:description', content: 'A collective list of products & services that offer zero-knowledge or end-to-end encryption.'},
-			{ property: 'og:image', content: 'https://res.cloudinary.com/minch/image/upload/w_60/v1609226799/EncryptedList/logo_ymk6dg.webp'},
+			{ property: 'og:image', content: 'https://res.cloudinary.com/minch/image/upload/v1609226799/EncryptedList/logo_ymk6dg.webp'},
 
 			// Twitter card
 			{name: 'twitter:card', content: 'summary'},
 			{name: 'twitter:site', content: 'https://encryptedlist.xyz/' },
 			{name: 'twitter:title', content: 'EncryptedList - A Growing List of Encrypted Products' },
 			{name: 'twitter:description', content: 'A collective list of products & services that offer zero-knowledge or end-to-end encryption.' },
-			{name: 'twitter:image:src', content: 'https://res.cloudinary.com/minch/image/upload/w_60/v1609226799/EncryptedList/logo_ymk6dg.webp' },
+			{name: 'twitter:image:src', content: 'https://res.cloudinary.com/minch/image/upload/v1609226799/EncryptedList/logo_ymk6dg.webp' },
 		],
 		link: [
 			{ rel: 'canonical', href: 'https://encryptedlist.xyz/'}
