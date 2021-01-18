@@ -76,7 +76,12 @@ export default {
     metaInfo: {
         title: 'Watchlist',
         meta: [
+            { name: 'title', template: '%s | EncryptedList', content: 'Watchlist'},
+            
+			{ property: 'og:title', template: '%s | EncryptedList', content: 'Watchlist'},
             { property: 'og:url', content: 'https://encryptedlist.xyz/watchlist'},
+            
+			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Watchlist' },
 			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/watchlist' },
         ],
         link: [

@@ -1,15 +1,17 @@
 <template>
     <div id='about'>
         <p>
-            EncryptedList is a list of products and services that offer <a href="https://protonmail.com/blog/what-is-end-to-end-encryption/" target="_blank" rel="noopener">end-to-end encryption <app-external-icon></app-external-icon></a> 👈 or some form of <a href="https://tresorit.com/blog/zero-knowledge-encryption/" target="_blank" rel="noopener">zero-knowledge architecture <app-external-icon></app-external-icon></a> 🔐.
+            EncryptedList is a collection of products &amp; services that offer or ensure data security through <a href="https://protonmail.com/blog/what-is-end-to-end-encryption/" target="_blank" rel="noopener">end-to-end encryption <app-external-icon></app-external-icon></a> 👈 or some form of <a href="https://tresorit.com/blog/zero-knowledge-encryption/" target="_blank" rel="noopener">zero-knowledge architecture <app-external-icon></app-external-icon></a> 🔐.
             This can include services that either have such architecture on some of their features or that implement it fully. 
-            It is based on claims made by their respective owners or companies.
-            <br>
-            Items tagged as "open-source" are more reliable. However, not all items tagged as "open-source" are fully open source. 
-            <br>
-            Items tagged as "opt-in" either don't have encryption enabled by default or have it as a feature on some <mark class="highlight">specific part</mark> of the software.
-            <br>
-            Do your research before trusting a service 🤓 and enjoy!😉.
+        </p>
+        <h3>Disclaimer</h3>
+        <p>
+            <ul>
+                <li>This collection is based on claims made by their respective owners or companies.</li>
+                <li>Some of the services come with the ability to encrypt which isn't on by default. They either require <mark class="highlight">enabling encryption</mark> or have it as a feature on some <mark class="highlight">specific part</mark> of the software. These services are tagged in red as "opt-in".</li>
+                <li>Products tagged as "open-source" are more reliable. However, not all products tagged as "open-source" are fully open source.</li>
+                <li>Do your research before trusting a service 🤓 and enjoy!😉.</li>
+            </ul>
         </p>
 
         <div class="links">
@@ -45,7 +47,12 @@ export default {
     metaInfo: {
         title: 'About',
         meta: [
+            { name: 'title', template: '%s | EncryptedList', content: 'About'},
+            
+			{ property: 'og:title', template: '%s | EncryptedList', content: 'About'},
             { property: 'og:url', content: 'https://encryptedlist.xyz/about'},
+            
+			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'About' },
 			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/about' },
         ],
         link: [
@@ -86,6 +93,20 @@ export default {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
+}
+
+#about > p ul {
+    list-style: none;
+    text-align: left;
+}
+
+#about > p ul li::before {
+    content: "\25FC";
+    color: var(--primary-yellow-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1.5em;
+    margin-left: -1em;
 }
 
 #about .links {

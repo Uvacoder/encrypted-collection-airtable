@@ -11,6 +11,47 @@
 
             <input type="hidden" name="form-name" value="submit" />
 
+            <fieldset name="list-type">      
+                <legend>
+                    Which list should this go to?
+                </legend>  
+
+                <!-- List Type -->
+                <p>
+                    <input 
+                        checked
+                        id="main" 
+                        value="Main" 
+                        type="radio" 
+                        name="list-type" 
+                        v-model="form.listType"
+                    >
+                    <label for="main">Main</label>
+                </p>
+
+                <p>
+                    <input 
+                        id="watchlist" 
+                        value="Watchlist" 
+                        type="radio" 
+                        name="list-type" 
+                        v-model="form.listType"
+                    >
+                    <label for="watchlist">Watchlist</label>
+                </p>
+
+                <p>
+                    <input 
+                        id="excluded" 
+                        value="Excluded" 
+                        type="radio" 
+                        name="list-type" 
+                        v-model="form.listType"
+                    >
+                    <label for="excluded">Excluded</label>
+                </p>
+            </fieldset>
+
             <label for="name">
                 <abbr title="Required" aria-label="Required">*</abbr>
                 Name: 
@@ -144,8 +185,13 @@ export default {
     metaInfo: {
         title: 'Submit',
         meta: [
+            { name: 'title', template: '%s | EncryptedList', content: 'Submit'},
+
+			{ property: 'og:title', template: '%s | EncryptedList', content: 'Submit'},
             { property: 'og:url', content: 'https://encryptedlist.xyz/submit'},
-			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/submit' },
+            
+			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Submit' },
+            { name: 'twitter:site', content: 'https://encryptedlist.xyz/submit' }
         ],
         link: [
 			{ rel: 'canonical', href: 'https://encryptedlist.xyz/submit'}
@@ -154,6 +200,7 @@ export default {
     data() {
         return {
             form: {
+                listType: '',
                 name: '',
                 desc: '',
                 url: 'https://',
@@ -277,19 +324,16 @@ export default {
     cursor: pointer;
 }
 
-#submit > form fieldset > p:first-of-type label,
-#submit > form fieldset > p:first-of-type input {
+#submit > form fieldset[name="Tags"] > p:first-of-type label,
+#submit > form fieldset[name="Tags"] > p:first-of-type label,
+#submit > form fieldset[name="Categories"] > p:first-of-type input,
+#submit > form fieldset[name="Categories"] > p:first-of-type input {
     cursor: not-allowed;
 }
 
 #submit > form button {
     background-color: var(--yellow-black-bg-color);
 	border-color:  var(--yellow-black-border-color);
-}
-
-#submit > form fieldset > label {
-    /* min-height: 0;
-    visibility: hidden; */
 }
 
 #submit > p {

@@ -69,7 +69,12 @@ export default {
 	metaInfo: {
 		title: 'Home',
 		meta: [
+			{ name: 'title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.'},
+
+			{ property: 'og:title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.'},
             { property: 'og:url', content: 'https://encryptedlist.xyz/'},
+
+			{name: 'twitter:title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.' },
 			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/' },
         ],
         link: [
