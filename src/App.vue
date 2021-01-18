@@ -33,7 +33,6 @@ export default {
             { name: 'viewport', content: 'width=device-width, initial-scale=1'},
 			{ name: 'description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.'},
 
-
 			// OpenGraph data
 			{ property: 'og:type', content: 'website'},
 			{ property: 'og:site_name', content: 'EncryptedList'},
