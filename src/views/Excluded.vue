@@ -75,12 +75,12 @@ export default {
     metaInfo: {
         title: 'Excluded',
         meta: [
-            { name: 'title', template: '%s | EncryptedList', content: 'Excluded'},
+            { name: 'title', content: 'Excluded', template: chunk => `${chunk} - EncryptedList` },
             
-			{ property: 'og:title', template: '%s | EncryptedList', content: 'Excluded'},
+			{ property: 'og:title', content: 'Excluded', template: chunk => `${chunk} - EncryptedList` },
             { property: 'og:url', content: 'https://encryptedlist.xyz/excluded'},
             
-			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Excluded' },
+			{ name: 'twitter:title', content: 'Excluded', template: chunk => `${chunk} - EncryptedList` },
 			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/excluded' },
         ],
         link: [
