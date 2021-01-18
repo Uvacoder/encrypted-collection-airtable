@@ -11,7 +11,7 @@
 
             <input type="hidden" name="form-name" value="submit" />
 
-            <fieldset name="list-type">      
+            <fieldset id="list-type">      
                 <legend>
                     Which list should this go to?
                 </legend>  
@@ -19,11 +19,11 @@
                 <!-- List Type -->
                 <p>
                     <input 
-                        checked
                         id="main" 
                         value="Main" 
                         type="radio" 
                         name="list-type" 
+                        checked
                         v-model="form.listType"
                     >
                     <label for="main">Main</label>
@@ -200,7 +200,7 @@ export default {
     data() {
         return {
             form: {
-                listType: '',
+                listType: 'Main',
                 name: '',
                 desc: '',
                 url: 'https://',
@@ -305,6 +305,7 @@ export default {
     height: 2.75rem;
 }
 
+#submit > form input[type="radio"],
 #submit > form input[type="checkbox"] {
     margin-right: .5rem;
 }
