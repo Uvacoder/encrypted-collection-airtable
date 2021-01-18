@@ -185,16 +185,16 @@ export default {
     metaInfo: {
         title: 'Submit',
         meta: [
-            { name: 'title', content: 'Submit', template: chunk => `${chunk} - EncryptedList` },
+            { name: 'title', template: '%s | EncryptedList', content: 'Submit'},
 
-			{ property: 'og:title', content: 'Submit', template: chunk => `${chunk} - EncryptedList` },
-            { property: 'og:url', content: 'https://encryptedlist.xyz/submit'},
+			{ property: 'og:title', template: '%s | EncryptedList', content: 'Submit'},
+            { property: 'og:url', content: 'https://encryptedlist.xyz/submit/'},
             
-			{ name: 'twitter:title', content: 'Submit', template: chunk => `${chunk} - EncryptedList` },
-            { name: 'twitter:site', content: 'https://encryptedlist.xyz/submit' }
+			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Submit' },
+            { name: 'twitter:site', content: 'https://encryptedlist.xyz/submit/' }
         ],
         link: [
-			{ rel: 'canonical', href: 'https://encryptedlist.xyz/submit'}
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/submit/'}
 		]
     },
     data() {

@@ -78,13 +78,13 @@ export default {
             { name: 'title', template: '%s | EncryptedList', content: 'Report'},
             
 			{ property: 'og:title', template: '%s | EncryptedList', content: 'Report'},
-            { property: 'og:url', content: 'https://encryptedlist.xyz/report'},
+            { property: 'og:url', content: 'https://encryptedlist.xyz/report/'},
             
 			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Report' },
-			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/report' },
+			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/report/' },
         ],
         link: [
-			{ rel: 'canonical', href: 'https://encryptedlist.xyz/report'}
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/report/'}
 		]
     },
     data() {

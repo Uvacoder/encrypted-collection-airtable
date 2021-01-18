@@ -50,13 +50,13 @@ export default {
             { name: 'title', template: '%s | EncryptedList', content: 'About'},
             
 			{ property: 'og:title', template: '%s | EncryptedList', content: 'About'},
-            { property: 'og:url', content: 'https://encryptedlist.xyz/about'},
+            { property: 'og:url', content: 'https://encryptedlist.xyz/about/'},
             
 			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'About' },
-			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/about' },
+			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/about/' },
         ],
         link: [
-			{ rel: 'canonical', href: 'https://encryptedlist.xyz/about'}
+			{ rel: 'canonical', href: 'https://encryptedlist.xyz/about/'}
 		]
     }
 }
