@@ -185,13 +185,13 @@ export default {
     metaInfo: {
         title: 'Submit',
         meta: [
-            { name: 'title', template: '%s | EncryptedList', content: 'Submit'},
+            { vmid: 'title', name: 'title', template: '%s | EncryptedList', content: 'Submit'},
 
-			{ property: 'og:title', template: '%s | EncryptedList', content: 'Submit'},
-            { property: 'og:url', content: 'https://encryptedlist.xyz/submit/'},
+			{ vmid: 'og:title', property: 'og:title', template: '%s | EncryptedList', content: 'Submit'},
+            { vmid: 'og:url', property: 'og:url', content: 'https://encryptedlist.xyz/submit/'},
             
-			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Submit' },
-            { name: 'twitter:site', content: 'https://encryptedlist.xyz/submit/' }
+			{ vmid: 'twitter:title', name: 'twitter:title', template: '%s | EncryptedList', content: 'Submit' },
+            { vmid: 'twitter:site', name: 'twitter:site', content: 'https://encryptedlist.xyz/submit/' }
         ],
         link: [
 			{ rel: 'canonical', href: 'https://encryptedlist.xyz/submit/'}

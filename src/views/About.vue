@@ -47,13 +47,13 @@ export default {
     metaInfo: {
         title: 'About',
         meta: [
-            { name: 'title', template: '%s | EncryptedList', content: 'About'},
+            { vmid: 'title', name: 'title', template: '%s | EncryptedList', content: 'About'},
             
-			{ property: 'og:title', template: '%s | EncryptedList', content: 'About'},
-            { property: 'og:url', content: 'https://encryptedlist.xyz/about/'},
+			{ vmid: 'og:title', property: 'og:title', template: '%s | EncryptedList', content: 'About'},
+            { vmid: 'og:url', property: 'og:url', content: 'https://encryptedlist.xyz/about/'},
             
-			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'About' },
-			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/about/' },
+			{ vmid: 'twitter:title', name: 'twitter:title', template: '%s | EncryptedList', content: 'About' },
+			{ vmid: 'twitter:site', name: 'twitter:site', content: 'https://encryptedlist.xyz/about/' },
         ],
         link: [
 			{ rel: 'canonical', href: 'https://encryptedlist.xyz/about/'}

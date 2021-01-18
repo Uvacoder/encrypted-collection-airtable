@@ -75,13 +75,13 @@ export default {
     metaInfo: {
         title: 'Excluded',
         meta: [
-            { name: 'title', template: '%s | EncryptedList', content: 'Excluded'},
+            { vmid: 'title', name: 'title', template: '%s | EncryptedList', content: 'Excluded'},
             
-			{ property: 'og:title', template: '%s | EncryptedList', content: 'Excluded'},
-            { property: 'og:url', content: 'https://encryptedlist.xyz/excluded/'},
+			{ vmid: 'og:title', property: 'og:title', template: '%s | EncryptedList', content: 'Excluded'},
+            { vmid: 'og:url', property: 'og:url', content: 'https://encryptedlist.xyz/excluded/'},
             
-			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Excluded' },
-			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/excluded/' },
+			{ vmid: 'twitter:title', name: 'twitter:title', template: '%s | EncryptedList', content: 'Excluded' },
+			{ vmid: 'twitter:site', name: 'twitter:site', content: 'https://encryptedlist.xyz/excluded/' },
         ],
         link: [
 			{ rel: 'canonical', href: 'https://encryptedlist.xyz/excluded/'}

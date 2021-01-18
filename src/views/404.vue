@@ -34,9 +34,9 @@ export default {
     metaInfo: {
         title: 'Not Found',
         meta: [
-            { name: 'title', template: '%s | EncryptedList', content: 'Page Not Found'},
-			{ property: 'og:title', template: '%s | EncryptedList', content: 'Page Not Found'},
-			{name: 'twitter:title', template: '%s | EncryptedList', content: 'Page Not Found' },
+            { vmid: 'title', name: 'title', template: '%s | EncryptedList', content: 'Page Not Found'},
+			{ vmid: 'og:title', property: 'og:title', template: '%s | EncryptedList', content: 'Page Not Found'},
+			{ vmid: 'twitter:title', name: 'twitter:title', template: '%s | EncryptedList', content: 'Page Not Found' },
         ],
     }
 }

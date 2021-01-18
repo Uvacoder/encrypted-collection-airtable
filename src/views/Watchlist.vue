@@ -76,13 +76,13 @@ export default {
     metaInfo: {
         title: 'Watchlist',
         meta: [
-            { name: 'title', template: '%s | EncryptedList', content: 'Watchlist'},
+            { vmid: 'title', name: 'title', template: '%s | EncryptedList', content: 'Watchlist'},
             
-			{ property: 'og:title', template: '%s | EncryptedList', content: 'Watchlist'},
-            { property: 'og:url', content: 'https://encryptedlist.xyz/watchlist/'},
+			{ vmid: 'og:title', property: 'og:title', template: '%s | EncryptedList', content: 'Watchlist'},
+            { vmid: 'og:url', property: 'og:url', content: 'https://encryptedlist.xyz/watchlist/'},
             
-			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Watchlist' },
-			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/watchlist/' },
+			{ vmid: 'twitter:title', name: 'twitter:title', template: '%s | EncryptedList', content: 'Watchlist' },
+			{ vmid: 'twitter:site', name: 'twitter:site', content: 'https://encryptedlist.xyz/watchlist/' },
         ],
         link: [
 			{ rel: 'canonical', href: 'https://encryptedlist.xyz/watchlist/'}

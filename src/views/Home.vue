@@ -69,13 +69,13 @@ export default {
 	metaInfo: {
 		title: 'Home',
 		meta: [
-			{ name: 'title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.'},
+			{ vmid: 'title', name: 'title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.'},
 
-			{ property: 'og:title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.'},
-            { property: 'og:url', content: 'https://encryptedlist.xyz/'},
+			{ vmid: 'og:title', property: 'og:title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.'},
+            { vmid: 'og:url', property: 'og:url', content: 'https://encryptedlist.xyz/'},
 
-			{name: 'twitter:title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.' },
-			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/' },
+			{ vmid: 'twitter:title', name: 'twitter:title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.' },
+			{ vmid: 'twitter:site', name: 'twitter:site', content: 'https://encryptedlist.xyz/' },
         ],
         link: [
 			{ rel: 'canonical', href: 'https://encryptedlist.xyz/'}

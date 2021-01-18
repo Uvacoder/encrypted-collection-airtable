@@ -75,13 +75,13 @@ export default {
     metaInfo: {
         title: 'Report',
         meta: [
-            { name: 'title', template: '%s | EncryptedList', content: 'Report'},
+            { vmid: 'title', name: 'title', template: '%s | EncryptedList', content: 'Report'},
             
-			{ property: 'og:title', template: '%s | EncryptedList', content: 'Report'},
-            { property: 'og:url', content: 'https://encryptedlist.xyz/report/'},
+			{ vmid: 'og:title', property: 'og:title', template: '%s | EncryptedList', content: 'Report'},
+            { vmid: 'og:url', property: 'og:url', content: 'https://encryptedlist.xyz/report/'},
             
-			{ name: 'twitter:title', template: '%s | EncryptedList', content: 'Report' },
-			{ name: 'twitter:site', content: 'https://encryptedlist.xyz/report/' },
+			{ vmid: 'twitter:title', name: 'twitter:title', template: '%s | EncryptedList', content: 'Report' },
+			{ vmid: 'twitter:site', name: 'twitter:site', content: 'https://encryptedlist.xyz/report/' },
         ],
         link: [
 			{ rel: 'canonical', href: 'https://encryptedlist.xyz/report/'}
