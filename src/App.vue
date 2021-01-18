@@ -32,8 +32,11 @@ export default {
 			{ charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1'},
 			{ name: 'description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.'},
+			{ name: 'title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.'},
+
 
 			// OpenGraph data
+			{ property: 'og:title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.'},
 			{ property: 'og:type', content: 'website'},
 			{ property: 'og:site_name', content: 'EncryptedList'},
 			{ property: 'og:url', content: 'https://encryptedlist.xyz/'},
@@ -42,6 +45,7 @@ export default {
 
 			// Twitter card
 			{name: 'twitter:card', content: 'summary'},
+			{name: 'twitter:title', template: null, content: 'EncryptedList - Curated Collection of Encrypted Tools.' },
 			{name: 'twitter:site', content: 'https://encryptedlist.xyz/' },
 			{name: 'twitter:description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.' },
 			{name: 'twitter:image:src', content: 'https://res.cloudinary.com/minch/image/upload/v1609226799/EncryptedList/logo_ymk6dg.webp' },
