@@ -11,7 +11,7 @@
 
             <input type="hidden" name="form-name" value="submit" />
 
-            <fieldset id="list-type">      
+            <fieldset name="list-type">      
                 <legend>
                     Which list should this go to?
                 </legend>  
@@ -199,7 +199,7 @@ export default {
     data() {
         return {
             form: {
-                listType: '',
+                listType: 'Main',
                 name: '',
                 desc: '',
                 url: 'https://',
