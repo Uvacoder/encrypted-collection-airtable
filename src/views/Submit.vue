@@ -11,7 +11,7 @@
 
             <input type="hidden" name="form-name" value="submit" />
 
-            <fieldset name="list-type">      
+            <fieldset name="type">      
                 <legend>
                     Which list should this go to?
                 </legend>  
@@ -22,7 +22,7 @@
                         id="main" 
                         value="Main" 
                         type="radio" 
-                        name="list-type" 
+                        name="type" 
                         v-model="form.listType"
                     >
                     <label for="main">Main</label>
@@ -33,7 +33,7 @@
                         id="watchlist" 
                         value="Watchlist" 
                         type="radio" 
-                        name="list-type" 
+                        name="type" 
                         v-model="form.listType"
                     >
                     <label for="watchlist">Watchlist</label>
@@ -44,7 +44,7 @@
                         id="excluded" 
                         value="Excluded" 
                         type="radio" 
-                        name="list-type" 
+                        name="type" 
                         v-model="form.listType"
                     >
                     <label for="excluded">Excluded</label>
