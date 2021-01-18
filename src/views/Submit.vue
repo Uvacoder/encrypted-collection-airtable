@@ -23,7 +23,6 @@
                         value="Main" 
                         type="radio" 
                         name="list-type" 
-                        checked
                         v-model="form.listType"
                     >
                     <label for="main">Main</label>
@@ -200,7 +199,7 @@ export default {
     data() {
         return {
             form: {
-                listType: 'Main',
+                listType: '',
                 name: '',
                 desc: '',
                 url: 'https://',
