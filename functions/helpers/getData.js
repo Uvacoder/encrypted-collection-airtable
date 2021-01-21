@@ -5,7 +5,7 @@ const formatReturn = require("./formatReturn");
 module.exports = async (tableName, numRecs) => {
 	try {
 		const table = base(tableName);
-		const baseImgURL = `https://ik.imagekit.io/x6xq2u8ftjl/tr:w-50,h-auto/encryptedlist/${tableName.toLowerCase()}`;
+		const baseImgURL = `https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/${tableName.toLowerCase()}`;
 		const initialLimit = typeof numRecs !== "undefined" ? numRecs : 50;
 
 		let products = [],
@@ -29,8 +29,8 @@ module.exports = async (tableName, numRecs) => {
 						url: record.fields.url,
 						tags: record.fields.tags,
 						categories: record.fields.categories,
-						png_img: `${baseImgURL}/png/${imgName}.png`,
-						webp_img: `${baseImgURL}/webp/${imgName}.webp`,
+						png_img: `${baseImgURL}/png/${imgName}.png?tr=w-50,dpr-1,lo-true`,
+						webp_img: `${baseImgURL}/webp/${imgName}.webp?tr=w-50,dpr-1,lo-true`,
 					});
 				});
 				fetchNextPage();
