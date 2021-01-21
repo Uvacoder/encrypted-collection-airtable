@@ -50,6 +50,7 @@
             <ul>
                 <li>Bugs</li>
                 <li>Broken links</li>
+                <li>Inaccurate info about a product</li>
                 <li>A misplaced service (one doesn't belong in its respective list or here at all)</li>
                 <li>Just about anything else</li>
             </ul>
