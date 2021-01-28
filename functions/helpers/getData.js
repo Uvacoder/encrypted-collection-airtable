@@ -30,7 +30,8 @@ module.exports = async (tableName, numRecs) => {
 						tags: record.fields.tags,
 						categories: record.fields.categories,
 						png_img: `${baseImgURL}/png/${imgName}.png?tr=w-105,dpr-1,lo-true`,
-						webp_img: `${baseImgURL}/webp/${imgName}.webp?tr=w-105,dpr-1,lo-true`,
+						webp_img: `${baseImgURL}/png/${imgName}.png?tr=w-105,dpr-1,lo-true`,
+						// webp_img: `${baseImgURL}/webp/${imgName}.webp?tr=w-105,dpr-1,lo-true`,
 					});
 				});
 				fetchNextPage();

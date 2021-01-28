@@ -14,15 +14,15 @@
 			</h3>
 
 			<fieldset @change="$emit('submitted', $event)">      
-                    <label for="pos_comment">
-                        <input hidden type="radio" value="It's amazing!" name="comment" id="pos_comment">
-                        Amazing 👏
-                    </label>
+                <label for="pos_comment">
+                    <input hidden type="radio" value="It's amazing!" name="comment" id="pos_comment">
+                    Amazing 👏
+                </label>
 
-					<label for="neg_comment">
-                        <input hidden type="radio" value="It's just okay!" name="comment" id="neg_comment">
-                        Just Ok 👍
-                    </label>
+                <label for="neg_comment">
+                    <input hidden type="radio" value="It's just okay!" name="comment" id="neg_comment">
+                    Just Ok 👍
+                </label>
 			</fieldset>
 		</form>
 

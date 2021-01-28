@@ -230,9 +230,7 @@ export default {
 		},
 		// submit feedback
         sendFeedback: function($event) {
-			$event.preventDefault();
-
-            const axiosConfig = {
+			const axiosConfig = {
                 header: { "Content-Type": "application/x-www-form-urlencoded" }
 			};
 

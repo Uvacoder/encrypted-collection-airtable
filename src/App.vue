@@ -38,13 +38,16 @@ export default {
 			{ property: 'og:type', content: 'website'},
 			{ property: 'og:site_name', content: 'EncryptedList'},
 			{ property: 'og:description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.'},
-			{ property: 'og:image', content: 'https://res.cloudinary.com/minch/image/upload/v1609226799/EncryptedList/logo_ymk6dg.webp'},
+			{ property: 'og:image', content: 'https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/logo.webp'},
 
 			// Twitter card
 			{name: 'twitter:card', content: 'summary'},
 			{name: 'twitter:description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.' },
-			{name: 'twitter:image:src', content: 'https://res.cloudinary.com/minch/image/upload/v1609226799/EncryptedList/logo_ymk6dg.webp' },
+			{name: 'twitter:image:src', content: 'https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/logo.webp' },
 		],
+		link: [
+			{ rel: 'icon', href: 'https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/tr:w-32,h-32,lo-true/favicon.ico', sizes: '32x32' }
+		]
     },
 	data() {
 		return {
