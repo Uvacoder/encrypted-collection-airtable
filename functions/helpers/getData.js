@@ -6,7 +6,7 @@ module.exports = async (tableName, numRecs) => {
 	try {
 		const table = base(tableName);
 		const baseImgURL = `https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/${tableName.toLowerCase()}`;
-		const initialLimit = typeof numRecs !== "undefined" ? numRecs : 50;
+		const initialLimit = typeof numRecs !== "undefined" ? numRecs : 150;
 
 		let products = [],
 			imgName = ``;
