@@ -15,6 +15,9 @@
 				<a title="Go To Product Website" aria-label="Go To Product Website" target="_blank" rel="noopener" :href="`${product.url}?ref=EncryptedList`">
 					<app-external-icon></app-external-icon>
 				</a>
+				<a title="Show Alternative" aria-label="Show Alternative" target="_blank" rel="noopener" :href="`${product.url}?ref=EncryptedList`">
+					<app-back-icon></app-back-icon>
+				</a>
 			</div>
 		</div>
 		<div class="product-tags">
@@ -27,11 +30,27 @@
 				:title="(tag === 'opt-in') ? 'Beware!' : ''"
 			>{{ tag }}</app-button-tag>
 		</div>
+		<div class="product-alternatives">
+			<p>An alternative to:</p>
+			<div class="alt">
+				<img src="img (1).png" alt="logo">
+				<p>Trello</p>
+			</div>
+			<div class="alt">
+				<img src="img (1).png" alt="logo">
+				<p>Slack</p>
+			</div>
+			<div class="alt">
+				<img src="img (1).png" alt="logo">
+				<p>Teams</p>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
 import ButtonTag from "./ButtonTag.vue";
+import BackIcon from "./icons/BackIcon.vue";
 import ExternalIcon from "./icons/ExternalIcon.vue";
 
 export default {
@@ -47,6 +66,7 @@ export default {
 	},
     components: {
         appButtonTag: ButtonTag,
+		appBackIcon: BackIcon,
         appExternalIcon: ExternalIcon,
 	},
 	methods: {
@@ -129,21 +149,25 @@ export default {
 
 .product-link {
 	display: block;
-	min-width: 3rem;
+	min-width: 2.5rem;
+	height: 5rem;
+	border-radius: 1.25rem;
 	margin-left: auto;
 	position: relative;
+	background-color: var(--tags-bg-color);
 }
 
 .product-link > a {
 	display: block;
 	width: 2.5rem;
 	height: 2.5rem;
-	position: absolute;
-	top: calc(50% - 1.25rem);
-	left: calc(50% - 1.25rem);
+	/* position: absolute; */
+	/* top: calc(50% - 1.25rem);
+	left: calc(50% - 1.25rem); */
 	border-radius: 1.25rem;
 	border: none;
 	background-color: var(--background-color);
+	background: transparent;
 	color: var(--text-color);
 	display: flex;
 	justify-content: center;
@@ -169,5 +193,55 @@ export default {
 .product-tags .warn {
 	color: #ffffff;
 	background-color: var(--alternate-red-color);
+}
+
+.product-alternatives {
+	width: 100%;
+	min-height: 3rem;
+	border-radius: .5rem;
+	padding: .5rem .75rem;
+	background-color: var(--tags-bg-hover-color);
+	/* border: 2px solid var(--gray-border-color); */
+	/* border: 2px solid var(--primary-yellow-color); */
+	/* border: 2px solid #2f3741; */
+	/* background-color: #2f3741; */
+	margin-top: .5rem;
+	/* color: #f1f3f5; */
+}
+
+.product-alternatives .alt {
+	float: left;
+	padding: .25rem;
+	padding-right: .75rem;
+	border-radius: 1.25rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 2rem;
+	margin-right: .5rem;
+	/* background-color: var(--current-tags-bg-hover-color); */
+	background-color: var(--alternatives-bg-color);
+}
+
+.product-alternatives .alt > * {
+	float: left;
+}
+
+.product-alternatives .alt img {
+	height: 1.5rem;
+	margin-right: .5rem;
+	width: 1.5rem;
+	border-radius: 50%;
+}
+
+.product-alternatives .alt > p {
+	font-size: .85rem;
+}
+
+.product-alternatives > p {
+	font-weight: bold;
+	margin: 0;
+	margin-bottom: .5rem;
+	padding: 0;
 }
 </style>

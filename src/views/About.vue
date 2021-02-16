@@ -10,6 +10,8 @@
                 <li>This collection is based on claims made by their respective owners or companies.</li>
                 <li>Some of the services come with the ability to encrypt which isn't on by default. They either require <mark class="highlight">enabling encryption</mark> or have it as a feature on some <mark class="highlight">specific part</mark> of the software. These services are tagged in red as "opt-in".</li>
                 <li>Products tagged as "open-source" are more reliable. However, not all products tagged as "open-source" are fully open source.</li>
+                <li>Some services may be discontinued without notice and their link or URL may point to a new service that's not meant to be there.</li>
+                <li>Please <router-link to="/report">report here <app-link-icon></app-link-icon></router-link> if you notice any suspicious services.</li>
                 <li>Do your research before trusting a service 🤓 and enjoy!😉.</li>
             </ul>
         </p>
@@ -35,12 +37,14 @@
 <script>
 import ButtonLink from "@/components/ButtonLink.vue";
 import HomeIcon from "@/components/icons/HomeIcon.vue";
+import LinkIcon from "@/components/icons/LinkIcon.vue";
 import ExternalIcon from "@/components/icons/ExternalIcon.vue";
 
 export default {
     name: 'About',
     components: {
         appHomeIcon: HomeIcon,
+        appLinkIcon: LinkIcon,
         appButtonLink: ButtonLink,
         appExternalIcon: ExternalIcon,
     },
@@ -107,6 +111,17 @@ export default {
     display: inline-block;
     width: 1.5em;
     margin-left: -1em;
+}
+
+#about > p ul li a {
+    text-decoration: none;
+    border-radius: .1rem;
+    padding: 0 .25rem;
+    color: var(--highlight-text-color);
+    background-color: var(--primary-yellow-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #about .links {

@@ -142,15 +142,16 @@ export default {
 
 html {
 	--text-color: #1c2024;
-	--background-color: #ffffff;
+	--background-color: #f1f3f5;
 	--gray-border-color: #1c2024;
 	--tags-bg-color: #e8eaec;
 	--tags-bg-hover-color: #d8dbdf;
-	--current-tags-bg-color: #ced4da;
+	--alternatives-bg-color: #e6e9ec;
+	--current-tags-bg-color: #ced4da; /* <----------Duplicate--------------- */
 	--current-tags-bg-hover-color: #b5bbc0;
 	--app-desc-text-color: #5d6470;
 	--placeholder-text-color: #9da3a8;
-	--product-border-color: #ced4da;
+	--product-border-color: #ced4da;	/* <---------Duplicate---------------- */
 	--product-desc-text-color: #5d6470;
 	--yellow-black-bg-color: #f1c61b;
 	--yellow-black-border-color: #1c2024;
@@ -163,6 +164,7 @@ html[data-theme='dark'] {
 	--gray-border-color: #495057;
 	--tags-bg-color: #272d35;
 	--tags-bg-hover-color: #2f3741;
+	--alternatives-bg-color: #242930;
 	--current-tags-bg-color: #495057;
 	--current-tags-bg-hover-color: #575f68;
 	--app-desc-text-color: #ced4da;

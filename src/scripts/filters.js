@@ -28,6 +28,7 @@ const categories = [
 	"File Transfer",
 	"Collaboration",
 	"Communication",
+	"Developer Tools",
 ];
 
 export { tags, categories };

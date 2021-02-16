@@ -86,7 +86,27 @@ export default {
 			tags: [],
 			limit: 10,
 			categories: [],
-            allProducts: [],
+            allProducts: [
+				{
+					name: "Signal",
+					desc: "encrypted messaging for the world of the 21st century.",
+					url: "https://signal.org",
+					tags: ["all","p2p","web-app"],
+					categories: ["All", "Health", "Notes"],
+					png_img: "./img (1).png",
+					webp_img: "./img (1).png"
+				},
+				{
+					name: "Telegram",
+					desc: "encrypted messaging for the world of the 21st century.",
+					url: "https://signal.org",
+					tags: ["all","p2p","web-app"],
+					categories: ["All", "Health", "Notes"],
+					png_img: "./img (2).png",
+					webp_img: "./img (2).png"
+				}
+			],
+            // allProducts: [],
 			searchQuery: "",
 			searchResults: [],
 			placeholderText: "",
