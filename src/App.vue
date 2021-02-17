@@ -1,10 +1,11 @@
 <template>
 	<div id="app">
-		<app-header v-show="!isIE()" :darkTheme="darkThemeEnabled" v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
+		<app-header :darkTheme="darkThemeEnabled" v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
 
-		<router-view v-show="!isIE()"></router-view>
+		<router-view></router-view>
 
-		<div v-show="isIE()" class="ie-overlay" >
+		<!-- <div v-show="isIE()" class="ie-overlay"> -->
+		<div :class="['ie-overlay', { 'ie-true' : isIE() }]">
 			<p>
 				It seems like you are using Internet Explorer (IE). <br><br>
 				This website isn't supported on IE. <br><br>
@@ -273,6 +274,11 @@ mark.highlight {
 	background-color: #fff;
 	color: #000;
 	padding: 2rem;
+	display: none;
+}
+
+.ie-overlay.ie-true {
+	display: block;
 }
 
 .ie-overlay p {
