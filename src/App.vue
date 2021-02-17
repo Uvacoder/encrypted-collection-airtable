@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style>
-/* Import regular monospace font */
+/* Import bold monospace font */
 @font-face {
 	font-family: 'JetBrains Mono';
 	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Bold.woff2') format('woff2'),
@@ -120,12 +120,22 @@ export default {
 	font-display: swap;
 }
 
-/* Import bold monospace font */
+/* Import extrabold monospace font */
 @font-face {
 	font-family: 'JetBrains Mono';
 	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-ExtraBold.woff2') format('woff2'),
 		url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-ExtraBold.woff') format('woff');
 	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Import regular monospace font */
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
+	url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff');
+	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
@@ -144,9 +154,9 @@ html {
 	--text-color: #1c2024;
 	--background-color: #f1f3f5;
 	--gray-border-color: #1c2024;
-	--tags-bg-color: #e8eaec;
-	--tags-bg-hover-color: #d8dbdf;
-	--alternatives-bg-color: #e6e9ec;
+	--tags-bg-color: #e3e5e7;
+	--tags-bg-hover-color: #ced4da;
+	--alternatives-bg-color: #ced4da;
 	--current-tags-bg-color: #ced4da; /* <----------Duplicate--------------- */
 	--current-tags-bg-hover-color: #b5bbc0;
 	--app-desc-text-color: #5d6470;
@@ -162,9 +172,9 @@ html[data-theme='dark'] {
 	--text-color: #f1f3f5;
 	--background-color: #1c2024;
 	--gray-border-color: #495057;
-	--tags-bg-color: #272d35;
-	--tags-bg-hover-color: #2f3741;
-	--alternatives-bg-color: #242930;
+	--tags-bg-color: #2b323a;
+	--tags-bg-hover-color: #3b4653;
+	--alternatives-bg-color: #343a40;
 	--current-tags-bg-color: #495057;
 	--current-tags-bg-hover-color: #575f68;
 	--app-desc-text-color: #ced4da;

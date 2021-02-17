@@ -29,6 +29,9 @@ module.exports = async (tableName, numRecs) => {
 						url: record.fields.url,
 						tags: record.fields.tags,
 						categories: record.fields.categories,
+						alternatives: record.fields.alternatives
+							? record.fields.alternatives
+							: [],
 						png_img: `${baseImgURL}/png/${imgName}.png?tr=w-105,dpr-1,lo-true`,
 						webp_img: `${baseImgURL}/png/${imgName}.png?tr=w-105,dpr-1,lo-true,f-webp`,
 						// webp_img: `${baseImgURL}/webp/${imgName}.webp?tr=w-105,dpr-1,lo-true`,

@@ -11,13 +11,17 @@
 				<h3 class="product-name" ref="pName" v-html="product.name"></h3>
 				<p class="product-desc" ref="pDesc" v-html="product.desc"></p>
 			</div>
-			<div class="product-link">
+			<div :class="['product-link', { 'with-alts' : product.alternatives.length > 0 }]">
 				<a title="Go To Product Website" aria-label="Go To Product Website" target="_blank" rel="noopener" :href="`${product.url}?ref=EncryptedList`">
 					<app-external-icon></app-external-icon>
 				</a>
-				<a title="Show Alternative" aria-label="Show Alternative" target="_blank" rel="noopener" :href="`${product.url}?ref=EncryptedList`">
-					<app-back-icon></app-back-icon>
-				</a>
+				<app-button 
+					:label="'Show Alternatives'"
+					:iconButton="true"
+					@clicked="toggleAlts = !toggleAlts"
+				>
+					<app-alternative-icon></app-alternative-icon>
+				</app-button>
 			</div>
 		</div>
 		<div class="product-tags">
@@ -30,28 +34,22 @@
 				:title="(tag === 'opt-in') ? 'Beware!' : ''"
 			>{{ tag }}</app-button-tag>
 		</div>
-		<div class="product-alternatives">
+		<div :class="['product-alternatives', { 'visible' : toggleAlts }]">
 			<p>An alternative to:</p>
-			<div class="alt">
-				<img src="img (1).png" alt="logo">
-				<p>Trello</p>
-			</div>
-			<div class="alt">
-				<img src="img (1).png" alt="logo">
-				<p>Slack</p>
-			</div>
-			<div class="alt">
-				<img src="img (1).png" alt="logo">
-				<p>Teams</p>
+
+			<div class="alt" v-for="(alt, index) in product.alternatives" :key="index">
+				<img :src="`https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/alts/png/${alt.split(' ').join('-').toLowerCase()}.png`" :alt="`${alt} logo`">
+				<p>{{ alt }}</p>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import Button from "./Button.vue";
 import ButtonTag from "./ButtonTag.vue";
-import BackIcon from "./icons/BackIcon.vue";
 import ExternalIcon from "./icons/ExternalIcon.vue";
+import AlternativeIcon from "./icons/AlternativeIcon.vue";
 
 export default {
 	name: "Product",
@@ -64,10 +62,16 @@ export default {
 			default: true
 		}
 	},
+	data() {
+		return {
+			toggleAlts: false
+		}
+	},
     components: {
-        appButtonTag: ButtonTag,
-		appBackIcon: BackIcon,
+        appButton: Button,
+		appButtonTag: ButtonTag,
         appExternalIcon: ExternalIcon,
+		appAlternativeIcon: AlternativeIcon,
 	},
 	methods: {
 		filterWith: function(q) {
@@ -105,6 +109,7 @@ export default {
 	background-color: var(--background-color);
 	color: var(--text-color);
 	display: flex;
+	align-items: center;
 	margin-bottom: 0.25rem;
 }
 
@@ -134,6 +139,7 @@ export default {
 
 .product-detail > * {
 	margin: 0 0 0.5rem 0;
+	padding-right: .5rem;
 }
 
 .product-name {
@@ -150,20 +156,26 @@ export default {
 .product-link {
 	display: block;
 	min-width: 2.5rem;
-	height: 5rem;
+	height: 2.5rem;
 	border-radius: 1.25rem;
 	margin-left: auto;
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	background-color: var(--tags-bg-color);
 }
 
-.product-link > a {
+.product-link.with-alts {
+	height: 5rem;
+}
+
+.product-link > a,
+.product-link > button {
 	display: block;
 	width: 2.5rem;
 	height: 2.5rem;
-	/* position: absolute; */
-	/* top: calc(50% - 1.25rem);
-	left: calc(50% - 1.25rem); */
 	border-radius: 1.25rem;
 	border: none;
 	background-color: var(--background-color);
@@ -172,14 +184,22 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border: none;
 }
 
-.product-link > a:hover {
+.product-link > a:hover,
+.product-link > button:hover {
+	border: none;
 	background-color: var(--primary-yellow-color);
 }
 
-.product-link > a:hover > svg {
+.product-link > a:hover > svg,
+.product-link > button:hover > svg {
 	color: var(--highlight-text-color);
+}
+
+.product-link > button {
+	display: none;
 }
 
 .product-tags {
@@ -199,14 +219,22 @@ export default {
 	width: 100%;
 	min-height: 3rem;
 	border-radius: .5rem;
-	padding: .5rem .75rem;
-	background-color: var(--tags-bg-hover-color);
-	/* border: 2px solid var(--gray-border-color); */
-	/* border: 2px solid var(--primary-yellow-color); */
-	/* border: 2px solid #2f3741; */
-	/* background-color: #2f3741; */
+	padding: .75rem 1rem;
+	background-color: var(--tags-bg-color);
 	margin-top: .5rem;
-	/* color: #f1f3f5; */
+	display: none;
+}
+
+.product-alternatives > p {
+	font-weight: bold;
+	margin: 0;
+	margin-bottom: .75rem;
+	padding: 0;
+}
+
+.product-link.with-alts > button,
+.product-alternatives.visible {
+	display: block;
 }
 
 .product-alternatives .alt {
@@ -218,9 +246,8 @@ export default {
 	justify-content: space-between;
 	align-items: center;
 	height: 2rem;
-	margin-right: .5rem;
-	/* background-color: var(--current-tags-bg-hover-color); */
-	background-color: var(--alternatives-bg-color);
+	margin: 0 .5rem .5rem 0;
+	background-color: var(--tags-bg-hover-color);
 }
 
 .product-alternatives .alt > * {
@@ -232,16 +259,11 @@ export default {
 	margin-right: .5rem;
 	width: 1.5rem;
 	border-radius: 50%;
+	overflow: hidden;
+	object-fit: contain;
 }
 
 .product-alternatives .alt > p {
 	font-size: .85rem;
-}
-
-.product-alternatives > p {
-	font-weight: bold;
-	margin: 0;
-	margin-bottom: .5rem;
-	padding: 0;
 }
 </style>
