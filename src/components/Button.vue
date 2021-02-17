@@ -51,7 +51,7 @@ export default {
 	border-bottom: 4px solid var(--gray-border-color);
 }
 
-.icon-button {
+.button.icon-button {
 	min-width: 2.5rem;
 	max-width: 2.5rem;
 	padding: 0;

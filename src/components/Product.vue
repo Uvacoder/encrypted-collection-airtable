@@ -3,8 +3,8 @@
 		<div class="product-info">
 			<div class="product-logo">
 				<picture>
-					<source :srcset="product.webp_img" type="image/webp">
-					<img :src="product.png_img" loading="lazy" alt="Product Logo"/>
+					<source :srcset="`${imgBaseUrl}/png/${hyphenify(product.name)}.png?tr=w-105,dpr-1,lo-true`" type="image/webp">
+					<img :src="`${imgBaseUrl}/png/${hyphenify(product.name)}.png?tr=w-105,dpr-1,lo-true,f-webp`" loading="lazy" alt="Product Logo"/>
 				</picture>
 			</div>
 			<div class="product-detail">
@@ -12,7 +12,7 @@
 				<p class="product-desc" ref="pDesc" v-html="product.desc"></p>
 			</div>
 			<div :class="['product-link', { 'with-alts' : product.alternatives.length > 0 }]">
-				<a title="Go To Product Website" aria-label="Go To Product Website" target="_blank" rel="noopener" :href="`${product.url}?ref=EncryptedList`">
+				<a title="Go To Product Website" aria-label="Go to Product Website" target="_blank" rel="noopener" :href="`${product.url}?ref=EncryptedList`">
 					<app-external-icon></app-external-icon>
 				</a>
 				<app-button 
@@ -38,7 +38,7 @@
 			<p>An alternative to:</p>
 
 			<div class="alt" v-for="(alt, index) in product.alternatives" :key="index">
-				<img :src="`https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/alts/png/${alt.split(' ').join('-').toLowerCase()}.png`" :alt="`${alt} logo`">
+				<img :src="`https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/alts/png/${hyphenify(alt)}.png`" :alt="`${alt} logo`">
 				<p>{{ alt }}</p>
 			</div>
 		</div>
@@ -48,6 +48,7 @@
 <script>
 import Button from "./Button.vue";
 import ButtonTag from "./ButtonTag.vue";
+import { hyphenify } from '@/scripts/helpers';
 import ExternalIcon from "./icons/ExternalIcon.vue";
 import AlternativeIcon from "./icons/AlternativeIcon.vue";
 
@@ -64,7 +65,8 @@ export default {
 	},
 	data() {
 		return {
-			toggleAlts: false
+			toggleAlts: false,
+			imgBaseUrl: "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/"
 		}
 	},
     components: {
@@ -74,6 +76,7 @@ export default {
 		appAlternativeIcon: AlternativeIcon,
 	},
 	methods: {
+		hyphenify,
 		filterWith: function(q) {
 			// filtering is disabled on some pages that use this component
 			if (this.filterable) {
@@ -126,6 +129,7 @@ export default {
 	top: calc(50% - 1.25rem);
 	left: calc(50% - 1.25rem);
 	border-radius: 0.25rem;
+	overflow: hidden;
 }
 
 .product-detail {
@@ -223,6 +227,7 @@ export default {
 	background-color: var(--tags-bg-color);
 	margin-top: .5rem;
 	display: none;
+	border: 2px solid var(--product-border-color);
 }
 
 .product-alternatives > p {
@@ -232,7 +237,10 @@ export default {
 	padding: 0;
 }
 
-.product-link.with-alts > button,
+.product-link.with-alts > button {
+	display: flex;
+}
+
 .product-alternatives.visible {
 	display: block;
 }

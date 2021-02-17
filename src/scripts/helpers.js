@@ -33,6 +33,13 @@ const capitalizeWords = (str) => {
 	return str.replace(/\b[a-z]/g, (char) => char.toUpperCase());
 };
 
+// Basically changes "Product Name" to "product-name"
+const hyphenify = (str) =>
+	str
+		.split(" ")
+		.join("-")
+		.toLowerCase();
+
 // returns start & end indices of all occurences of a query from a string
 const stringSearch = (str, query, caseInsensitive = true) => {
 	caseInsensitive = isDefined(caseInsensitive) ? caseInsensitive : true;
@@ -80,6 +87,7 @@ export {
 	isIE,
 	encode,
 	scroll,
+	hyphenify,
 	isDefined,
 	capitalizeWords,
 	stringSearch,
