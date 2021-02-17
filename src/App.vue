@@ -1,5 +1,9 @@
 <template>
 	<div id="app">
+		<app-header v-show="!isIE()" :darkTheme="darkThemeEnabled" v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
+
+		<router-view v-show="!isIE()"></router-view>
+
 		<div v-show="isIE()" class="ie-overlay" >
 			<p>
 				It seems like you are using Internet Explorer (IE). <br><br>
@@ -8,10 +12,6 @@
 				Otherwise, please upgrade to a different browser.
 			</p>
 		</div>
-
-		<app-header v-show="!isIE()" :darkTheme="darkThemeEnabled" v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
-
-		<router-view v-show="!isIE()"></router-view>
 	</div>
 </template>
 
