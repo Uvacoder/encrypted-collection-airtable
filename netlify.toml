@@ -19,4 +19,4 @@
         X-Frame-Options = "DENY"
         X-XSS-Protection = "1; mode=block"
         X-Content-Type-Options = "nosniff"
-        Content-Security-Policy = "default-src 'self'; script-src https://encryptedlist.goatcounter.com; font-src https://cdn.jsdelivr.net; img-src https://ik.imagekit.io"
+        Content-Security-Policy = "default-src 'self'; script-src 'self' https://encryptedlist.goatcounter.com; font-src https://cdn.jsdelivr.net; img-src https://ik.imagekit.io"
