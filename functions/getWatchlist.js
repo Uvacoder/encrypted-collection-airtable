@@ -6,11 +6,11 @@ exports.handler = async (event, callback) => {
 	try {
 		const altHost = `${process.env.ALT_BASE_URL}`;
 		const mainHost = `${process.env.MAIN_BASE_URL}`;
-		const altReferer = `https://${process.env.ALT_BASE_URL}/watchlist`;
-		const mainReferer = `https://${process.env.MAIN_BASE_URL}/watchlist`;
+		// const altReferer = `https://${process.env.ALT_BASE_URL}/watchlist`;
+		// const mainReferer = `https://${process.env.MAIN_BASE_URL}/watchlist`;
 
-		// const altReferer = `http://${process.env.ALT_BASE_URL}/watchlist`;
-		// const mainReferer = `http://${process.env.MAIN_BASE_URL}/watchlist`;
+		const altReferer = `http://${process.env.ALT_BASE_URL}/watchlist`;
+		const mainReferer = `http://${process.env.MAIN_BASE_URL}/watchlist`;
 
 		if (
 			event.httpMethod === "GET" &&
