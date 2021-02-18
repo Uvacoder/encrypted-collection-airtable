@@ -5,7 +5,7 @@ const formatReturn = require("./formatReturn");
 module.exports = async (tableName, numRecs) => {
 	try {
 		const table = base(tableName);
-		const initialLimit = typeof numRecs !== "undefined" ? numRecs : 150;
+		const initialLimit = typeof numRecs !== "undefined" ? numRecs : 350;
 
 		let products = [];
 
@@ -31,7 +31,7 @@ module.exports = async (tableName, numRecs) => {
 			});
 
 		if (typeof recs !== "undefined") {
-			console.log(recs);
+			console.log(recs.length);
 		}
 
 		return formatReturn(200, products);

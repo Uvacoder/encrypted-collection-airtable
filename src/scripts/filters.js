@@ -1,6 +1,5 @@
 // List of available tags
 const tags = [
-	"all",
 	"p2p",
 	"beta",
 	"free",
@@ -16,7 +15,6 @@ const tags = [
 
 // List of available categories
 const categories = [
-	"All",
 	"Email",
 	"Notes",
 	"Health",

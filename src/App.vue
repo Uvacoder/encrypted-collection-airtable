@@ -130,60 +130,49 @@ export default {
 	font-display: swap;
 }
 
-/* Import regular monospace font */
-@font-face {
-	font-family: 'JetBrains Mono';
-	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
-	url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
 :root {
-	--gray-bg-color: #868e96;
 	--lightgray-bg-color: #ced4da;
 	--highlight-text-color: #1c2024;
 	--primary-red-color: #fa5252;
 	--alternate-red-color: #e03131;
 	--primary-green-color: #51cf66;
 	--primary-yellow-color: #f1c61b;
+	--primary-black-color: #1c2024;
+	--primary-white-color: #f1f3f5;
 }
 
 html {
 	--text-color: #1c2024;
 	--background-color: #f1f3f5;
 	--gray-border-color: #1c2024;
+	--light-dark-gray-color: #c0c8cf;
+	--dark-light-gray-color: #5c6370;
+	
+	--yellow-black-color: #f1c61b;
+	--yellow-black-alt-color: #1c2024;
+
 	--tags-bg-color: #dce1e6;
 	--tags-bg-hover-color: #c9d1da;
-	/* --alternatives-bg-color: #ced4da; */
-	--current-tags-bg-color: #ced4da; /* <----------Duplicate--------------- */
 	--current-tags-bg-hover-color: #b5bbc0;
-	--app-desc-text-color: #5d6470;
+	
 	--placeholder-text-color: #9da3a8;
-	--product-border-color: #ccd3da;	/* <---------Duplicate---------------- */
-	--product-desc-text-color: #5d6470;
-	--yellow-black-bg-color: #f1c61b;
-	--yellow-black-border-color: #1c2024;
-	--wip-text-color: #475058;
 }
 
 html[data-theme='dark'] {
 	--text-color: #f1f3f5;
 	--background-color: #1c2024;
 	--gray-border-color: #495057;
+	--light-dark-gray-color: #495057;
+	--dark-light-gray-color: #ced4da;
+
+	--yellow-black-color: #1c2024;
+	--yellow-black-alt-color: #f1c61b;
+
 	--tags-bg-color: #2b323a;
 	--tags-bg-hover-color: #3b4653;
-	/* --alternatives-bg-color: #343a40; */
-	--current-tags-bg-color: #495057;
 	--current-tags-bg-hover-color: #575f68;
-	--app-desc-text-color: #ced4da;
+
 	--placeholder-text-color: #7b828a;
-	--product-border-color: #495057;
-	--product-desc-text-color: #ced4da;
-	--yellow-black-bg-color: #1c2024;
-	--yellow-black-border-color: #f1c61b;
-	--wip-text-color: #748694;
 }
 
 html,
@@ -270,8 +259,8 @@ mark.highlight {
 	left: 0;
 	width: 100%;
 	height: 100vh;
-	background-color: #fff;
-	color: #000;
+	background-color: var(--primary-white-color);
+	color: var(--primary-black-color);
 	padding: 2rem;
 }
 

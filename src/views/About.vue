@@ -150,8 +150,8 @@ export default {
 	border-bottom: 4px solid;	
 	border-radius: 0.5rem;
 	color: var(--text-color);
-    background-color: var(--yellow-black-bg-color);
-	border-color:  var(--yellow-black-border-color);
+    background-color: var(--yellow-black-color);
+	border-color:  var(--yellow-black-alt-color);
 }
 
 #about .links > :last-child svg {

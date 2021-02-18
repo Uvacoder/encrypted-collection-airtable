@@ -6,11 +6,9 @@ exports.handler = async (event, callback) => {
 	try {
 		const altHost = `${process.env.ALT_BASE_URL}`;
 		const mainHost = `${process.env.MAIN_BASE_URL}`;
+
 		const altReferer = `https://${process.env.ALT_BASE_URL}/excluded`;
 		const mainReferer = `https://${process.env.MAIN_BASE_URL}/excluded`;
-
-		// const altReferer = `http://${process.env.ALT_BASE_URL}/excluded`;
-		// const mainReferer = `http://${process.env.MAIN_BASE_URL}/excluded`;
 
 		if (
 			event.httpMethod === "GET" &&

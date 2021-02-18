@@ -11,7 +11,6 @@
 			<div class="app-detail">
 				<h3 class="app-name">
 					{{ headerTitle }}
-					<span title="Work In Progress">(WIP)</span>
 				</h3>
 				<p class="app-desc">
 					List of services that offer zero-knowledge or end-to-end encryption 🔐.
@@ -313,7 +312,7 @@ export default {
 .app-logo img {
 	width: 100%;
 	height: 100%;
-	background-color: #fff;
+	background-color: var(--primary-white-color);
 	display: block;
 	position: absolute;
 	top: calc(50% - 1.5rem);
@@ -343,12 +342,8 @@ html[data-theme='dark'] .app-logo img {
 	color: var(--text-color);
 }
 
-.app-name > span{
-	color: var(--wip-text-color);
-}
-
 .app-desc {
-	color: var(--app-desc-text-color);
+	color: var(--dark-light-gray-color);
 	line-height: 1.5;
 	font-size: 1rem;
 	margin: 0.25rem;
@@ -372,8 +367,8 @@ html[data-theme='dark'] .app-logo img {
 
 .nav-buttons > .give-feedback,
 .menu-list .header .menu-list-buttons > .give-feedback {
-	background-color: var(--yellow-black-bg-color);
-	border-color:  var(--yellow-black-border-color);
+	background-color: var(--yellow-black-color);
+	border-color:  var(--yellow-black-alt-color);
 }
 
 .nav-buttons > .toggle-menu {

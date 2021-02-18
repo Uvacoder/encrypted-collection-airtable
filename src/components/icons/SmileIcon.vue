@@ -16,7 +16,7 @@
 svg {
     width: 1.5rem;
     height: 1.5rem;
-    color: var(--yellow-black-border-color);
+    color: var(--yellow-black-alt-color);
 }
 </style>
 

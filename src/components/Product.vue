@@ -3,8 +3,8 @@
 		<div class="product-info">
 			<div class="product-logo">
 				<picture>
-					<source :srcset="`${imgBaseUrl}/png/${hyphenify(product.name)}.png?tr=w-105,dpr-1,lo-true`" type="image/webp">
-					<img :src="`${imgBaseUrl}/png/${hyphenify(product.name)}.png?tr=w-105,dpr-1,lo-true,f-webp`" loading="lazy" alt="Product Logo"/>
+					<source :srcset="`${imgBaseUrl}/png/${hyphenify(product.name)}.png?tr=w-105,dpr-1,lo-true,f-webp`" type="image/webp">
+					<img :src="`${imgBaseUrl}/png/${hyphenify(product.name)}.png?tr=w-105,dpr-1,lo-true`" loading="lazy" alt="Product Logo"/>
 				</picture>
 			</div>
 			<div class="product-detail">
@@ -26,7 +26,7 @@
 		</div>
 		<div class="product-tags">
 			<app-button-tag
-				v-for="(tag, index) in product.tags.slice(1)" 
+				v-for="(tag, index) in product.tags" 
 				:key="index" 
 				:value="tag"
 				@clicked="filterWith(tag)"
@@ -103,7 +103,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	background-color: var(--background-color);
-	border-bottom: 2px solid var(--product-border-color);
+	border-bottom: 2px solid var(--light-dark-gray-color);
 	padding: 0.75rem 0;
 }
 
@@ -152,7 +152,7 @@ export default {
 }
 
 .product-desc {
-	color: var(--product-desc-text-color);
+	color: var(--dark-light-gray-color);
 	line-height: 1.5;
 	font-size: 0.9rem;
 }
@@ -215,7 +215,7 @@ export default {
 }
 
 .product-tags .warn {
-	color: #ffffff;
+	color: var(--primary-white-color);
 	background-color: var(--alternate-red-color);
 }
 
@@ -227,7 +227,7 @@ export default {
 	background-color: var(--tags-bg-color);
 	margin-top: .5rem;
 	display: none;
-	border: 2px solid var(--product-border-color);
+	border: 2px solid var(--light-dark-gray-color);
 }
 
 .product-alternatives > p {
@@ -256,6 +256,7 @@ export default {
 	height: 2rem;
 	margin: 0 .5rem .5rem 0;
 	background-color: var(--tags-bg-hover-color);
+	border: 2px solid var(--light-dark-gray-color);
 }
 
 .product-alternatives .alt > * {

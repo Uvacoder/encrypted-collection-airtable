@@ -284,10 +284,10 @@ export default {
 	border-radius: 0.5rem;
 	margin: .75rem 0;
 	padding: .5rem;
-	background-color: var(--yellow-black-bg-color);
+	background-color: var(--yellow-black-color);
 	border: 2px solid var(--gray-border-color);
 	border-bottom: 4px solid var(--gray-border-color);	
-	border-color:  var(--yellow-black-border-color);	
+	border-color:  var(--yellow-black-alt-color);	
 }
 
 .product-list > .no-results {
@@ -352,7 +352,7 @@ export default {
 	margin-left: auto;
 	padding: 0 .2rem 0 .5rem;
 	color: var(--text-color);
-	background-color: var(--current-tags-bg-color);
+	background-color: var(--light-dark-gray-color);
 }
 
 .product-filters .headers .current:hover {
