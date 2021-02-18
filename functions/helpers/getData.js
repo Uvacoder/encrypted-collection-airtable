@@ -7,7 +7,9 @@ module.exports = async (tableName, numRecs) => {
 		const table = base(tableName);
 		const initialLimit = typeof numRecs !== "undefined" ? numRecs : 350;
 
-		let products = [];
+		let products = [],
+			img_name = "",
+			imgBaseUrl = "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist";
 
 		const recs = await table
 			.select({
@@ -16,8 +18,14 @@ module.exports = async (tableName, numRecs) => {
 			})
 			.eachPage((records, fetchNextPage) => {
 				records.forEach((record) => {
+					img_name = record.fields.name
+						.split(" ")
+						.join("-")
+						.toLowerCase();
+
 					products.push({
 						name: record.fields.name,
+						markup_name: record.fields.name,
 						desc: record.fields.description,
 						url: record.fields.url,
 						tags: record.fields.tags,
@@ -25,6 +33,7 @@ module.exports = async (tableName, numRecs) => {
 						alternatives: record.fields.alternatives
 							? record.fields.alternatives
 							: [],
+						png_url: `${imgBaseUrl}/png/${img_name}.png?tr=w-105,dpr-1,lo-true`,
 					});
 				});
 				fetchNextPage();

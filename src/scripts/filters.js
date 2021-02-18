@@ -8,6 +8,7 @@ const tags = [
 	"premium",
 	"freemium",
 	"proprietary",
+	"self-hosted",
 	"open-source",
 	"decentralized",
 	"cross-platform",

@@ -3,8 +3,8 @@
 		<div class="product-info">
 			<div class="product-logo">
 				<picture>
-					<source :srcset="`${imgBaseUrl}/png/${hyphenify(product.name)}.png?tr=w-105,dpr-1,lo-true,f-webp`" type="image/webp">
-					<img :src="`${imgBaseUrl}/png/${hyphenify(product.name)}.png?tr=w-105,dpr-1,lo-true`" loading="lazy" alt="Product Logo"/>
+					<source :srcset="`${product.png_url},f-webp`" type="image/webp">
+					<img :src="product.png_url" loading="lazy" alt="Product Logo"/>
 				</picture>
 			</div>
 			<div class="product-detail">
@@ -66,7 +66,6 @@ export default {
 	data() {
 		return {
 			toggleAlts: false,
-			imgBaseUrl: "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/"
 		}
 	},
     components: {
