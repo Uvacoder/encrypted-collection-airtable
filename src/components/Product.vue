@@ -19,6 +19,7 @@
 					:label="'Show Alternatives'"
 					:iconButton="true"
 					@clicked="toggleAlts = !toggleAlts"
+					:class="{ 'active-alts' : toggleAlts }"
 				>
 					<app-alternative-icon></app-alternative-icon>
 				</app-button>
@@ -205,6 +206,18 @@ export default {
 	display: none;
 }
 
+.product-link.with-alts > button {
+	display: flex;
+}
+
+.product-link.with-alts > button.active-alts {
+	background-color: var(--primary-yellow-color);
+}
+
+.product-link.with-alts > button.active-alts svg {
+	color: var(--primary-black-color);
+}
+
 .product-tags {
 	padding: .25rem 0 0 0;
 }
@@ -234,10 +247,6 @@ export default {
 	margin: 0;
 	margin-bottom: .75rem;
 	padding: 0;
-}
-
-.product-link.with-alts > button {
-	display: flex;
 }
 
 .product-alternatives.visible {
