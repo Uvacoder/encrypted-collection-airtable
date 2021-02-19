@@ -35,7 +35,7 @@
 			>{{ tag }}</app-button-tag>
 		</div>
 		<div :class="['product-alternatives', { 'visible' : toggleAlts }]">
-			<p>An alternative to:</p>
+			<p>Secure alternative to:</p>
 
 			<div class="alt" v-for="(alt, index) in product.alternatives" :key="index">
 				<img :src="`https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/alts/png/${hyphenify(alt)}.png`" :alt="`${alt} logo`">
