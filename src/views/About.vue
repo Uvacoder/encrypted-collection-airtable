@@ -12,6 +12,7 @@
                 <li>Products tagged as "open-source" are more reliable. However, not all products tagged as "open-source" are fully open source.</li>
                 <li>Some services may be discontinued without notice and their link or URL may point to a new service that's not meant to be there.</li>
                 <li>Please <router-link to="/report">report here <app-link-icon></app-link-icon></router-link> if you notice any suspicious services.</li>
+                <li>All product logos belong to their respective owners.</li>
                 <li>Do your research before trusting a service 🤓 and enjoy!😉.</li>
             </ul>
         </p>
