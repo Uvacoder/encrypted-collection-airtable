@@ -287,10 +287,10 @@ export default {
 		// attach keyboard shortcuts for input
 		window.addEventListener('keyup', (e) => {
 			if (vm.$refs.searchInput) {
-				if (e.keyCode === 59) // when semicolon ( ; )
+				if (e.key === ";") // when semicolon ( ; )
 				{ 
 					vm.focusInput();
-				} else if (e.keyCode === 27) // when 'Esc' key is pressed
+				} else if (e.key === "Escape") // when 'Esc' key is pressed
 				{ 
 					vm.$refs.searchInput.blur();
 				}
