@@ -1,6 +1,6 @@
 <template>
     <div id='home'>
-        <div class="search">
+		<div class="search">
 			<div class="search-bar">
 				<div @click="focusInput">
 					<app-search-icon></app-search-icon>

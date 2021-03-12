@@ -50,6 +50,11 @@
 			</app-button>
 		</div>
 		<div class="filter-list">
+			<div class="message">
+				The database currently contains about 133 products. 
+				Additionally, there are 150+ products in my backlog that aren't yet added to the database.
+				The list is, therefore, not complete yet and you may not see even some of the popular encrypted services listed. 👍
+			</div>
 			<div class="product-filters">
 				<div class="headers">
 					<h4>Tags</h4>
@@ -377,11 +382,24 @@ export default {
 	border-radius: .35rem;
 }
 
+
+.message {
+	width: 100%;
+	padding: 1rem;
+	line-height: 1.35;
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	border: 2px solid var(--yellow-black-alt-color);
+	border-bottom: 4px solid var(--yellow-black-alt-color);
+	background-color: var(--yellow-black-color);
+}
+
 @media only screen and (max-width: 840px) {
 	.ProductList {
 		flex-direction: column-reverse;
 	}
 
+	.message,
 	.product-list,
 	.filter-list {
 		width: 100%;
