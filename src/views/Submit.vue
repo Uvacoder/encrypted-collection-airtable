@@ -95,19 +95,7 @@
                 </legend>  
 
                 <!-- All - Default Tag -->
-                <p>
-                    <input 
-                        checked
-                        disabled
-                        :id="tags[0]" 
-                        :value="tags[0]" 
-                        type="checkbox" 
-                        name="tags" 
-                    >
-                    <label :for="tags[0]">{{ tags[0] }}</label>
-                </p>
-
-                <p v-for="(tag, index) in tags.slice(1)" :key="index">
+                <p v-for="(tag, index) in tags" :key="index">
                     <input 
                         :id="tag" 
                         name="tags" 
@@ -125,19 +113,7 @@
                 </legend>
 
                 <!-- All - Default Category -->
-                <p>
-                    <input 
-                        checked
-                        disabled
-                        :id="categories[0]" 
-                        :value="categories[0]" 
-                        type="checkbox" 
-                        name="categories" 
-                    >
-                    <label :for="categories[0]">{{ categories[0] }}</label>
-                </p>
-
-                <p v-for="(cat, index) in categories.slice(1)" :key="index">
+                <p v-for="(cat, index) in categories" :key="index">
                     <input 
                         :id="cat" 
                         :value="cat" 
@@ -322,13 +298,6 @@ export default {
 #submit > form fieldset label,
 #submit > form fieldset input {
     cursor: pointer;
-}
-
-#submit > form fieldset[name="Tags"] > p:first-of-type label,
-#submit > form fieldset[name="Tags"] > p:first-of-type label,
-#submit > form fieldset[name="Categories"] > p:first-of-type input,
-#submit > form fieldset[name="Categories"] > p:first-of-type input {
-    cursor: not-allowed;
 }
 
 #submit > form button {
