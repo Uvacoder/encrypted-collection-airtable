@@ -51,7 +51,7 @@
 		</div>
 		<div class="filter-list">
 			<div class="message">
-				The database currently contains about 133 products. 
+				The database currently contains about 137 products. 
 				Additionally, there are 150+ products in my backlog that aren't yet added to the database.
 				The list is, therefore, not complete yet and you may not see even some of the popular encrypted services listed. 👍
 			</div>
