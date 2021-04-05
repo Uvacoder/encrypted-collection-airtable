@@ -18,7 +18,9 @@ module.exports = async (tableName, numRecs) => {
 			})
 			.eachPage((records, fetchNextPage) => {
 				records.forEach((record) => {
+					// slugify name
 					img_name = record.fields.name
+						.trim()
 						.split(" ")
 						.join("-")
 						.toLowerCase();
