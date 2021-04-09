@@ -130,6 +130,7 @@ export default {
 	left: calc(50% - 1.25rem);
 	border-radius: 0.25rem;
 	overflow: hidden;
+	background: transparent;
 }
 
 .product-detail {
