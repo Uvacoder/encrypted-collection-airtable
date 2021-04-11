@@ -24,7 +24,7 @@ const categories = [
 	"Security",
 	"Utilities",
 	"Productivity",
-	"File Transfer",
+	"Data Transfer",
 	"Collaboration",
 	"Communication",
 	"Developer Tools",
