@@ -16,7 +16,7 @@
 					<app-external-icon></app-external-icon>
 				</a>
 				<app-button 
-					:label="'Show Alternatives'"
+					:label="'Show insecure alternatives:'"
 					:iconButton="true"
 					@clicked="toggleAlts = !toggleAlts"
 					:class="{ 'active-alts' : toggleAlts }"
