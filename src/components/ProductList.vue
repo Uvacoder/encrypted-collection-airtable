@@ -115,7 +115,8 @@
 					></app-button-tag>
 				</div>
 				
-				<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Buy Me Coffee', '#f1c61b', 'R5R76FGFT');kofiwidget2.draw();</script> 
+				<a href='https://ko-fi.com/R5R76FGFT' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+				
 			</div>
 		</div>
 	</div>
