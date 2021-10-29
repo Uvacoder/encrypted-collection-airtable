@@ -116,7 +116,7 @@ export default {
 				return res.data;
 			})
 			.then((data) => {
-				this.watchlistProducts = data.slice();
+				this.watchlistProducts = JSON.parse(data.body);
 				this.isFetchingData = false;
 			})
 			.catch((err) => {
@@ -126,18 +126,18 @@ export default {
 			});
         },
         // detect list reaching top of viewport
-		setScrollOffset: function() {
-            if (this.$route.path.toLowerCase() === "/watchlist") {
-                this.scrollOffset = (this.$refs.list.$el.offsetTop - document.documentElement.scrollTop + 250) <= 0;
-			}
-        }
+		// setScrollOffset: function() {
+        //     if (this.$route.path.toLowerCase() === "/watchlist") {
+        //         this.scrollOffset = (this.$refs.list.$el.offsetTop - document.documentElement.scrollTop + 250) <= 0;
+		// 	}
+        // }
     },
     created() {
         this.fetchData();
     },
     mounted() {
-		this.setScrollOffset();
-        window.addEventListener("scroll", () => { this.setScrollOffset() });
+		// this.setScrollOffset();
+        // window.addEventListener("scroll", () => { this.setScrollOffset() });
     },
 }
 </script>
