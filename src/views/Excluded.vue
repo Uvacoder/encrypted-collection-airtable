@@ -115,7 +115,7 @@ export default {
 				return res.data;
 			})
 			.then((data) => {
-				this.excludedProducts = JSON.parse(data.body);
+				this.excludedProducts = data.slice();
 				this.isFetchingData = false;
 			})
 			.catch((err) => {

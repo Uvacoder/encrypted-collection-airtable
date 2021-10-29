@@ -1,6 +1,5 @@
 "use strict";
 const { base } = require("./airtable");
-const formatReturn = require("./formatReturn");
 
 module.exports = async (tableName, numRecs) => {
 	try {
@@ -45,8 +44,8 @@ module.exports = async (tableName, numRecs) => {
 			console.log(recs.length);
 		}
 
-		return formatReturn(200, products);
+		return products;
 	} catch (err) {
-		return formatReturn(500, { error: err });
+		return err;
 	}
 };

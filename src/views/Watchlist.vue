@@ -116,7 +116,7 @@ export default {
 				return res.data;
 			})
 			.then((data) => {
-				this.watchlistProducts = JSON.parse(data.body);
+				this.watchlistProducts = data.slice();
 				this.isFetchingData = false;
 			})
 			.catch((err) => {

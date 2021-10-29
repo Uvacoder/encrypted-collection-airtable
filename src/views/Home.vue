@@ -146,7 +146,7 @@
 					.then((data) => {
 						this.allProducts = [];
 						this.allProducts.length = 0;
-						this.allProducts = JSON.parse(data.body);
+						this.allProducts = data.slice();
 						this.isFetchingData = false;
 					})
 					.catch((err) => {
