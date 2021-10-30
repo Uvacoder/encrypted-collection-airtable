@@ -1,5 +1,5 @@
 "use strict";
-const getData = require("./helpers/getData");
+const getTable = require("./helpers/getTable");
 
 const getHeaderValue = (headerKey, headers) => {
 	const keyIndex = headers.indexOf(headerKey.toLowerCase());
@@ -26,9 +26,9 @@ module.exports = async (req, res) => {
 		) {
 			if (Object.keys(req.query).length > 0) {
 				const initialLimit = req.query.limit;
-				res.status(200).send(await getData("Main", initialLimit));
+				res.status(200).send(await getTable("Main", initialLimit));
 			} else {
-				res.status(200).send(await getData("Main"));
+				res.status(200).send(await getTable("Main"));
 			}
 		} else {
 			return {
