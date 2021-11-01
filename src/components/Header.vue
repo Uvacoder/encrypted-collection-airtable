@@ -171,8 +171,8 @@ import SmileIcon from "./icons/SmileIcon.vue";
 import DangerIcon from "./icons/DangerIcon.vue";
 import MenuAltIcon from "./icons/MenuAltIcon.vue";
 import UnavailableIcon from "./icons/UnavailableIcon.vue";
+// import { encode } from '@/scripts/helpers';
 
-import { encode } from '@/scripts/helpers';
 
 export default {
 	name: "Header",
@@ -228,31 +228,32 @@ export default {
 			this.showOverlay(show);
 		},
 		// submit feedback
-        sendFeedback: function($event) {
-			const axiosConfig = {
-                header: { "Content-Type": "application/x-www-form-urlencoded" }
-			};
+		sendFeedback: function($event) {
+			console.log("This feedback form has been temporarily disabled", $event);
+			// const axiosConfig = {
+      //           header: { "Content-Type": "application/x-www-form-urlencoded" }
+			// };
 
-			// send the feedback
-            this.$http.post(
-                this.$route.path,
-                encode({
-                    "form-name": "feedback",
-                    "comment": $event.target.value
-                }),
-                axiosConfig
-            )
-			.then(() => {
-				// reset form and show success message
-				$event.target.form.reset();
-				this.feedbackModal.status = 1;
-			})
-			.catch(() => {
-				// reset form and show failure message
-				$event.target.form.reset();
-				this.feedbackModal.status = 2;
-			});
-        },
+			// // send the feedback
+			// this.$http.post(
+			// 		this.$route.path,
+			// 		encode({
+			// 				"form-name": "feedback",
+			// 				"comment": $event.target.value
+			// 		}),
+			// 		axiosConfig
+			// )
+			// .then(() => {
+			// 	// reset form and show success message
+			// 	$event.target.form.reset();
+			// 	this.feedbackModal.status = 1;
+			// })
+			// .catch(() => {
+			// 	// reset form and show failure message
+			// 	$event.target.form.reset();
+			// 	this.feedbackModal.status = 2;
+			// });
+		},
 	},
 	computed: {
 		headerTitle: function() {

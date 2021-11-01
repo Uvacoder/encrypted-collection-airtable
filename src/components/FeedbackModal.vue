@@ -3,11 +3,13 @@
         <form 
 			method="POST"
 			name="feedback"
-			data-netlify="true"
-			data-netlify-honeypot="bot-field"
             :class="['feedback-form', { 'hidden' :  status !== 0 }]"
 		>
 			<input type="hidden" name="form-name" value="feedback" />
+
+            <h3 class="emergency-ui">
+				This feedback form is temporarily disabled.
+			</h3>
 
 			<h3>
 				Do you like this website?
@@ -157,6 +159,20 @@ export default {
 
 #FeedbackModal .feedback-form > fieldset label:last-of-type {
 	margin-left: 3rem;
+}
+
+#FeedbackModal .feedback-form > *.emergency-ui {
+    margin: .5rem;
+    cursor: pointer;
+	padding: .25rem .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	border: 2px solid var(--gray-border-color);	
+	border-radius: 0.5rem;
+	color: var(--text-color);
+	background-color: var(--yellow-black-color);
+	border-color:  var(--yellow-black-alt-color);
 }
 
 @media only screen and (max-width: 540px) {

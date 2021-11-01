@@ -2,11 +2,11 @@
     <div id='submit'>
         <form 
             method="POST"
-            data-netlify="true"
             name="submit"
-            data-netlify-honeypot="bot-field"
             @submit.prevent="handleFormSubmission"
         >
+            <h2 class="emergency-ui">This form is temporarily disabled.</h2>
+
             <h2>Enter Product Details</h2>
 
             <input type="hidden" name="form-name" value="submit" />
@@ -188,24 +188,31 @@ export default {
     },
     methods: {
         handleFormSubmission: function() {
-            const axiosConfig = {
-                header: { "Content-Type": "application/x-www-form-urlencoded" }
-            };
-
-            this.$http.post(
-                "/submit",
+            console.log("This report submission form has been temporarily disabled", 
                 encode({
-                    "form-name": "submit",
+                    "form-name": "report",
                     ...this.form
-                }),
-                axiosConfig
+                })
             )
-			.then(() => {
-                this.$router.push({ name: "FormSuccess", query: { from: "submit" } });
-			})
-			.catch(() => {
-                this.$router.push({ name: "FormFailure", query: { from: "submit" } });
-			});
+            
+            // const axiosConfig = {
+            //     header: { "Content-Type": "application/x-www-form-urlencoded" }
+            // };
+
+            // this.$http.post(
+            //     "/submit",
+            //     encode({
+            //         "form-name": "submit",
+            //         ...this.form
+            //     }),
+            //     axiosConfig
+            // )
+			// .then(() => {
+            //     this.$router.push({ name: "FormSuccess", query: { from: "submit" } });
+			// })
+			// .catch(() => {
+            //     this.$router.push({ name: "FormFailure", query: { from: "submit" } });
+			// });
         },
     },
     created() {
@@ -328,6 +335,17 @@ export default {
     padding: 0 .25rem;
 }
 
+#submit > form > .emergency-ui {
+	padding: .5rem .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	border: 2px solid var(--gray-border-color);	
+	border-radius: 0.5rem;
+	color: var(--text-color);
+	background-color: var(--yellow-black-color);
+	border-color:  var(--yellow-black-alt-color);
+}
 
 @media only screen and (max-width: 840px) {
     #submit {

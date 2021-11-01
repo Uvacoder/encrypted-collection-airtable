@@ -2,11 +2,12 @@
     <div id='report'>
         <form 
             method="POST"
-            data-netlify="true"
             name="report"
-            data-netlify-honeypot="bot-field"
             @submit.prevent="handleFormSubmission"
+            class="disabled-form"
         >
+            <h2 class="emergency-ui">This form is temporarily disabled.</h2>
+        
             <h2>Enter Product Details</h2>
 
             <input type="hidden" name="form-name" value="report" />
@@ -98,24 +99,32 @@ export default {
     },
     methods: {
         handleFormSubmission: function() {
-            const axiosConfig = {
-                header: { "Content-Type": "application/x-www-form-urlencoded" }
-            };
-
-            this.$http.post(
-                "/report",
+			console.log(
+                "This report submission form has been temporarily disabled", 
                 encode({
                     "form-name": "report",
                     ...this.form
-                }),
-                axiosConfig
-            )
-			.then(() => {
-                this.$router.push({ name: "FormSuccess", query: { from: "report" } });
-			})
-			.catch(() => {
-                this.$router.push({ name: "FormFailure", query: { from: "report" } });
-			});
+                })
+            );
+
+            // const axiosConfig = {
+            //     header: { "Content-Type": "application/x-www-form-urlencoded" }
+            // };
+
+            // this.$http.post(
+            //     "/report",
+            //     encode({
+            //         "form-name": "report",
+            //         ...this.form
+            //     }),
+            //     axiosConfig
+            // )
+			// .then(() => {
+            //     this.$router.push({ name: "FormSuccess", query: { from: "report" } });
+			// })
+			// .catch(() => {
+            //     this.$router.push({ name: "FormFailure", query: { from: "report" } });
+			// });
         },
     }
 }
@@ -226,6 +235,17 @@ export default {
     padding: 0 .25rem;
 }
 
+#report > form > .emergency-ui {
+	padding: .5rem .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	border: 2px solid var(--gray-border-color);	
+	border-radius: 0.5rem;
+	color: var(--text-color);
+	background-color: var(--yellow-black-color);
+	border-color:  var(--yellow-black-alt-color);
+}
 
 @media only screen and (max-width: 840px) {
     #report {

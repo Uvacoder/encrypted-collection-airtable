@@ -23,6 +23,5 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-# Local Netlify folder
-.netlify
+# Local Vercel folder
 .vercel
