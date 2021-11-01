@@ -110,26 +110,6 @@ export default {
 </script>
 
 <style>
-/* Import bold monospace font */
-@font-face {
-	font-family: 'JetBrains Mono';
-	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Bold.woff2') format('woff2'),
-		url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Bold.woff') format('woff');
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-/* Import extrabold monospace font */
-@font-face {
-	font-family: 'JetBrains Mono';
-	src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-ExtraBold.woff2') format('woff2'),
-		url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-ExtraBold.woff') format('woff');
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
 :root {
 	--lightgray-bg-color: #ced4da;
 	--highlight-text-color: #1c2024;
@@ -191,7 +171,7 @@ body  {
 	-ms-user-select: none;
 	user-select: none;
 	font-family:  "JetBrains Mono", "Cascadia Mono", "Lucida Console", monospace !important;
-	font-weight: 500;
+	font-weight: 700;
 	transition: all 0.2s, color 0s, background-color 0s;
 	-moz-transition: all 0.2s, color 0s, background-color 0s;
 	-webkit-transition: all 0.2s, color 0s, background-color 0s;
