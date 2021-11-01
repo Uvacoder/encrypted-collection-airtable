@@ -230,6 +230,9 @@ export default {
 		// submit feedback
 		sendFeedback: function($event) {
 			console.log("This feedback form has been temporarily disabled", $event);
+			this.feedbackModal.status = 2;
+
+			
 			// const axiosConfig = {
       //           header: { "Content-Type": "application/x-www-form-urlencoded" }
 			// };
