@@ -28,9 +28,9 @@ export default {
 	metaInfo: {
 		titleTemplate: '%s | EncryptedList',
 		
-        meta: [
+		meta: [
 			{ charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1'},
+			{ name: 'viewport', content: 'width=device-width, initial-scale=1'},
 			{ name: 'description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.'},
 			{ name: 'keywords', content: 'encryption, end-to-end encryption, zero-knowledge encryption, encrypted apps, encrypted, privacy, security, list, collection' },
 
