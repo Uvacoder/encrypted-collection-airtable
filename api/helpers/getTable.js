@@ -13,7 +13,7 @@ module.exports = async (tableName, numRecs) => {
 		const recs = await table
 			.select({
 				view: "all",
-				maxRecords: parseInt(initialLimit),
+				maxRecords: parseInt(initialLimit)
 			})
 			.eachPage((records, fetchNextPage) => {
 				records.forEach((record) => {
@@ -34,7 +34,7 @@ module.exports = async (tableName, numRecs) => {
 						alternatives: record.fields.alternatives
 							? record.fields.alternatives
 							: [],
-						png_url: `${imgBaseUrl}/png/${img_name}.png?tr=w-105,dpr-1,lo-true`,
+						png_url: `${imgBaseUrl}/png/${img_name}.png?tr=w-105,dpr-1,lo-true`
 					});
 				});
 				fetchNextPage();

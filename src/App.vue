@@ -1,15 +1,19 @@
 <template>
 	<div id="app">
-		<div v-show="isIE()" class="ie-overlay" >
+		<div v-show="isIE()" class="ie-overlay">
 			<p>
-				It seems like you are using Internet Explorer (IE). <br><br>
-				This website isn't supported on IE. <br><br>
-				If this is inaccurate, you probably have a setting or an extension that alters the browser behavior. <br><br>
+				It seems like you are using Internet Explorer (IE). <br /><br />
+				This website isn't supported on IE. <br /><br />
+				If this is inaccurate, you probably have a setting or an extension that
+				alters the browser behavior. <br /><br />
 				Otherwise, please upgrade to a different browser.
 			</p>
 		</div>
 
-		<app-header v-show="!isIE()" :darkTheme="darkThemeEnabled" v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
+		<app-header
+			v-show="!isIE()"
+			:darkTheme="darkThemeEnabled"
+			v-on:theme-change="darkThemeEnabled = !darkThemeEnabled"></app-header>
 
 		<router-view v-show="!isIE()"></router-view>
 	</div>
@@ -17,7 +21,7 @@
 
 <script>
 import localForage from "localforage";
-import { isIE } from '@/scripts/helpers';
+import { isIE } from "@/scripts/helpers";
 import Header from "@/components/Header.vue";
 
 export default {
@@ -26,78 +30,103 @@ export default {
 		appHeader: Header
 	},
 	metaInfo: {
-		titleTemplate: '%s | EncryptedList',
-		
+		titleTemplate: "%s | EncryptedList",
+
 		meta: [
-			{ charset: 'utf-8' },
-			{ name: 'viewport', content: 'width=device-width, initial-scale=1'},
-			{ name: 'description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.'},
-			{ name: 'keywords', content: 'encryption, end-to-end encryption, zero-knowledge encryption, encrypted apps, encrypted, privacy, security, list, collection' },
+			{ charset: "utf-8" },
+			{
+				name: "viewport",
+				content: "width=device-width, initial-scale=1"
+			},
+			{
+				name: "description",
+				content:
+					"EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption."
+			},
+			{
+				name: "keywords",
+				content:
+					"encryption, end-to-end encryption, zero-knowledge encryption, encrypted apps, encrypted, privacy, security, list, collection"
+			},
 
 			// OpenGraph data
-			{ property: 'og:type', content: 'website'},
-			{ property: 'og:site_name', content: 'EncryptedList'},
-			{ property: 'og:description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.'},
-			{ property: 'og:image', content: 'https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/logo.webp'},
+			{ property: "og:type", content: "website" },
+			{ property: "og:site_name", content: "EncryptedList" },
+			{
+				property: "og:description",
+				content:
+					"EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption."
+			},
+			{
+				property: "og:image",
+				content: "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/logo.webp"
+			},
 
 			// Twitter card
-			{name: 'twitter:card', content: 'summary'},
-			{name: 'twitter:description', content: 'EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption.' },
-			{name: 'twitter:image:src', content: 'https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/logo.webp' },
+			{ name: "twitter:card", content: "summary" },
+			{
+				name: "twitter:description",
+				content:
+					"EncryptedList is a collection of products & services that offer or ensure data security through zero-knowledge or end-to-end encryption."
+			},
+			{
+				name: "twitter:image:src",
+				content: "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/logo.webp"
+			}
 		],
 		link: [
-			{ rel: 'icon', href: 'https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/tr:w-32,h-32,lo-true/favicon.ico', sizes: '32x32' }
+			{
+				rel: "icon",
+				href: "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/tr:w-32,h-32,lo-true/favicon.ico",
+				sizes: "32x32"
+			}
 		]
-    },
+	},
 	data() {
 		return {
 			darkThemeEnabled: false
-		}
+		};
 	},
 	methods: {
 		// detect if browser is IE
 		isIE,
 		// Initialize local storage for theme
-		initDB: function() {
+		initDB: function () {
 			let vm = this;
 
 			localForage
 				.getItem("theme")
-				.then(function(value) {
+				.then(function (value) {
 					// first timer or site data cleared
 					// offline store for theme doesn't exist yet
 					if (value === null) {
-						localForage
-							.setItem("theme", vm.darkThemeEnabled)
-							.catch((err) => {
-								throw err;
-							});
+						localForage.setItem("theme", vm.darkThemeEnabled).catch((err) => {
+							throw err;
+						});
 					} else {
 						vm.darkThemeEnabled = value;
 					}
 				})
-				.catch(function(err) {
+				.catch(function (err) {
 					throw err;
 				});
 		},
 		// Update local storage for theme
-		updateDB: function() {
-			localForage
-				.setItem("theme", this.darkThemeEnabled)
-				.catch((err) => {
-					throw err;
-				});
+		updateDB: function () {
+			localForage.setItem("theme", this.darkThemeEnabled).catch((err) => {
+				throw err;
+			});
 		}
 	},
 	watch: {
-		darkThemeEnabled: function() {
+		darkThemeEnabled: function () {
 			// toggle dark mode
-			let rootElt = document.querySelector('html');
+			let rootElt = document.querySelector("html");
 
-			if (this.darkThemeEnabled && !rootElt.hasAttribute('data-theme')) {
-				rootElt.setAttribute('data-theme','dark');
+			if (this.darkThemeEnabled && !rootElt.hasAttribute("data-theme")) {
+				rootElt.setAttribute("data-theme", "dark");
 			} else if (!this.darkThemeEnabled) {
-				rootElt.removeAttribute('data-theme');
+				rootElt.removeAttribute("data-theme");
 			}
 
 			this.updateDB();
@@ -105,7 +134,7 @@ export default {
 	},
 	mounted() {
 		this.initDB();
-	},
+	}
 };
 </script>
 
@@ -127,18 +156,18 @@ html {
 	--gray-border-color: #1c2024;
 	--light-dark-gray-color: #c0c8cf;
 	--dark-light-gray-color: #5c6370;
-	
+
 	--yellow-black-color: #f1c61b;
 	--yellow-black-alt-color: #1c2024;
 
 	--tags-bg-color: #dce1e6;
 	--tags-bg-hover-color: #c9d1da;
 	--current-tags-bg-hover-color: #b5bbc0;
-	
+
 	--placeholder-text-color: #9da3a8;
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
 	--text-color: #f1f3f5;
 	--background-color: #1c2024;
 	--gray-border-color: #495057;
@@ -156,7 +185,7 @@ html[data-theme='dark'] {
 }
 
 html,
-body  {
+body {
 	margin: 0;
 	padding: 0;
 	background-color: var(--background-color) !important;
@@ -170,7 +199,7 @@ body  {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	font-family:  "JetBrains Mono", "Cascadia Mono", "Lucida Console", monospace !important;
+	font-family: "JetBrains Mono", "Cascadia Mono", "Lucida Console", monospace !important;
 	font-weight: 700;
 	transition: all 0.2s, color 0s, background-color 0s;
 	-moz-transition: all 0.2s, color 0s, background-color 0s;
@@ -178,8 +207,12 @@ body  {
 	box-sizing: border-box;
 }
 
-input, input:before, input:after,
-textarea, textarea:before, textarea:after {
+input,
+input:before,
+input:after,
+textarea,
+textarea:before,
+textarea:after {
 	-webkit-user-select: initial;
 	-khtml-user-select: initial;
 	-moz-user-select: initial;
@@ -187,7 +220,6 @@ textarea, textarea:before, textarea:after {
 	user-select: initial;
 	color: var(--text-color);
 }
-
 
 input::placeholder,
 textarea::placeholder {
@@ -197,25 +229,25 @@ textarea::placeholder {
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-    color: var(--placeholder-text-color) !important;
+	color: var(--placeholder-text-color) !important;
 	opacity: 1;
 }
 
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-    color: var(--placeholder-text-color) !important;
+	color: var(--placeholder-text-color) !important;
 	opacity: 1;
 }
 
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-    color: var(--placeholder-text-color) !important;
+	color: var(--placeholder-text-color) !important;
 	opacity: 1;
 }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-    color: var(--placeholder-text-color) !important;
+	color: var(--placeholder-text-color) !important;
 	opacity: 1 !important;
 }
 
@@ -252,12 +284,11 @@ mark.highlight {
 
 @media only screen and (max-width: 580px) {
 	#app {
-		padding: 0 .75rem 2rem .75rem;
+		padding: 0 0.75rem 2rem 0.75rem;
 	}
 
 	.ie-overlay p {
 		width: 100%;
 	}
 }
-
 </style>

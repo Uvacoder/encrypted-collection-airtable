@@ -5,11 +5,11 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state: {
-		headerTitle: "EncryptedList",
+		headerTitle: "EncryptedList"
 	},
 	mutations: {
 		updateTitle(state, newTitle) {
 			state.headerTitle = newTitle;
-		},
-	},
+		}
+	}
 });

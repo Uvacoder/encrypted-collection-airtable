@@ -2,13 +2,11 @@
 	<div class="spinner"></div>
 </template>
 
-
 <script>
 export default {
-	name: 'LoadingIcon'
-}
+	name: "LoadingIcon"
+};
 </script>
-
 
 <style scoped>
 * {
@@ -19,10 +17,10 @@ export default {
 	width: 3rem;
 	height: 3rem;
 	margin: 0 auto;
-	border-top: .5rem solid var(--primary-yellow-color);
-	border-bottom: .5rem solid var(--primary-yellow-color);
-	border-left: .5rem solid var(--background-color);
-	border-right: .5rem solid var(--background-color);
+	border-top: 0.5rem solid var(--primary-yellow-color);
+	border-bottom: 0.5rem solid var(--primary-yellow-color);
+	border-left: 0.5rem solid var(--background-color);
+	border-right: 0.5rem solid var(--background-color);
 	border-radius: 1.5rem;
 	-webkit-transform-origin: center;
 	-moz-transform-origin: center;

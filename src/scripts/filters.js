@@ -11,7 +11,7 @@ const tags = [
 	"self-hosted",
 	"open-source",
 	"decentralized",
-	"cross-platform",
+	"cross-platform"
 ];
 
 // List of available categories
@@ -27,7 +27,7 @@ const categories = [
 	"Data Transfer",
 	"Collaboration",
 	"Communication",
-	"Developer Tools",
+	"Developer Tools"
 ];
 
 export { tags, categories };

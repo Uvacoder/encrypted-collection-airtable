@@ -8,17 +8,14 @@ const scroll = () => {
 	window.scroll({
 		top: 0,
 		left: 0,
-		behavior: "smooth",
+		behavior: "smooth"
 	});
 };
 
 // encoding used for form submissions
 const encode = (data) => {
 	return Object.keys(data)
-		.map(
-			(key) =>
-				`${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-		)
+		.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
 		.join("&");
 };
 
@@ -34,11 +31,7 @@ const capitalizeWords = (str) => {
 };
 
 // Basically changes "Product Name" to "product-name"
-const hyphenify = (str) =>
-	str
-		.split(" ")
-		.join("-")
-		.toLowerCase();
+const hyphenify = (str) => str.split(" ").join("-").toLowerCase();
 
 // returns start & end indices of all occurences of a query from a string
 const stringSearch = (str, query, caseInsensitive = true) => {
@@ -91,5 +84,5 @@ export {
 	isDefined,
 	capitalizeWords,
 	stringSearch,
-	highlightQuery,
+	highlightQuery
 };

@@ -4,8 +4,14 @@
 		<router-link class="app-info nav-left" ref="navLeft" :to="{ path: '/' }">
 			<div class="app-logo">
 				<picture>
-					<source srcset="https://ik.imagekit.io/x6xq2u8ftjl/tr:h-100/encryptedlist/logo.webp" type="image/webp">
-					<img src="https://ik.imagekit.io/x6xq2u8ftjl/tr:h-100/encryptedlist/logo.png" alt="Logo"/>
+					<source
+						srcset="
+							https://ik.imagekit.io/x6xq2u8ftjl/tr:h-100/encryptedlist/logo.webp
+						"
+						type="image/webp" />
+					<img
+						src="https://ik.imagekit.io/x6xq2u8ftjl/tr:h-100/encryptedlist/logo.png"
+						alt="Logo" />
 				</picture>
 			</div>
 			<div class="app-detail">
@@ -13,67 +19,62 @@
 					{{ headerTitle }}
 				</h3>
 				<p class="app-desc">
-					List of services that offer zero-knowledge or end-to-end encryption 🔐.
+					List of services that offer zero-knowledge or end-to-end encryption
+					🔐.
 				</p>
 			</div>
 		</router-link>
-		
+
 		<!-- main nav buttons -->
 		<div class="nav-buttons">
 			<app-button
 				class="change-theme"
-				:iconButton="true" 
-				@clicked="emitThemeChange" 
-				:label="'Change Color Theme'"
-			>
+				:iconButton="true"
+				@clicked="emitThemeChange"
+				:label="'Change Color Theme'">
 				<app-sun-icon v-if="darkMode"></app-sun-icon>
 				<app-moon-icon v-else></app-moon-icon>
 			</app-button>
 
 			<app-button
 				class="give-feedback"
-				:iconButton="true" 
+				:iconButton="true"
 				:label="'Give Feedback'"
-				@clicked="showFeedbackModal(true)"
-			>
+				@clicked="showFeedbackModal(true)">
 				<app-smile-icon></app-smile-icon>
 			</app-button>
 
 			<app-button
 				class="show-pages"
 				@clicked="showMenuList(true)"
-				:label="'Show List of Pages'"
-			>
+				:label="'Show List of Pages'">
 				Menu
 				<app-menu-alt-icon></app-menu-alt-icon>
 			</app-button>
-			
+
 			<app-button
 				class="toggle-menu"
-				:iconButton="true" 
+				:iconButton="true"
 				@clicked="showMenuList(true)"
-				:label="'Toggle Menu'"
-			>
+				:label="'Toggle Menu'">
 				<app-menu-icon></app-menu-icon>
 			</app-button>
 		</div>
 
 		<!-- transparent overlay -->
-		<div 
+		<div
 			@click="showOverlay(false)"
-			:class="['overlay', { 'visible' : overlayVisible }]"
-		></div>
+			:class="['overlay', { visible: overlayVisible }]"></div>
 
 		<!-- feedback modal popup -->
-		<app-feedback-modal 
+		<app-feedback-modal
 			:hidden="feedbackModal.hidden"
 			:status="feedbackModal.status"
 			@submitted="sendFeedback($event)"
-			@close-modal="showFeedbackModal(false)"
-		></app-feedback-modal>
-		
+			@close-modal="showFeedbackModal(false)"></app-feedback-modal>
+
 		<!-- hidden-by-default list of menu items -->
-		<div :class="['menu-list', { 'shown' : menuShown }]">
+		<div :class="['menu-list', { shown: menuShown }]">
 			<div class="header">
 				<h2 class="desktop-header-title">Navigate To</h2>
 				<h2 class="mobile-header-title">Menu</h2>
@@ -81,20 +82,18 @@
 				<div class="menu-list-buttons">
 					<app-button
 						class="change-theme"
-						:iconButton="true" 
-						@clicked="emitThemeChange" 
-						:label="'Change Color Theme'"
-					>
+						:iconButton="true"
+						@clicked="emitThemeChange"
+						:label="'Change Color Theme'">
 						<app-sun-icon v-if="darkMode"></app-sun-icon>
 						<app-moon-icon v-else></app-moon-icon>
 					</app-button>
 
 					<app-button
 						class="give-feedback"
-						:iconButton="true" 
+						:iconButton="true"
 						:label="'Give Feedback'"
-						@clicked="showFeedbackModal(true)"
-					>
+						@clicked="showFeedbackModal(true)">
 						<app-smile-icon></app-smile-icon>
 					</app-button>
 
@@ -102,57 +101,51 @@
 						class="hide-pages"
 						:iconButton="true"
 						:label="'Hide List of Pages'"
-						@clicked="showMenuList(false)"
-					>
+						@clicked="showMenuList(false)">
 						<app-menu-alt-icon></app-menu-alt-icon>
 					</app-button>
 				</div>
 			</div>
-			
+
 			<app-button-link
 				:path="'/about'"
 				:label="'Go to About Page'"
-				@clicked="showMenuList(false)" 
-			>
+				@clicked="showMenuList(false)">
 				About
 				<app-info-icon></app-info-icon>
 			</app-button-link>
-			
+
 			<app-button-link
 				:path="'/submit'"
-				@clicked="showMenuList(false)" 
-				:label="'Go to Submission Page'"
-			>
+				@clicked="showMenuList(false)"
+				:label="'Go to Submission Page'">
 				Submit
 				<app-add-icon></app-add-icon>
-			</app-button-link> 
+			</app-button-link>
 
 			<app-button-link
 				:path="'/report'"
 				:label="'Go to Report Page'"
-				@clicked="showMenuList(false)" 
-			>
+				@clicked="showMenuList(false)">
 				Report
 				<app-danger-icon></app-danger-icon>
 			</app-button-link>
-						
+
 			<app-button-link
 				:path="'/watchlist'"
 				:label="'Go to Watchlist Page'"
-				@clicked="showMenuList(false)" 
-			>
+				@clicked="showMenuList(false)">
 				Watchlist
 				<app-eye-icon></app-eye-icon>
 			</app-button-link>
 
 			<app-button-link
 				:path="'/excluded'"
-				@clicked="showMenuList(false)" 
-				:label="'Go to Excluded Products Page'"
-			>
+				@clicked="showMenuList(false)"
+				:label="'Go to Excluded Products Page'">
 				Excluded List
 				<app-unavailable-icon></app-unavailable-icon>
-			</app-button-link>      
+			</app-button-link>
 		</div>
 	</nav>
 </template>
@@ -173,13 +166,12 @@ import MenuAltIcon from "./icons/MenuAltIcon.vue";
 import UnavailableIcon from "./icons/UnavailableIcon.vue";
 // import { encode } from '@/scripts/helpers';
 
-
 export default {
 	name: "Header",
 	props: ["darkTheme"],
 	components: {
-		appButton: Button,		
-		appAddIcon: AddIcon,		
+		appButton: Button,
+		appAddIcon: AddIcon,
 		appEyeIcon: EyeIcon,
 		appSunIcon: SunIcon,
 		appMoonIcon: MoonIcon,
@@ -190,7 +182,7 @@ export default {
 		appDangerIcon: DangerIcon,
 		appButtonLink: ButtonLink,
 		appMenuAltIcon: MenuAltIcon,
-		appUnavailableIcon: UnavailableIcon,
+		appUnavailableIcon: UnavailableIcon
 	},
 	data() {
 		return {
@@ -201,40 +193,40 @@ export default {
 			},
 			menuShown: false,
 			overlayVisible: false
-		}
+		};
 	},
 	methods: {
 		// emit theme change to main component
-		emitThemeChange: function() {
+		emitThemeChange: function () {
 			this.darkMode = !this.darkMode;
-			this.$emit('theme-change');
+			this.$emit("theme-change");
 		},
 		// toggle overlay visibility
-		showOverlay: function(show) {
+		showOverlay: function (show) {
 			this.overlayVisible = show;
 		},
 		// toggle side menu visibility with overlay
-        showMenuList: function(show) {
+		showMenuList: function (show) {
 			this.menuShown = show;
 			this.showOverlay(show);
 		},
 		// toggle feedback modal visibility with overlay
-		showFeedbackModal: function(show) {
-			if (show) { // show
+		showFeedbackModal: function (show) {
+			if (show) {
+				// show
 				this.showMenuList(false); // hide menu if shown
 				this.feedbackModal.hidden = !show;
 			}
-			
+
 			this.showOverlay(show);
 		},
 		// submit feedback
-		sendFeedback: function($event) {
+		sendFeedback: function ($event) {
 			console.log("This feedback form has been temporarily disabled", $event);
 			this.feedbackModal.status = 2;
 
-			
 			// const axiosConfig = {
-      //           header: { "Content-Type": "application/x-www-form-urlencoded" }
+			//           header: { "Content-Type": "application/x-www-form-urlencoded" }
 			// };
 
 			// // send the feedback
@@ -256,26 +248,26 @@ export default {
 			// 	$event.target.form.reset();
 			// 	this.feedbackModal.status = 2;
 			// });
-		},
+		}
 	},
 	computed: {
-		headerTitle: function() {
+		headerTitle: function () {
 			return this.$store.state.headerTitle;
 		}
 	},
 	watch: {
-		darkTheme: function(value) {
+		darkTheme: function (value) {
 			this.darkMode = value;
 		},
-		"feedbackModal.hidden": function() {
+		"feedbackModal.hidden": function () {
 			this.feedbackModal.status = 0;
 		},
-		overlayVisible: function(value) {
+		overlayVisible: function (value) {
 			if (!value) {
 				this.menuShown = false;
 				this.feedbackModal.hidden = true;
 			}
-		},
+		}
 	}
 };
 </script>
@@ -325,12 +317,12 @@ export default {
 	box-shadow: 1px 1px 5px var(--lightgray-bg-color);
 }
 
-html[data-theme='dark'] .app-logo img {
+html[data-theme="dark"] .app-logo img {
 	box-shadow: none;
 }
 
 .app-detail {
-	margin-left: .75rem;
+	margin-left: 0.75rem;
 	padding-top: 0.25rem;
 	display: flex;
 	flex-direction: column;
@@ -372,7 +364,7 @@ html[data-theme='dark'] .app-logo img {
 .nav-buttons > .give-feedback,
 .menu-list .header .menu-list-buttons > .give-feedback {
 	background-color: var(--yellow-black-color);
-	border-color:  var(--yellow-black-alt-color);
+	border-color: var(--yellow-black-alt-color);
 }
 
 .nav-buttons > .toggle-menu {
@@ -388,7 +380,7 @@ html[data-theme='dark'] .app-logo img {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, .75);
+	background-color: rgba(0, 0, 0, 0.75);
 	visibility: hidden;
 }
 
@@ -397,16 +389,16 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .menu-list {
-    width: 45%;
-    height: 100vh;
+	width: 45%;
+	height: 100vh;
 	z-index: 2;
-    position: fixed;
-    top: 0;
-    right: 0;
+	position: fixed;
+	top: 0;
+	right: 0;
 	padding-top: 1rem;
 	transform: translateX(100%);
-    background-color: var(--background-color);
-    border-left: 3px solid var(--gray-border-color);
+	background-color: var(--background-color);
+	border-left: 3px solid var(--gray-border-color);
 	transition: all 0.2s ease-out, color 0s, background-color 0s;
 	-moz-transition: all 0.2s ease-out, color 0s, background-color 0s;
 	-webkit-transition: all 0.2s ease-out, color 0s, background-color 0s;
@@ -417,16 +409,16 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .menu-list > * {
-    width: 75%;
-    min-width: 240px;
-    max-width: 320px;
-    margin: 1rem auto;
+	width: 75%;
+	min-width: 240px;
+	max-width: 320px;
+	margin: 1rem auto;
 }
 
 .menu-list .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .menu-list .header .mobile-header-title {
@@ -438,7 +430,7 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .menu-list .header .menu-list-buttons {
-    display: flex;
+	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	color: var(--text-color);
@@ -448,11 +440,11 @@ html[data-theme='dark'] .app-logo img {
 	margin-right: 0.5rem;
 }
 
-.menu-list .header .menu-list-buttons > *:not(:last-child)  {
+.menu-list .header .menu-list-buttons > *:not(:last-child) {
 	display: none;
 }
 
-.menu-list .header .menu-list-buttons > :last-child  {
+.menu-list .header .menu-list-buttons > :last-child {
 	margin: 0;
 }
 
@@ -462,12 +454,12 @@ html[data-theme='dark'] .app-logo img {
 }
 
 .nav-buttons > .show-pages svg {
-	margin-left: .5rem;
+	margin-left: 0.5rem;
 }
 
 @media only screen and (max-width: 840px) {
 	.nav-buttons > .show-pages,
-	.nav-buttons > .change-theme,	
+	.nav-buttons > .change-theme,
 	.nav-buttons > .give-feedback {
 		display: none;
 	}
@@ -484,7 +476,7 @@ html[data-theme='dark'] .app-logo img {
 		display: none;
 	}
 
-	.menu-list .header .menu-list-buttons > *:not(:last-child)  {
+	.menu-list .header .menu-list-buttons > *:not(:last-child) {
 		display: flex;
 	}
 }

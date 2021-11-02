@@ -3,43 +3,59 @@
 		<div class="product-info">
 			<div class="product-logo">
 				<picture>
-					<source :srcset="`${product.png_url},f-webp`" type="image/webp">
-					<img :src="product.png_url" loading="lazy" alt="Product Logo"/>
+					<source :srcset="`${product.png_url},f-webp`" type="image/webp" />
+					<img :src="product.png_url" loading="lazy" alt="Product Logo" />
 				</picture>
 			</div>
 			<div class="product-detail">
 				<h3 class="product-name" ref="pName" v-html="product.name"></h3>
 				<p class="product-desc" ref="pDesc" v-html="product.desc"></p>
 			</div>
-			<div :class="['product-link', { 'with-alts' : product.alternatives.length > 0 }]">
-				<a title="Go To Product Website" aria-label="Go to Product Website" target="_blank" rel="noopener" :href="`${product.url}?ref=EncryptedList`">
+			<div
+				:class="[
+					'product-link',
+					{ 'with-alts': product.alternatives.length > 0 }
+				]">
+				<a
+					title="Go To Product Website"
+					aria-label="Go to Product Website"
+					target="_blank"
+					rel="noopener"
+					:href="`${product.url}?ref=EncryptedList`">
 					<app-external-icon></app-external-icon>
 				</a>
-				<app-button 
+				<app-button
 					:label="'Show insecure alternatives:'"
 					:iconButton="true"
 					@clicked="toggleAlts = !toggleAlts"
-					:class="{ 'active-alts' : toggleAlts }"
-				>
+					:class="{ 'active-alts': toggleAlts }">
 					<app-alternative-icon></app-alternative-icon>
 				</app-button>
 			</div>
 		</div>
 		<div class="product-tags">
 			<app-button-tag
-				v-for="(tag, index) in product.tags" 
-				:key="index" 
+				v-for="(tag, index) in product.tags"
+				:key="index"
 				:value="tag"
 				@clicked="filterWith(tag)"
-				:class="{ 'warn' : tag === 'opt-in' }"
-				:title="(tag === 'opt-in') ? 'Beware!' : ''"
-			>{{ tag }}</app-button-tag>
+				:class="{ warn: tag === 'opt-in' }"
+				:title="tag === 'opt-in' ? 'Beware!' : ''"
+				>{{ tag }}</app-button-tag
+			>
 		</div>
-		<div :class="['product-alternatives', { 'visible' : toggleAlts }]">
+		<div :class="['product-alternatives', { visible: toggleAlts }]">
 			<p>Secure alternative to:</p>
 
-			<div class="alt" v-for="(alt, index) in product.alternatives" :key="index">
-				<img :src="`https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/alts/png/${hyphenify(alt)}.png`" :alt="`${alt} logo`">
+			<div
+				class="alt"
+				v-for="(alt, index) in product.alternatives"
+				:key="index">
+				<img
+					:src="`https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/alts/png/${hyphenify(
+						alt
+					)}.png`"
+					:alt="`${alt} logo`" />
 				<p>{{ alt }}</p>
 			</div>
 		</div>
@@ -49,7 +65,7 @@
 <script>
 import Button from "./Button.vue";
 import ButtonTag from "./ButtonTag.vue";
-import { hyphenify } from '@/scripts/helpers';
+import { hyphenify } from "@/scripts/helpers";
 import ExternalIcon from "./icons/ExternalIcon.vue";
 import AlternativeIcon from "./icons/AlternativeIcon.vue";
 
@@ -57,7 +73,7 @@ export default {
 	name: "Product",
 	props: {
 		product: {
-			type: Object,
+			type: Object
 		},
 		filterable: {
 			type: Boolean,
@@ -66,30 +82,31 @@ export default {
 	},
 	data() {
 		return {
-			toggleAlts: false,
-		}
+			toggleAlts: false
+		};
 	},
-    components: {
-        appButton: Button,
+	components: {
+		appButton: Button,
 		appButtonTag: ButtonTag,
-        appExternalIcon: ExternalIcon,
-		appAlternativeIcon: AlternativeIcon,
+		appExternalIcon: ExternalIcon,
+		appAlternativeIcon: AlternativeIcon
 	},
 	methods: {
 		hyphenify,
-		filterWith: function(q) {
+		filterWith: function (q) {
 			// filtering is disabled on some pages that use this component
 			if (this.filterable) {
 				let query = Object.assign({}, this.$route.query);
 
 				if (query.t !== q) {
 					// needs to be here to avoid redundant navigation error
-					this.$router.push({ query: Object.assign({}, this.$route.query, { t : q }) });
+					this.$router.push({
+						query: Object.assign({}, this.$route.query, { t: q })
+					});
 				}
 			}
-
-		},
-	},
+		}
+	}
 };
 </script>
 
@@ -144,7 +161,7 @@ export default {
 
 .product-detail > * {
 	margin: 0 0 0.5rem 0;
-	padding-right: .5rem;
+	padding-right: 0.5rem;
 }
 
 .product-name {
@@ -220,7 +237,7 @@ export default {
 }
 
 .product-tags {
-	padding: .25rem 0 0 0;
+	padding: 0.25rem 0 0 0;
 }
 
 .product-tags button {
@@ -235,10 +252,10 @@ export default {
 .product-alternatives {
 	width: 100%;
 	min-height: 3rem;
-	border-radius: .5rem;
-	padding: .75rem 1rem;
+	border-radius: 0.5rem;
+	padding: 0.75rem 1rem;
 	background-color: var(--tags-bg-color);
-	margin-top: .5rem;
+	margin-top: 0.5rem;
 	display: none;
 	border: 2px solid var(--light-dark-gray-color);
 }
@@ -246,7 +263,7 @@ export default {
 .product-alternatives > p {
 	font-weight: bold;
 	margin: 0;
-	margin-bottom: .75rem;
+	margin-bottom: 0.75rem;
 	padding: 0;
 }
 
@@ -256,14 +273,14 @@ export default {
 
 .product-alternatives .alt {
 	float: left;
-	padding: .25rem;
-	padding-right: .75rem;
+	padding: 0.25rem;
+	padding-right: 0.75rem;
 	border-radius: 1.25rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	height: 2rem;
-	margin: 0 .5rem .5rem 0;
+	margin: 0 0.5rem 0.5rem 0;
 	background-color: var(--tags-bg-hover-color);
 	border: 2px solid var(--light-dark-gray-color);
 }
@@ -274,7 +291,7 @@ export default {
 
 .product-alternatives .alt img {
 	height: 1.5rem;
-	margin-right: .5rem;
+	margin-right: 0.5rem;
 	width: 1.5rem;
 	border-radius: 50%;
 	overflow: hidden;
@@ -282,6 +299,6 @@ export default {
 }
 
 .product-alternatives .alt > p {
-	font-size: .85rem;
+	font-size: 0.85rem;
 }
 </style>

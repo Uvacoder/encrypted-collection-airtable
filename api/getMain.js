@@ -34,8 +34,8 @@ module.exports = async (req, res) => {
 			return {
 				statusCode: 404,
 				body: JSON.stringify({
-					error: "Error Making Request (Unauthorized)",
-				}),
+					error: "Error Making Request (Unauthorized)"
+				})
 			};
 		}
 	} catch (err) {
