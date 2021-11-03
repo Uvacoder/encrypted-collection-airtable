@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import ButtonLink from "@/components/ButtonLink.vue";
-import BackIcon from "@/components/icons/BackIcon.vue";
-import HomeIcon from "@/components/icons/HomeIcon.vue";
-import ClearIcon from "@/components/icons/ClearIcon.vue";
+import ButtonLink from "../../components/ButtonLink.vue";
+import BackIcon from "../../components/icons/BackIcon.vue";
+import HomeIcon from "../../components/icons/HomeIcon.vue";
+import ClearIcon from "../../components/icons/ClearIcon.vue";
 
 export default {
 	name: "FormFailure",

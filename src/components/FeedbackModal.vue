@@ -2,6 +2,7 @@
 	<div id="FeedbackModal" :class="{ hidden: hidden }">
 		<form
 			method="POST"
+			action="/api/formSubmit.js"
 			name="feedback"
 			:class="['feedback-form', { hidden: status !== 0 }]">
 			<input type="hidden" name="form-name" value="feedback" />
@@ -64,9 +65,9 @@
 </template>
 
 <script>
-import Button from "@/components/Button.vue";
-import CheckIcon from "@/components/icons/CheckIcon.vue";
-import ClearIcon from "@/components/icons/ClearIcon.vue";
+import Button from "./Button.vue";
+import CheckIcon from "./icons/CheckIcon.vue";
+import ClearIcon from "./icons/ClearIcon.vue";
 
 export default {
 	name: "FeedbackModal",

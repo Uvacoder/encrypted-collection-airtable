@@ -55,14 +55,14 @@
 </template>
 
 <script>
-import { scroll, isDefined } from "@/scripts/helpers";
-import Button from "@/components/Button.vue";
-import Product from "@/components/Product.vue";
-import ListIcon from "@/components/icons/ListIcon.vue";
-import LinkIcon from "@/components/icons/LinkIcon.vue";
-import ErrorIcon from "@/components/icons/ErrorIcon.vue";
-import LoadingIcon from "@/components/icons/LoadingIcon.vue";
-import ArrowUpIcon from "@/components/icons/ArrowUpIcon.vue";
+import { scroll, isDefined } from "../scripts/helpers";
+import Button from "../components/Button.vue";
+import Product from "../components/Product.vue";
+import ListIcon from "../components/icons/ListIcon.vue";
+import LinkIcon from "../components/icons/LinkIcon.vue";
+import ErrorIcon from "../components/icons/ErrorIcon.vue";
+import LoadingIcon from "../components/icons/LoadingIcon.vue";
+import ArrowUpIcon from "../components/icons/ArrowUpIcon.vue";
 
 export default {
 	name: "Excluded",

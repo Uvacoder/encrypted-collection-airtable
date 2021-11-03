@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import ButtonLink from "@/components/ButtonLink.vue";
-import BackIcon from "@/components/icons/BackIcon.vue";
-import HomeIcon from "@/components/icons/HomeIcon.vue";
-import CheckIcon from "@/components/icons/CheckIcon.vue";
+import ButtonLink from "../../components/ButtonLink.vue";
+import BackIcon from "../../components/icons/BackIcon.vue";
+import HomeIcon from "../../components/icons/HomeIcon.vue";
+import CheckIcon from "../../components/icons/CheckIcon.vue";
 
 export default {
 	name: "FormSuccess",

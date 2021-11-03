@@ -73,10 +73,10 @@
 </template>
 
 <script>
-import ButtonLink from "@/components/ButtonLink.vue";
-import HomeIcon from "@/components/icons/HomeIcon.vue";
-import LinkIcon from "@/components/icons/LinkIcon.vue";
-import ExternalIcon from "@/components/icons/ExternalIcon.vue";
+import ButtonLink from "../components/ButtonLink.vue";
+import HomeIcon from "../components/icons/HomeIcon.vue";
+import LinkIcon from "../components/icons/LinkIcon.vue";
+import ExternalIcon from "../components/icons/ExternalIcon.vue";
 
 export default {
 	name: "About",

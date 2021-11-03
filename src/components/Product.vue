@@ -65,7 +65,7 @@
 <script>
 import Button from "./Button.vue";
 import ButtonTag from "./ButtonTag.vue";
-import { hyphenify } from "@/scripts/helpers";
+import { hyphenify } from "../scripts/helpers";
 import ExternalIcon from "./icons/ExternalIcon.vue";
 import AlternativeIcon from "./icons/AlternativeIcon.vue";
 

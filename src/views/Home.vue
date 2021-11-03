@@ -43,19 +43,19 @@
 </template>
 
 <script>
-import Button from "@/components/Button.vue";
-import ProductList from "@/components/ProductList.vue";
-import ClearIcon from "@/components/icons/ClearIcon.vue";
-import SearchIcon from "@/components/icons/SearchIcon.vue";
-import ArrowUpIcon from "@/components/icons/ArrowUpIcon.vue";
+import Button from "../components/Button.vue";
+import ProductList from "../components/ProductList.vue";
+import ClearIcon from "../components/icons/ClearIcon.vue";
+import SearchIcon from "../components/icons/SearchIcon.vue";
+import ArrowUpIcon from "../components/icons/ArrowUpIcon.vue";
 
-import { tags, categories } from "@/scripts/filters";
+import { tags, categories } from "../scripts/filters";
 import {
 	scroll,
 	isDefined,
 	stringSearch,
 	highlightQuery
-} from "@/scripts/helpers";
+} from "../scripts/helpers";
 
 export default {
 	name: "Home",

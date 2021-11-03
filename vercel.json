@@ -4,12 +4,12 @@
 			"source": "/(.*)",
 			"headers": [
 				{
-					"key": "Cross-Origin-Resource-Policy",
-					"value": "same-site"
-				},
-				{
 					"key": "Content-Security-Policy",
 					"value": "default-src 'self' encryptedlist.vercel.app  api.airtable.com fontlist.vercel.app; img-src *.imagekit.io cdn.ko-fi.com"
+				},
+				{
+					"key": "Cross-Origin-Resource-Policy",
+					"value": "same-site"
 				},
 				{
 					"key": "X-Content-Type-Options",

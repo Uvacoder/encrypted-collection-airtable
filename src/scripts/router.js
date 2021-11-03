@@ -2,15 +2,15 @@ import Vue from "vue";
 import { store } from "./store";
 import VueRouter from "vue-router";
 
-import Home from "@/views/Home.vue";
-import About from "@/views/About.vue";
-import Unfound from "@/views/404.vue";
-import Excluded from "@/views/Excluded.vue";
-import Watchlist from "@/views/Watchlist.vue";
-import Submit from "@/views/Submit.vue";
-import Report from "@/views/Report.vue";
-import FormFailure from "@/views/FormStatus/FormFailure.vue";
-import FormSuccess from "@/views/FormStatus/FormSuccess.vue";
+import Home from "../views/Home.vue";
+import About from "../views/About.vue";
+import Unfound from "../views/404.vue";
+import Excluded from "../views/Excluded.vue";
+import Watchlist from "../views/Watchlist.vue";
+import Submit from "../views/Submit.vue";
+import Report from "../views/Report.vue";
+import FormFailure from "../views/FormStatus/FormFailure.vue";
+import FormSuccess from "../views/FormStatus/FormSuccess.vue";
 
 Vue.use(VueRouter);
 

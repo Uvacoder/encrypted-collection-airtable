@@ -21,8 +21,8 @@
 
 <script>
 import localForage from "localforage";
-import { isIE } from "@/scripts/helpers";
-import Header from "@/components/Header.vue";
+import { isIE } from "./scripts/helpers";
+import Header from "./components/Header.vue";
 
 export default {
 	name: "App",

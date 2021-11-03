@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import ButtonLink from "@/components/ButtonLink.vue";
-import HomeIcon from "@/components/icons/HomeIcon.vue";
+import ButtonLink from "../components/ButtonLink.vue";
+import HomeIcon from "../components/icons/HomeIcon.vue";
 
 export default {
 	name: "Unfound",

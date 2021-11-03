@@ -164,7 +164,7 @@ import SmileIcon from "./icons/SmileIcon.vue";
 import DangerIcon from "./icons/DangerIcon.vue";
 import MenuAltIcon from "./icons/MenuAltIcon.vue";
 import UnavailableIcon from "./icons/UnavailableIcon.vue";
-// import { encode } from '@/scripts/helpers';
+// import { encode } from '../scripts/helpers';
 
 export default {
 	name: "Header",
@@ -222,13 +222,13 @@ export default {
 		},
 		// submit feedback
 		sendFeedback: function ($event) {
-			console.log("This feedback form has been temporarily disabled", $event);
-			this.feedbackModal.status = 2;
-
+			console.log("form submission triggered", $event);
+			// console.log("This feedback form has been temporarily disabled", $event);
+			// this.feedbackModal.status = 2;
+			// /api/formSubmit.js
 			// const axiosConfig = {
 			//           header: { "Content-Type": "application/x-www-form-urlencoded" }
 			// };
-
 			// // send the feedback
 			// this.$http.post(
 			// 		this.$route.path,

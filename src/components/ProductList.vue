@@ -124,7 +124,7 @@ import ListIcon from "./icons/ListIcon.vue";
 import ErrorIcon from "./icons/ErrorIcon.vue";
 import LoadingIcon from "./icons/LoadingIcon.vue";
 import ChevronDownIcon from "./icons/ChevronDownIcon.vue";
-import { isDefined, capitalizeWords } from "@/scripts/helpers";
+import { isDefined, capitalizeWords } from "../scripts/helpers";
 
 export default {
 	name: "ProductList",

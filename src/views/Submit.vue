@@ -129,12 +129,12 @@
 </template>
 
 <script>
-import Button from "@/components/Button.vue";
-import LinkIcon from "@/components/icons/LinkIcon.vue";
-import SendIcon from "@/components/icons/SendIcon.vue";
+import Button from "../components/Button.vue";
+import LinkIcon from "../components/icons/LinkIcon.vue";
+import SendIcon from "../components/icons/SendIcon.vue";
 
-import { encode } from "@/scripts/helpers";
-import { tags, categories } from "@/scripts/filters";
+import { encode } from "../scripts/helpers";
+import { tags, categories } from "../scripts/filters";
 
 export default {
 	name: "Submit",
