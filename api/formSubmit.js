@@ -28,16 +28,16 @@ module.exports = async (req, res) => {
 				axiosConfig
 			)
 			.then(() => {
-				res.status(200);
+				res.status(200).json({ error: "" });
 			})
 			.catch((err) => {
 				console.error("Somethings gone wrong ", err);
 
-				res.send(err); // send the thrown error
+				res.status(err.statusCode || 500).json({ error: err.message }); // send the thrown error
 			});
 	} catch (err) {
 		console.error("Somethings gone wrong ", err);
 
-		res.send(err); // send the thrown error
+		res.status(err.statusCode || 500).json({ error: err.message }); // send the thrown error
 	}
 };
