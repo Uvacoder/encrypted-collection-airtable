@@ -129,7 +129,7 @@ export default {
 	methods: {
 		handleFormSubmission: function () {
 			this.$http
-				.post("/api/formSubmit?formType='Report'", this.form)
+				.post("/api/formSubmit?formType=Report", this.form)
 				.then(() => {
 					this.$router.push({ name: "FormSuccess", query: { from: "report" } });
 				})

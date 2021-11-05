@@ -195,32 +195,14 @@ export default {
 	},
 	methods: {
 		handleFormSubmission: function () {
-			console.log(
-				"This report submission form has been temporarily disabled",
-				encode({
-					"form-name": "report",
-					...this.form
+			this.$http
+				.post("/api/formSubmit?formType=Submission", this.form)
+				.then(() => {
+					this.$router.push({ name: "FormSuccess", query: { from: "submit" } });
 				})
-			);
-
-			// const axiosConfig = {
-			//     header: { "Content-Type": "application/x-www-form-urlencoded" }
-			// };
-
-			// this.$http.post(
-			//     "/submit",
-			//     encode({
-			//         "form-name": "submit",
-			//         ...this.form
-			//     }),
-			//     axiosConfig
-			// )
-			// .then(() => {
-			//     this.$router.push({ name: "FormSuccess", query: { from: "submit" } });
-			// })
-			// .catch(() => {
-			//     this.$router.push({ name: "FormFailure", query: { from: "submit" } });
-			// });
+				.catch(() => {
+					this.$router.push({ name: "FormFailure", query: { from: "submit" } });
+				});
 		}
 	},
 	created() {

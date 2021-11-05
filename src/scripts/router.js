@@ -23,7 +23,12 @@ const routes = [
 	{ path: "/failure", name: "FormFailure", component: FormFailure },
 	{ path: "/excluded", name: "Excluded", component: Excluded },
 	{ path: "/watchlist", name: "Watchlist", component: Watchlist },
-	{ path: "*", name: "404", component: Unfound }
+	{ path: "*", name: "404", component: Unfound },
+	{
+		path: "/:catchAll(.*)",
+		component: Unfound,
+		name: "404"
+	}
 ];
 
 const router = new VueRouter({

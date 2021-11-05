@@ -4,11 +4,11 @@ const yaml = require("js-yaml");
 
 module.exports = async (req, res) => {
 	try {
-		// if (req.method == "post") {
-		// } else {
-		// }
 		const { formType } = req.query;
 		const submissionBody = yaml.dump(req.body);
+
+		const githubIssueURL =
+			"https://api.github.com/repos/oneminch/api-test/issues";
 
 		const axiosConfig = {
 			headers: {
@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
 		axios
 			.post(
-				"https://api.github.com/repos/oneminch/api-test/issues",
+				githubIssueURL,
 				{
 					title: formType,
 					body: submissionBody,
