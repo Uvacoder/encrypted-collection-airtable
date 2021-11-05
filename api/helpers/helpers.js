@@ -6,7 +6,7 @@ const getHeaderValue = (headerKey, headers) => {
 };
 
 // Should the current page make a request
-const makeRequest = (rawHeaders) => {
+const makeRequest = (method, rawHeaders) => {
 	const reqHost = getHeaderValue("host", rawHeaders);
 	const reqReferer = getHeaderValue("referer", rawHeaders);
 
@@ -17,7 +17,7 @@ const makeRequest = (rawHeaders) => {
 	const mainReferer = `https://${process.env.MAIN_BASE_URL}/`;
 
 	if (
-		req.method === "GET" &&
+		method === "GET" &&
 		(reqHost === altHost || reqHost === mainHost) &&
 		(reqReferer.indexOf(altReferer) >= 0 ||
 			reqReferer.indexOf(mainReferer) >= 0)

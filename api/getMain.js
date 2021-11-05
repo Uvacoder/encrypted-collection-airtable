@@ -4,7 +4,7 @@ import { makeRequest, unauthorizedError } from "./helpers/helpers";
 
 module.exports = async (req, res) => {
 	try {
-		if (makeRequest(req.rawHeaders)) {
+		if (makeRequest(req.method, req.rawHeaders)) {
 			if (Object.keys(req.query).length > 0) {
 				const initialLimit = req.query.limit;
 				res.status(200).send(await getTable("Main", initialLimit));
