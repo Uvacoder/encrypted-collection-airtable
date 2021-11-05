@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 		const submissionBody = yaml.dump(req.body);
 
 		const githubIssueURL =
-			"https://api.github.com/repos/oneminch/api-test/issues";
+			"https://api.github.com/repos/oneminch/encrypted-list/issues";
 
 		const axiosConfig = {
 			headers: {
