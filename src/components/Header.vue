@@ -36,13 +36,13 @@
 				<app-moon-icon v-else></app-moon-icon>
 			</app-button>
 
-			<app-button
+			<!-- <app-button
 				class="give-feedback"
 				:iconButton="true"
 				:label="'Give Feedback'"
 				@clicked="showFeedbackModal(true)">
 				<app-smile-icon></app-smile-icon>
-			</app-button>
+			</app-button> -->
 
 			<app-button
 				class="show-pages"
@@ -67,11 +67,11 @@
 			:class="['overlay', { visible: overlayVisible }]"></div>
 
 		<!-- feedback modal popup -->
-		<app-feedback-modal
+		<!-- <app-feedback-modal
 			:hidden="feedbackModal.hidden"
 			:status="feedbackModal.status"
 			@submitted="sendFeedback($event)"
-			@close-modal="showFeedbackModal(false)"></app-feedback-modal>
+			@close-modal="showFeedbackModal(false)"></app-feedback-modal> -->
 
 		<!-- hidden-by-default list of menu items -->
 		<div :class="['menu-list', { shown: menuShown }]">
@@ -89,13 +89,13 @@
 						<app-moon-icon v-else></app-moon-icon>
 					</app-button>
 
-					<app-button
+					<!-- <app-button
 						class="give-feedback"
 						:iconButton="true"
 						:label="'Give Feedback'"
 						@clicked="showFeedbackModal(true)">
 						<app-smile-icon></app-smile-icon>
-					</app-button>
+					</app-button> -->
 
 					<app-button
 						class="hide-pages"
@@ -158,13 +158,12 @@ import EyeIcon from "./icons/EyeIcon.vue";
 import SunIcon from "./icons/SunIcon.vue";
 import MoonIcon from "./icons/MoonIcon.vue";
 import MenuIcon from "./icons/MenuIcon.vue";
-import FeedbackModal from "./FeedbackModal.vue";
 import InfoIcon from "./icons/InfoIcon.vue";
 import SmileIcon from "./icons/SmileIcon.vue";
 import DangerIcon from "./icons/DangerIcon.vue";
 import MenuAltIcon from "./icons/MenuAltIcon.vue";
 import UnavailableIcon from "./icons/UnavailableIcon.vue";
-// import { encode } from '../scripts/helpers';
+// import FeedbackModal from "./FeedbackModal.vue";
 
 export default {
 	name: "Header",
@@ -177,22 +176,22 @@ export default {
 		appMoonIcon: MoonIcon,
 		appMenuIcon: MenuIcon,
 		appInfoIcon: InfoIcon,
-		appFeedbackModal: FeedbackModal,
 		appSmileIcon: SmileIcon,
 		appDangerIcon: DangerIcon,
 		appButtonLink: ButtonLink,
 		appMenuAltIcon: MenuAltIcon,
 		appUnavailableIcon: UnavailableIcon
+		// appFeedbackModal: FeedbackModal,
 	},
 	data() {
 		return {
 			darkMode: this.darkTheme,
-			feedbackModal: {
-				status: 0,
-				hidden: true
-			},
 			menuShown: false,
 			overlayVisible: false
+			// feedbackModal: {
+			// 	status: 0,
+			// 	hidden: true
+			// },
 		};
 	},
 	methods: {
@@ -222,32 +221,29 @@ export default {
 		},
 		// submit feedback
 		sendFeedback: function ($event) {
-			console.log("form submission triggered", $event);
-			// console.log("This feedback form has been temporarily disabled", $event);
-			// this.feedbackModal.status = 2;
-			// /api/formSubmit.js
 			// const axiosConfig = {
-			//           header: { "Content-Type": "application/x-www-form-urlencoded" }
+			// 	header: { "Content-Type": "application/x-www-form-urlencoded" }
 			// };
 			// // send the feedback
-			// this.$http.post(
+			// this.$http
+			// 	.post(
 			// 		this.$route.path,
 			// 		encode({
-			// 				"form-name": "feedback",
-			// 				"comment": $event.target.value
+			// 			"form-name": "feedback",
+			// 			comment: $event.target.value
 			// 		}),
 			// 		axiosConfig
-			// )
-			// .then(() => {
-			// 	// reset form and show success message
-			// 	$event.target.form.reset();
-			// 	this.feedbackModal.status = 1;
-			// })
-			// .catch(() => {
-			// 	// reset form and show failure message
-			// 	$event.target.form.reset();
-			// 	this.feedbackModal.status = 2;
-			// });
+			// 	)
+			// 	.then(() => {
+			// 		// reset form and show success message
+			// 		$event.target.form.reset();
+			// 		this.feedbackModal.status = 1;
+			// 	})
+			// 	.catch(() => {
+			// 		// reset form and show failure message
+			// 		$event.target.form.reset();
+			// 		this.feedbackModal.status = 2;
+			// 	});
 		}
 	},
 	computed: {
