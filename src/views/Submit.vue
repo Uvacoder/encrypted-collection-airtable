@@ -1,7 +1,7 @@
 <template>
 	<div id="submit">
 		<form method="POST" name="submit" @submit.prevent="handleFormSubmission">
-			<h2 class="emergency-ui">This form is temporarily disabled.</h2>
+			<!-- <h2 class="emergency-ui">This form is temporarily disabled.</h2> -->
 
 			<h2>Enter Product Details</h2>
 
@@ -123,7 +123,8 @@
 				>the report page <app-link-icon></app-link-icon
 			></router-link>
 			to report already existing products. I'll review the submission and add
-			the product ASAP.
+			the product ASAP. This form is powered by GitHub Issues and submissions
+			will be public.
 		</p>
 	</div>
 </template>
@@ -324,7 +325,7 @@ export default {
 	padding: 0 0.25rem;
 }
 
-#submit > form > .emergency-ui {
+/* #submit > form > .emergency-ui {
 	padding: 0.5rem 0.75rem;
 	display: flex;
 	align-items: center;
@@ -334,7 +335,7 @@ export default {
 	color: var(--text-color);
 	background-color: var(--yellow-black-color);
 	border-color: var(--yellow-black-alt-color);
-}
+} */
 
 @media only screen and (max-width: 840px) {
 	#submit {

@@ -214,7 +214,7 @@ export default {
 			if (show) {
 				// show
 				this.showMenuList(false); // hide menu if shown
-				this.feedbackModal.hidden = !show;
+				// this.feedbackModal.hidden = !show;
 			}
 
 			this.showOverlay(show);
@@ -256,12 +256,12 @@ export default {
 			this.darkMode = value;
 		},
 		"feedbackModal.hidden": function () {
-			this.feedbackModal.status = 0;
+			// this.feedbackModal.status = 0;
 		},
 		overlayVisible: function (value) {
 			if (!value) {
 				this.menuShown = false;
-				this.feedbackModal.hidden = true;
+				// this.feedbackModal.hidden = true;
 			}
 		}
 	}

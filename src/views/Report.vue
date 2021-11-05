@@ -5,7 +5,7 @@
 			name="report"
 			@submit.prevent="handleFormSubmission"
 			class="disabled-form">
-			<h2 class="emergency-ui">This form is temporarily disabled.</h2>
+			<!-- <h2 class="emergency-ui">This form is temporarily disabled.</h2> -->
 
 			<h2>Enter Product Details</h2>
 
@@ -43,7 +43,8 @@
 		<div class="page-info">
 			<p>
 				If you need to <mark class="highlight">report</mark> something, you can
-				do so on this page. If the product is already in the
+				do so on this page. This form is powered by GitHub Issues and
+				submissions will be public. If the product is already in the
 				<router-link to="/excluded"
 					>excluded list <app-link-icon></app-link-icon
 				></router-link>
@@ -245,7 +246,7 @@ export default {
 	padding: 0 0.25rem;
 }
 
-#report > form > .emergency-ui {
+/* #report > form > .emergency-ui {
 	padding: 0.5rem 0.75rem;
 	display: flex;
 	align-items: center;
@@ -255,7 +256,7 @@ export default {
 	color: var(--text-color);
 	background-color: var(--yellow-black-color);
 	border-color: var(--yellow-black-alt-color);
-}
+} */
 
 @media only screen and (max-width: 840px) {
 	#report {
