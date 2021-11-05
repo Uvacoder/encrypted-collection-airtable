@@ -74,8 +74,6 @@ import Button from "../components/Button.vue";
 import LinkIcon from "../components/icons/LinkIcon.vue";
 import SendIcon from "../components/icons/SendIcon.vue";
 
-// import { encode } from "../scripts/helpers";
-
 export default {
 	name: "Report",
 	components: {

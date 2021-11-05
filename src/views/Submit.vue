@@ -133,8 +133,6 @@
 import Button from "../components/Button.vue";
 import LinkIcon from "../components/icons/LinkIcon.vue";
 import SendIcon from "../components/icons/SendIcon.vue";
-
-import { encode } from "../scripts/helpers";
 import { tags, categories } from "../scripts/filters";
 
 export default {
@@ -198,8 +196,7 @@ export default {
 		handleFormSubmission: function () {
 			this.$http
 				.post("/api/formSubmit?formType=Submission", this.form)
-				.then((res) => {
-					console.log(res);
+				.then(() => {
 					this.$router.push({ name: "FormSuccess", query: { from: "submit" } });
 				})
 				.catch(() => {
