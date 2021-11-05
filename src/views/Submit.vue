@@ -198,7 +198,8 @@ export default {
 		handleFormSubmission: function () {
 			this.$http
 				.post("/api/formSubmit?formType=Submission", this.form)
-				.then(() => {
+				.then((res) => {
+					console.log(res);
 					this.$router.push({ name: "FormSuccess", query: { from: "submit" } });
 				})
 				.catch(() => {

@@ -28,7 +28,8 @@ module.exports = async (req, res) => {
 				axiosConfig
 			)
 			.then(() => {
-				res.status(200).json({ error: "" });
+				res.status(200).json(req.body.slice());
+				// res.status(200).json({ error: "" });
 			})
 			.catch((err) => {
 				console.error("Somethings gone wrong ", err);
