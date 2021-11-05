@@ -1,6 +1,6 @@
 "use strict";
 const getTable = require("./helpers/getTable");
-import { makeRequest } from "./helpers/helpers";
+import { makeRequest, unauthorizedError } from "./helpers/helpers";
 
 module.exports = async (req, res) => {
 	try {
