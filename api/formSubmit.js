@@ -1,11 +1,11 @@
 "use strict";
 import axios from "axios";
-const yaml = require("js-yaml");
+import { mdify } from "./helpers/helpers";
 
 module.exports = async (req, res) => {
 	try {
 		const { formType } = req.query;
-		const submissionBody = yaml.dump(req.body);
+		const submissionBody = mdify(req.body, formType.toLowerCase());
 
 		const githubIssueURL =
 			"https://api.github.com/repos/oneminch/encrypted-list/issues";

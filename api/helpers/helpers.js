@@ -1,3 +1,5 @@
+const json2md = require("json2md");
+
 // Get header values from raw header data
 const getHeaderValue = (headerKey, headers) => {
 	const keyIndex = headers.indexOf(headerKey.toLowerCase());
@@ -28,6 +30,7 @@ const makeRequest = (method, rawHeaders) => {
 	return false;
 };
 
+// return error code and message
 const unauthorizedError = () => {
 	return {
 		statusCode: 404,
@@ -37,4 +40,25 @@ const unauthorizedError = () => {
 	};
 };
 
-export { makeRequest, unauthorizedError };
+// Convert given data to markdown based on form type
+const mdify = (data, formType) => {
+	if (formType == "report") {
+		return json2md([
+			{ p: `**Title**: ${data.pname.length > 0 ? data.pname : "N/A"}` },
+			{ p: `**Message**: ${data.message}` }
+		]);
+	} else if (formType == "submission") {
+		return json2md([
+			{ p: `**List Type**: ${data.listType}` },
+			{ p: `**Product Name**: ${data.name}` },
+			{ p: `**Product Description**: ${data.desc}` },
+			{ p: `**Product URL**: ${data.url}` },
+			{ h4: "Tags" },
+			{ ul: data.tags },
+			{ h4: "Categories" },
+			{ ul: data.categories }
+		]);
+	}
+};
+
+export { mdify, makeRequest, unauthorizedError };
