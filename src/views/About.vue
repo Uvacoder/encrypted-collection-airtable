@@ -4,16 +4,16 @@
 			EncryptedList is a collection of products &amp; services that offer or
 			ensure data security through
 			<a
-				href="https://protonmail.com/blog/what-is-end-to-end-encryption/"
+				href="https://protonmail.com/blog/what-is-end-to-end-encryption?ref=encryptedlist"
 				target="_blank"
-				rel="noopener"
+				rel="noopener noreferrer"
 				>end-to-end encryption <app-external-icon></app-external-icon
 			></a>
 			👈 or some form of
 			<a
-				href="https://tresorit.com/blog/zero-knowledge-encryption/"
+				href="https://tresorit.com/blog/zero-knowledge-encryption?ref=encryptedlist"
 				target="_blank"
-				rel="noopener"
+				rel="noopener noreferrer"
 				>zero-knowledge architecture <app-external-icon></app-external-icon
 			></a>
 			🔐. This can include services that either have such architecture on some
@@ -63,7 +63,7 @@
 				title="Go To GitHub Repo"
 				aria-label="Go To GitHub Repo"
 				target="_blank"
-				rel="noopener"
+				rel="noopener noreferrer"
 				href="https://github.com/oneminch/encrypted-list">
 				GitHub
 				<app-external-icon></app-external-icon>
