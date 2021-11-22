@@ -20,8 +20,8 @@
 					title="Go To Product Website"
 					aria-label="Go to Product Website"
 					target="_blank"
-					rel="noopener"
-					:href="`${product.url}?ref=EncryptedList`">
+					rel="noopener noreferrer"
+					:href="`${product.url}?ref=encryptedlist`">
 					<app-external-icon></app-external-icon>
 				</a>
 				<app-button
