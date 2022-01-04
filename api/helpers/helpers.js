@@ -45,7 +45,8 @@ const mdify = (data, formType) => {
 	if (formType == "report") {
 		return json2md([
 			{ p: `**Title**: ${data.pname.length > 0 ? data.pname : "N/A"}` },
-			{ p: `**Message**: ${data.message}` }
+			{ p: `**Message**: ${data.message}` },
+			{ p: "@oneminch | https://encryptedlist.xyz" }
 		]);
 	} else if (formType == "submission") {
 		return json2md([
@@ -56,7 +57,8 @@ const mdify = (data, formType) => {
 			{ h4: "Tags" },
 			{ ul: data.tags },
 			{ h4: "Categories" },
-			{ ul: data.categories }
+			{ ul: data.categories },
+			{ p: "@oneminch | https://encryptedlist.xyz" }
 		]);
 	}
 };
