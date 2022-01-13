@@ -23,7 +23,8 @@ module.exports = async (req, res) => {
 				{
 					title: formType,
 					body: submissionBody,
-					labels: [formType.toLowerCase()]
+					labels: [formType.toLowerCase()],
+					assignees: ["oneminch"]
 				},
 				axiosConfig
 			)
