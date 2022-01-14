@@ -20,7 +20,7 @@
 			of their features or that implement it fully.
 		</p>
 
-		<h3>Disclaimer</h3>
+		<h2 id="disclosure">Disclosure</h2>
 
 		<ul>
 			<li>

@@ -21,6 +21,9 @@
 				<p class="app-desc">
 					List of services that offer zero-knowledge or end-to-end encryption
 					🔐.
+					<router-link class="disclosure" :to="{ path: '/about#disclosure' }">
+						Disclosure
+					</router-link>
 				</p>
 			</div>
 		</router-link>
@@ -340,6 +343,12 @@ html[data-theme="dark"] .app-logo img {
 	font-size: 1rem;
 	margin: 0.25rem;
 	max-width: 400px;
+}
+
+.app-desc > .disclosure {
+	font-size: 0.75rem;
+	color: var(--dark-light-gray-color);
+	/* text-decoration: none; */
 }
 
 .nav-buttons {
