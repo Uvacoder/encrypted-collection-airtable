@@ -200,11 +200,15 @@ body {
 	-ms-user-select: none;
 	user-select: none;
 	font-family: "JetBrains Mono", "Cascadia Mono", "Lucida Console", monospace !important;
-	font-weight: 700;
+	font-weight: 400;
 	transition: all 0.2s, color 0s, background-color 0s;
 	-moz-transition: all 0.2s, color 0s, background-color 0s;
 	-webkit-transition: all 0.2s, color 0s, background-color 0s;
 	box-sizing: border-box;
+}
+
+* > strong {
+	font-weight: 800;
 }
 
 input,

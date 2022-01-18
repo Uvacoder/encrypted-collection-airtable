@@ -6,6 +6,7 @@ import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import Unfound from "../views/404.vue";
 import Excluded from "../views/Excluded.vue";
+import Changelog from "../views/Changelog.vue";
 import Watchlist from "../views/Watchlist.vue";
 import Submit from "../views/Submit.vue";
 import Report from "../views/Report.vue";
@@ -19,6 +20,12 @@ const routes = [
 	{ path: "/about", name: "About", component: About },
 	{ path: "/submit", name: "Submit", component: Submit },
 	{ path: "/report", name: "Report", component: Report },
+	{
+		path: "/updates",
+		name: "Changelog",
+		alias: "/changelog",
+		component: Changelog
+	},
 	{ path: "/success", name: "FormSuccess", component: FormSuccess },
 	{ path: "/failure", name: "FormFailure", component: FormFailure },
 	{ path: "/excluded", name: "Excluded", component: Excluded },

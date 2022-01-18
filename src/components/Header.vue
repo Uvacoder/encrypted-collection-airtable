@@ -48,6 +48,14 @@
 			</app-button> -->
 
 			<app-button
+				class="show-changelog"
+				:iconButton="true"
+				:label="'Show Changelog'"
+				@clicked="showChangelog">
+				<app-changelog-icon></app-changelog-icon>
+			</app-button>
+
+			<app-button
 				class="show-pages"
 				@clicked="showMenuList(true)"
 				:label="'Show List of Pages'">
@@ -99,6 +107,14 @@
 						@clicked="showFeedbackModal(true)">
 						<app-smile-icon></app-smile-icon>
 					</app-button> -->
+
+					<app-button
+						class="show-changelog"
+						:iconButton="true"
+						:label="'Show Changelog'"
+						@clicked="showChangelog">
+						<app-changelog-icon></app-changelog-icon>
+					</app-button>
 
 					<app-button
 						class="hide-pages"
@@ -165,6 +181,7 @@ import InfoIcon from "./icons/InfoIcon.vue";
 import SmileIcon from "./icons/SmileIcon.vue";
 import DangerIcon from "./icons/DangerIcon.vue";
 import MenuAltIcon from "./icons/MenuAltIcon.vue";
+import ChangelogIcon from "./icons/ChangelogIcon.vue";
 import UnavailableIcon from "./icons/UnavailableIcon.vue";
 // import FeedbackModal from "./FeedbackModal.vue";
 
@@ -183,6 +200,7 @@ export default {
 		appDangerIcon: DangerIcon,
 		appButtonLink: ButtonLink,
 		appMenuAltIcon: MenuAltIcon,
+		appChangelogIcon: ChangelogIcon,
 		appUnavailableIcon: UnavailableIcon
 		// appFeedbackModal: FeedbackModal,
 	},
@@ -198,6 +216,9 @@ export default {
 		};
 	},
 	methods: {
+		showChangelog: function () {
+			this.$router.push({ path: "updates" });
+		},
 		// emit theme change to main component
 		emitThemeChange: function () {
 			this.darkMode = !this.darkMode;
@@ -366,7 +387,9 @@ html[data-theme="dark"] .app-logo img {
 	margin: 0;
 }
 
+.nav-buttons > .show-changelog,
 .nav-buttons > .give-feedback,
+.menu-list .header .menu-list-buttons > .show-changelog,
 .menu-list .header .menu-list-buttons > .give-feedback {
 	background-color: var(--yellow-black-color);
 	border-color: var(--yellow-black-alt-color);
@@ -465,7 +488,8 @@ html[data-theme="dark"] .app-logo img {
 @media only screen and (max-width: 840px) {
 	.nav-buttons > .show-pages,
 	.nav-buttons > .change-theme,
-	.nav-buttons > .give-feedback {
+	.nav-buttons > .give-feedback,
+	.nav-buttons > .show-changelog {
 		display: none;
 	}
 
