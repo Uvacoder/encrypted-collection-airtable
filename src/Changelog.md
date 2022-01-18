@@ -2,7 +2,7 @@
 
 List of changes made to the EncryptedList database.
 
-- _2022-01-17_: List of changes made:
+- _2022-01-17_ - List of changes made:
 
   1. 18 products have been moved from the main list to the excluded list:
 
@@ -44,8 +44,8 @@ List of changes made to the EncryptedList database.
      - **Briar** &rarr; Main
      - **Revolt** &rarr; Watchlist
 
-- _2022-01-13_: **Misakey** description updated to reflect current business.
+- _2022-01-13_ - **Misakey** description updated to reflect current business.
 
-- _2022-01-10_: **Octo** was added to the main list.
+- _2022-01-10_ - **Octo** was added to the main list.
 
-- _2021-08-12_: **Quill.chat** removed from Watchlist because it's sunsetted following its acquisition by Twitter.
+- _2021-08-12_ - **Quill.chat** removed from Watchlist because it's sunsetted following its acquisition by Twitter.

@@ -57,7 +57,7 @@ export default {
 		});
 
 		const changelogFile =
-			"https://cdn.statically.io/gh/oneminch/encrypted-list/main/src/Changelog.md";
+			"https://raw.githubusercontent.com/oneminch/encrypted-list/main/src/Changelog.md";
 
 		fetch(
 			`https://api.allorigins.win/get?url=${encodeURIComponent(changelogFile)}`

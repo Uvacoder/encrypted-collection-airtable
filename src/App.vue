@@ -200,7 +200,7 @@ body {
 	-ms-user-select: none;
 	user-select: none;
 	font-family: "Space Grotesk", "Cascadia Mono", "Lucida Console", monospace !important;
-	font-weight: 500;
+	font-weight: 400;
 	transition: all 0.2s, color 0s, background-color 0s;
 	-moz-transition: all 0.2s, color 0s, background-color 0s;
 	-webkit-transition: all 0.2s, color 0s, background-color 0s;

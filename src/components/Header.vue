@@ -218,6 +218,7 @@ export default {
 	methods: {
 		showChangelog: function () {
 			this.$router.push({ path: "updates" });
+			this.showMenuList(false);
 		},
 		// emit theme change to main component
 		emitThemeChange: function () {
