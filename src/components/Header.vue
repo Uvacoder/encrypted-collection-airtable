@@ -387,9 +387,10 @@ html[data-theme="dark"] .app-logo img {
 	margin: 0;
 }
 
-.nav-buttons > .show-changelog,
+/* .nav-buttons > .show-changelog,
+.menu-list .header .menu-list-buttons > .show-changelog, */
+
 .nav-buttons > .give-feedback,
-.menu-list .header .menu-list-buttons > .show-changelog,
 .menu-list .header .menu-list-buttons > .give-feedback {
 	background-color: var(--yellow-black-color);
 	border-color: var(--yellow-black-alt-color);
