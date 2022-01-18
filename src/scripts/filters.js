@@ -7,10 +7,10 @@ const tags = [
 	"web-app",
 	"premium",
 	"freemium",
+	"blockchain",
 	"proprietary",
 	"self-hosted",
 	"open-source",
-	"decentralized",
 	"cross-platform"
 ];
 
