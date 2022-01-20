@@ -168,7 +168,7 @@ export default {
 	content: "\25FC";
 	color: var(--primary-yellow-color);
 	font-weight: bold;
-	display: inline-block;
+	float: left;
 	width: 1.5em;
 	margin-left: -1em;
 }
