@@ -353,7 +353,7 @@ html[data-theme="dark"] .app-logo img {
 
 .app-name {
 	font-size: 1.25rem;
-	font-weight: bold;
+	font-weight: 700;
 	line-height: 1.25;
 	margin: 0.25rem;
 	color: var(--text-color);

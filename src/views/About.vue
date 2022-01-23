@@ -167,7 +167,7 @@ export default {
 #about > ul li::before {
 	content: "\25FC";
 	color: var(--primary-yellow-color);
-	font-weight: bold;
+	font-weight: 700;
 	float: left;
 	width: 1.5em;
 	margin-left: -1em;

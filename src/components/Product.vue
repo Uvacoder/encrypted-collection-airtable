@@ -261,7 +261,7 @@ export default {
 }
 
 .product-alternatives > p {
-	font-weight: bold;
+	font-weight: 700;
 	margin: 0;
 	margin-bottom: 0.75rem;
 	padding: 0;

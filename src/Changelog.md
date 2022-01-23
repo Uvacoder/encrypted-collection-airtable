@@ -6,46 +6,46 @@ List of changes made to the EncryptedList database.
 
   - 18 products have been moved from the main list to the excluded list:
 
-    - **Darkwire.io** - Dead Link (Possibly Defunct)
-    - **Encrypt My Photos** - Dead Link (Possibly Defunct)
-    - **Encryptochat** - Dead Link (Possibly Defunct)
-    - **Enzypt** - Dead Link (Possibly Defunct)
-    - **Firefox Lockwise** - Integrated into Firefox Browser
-    - **Jumble** - Dead Link (Possibly Defunct)
-    - **Krypton** - Acquired & Shut Down
-    - **Local Bitcoin (Bitcoin.com Local)** - Sunsetted
-    - **Okuna** - Sunsetted
-    - **pDrive** - Defunct
-    - **Photo Vault** - Defunct
-    - **Plasma Rooms** - Pivoted into a Different Business
-    - **Portabella** - Defunct
-    - **PrivaNote** - Defunct
-    - **Recall Photos** - No Development Activity/App Removed from App Store
-    - **SecretHub** - Acquired & Shut Down. Became **1Password Secrets Automation**
-    - **Stash** - Dead Link
-    - **Xroom** - Acquired & Shut Down
+    - **_Darkwire.io_** - Dead Link (Possibly Defunct)
+    - **_Encrypt My Photos_** - Dead Link (Possibly Defunct)
+    - **_Encryptochat_** - Dead Link (Possibly Defunct)
+    - **_Enzypt_** - Dead Link (Possibly Defunct)
+    - **_Firefox Lockwise_** - Integrated into Firefox Browser
+    - **_Jumble_** - Dead Link (Possibly Defunct)
+    - **_Krypton_** - Acquired & Shut Down
+    - **_Local Bitcoin (Bitcoin.com Local)_** - Sunsetted
+    - **_Okuna_** - Sunsetted
+    - **_pDrive_** - Defunct
+    - **_Photo Vault_** - Defunct
+    - **_Plasma Rooms_** - Pivoted into a Different Business
+    - **_Portabella_** - Defunct
+    - **_PrivaNote_** - Defunct
+    - **_Recall Photos_** - No Development Activity/App Removed from App Store
+    - **_SecretHub_** - Acquired & Shut Down. Became **_1Password Secrets Automation_**
+    - **_Stash_** - Dead Link
+    - **_Xroom_** - Acquired & Shut Down
 
   - 4 products have been moved from the main list to the watchlist:
 
-    - **BeSafe** - Dead Link (Possibly Defunct)
-    - **DECS** - Inactive but Possible Near-future Update
-    - **Memex** - Reverted Back to Beta
-    - **Stickytape** - Dead Link (Possibly Defunct)
+    - **_BeSafe_** - Dead Link (Possibly Defunct)
+    - **_DECS_** - Inactive but Possible Near-future Update
+    - **_Memex_** - Reverted Back to Beta
+    - **_Stickytape_** - Dead Link (Possibly Defunct)
 
   - Updated product details for:
 
-    - **Quick Sync Me** - Logo
-    - **Recap** - Description
-    - **Wickr** - Description to indicate its acquisition by Amazon
+    - **_Quick Sync Me_** - Logo
+    - **_Recap_** - Description
+    - **_Wickr_** - Description to indicate its acquisition by Amazon
 
   - Add new products:
 
-    - **0bin** &rarr; Main
-    - **Briar** &rarr; Main
-    - **Revolt** &rarr; Watchlist
+    - **_0bin_** &rarr; Main
+    - **_Briar_** &rarr; Main
+    - **_Revolt_** &rarr; Watchlist
 
-- _2022-01-13_ - **Misakey** description updated to reflect current business.
+- _2022-01-13_ - **_Misakey_** description updated to reflect current business.
 
-- _2022-01-10_ - **Octo** was added to the main list.
+- _2022-01-10_ - **_Octo_** was added to the main list.
 
-- _2021-08-12_ - **Quill.chat** removed from Watchlist because it's sunsetted following its acquisition by Twitter.
+- _2021-08-12_ - **_Quill.chat_** removed from Watchlist because it's sunsetted following its acquisition by Twitter.

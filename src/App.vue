@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import "@fontsource/roboto-mono/400.css";
+import "@fontsource/roboto-mono/700.css";
 import localForage from "localforage";
 import { isIE } from "./scripts/helpers";
 import Header from "./components/Header.vue";
@@ -199,7 +201,7 @@ body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	font-family: "Space Grotesk", "Cascadia Mono", "Lucida Console", monospace !important;
+	font-family: "Roboto Mono", "Cascadia Mono", "Lucida Console", monospace !important;
 	font-weight: 400;
 	transition: all 0.2s, color 0s, background-color 0s;
 	-moz-transition: all 0.2s, color 0s, background-color 0s;

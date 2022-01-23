@@ -222,7 +222,7 @@ export default {
 #report > .page-info ul li::before {
 	content: "\25FC";
 	color: var(--primary-yellow-color);
-	font-weight: bold;
+	font-weight: 700;
 	display: inline-block;
 	width: 1.5em;
 	margin-left: -1em;

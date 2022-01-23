@@ -69,7 +69,7 @@ export default {
 	width: 65%;
 	text-align: center;
 	font-size: 1.5rem;
-	font-weight: bold;
+	font-weight: 700;
 	margin: 1rem auto;
 }
 
