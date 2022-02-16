@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import "@fontsource/roboto-mono/400.css";
-import "@fontsource/roboto-mono/700.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/700.css";
 import localForage from "localforage";
 import { isIE } from "./scripts/helpers";
 import Header from "./components/Header.vue";
@@ -61,7 +61,7 @@ export default {
 			},
 			{
 				property: "og:image",
-				content: "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/logo.webp"
+				content: "https://enclist.sirv.com/logo.webp"
 			},
 
 			// Twitter card
@@ -73,13 +73,13 @@ export default {
 			},
 			{
 				name: "twitter:image:src",
-				content: "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/logo.webp"
+				content: "https://enclist.sirv.com/logo.webp"
 			}
 		],
 		link: [
 			{
 				rel: "icon",
-				href: "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/tr:w-32,h-32,lo-true/favicon.ico",
+				href: "https://enclist.sirv.com/favicon.ico?w=32&h=32",
 				sizes: "32x32"
 			}
 		]
@@ -201,7 +201,7 @@ body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	font-family: "Roboto Mono", "Cascadia Mono", "Lucida Console", monospace !important;
+	font-family: "IBM Plex Mono", "Cascadia Mono", "Lucida Console", monospace !important;
 	font-weight: 400;
 	transition: all 0.2s, color 0s, background-color 0s;
 	-moz-transition: all 0.2s, color 0s, background-color 0s;

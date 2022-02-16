@@ -52,9 +52,7 @@
 				v-for="(alt, index) in product.alternatives"
 				:key="index">
 				<img
-					:src="`https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist/alts/png/${hyphenify(
-						alt
-					)}.png`"
+					:src="`https://enclist.sirv.com/alts/${hyphenify(alt)}.png`"
 					:alt="`${alt} logo`" />
 				<p>{{ alt }}</p>
 			</div>

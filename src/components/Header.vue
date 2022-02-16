@@ -5,13 +5,9 @@
 			<div class="app-logo">
 				<picture>
 					<source
-						srcset="
-							https://ik.imagekit.io/x6xq2u8ftjl/tr:h-100/encryptedlist/logo.webp
-						"
+						srcset="https://enclist.sirv.com/logo.webp?h=100"
 						type="image/webp" />
-					<img
-						src="https://ik.imagekit.io/x6xq2u8ftjl/tr:h-100/encryptedlist/logo.png"
-						alt="Logo" />
+					<img src="https://enclist.sirv.com/logo.png?h=100" alt="Logo" />
 				</picture>
 			</div>
 			<div class="app-detail">

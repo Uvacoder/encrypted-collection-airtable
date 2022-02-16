@@ -8,7 +8,7 @@ module.exports = async (tableName, numRecs) => {
 
 		let products = [],
 			img_name = "",
-			imgBaseUrl = "https://ik.imagekit.io/x6xq2u8ftjl/encryptedlist";
+			imgBaseUrl = "https://enclist.sirv.com/";
 
 		const recs = await table
 			.select({
@@ -34,7 +34,7 @@ module.exports = async (tableName, numRecs) => {
 						alternatives: record.fields.alternatives
 							? record.fields.alternatives
 							: [],
-						png_url: `${imgBaseUrl}/png/${img_name}.png?tr=w-105,dpr-1,lo-true`
+						png_url: `${imgBaseUrl}/main/${img_name}.png?w=105`
 					});
 				});
 				fetchNextPage();
