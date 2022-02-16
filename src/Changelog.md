@@ -2,6 +2,8 @@
 
 List of changes made to the EncryptedList database.
 
+- _2022-02-16_ - Update Logo Image for [Skiff](https://skiff.org)
+
 - _2022-01-17_ - List of changes made:
 
   - 18 products have been moved from the main list to the excluded list:
