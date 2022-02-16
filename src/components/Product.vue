@@ -3,7 +3,9 @@
 		<div class="product-info">
 			<div class="product-logo">
 				<picture>
-					<source :srcset="`${product.png_url},f-webp`" type="image/webp" />
+					<source
+						:srcset="`${product.png_url}&format=webp`"
+						type="image/webp" />
 					<img :src="product.png_url" loading="lazy" alt="Product Logo" />
 				</picture>
 			</div>
