@@ -8,7 +8,7 @@ module.exports = async (tableName, numRecs) => {
 
 		let products = [],
 			img_name = "",
-			imgBaseUrl = "https://enclist.sirv.com/";
+			imgBaseUrl = "https://enclist.sirv.com";
 
 		const recs = await table
 			.select({
