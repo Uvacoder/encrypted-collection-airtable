@@ -7,7 +7,7 @@
 		"serve": "vite preview"
 	},
 	"dependencies": {
-		"@fontsource/roboto-mono": "^4.5.0",
+		"@fontsource/ibm-plex-mono": "^4.5.2",
 		"airtable": "^0.10.1",
 		"axios": "^0.21.1",
 		"core-js": "^3.6.5",
