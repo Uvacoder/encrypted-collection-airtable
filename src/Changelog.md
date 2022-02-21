@@ -2,6 +2,17 @@
 
 List of changes made to the EncryptedList database.
 
+- _2022-02-20_ - Add 8 new products to the main list:
+
+  - **Budget Zen**
+  - **Deskreen**
+  - **ente**
+  - **Linphone**
+  - **Lufi**
+  - **ONLYOFFICE Private Rooms**
+  - **Sendfiles.online**
+  - **Thunderbird**
+
 - _2022-02-16_ - Update Logo Image for [Skiff](https://skiff.org)
 
 - _2022-01-17_ - List of changes made:
