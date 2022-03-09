@@ -1,4 +1,5 @@
 "use strict";
+const { shuffle } = require("lodash");
 const { base } = require("./airtable");
 
 module.exports = async (tableName, numRecs) => {
@@ -44,7 +45,7 @@ module.exports = async (tableName, numRecs) => {
 			console.log(recs.length);
 		}
 
-		return products;
+		return shuffle(products);
 	} catch (err) {
 		return err;
 	}
