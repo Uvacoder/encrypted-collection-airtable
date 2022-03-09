@@ -302,7 +302,7 @@ export default {
 		if (isDefined(this.$route.query.c) || isDefined(this.$route.query.t)) {
 			this.fetchAll(); // fetch all
 		} else {
-			this.fetchSome(this.limit); // fetch first few
+			this.fetchSome(); // fetch first few
 		}
 
 		this.tags = tags;
