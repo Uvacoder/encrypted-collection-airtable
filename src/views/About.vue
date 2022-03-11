@@ -50,7 +50,7 @@
 				if you notice any suspicious services.
 			</li>
 			<li>All product logos belong to their respective owners.</li>
-			<li>Do your research before trusting a service 🤓 and enjoy!😉.</li>
+			<li>And lastly, <mark class="highlight">do your research</mark> before trusting a service 🤓.</li>
 		</ul>
 
 		<div class="links">
