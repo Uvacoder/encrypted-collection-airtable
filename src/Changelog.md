@@ -2,7 +2,11 @@
 
 List of changes made to the EncryptedList database.
 
-* _2022-02-20_ - List of changes made:
+* _2022-03-22_ - Update Logo Image for **Skiff**
+
+* _2022-03-21_ - Add **prvt** to the Watchlist
+
+* _2022-03-12_ - List of changes made:
 
   * Add 6 new products to the main list:
     * **GoldBug**
