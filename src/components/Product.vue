@@ -115,6 +115,10 @@ export default {
 	outline: none;
 }
 
+img {
+	font-size: .25rem;
+}
+
 .product {
 	width: 100%;
 	display: flex;
