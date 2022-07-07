@@ -2,13 +2,27 @@
 
 List of changes made to the EncryptedList database.
 
+* _2022-07-07_ - List of changes made:
+
+  * Remove 1 product from the main list:
+    * **Skiff** - Divided into 3 separate products (Drive, Mail & Pages).
+
+  * Added 4 new products to the main list:
+    * **Skiff Drive**
+    * **Skiff Mail**
+    * **Skiff Pages**
+    * **throwaway.sh**
+
+  * Updated 1 product in the main list:
+    * **Actual** - Tags updated
+
 * _2022-03-22_ - Update Logo Image for **Skiff**
 
-* _2022-03-21_ - Add **prvt** to the Watchlist
+* _2022-03-21_ - Added 1 product to the Watchlist: **prvt**
 
 * _2022-03-12_ - List of changes made:
 
-  * Add 6 new products to the main list:
+  * Added 6 new products to the main list:
     * **GoldBug**
     * **Ockam**
     * **Oorja**
@@ -17,10 +31,10 @@ List of changes made to the EncryptedList database.
     * **Sniptt**
     * **VULNREPO**
 
-  * Add 1 product to the excluded list:
+  * Added 1 product to the excluded list:
     * **ChasR** - Inactive Development
 
-* _2022-02-20_ - Add 8 new products to the main list:
+* _2022-02-20_ - Added 8 new products to the main list:
 
   * **Budget Zen**
   * **Deskreen**
@@ -69,7 +83,7 @@ List of changes made to the EncryptedList database.
     * **Recap** - Description
     * **Wickr** - Description to indicate its acquisition by Amazon
 
-  * Add new products:
+  * Added new products:
 
     * **0bin** &rarr; Main
     * **Briar** &rarr; Main
