@@ -2,6 +2,21 @@
 
 List of changes made to the EncryptedList database.
 
+* _2022-07-09_ - List of changes made:
+
+  * Remove 1 product from the main list:
+    * **Firefox Lockwise**
+
+  * Added 2 new products to the main list:
+    * **Proton Calendar**
+    * **Proton Drive**
+  
+  * Updated 1 product in the main list:
+    * **Proton Mail**:
+      * Renamed to **Proton Mail** from **ProtonMail**
+      * Logo updated
+
+
 * _2022-07-07_ - List of changes made:
 
   * Remove 1 product from the main list:
