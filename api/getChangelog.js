@@ -2,12 +2,21 @@
 
 module.exports = async (req, res) => {
 	try {
-		const changelogURL = `https://raw.githubusercontent.com/oneminch/encrypted-list/main/src/Changelog.md`;
+		const changelogURL =
+			"https://raw.githubusercontent.com/oneminch/encrypted-list/main/src/Changelog.md";
 
-		const response = await fetch(changelogURL);
-		const content = await response.json();
-
-		res.status(200).send(content);
+		fetch(changelogURL)
+			.then((response) => {
+				if (response.ok) return response.text();
+				throw new Error("Network response was not ok.");
+			})
+			.then((data) => {
+				console.log(data);
+				res.status(200).send(data);
+			})
+			.catch((err) => {
+				res.send(err);
+			});
 	} catch (err) {
 		console.error("Somethings gone wrong ", err);
 

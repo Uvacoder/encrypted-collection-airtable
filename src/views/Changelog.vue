@@ -66,8 +66,8 @@ export default {
 				return response.data;
 			})
 			.then((data) => {
-				console.log(data.contents);
-				this.outputHTML = md.render(data.contents);
+				console.log(data);
+				this.outputHTML = md.render(data);
 			})
 			.catch((err) => {
 				throw err;
