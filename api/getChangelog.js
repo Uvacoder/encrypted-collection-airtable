@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
 		const changelogURL = `https://raw.githubusercontent.com/oneminch/encrypted-list/main/src/Changelog.md`;
 
 		const response = await fetch(changelogURL);
-		const content = await response.text();
+		const content = await response.json();
 
 		res.status(200).send(content);
 	} catch (err) {

@@ -66,10 +66,10 @@ export default {
 				return response.data;
 			})
 			.then((data) => {
-				this.outputHTML = md.render(data);
+				console.log(data.contents);
+				this.outputHTML = md.render(data.contents);
 			})
 			.catch((err) => {
-				// console.log(err);
 				throw err;
 			});
 
