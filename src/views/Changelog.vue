@@ -56,17 +56,34 @@ export default {
 			typographer: true
 		});
 
-		const changelogFile =
-			"https://raw.githubusercontent.com/oneminch/encrypted-list/main/src/Changelog.md";
+		const axiosConfig = {
+			headers: { "Content-type": "application/json" }
+		};
 
-		fetch(
-			`https://api.allorigins.win/get?url=${encodeURIComponent(changelogFile)}`
-		)
+		this.$http
+			.get("/api/getChangelog", axiosConfig)
 			.then((response) => {
-				if (response.ok) return response.json();
-				throw new Error("Network response was not ok.");
+				return response.data;
 			})
-			.then((data) => (this.outputHTML = md.render(data.contents)));
+			.then((data) => {
+				this.outputHTML = md.render(data);
+			})
+			.catch((err) => {
+				// console.log(err);
+				throw err;
+			});
+
+		// const changelogFile =
+		// 	"https://raw.githubusercontent.com/oneminch/encrypted-list/main/src/Changelog.md";
+
+		// fetch(
+		// 	`https://api.allorigins.win/get?url=${encodeURIComponent(changelogFile)}`
+		// )
+		// 	.then((response) => {
+		// 		if (response.ok) return response.json();
+		// 		throw new Error("Network response was not ok.");
+		// 	})
+		// 	.then((data) => (this.outputHTML = md.render(data.contents)));
 	}
 };
 </script>
