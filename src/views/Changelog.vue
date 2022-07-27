@@ -56,34 +56,23 @@ export default {
 			typographer: true
 		});
 
-		const axiosConfig = {
-			headers: { "Content-type": "application/json" }
-		};
+		const changelogFile =
+			"https://raw.githubusercontent.com/oneminch/encrypted-list/main/src/Changelog.md";
 
-		this.$http
-			.get("/api/getChangelog", axiosConfig)
+		fetch(
+			`https://api.allorigins.win/get?url=${encodeURIComponent(changelogFile)}`
+		)
 			.then((response) => {
-				return response.data;
+				if (response.ok) return response.json();
+				throw new Error("Network response was not ok.");
 			})
-			.then((data) => {
-				console.log(data);
-				this.outputHTML = md.render(data);
-			})
-			.catch((err) => {
-				throw err;
-			});
-
-		// const changelogFile =
-		// 	"https://raw.githubusercontent.com/oneminch/encrypted-list/main/src/Changelog.md";
-
-		// fetch(
-		// 	`https://api.allorigins.win/get?url=${encodeURIComponent(changelogFile)}`
-		// )
-		// 	.then((response) => {
-		// 		if (response.ok) return response.json();
-		// 		throw new Error("Network response was not ok.");
-		// 	})
-		// 	.then((data) => (this.outputHTML = md.render(data.contents)));
+			.then((data) => (this.outputHTML = md.render(data.contents)))
+			.catch(
+				(err) =>
+					(this.outputHTML = md.render(
+						`### An error has occurred when loading the updates.`
+					))
+			);
 	}
 };
 </script>
