@@ -15,11 +15,8 @@
 					{{ headerTitle }}
 				</h3>
 				<p class="app-desc">
-					List of services that offer zero-knowledge or end-to-end encryption
-					🔐.
-					<router-link class="disclosure" :to="{ path: '/about#disclosure' }">
-						Disclosure
-					</router-link>
+					List of services that offer zero-knowledge or end-to-end encryption.
+					<em title="Database Last Updated">Last updated: {{databaseLastUpdated}}</em>
 				</p>
 			</div>
 		</router-link>
@@ -44,10 +41,19 @@
 			</app-button> -->
 
 			<app-button
+				class="show-about"
+				:path="'/about'"
+				:iconButton="true"
+				:label="'About Page / Disclaimer'"
+				@clicked="showPage('about')">
+				<app-info-icon></app-info-icon>
+			</app-button>
+
+			<app-button
 				class="show-changelog"
 				:iconButton="true"
 				:label="'Show Changelog'"
-				@clicked="showChangelog">
+				@clicked="showPage('updates')">
 				<app-changelog-icon></app-changelog-icon>
 			</app-button>
 
@@ -108,7 +114,7 @@
 						class="show-changelog"
 						:iconButton="true"
 						:label="'Show Changelog'"
-						@clicked="showChangelog">
+						@clicked="showPage('updates')">
 						<app-changelog-icon></app-changelog-icon>
 					</app-button>
 
@@ -204,7 +210,8 @@ export default {
 		return {
 			darkMode: this.darkTheme,
 			menuShown: false,
-			overlayVisible: false
+			overlayVisible: false,
+			databaseLastUpdated: "Sep 14, 2022"
 			// feedbackModal: {
 			// 	status: 0,
 			// 	hidden: true
@@ -212,8 +219,9 @@ export default {
 		};
 	},
 	methods: {
-		showChangelog: function () {
-			this.$router.push({ path: "updates" });
+		// show a page and hide menu
+		showPage: function (page) {
+			this.$router.push({ path: page });
 			this.showMenuList(false);
 		},
 		// emit theme change to main component
@@ -276,9 +284,9 @@ export default {
 		darkTheme: function (value) {
 			this.darkMode = value;
 		},
-		"feedbackModal.hidden": function () {
-			// this.feedbackModal.status = 0;
-		},
+		// "feedbackModal.hidden": function () {
+		// 	this.feedbackModal.status = 0;
+		// },
 		overlayVisible: function (value) {
 			if (!value) {
 				this.menuShown = false;
@@ -363,6 +371,7 @@ html[data-theme="dark"] .app-logo img {
 	max-width: 400px;
 }
 
+.app-desc > em,
 .app-desc > .disclosure {
 	font-size: 0.75rem;
 	color: var(--dark-light-gray-color);
@@ -487,6 +496,7 @@ html[data-theme="dark"] .app-logo img {
 	.nav-buttons > .show-pages,
 	.nav-buttons > .change-theme,
 	.nav-buttons > .give-feedback,
+	.nav-buttons > .show-about,
 	.nav-buttons > .show-changelog {
 		display: none;
 	}
