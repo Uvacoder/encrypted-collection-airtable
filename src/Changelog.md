@@ -2,6 +2,71 @@
 
 List of changes made to the EncryptedList database.
 
+- _2022-09-14_ - List of changes made:
+
+  - Added 4 products to the main list:
+
+    - **Cyber Dust**
+    - **RustDesk**
+    - **SimpleX Chat**
+    - **StealthTalk**
+
+  - Moved 32 products from the main list to the excluded list:
+
+    - **Bozon** - No Activity
+    - **Callaba** - Pivoted into a Different Unrelated Business
+    - **Cloak.ly** - No Activity
+    - **Consol** - No Activity
+    - **Contact Cache** - Dead Link (Possible Defunct)
+    - **Crypho** - No Activity
+    - **CTemplar** - Sunsetted
+    - **Datash** - No Activity
+    - **E2EE Cloud** - No Development Activity
+    - **Encryptic** - No Development Activity
+    - **Finch** - No Activity
+    - **FireFile** - No Activity
+    - **Forms.id** - No Activity
+    - **Hornetdrive** - No Activity
+    - **KeyKong** - No Activity
+    - **Librem One** - No Development Activity
+    - **Mesh** - No Development Activity
+    - **Misakey** - Dead Link (Possible Defunct)
+    - **Momentum** - No Activity
+    - **MYKI** - Dead Link/App Removed from App Stores
+    - **OnePile** - Discontinued
+    - **ProtectedText** - No Activity
+    - **RememBear** - Sunsetted
+    - **SendLeap** - Dead Link (Possible Defunct)
+    - **Sense Chat** - Dead Link (Possible Defunct)
+    - **SimpleForm** - Dead Link (Possible Defunct)
+    - **Skizzle** - Dead Link (Possible Defunct)
+    - **Snatch App** - Dead Link (Possible Defunct)
+    - **TallyLab** - No Activity
+    - **Tanker** - Acquired & Shut Down
+    - **woelkli** - No Activity
+    - **ZBXalert** - No Activity
+
+  - Moved 1 product from the main list to the watchlist:
+
+    - **FortKnoxster** - Pivoted into a Different Unrelated Business; Awaits Relaunch
+
+  - Updated the details of 10 products:
+
+    - **CryptPad** - URL
+    - **Datash** - Tag
+      - `open-source` &rarr; `proprietary`
+    - **DekkoSecure** - Description (Business Change), Logo
+    - **EnvKey** - Tag
+      - Pricing: Add `free` along with `premium`
+    - **FortKnoxster** - Description (Business Change), Logo
+    - **KeeperChat** - Tag
+      - Pricing: Add `free` along with `premium`
+    - **LastPass Authenticator** - URL
+    - **NordLocker** - Description (Business Change)
+    - **Notesnook** - Tag
+      - `proprietary` &rarr; `open-source`
+    - **Storro** - Description
+
 - _2022-08-01_ - Change made:
 
   - Updated logo for **Padloc**
@@ -85,12 +150,12 @@ List of changes made to the EncryptedList database.
     - **Okuna** - Sunsetted
     - **pDrive** - Defunct
     - **Photo Vault** - Defunct
-    - **Plasma Rooms** - Pivoted into a Different Business
+    - **Plasma Rooms** - Pivoted into a Different Unrelated Business
     - **Portabella** - Defunct
     - **PrivaNote** - Defunct
     - **Recall Photos** - No Development Activity/App Removed from App Store
     - **SecretHub** - Acquired & Shut Down. Became **1Password Secrets Automation**
-    - **Stash** - Dead Link
+    - **Stash** - Dead Link (Possible Defunct)
     - **Xroom** - Acquired & Shut Down
 
   - 4 products have been moved from the main list to the watchlist:
