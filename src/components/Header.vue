@@ -299,29 +299,23 @@ export default {
 		const changelogFileApiUrl =
 			"https://api.github.com/repos/oneminch/encrypted-list/commits?path=src/Changelog.md";
 
-		const axiosConfig = {
-			headers: { "Content-type": "application/json" }
-		};
-
-		this.$http
-			.get(
-				`https://api.allorigins.win/get?url=${encodeURIComponent(
-					changelogFileApiUrl
-				)}`,
-				axiosConfig
-			)
+		fetch(
+			`https://api.allorigins.win/get?url=${encodeURIComponent(
+				changelogFileApiUrl
+			)}`
+		)
 			.then((res) => {
-				return res.data;
+				if (res.ok) return res.json();
+				throw new Error("Network response was not ok.");
 			})
 			.then((data) => {
-				const d = new Date(data[0].commit.committer.date);
+				const d = new Date(JSON.parse(data.contents)[0].commit.committer.date);
 
 				const month = new Intl.DateTimeFormat("en-US", { month: "long" })
 					.format(d)
 					.slice(0, 3);
 
-				console.log(month);
-				// this.databaseLastUpdated = `Last updated: ${month} ${d.getDate()}, ${d.getFullYear()}`;
+				this.databaseLastUpdated = `Last updated: ${month} ${d.getDate()}, ${d.getFullYear()}`;
 			})
 			.catch((err) => {
 				console.log(err);
