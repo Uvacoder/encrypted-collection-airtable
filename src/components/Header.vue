@@ -16,9 +16,7 @@
 				</h3>
 				<p class="app-desc">
 					List of services that offer zero-knowledge or end-to-end encryption.
-					<em title="Database Last Updated"
-						>Last updated: {{ databaseLastUpdated }}</em
-					>
+					<em title="Database Last Updated">{{ databaseLastUpdated }}</em>
 				</p>
 			</div>
 		</router-link>
@@ -213,7 +211,7 @@ export default {
 			darkMode: this.darkTheme,
 			menuShown: false,
 			overlayVisible: false,
-			databaseLastUpdated: "Oct 7th, 2022"
+			databaseLastUpdated: ""
 			// feedbackModal: {
 			// 	status: 0,
 			// 	hidden: true
@@ -295,6 +293,34 @@ export default {
 				// this.feedbackModal.hidden = true;
 			}
 		}
+	},
+	mounted() {
+		// update database modified date
+		const changelogFileApiUrl =
+			"https://api.github.com/repos/oneminch/encrypted-list/commits?path=src/Changelog.md";
+
+		const axiosConfig = {
+			headers: { "Content-type": "application/json" }
+		};
+
+		this.$http
+			.get(changelogFileApiUrl, axiosConfig)
+			.then((res) => {
+				return res.data;
+			})
+			.then((data) => {
+				const d = new Date(data[0].commit.committer.date);
+
+				const month = new Intl.DateTimeFormat("en-US", { month: "long" })
+					.format(d)
+					.slice(0, 3);
+
+				console.log(month);
+				// this.databaseLastUpdated = `Last updated: ${month} ${d.getDate()}, ${d.getFullYear()}`;
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 };
 </script>
