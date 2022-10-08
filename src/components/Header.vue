@@ -16,7 +16,9 @@
 				</h3>
 				<p class="app-desc">
 					List of services that offer zero-knowledge or end-to-end encryption.
-					<em title="Database Last Updated">Last updated: {{databaseLastUpdated}}</em>
+					<em title="Database Last Updated"
+						>Last updated: {{ databaseLastUpdated }}</em
+					>
 				</p>
 			</div>
 		</router-link>
@@ -211,7 +213,7 @@ export default {
 			darkMode: this.darkTheme,
 			menuShown: false,
 			overlayVisible: false,
-			databaseLastUpdated: "Sep 14, 2022"
+			databaseLastUpdated: "Oct 7th, 2022"
 			// feedbackModal: {
 			// 	status: 0,
 			// 	hidden: true

@@ -2,6 +2,12 @@
 
 List of changes made to the EncryptedList database.
 
+- _2022-10-07_ - Change made:
+
+  - Added 1 product from the main list:
+
+    - **SendBig**
+
 - _2022-09-14_ - List of changes made:
 
   - Added 4 products to the main list:
