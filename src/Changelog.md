@@ -2,6 +2,23 @@
 
 List of changes made to the EncryptedList database.
 
+- _2022-10-08_ - Changes made:
+
+  - Update the logos of 12 products:
+
+    - **Cove Identity**
+    - **EasyJoin**
+    - **ente**
+    - **EnvKey**
+    - **Iris**
+    - **Recap**
+    - **Squawk**
+    - **Surge**
+    - **Tauria**
+    - **Telegram**
+    - **Virtru**
+    - **Webex Teams**
+
 - _2022-10-07_ - Change made:
 
   - Added 1 product from the main list:
