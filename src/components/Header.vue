@@ -304,7 +304,12 @@ export default {
 		};
 
 		this.$http
-			.get(changelogFileApiUrl, axiosConfig)
+			.get(
+				`https://api.allorigins.win/get?url=${encodeURIComponent(
+					changelogFileApiUrl
+				)}`,
+				axiosConfig
+			)
 			.then((res) => {
 				return res.data;
 			})
