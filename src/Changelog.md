@@ -2,6 +2,16 @@
 
 List of changes made to the EncryptedList database.
 
+- _2022-10-24_ - Changes made:
+
+  - Add 1 product to the Watchlist:
+
+    - **Beepo**
+
+  - Add 1 product to the ExcludedList:
+  
+    - **Encrypt.to**
+
 - _2022-10-08_ - Changes made:
 
   - Update the logos of 12 products:
