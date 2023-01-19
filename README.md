@@ -1,5 +1,9 @@
 # EncryptedList 🔐
 
+- https://encryptedlist.xyz
+
+- https://github.com/oneminch/encrypted-list
+
 A collective list of products & services that offer zero-knowledge or end-to-end encryption.
 
 ## Development
